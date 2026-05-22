@@ -4,8 +4,8 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 
 export default function HomeScreen() {
     return (
-        <View>
-            <Text>
+        <View style={styles.parent}>
+            <Text style={styles.page_title}>
                 home
             </Text>
 
@@ -33,5 +33,20 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-    
+    parent: {
+        padding: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    page_title: {
+        fontSize: 25,
+        textAlign: 'center',
+        padding: 30,
+    },
+
+    button: {
+        width: 50,
+        fontSize: 15,
+    },
 });
