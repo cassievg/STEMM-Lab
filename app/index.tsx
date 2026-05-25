@@ -1,52 +1,83 @@
 import { router } from 'expo-router';
 import React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 export default function HomeScreen() {
     return (
-        <View style={styles.parent}>
+        <View style={styles.page}>
             <Text style={styles.page_title}>
-                home
+                Welcome to STEMM Lab!
             </Text>
 
-            <Button
-            title = "Settings"
-            onPress={() => router.push('/settings')}
-            />
+            <View style={styles.button_parent}>
+                <Pressable onPress={() => {router.push('/settings')}}
+                style={styles.pressable}>
+                    <Text style={styles.button_text}>Settings</Text>
+                </Pressable>
+            </View>
 
-            <Button
-            title = "History"
-            onPress={() => router.push('/history')}
-            />
+            <View style={styles.button_parent}>
+                <Pressable onPress={() => {router.push('/history')}}
+                style={styles.pressable}>
+                    <Text style={styles.button_text}>History</Text>
+                </Pressable>
+            </View>
 
-            <Button
-            title = "Profile"
-            onPress={() => router.push('/profile')}
-            />
+            <View style={styles.button_parent}>
+                <Pressable 
+                onPress={() => {router.push('/profile')}}
+                style={styles.pressable}>
+                    <Text style={styles.button_text}>Profile</Text>
+                </Pressable>
+            </View>
 
-            <Button
-            title = "Inbox"
-            onPress={() => router.push('/inbox')}
-            />
+            <View style={styles.button_parent}>
+                <Pressable 
+                onPress={() => {router.push('/inbox')}}
+                style={(styles.pressable)}>
+                    <Text style={styles.button_text}>Inbox</Text>
+                </Pressable>
+            </View>
         </View>
     );    
 }
 
 const styles = StyleSheet.create({
-    parent: {
-        padding: 50,
+    page: {
+        padding: '5%',
         alignItems: 'center',
         justifyContent: 'center',
+        height: '100%',
     },
 
     page_title: {
-        fontSize: 25,
+        fontSize: 30,
         textAlign: 'center',
-        padding: 30,
+        paddingBottom: '5%',
+        fontWeight: 'bold',
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif'
     },
 
-    button: {
-        width: 50,
-        fontSize: 15,
+    button_parent: {
+        width: '50%',
+        height: '8%',
+        display: 'flex',
+        backgroundColor: '#afdaff',
+        marginTop: '5%',
+        borderRadius: 15,
+    },
+
+    pressable: {
+        width: '100%',
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    button_text: {
+        fontSize: 20,
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        width: '100%',
+        textAlign: 'center',
     },
 });
