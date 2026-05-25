@@ -5,9 +5,11 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 export default function HomeScreen() {
     return (
         <View style={styles.page}>
-            <Text style={styles.page_title}>
-                Welcome to STEMM Lab!
-            </Text>
+            <View style={styles.title_container}>
+                <Text style={styles.page_title}>
+                    Welcome to STEMM Lab!
+                </Text>           
+            </View>
 
             <View style={styles.button_parent}>
                 <Pressable onPress={() => {router.push('/settings')}}
@@ -50,6 +52,10 @@ const styles = StyleSheet.create({
         height: '100%',
     },
 
+    title_container: {
+        width: '70%',
+    },
+
     page_title: {
         fontSize: 30,
         textAlign: 'center',
@@ -59,11 +65,11 @@ const styles = StyleSheet.create({
     },
 
     button_parent: {
-        width: '50%',
-        height: '8%',
+        width: '70%',
+        height: '7%',
         display: 'flex',
         backgroundColor: '#afdaff',
-        marginTop: '5%',
+        marginTop: '10%',
         borderRadius: 15,
     },
 
