@@ -1,55 +1,108 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { router } from 'expo-router';
+import React, { useState } from 'react';
+import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+
+import { globalStyles } from "./styles";
 
 export default function Login() {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
     return (
-        <View style={styles.page}>
-            <View style={styles.title_container}>
-                <Text style={styles.page_title}>
+        <View style={globalStyles.page}>
+            <View style={globalStyles.title_container}>
+                <Text style={globalStyles.page_title}>
                     Login
                 </Text>           
             </View>
 
-            
+            <View style={localStyles.form_container}>
+                <View style={localStyles.input_container}>
+                    <View style={localStyles.label_container}>
+                        <Text style={localStyles.input_label}>Username</Text>
+                    </View>
+
+                    <TextInput 
+                    style={localStyles.text_input}
+                    placeholder='Username'
+                    placeholderTextColor='#969696'
+                    onChangeText={userInput => setUsername(userInput)}
+                    defaultValue=''
+                    />
+                </View>
+
+                <View style={localStyles.input_container}>
+                    <View style={localStyles.label_container}>
+                        <Text style={localStyles.input_label}>Password</Text>
+                    </View>
+                    
+                    <TextInput 
+                    style={localStyles.text_input}
+                    placeholder='Password'
+                    placeholderTextColor='#969696'
+                    onChangeText={passInput => setUsername(passInput)}
+                    defaultValue=''
+                    secureTextEntry
+                    />
+                </View>
+
+                <View style={localStyles.button_parent}>
+                    <Pressable 
+                    onPress={() => {router.push('/homescreen')}}
+                    style={({ pressed }) => [
+                        pressed ? localStyles.pressable_onPress : localStyles.pressable_default
+                    ]}>
+                        <Text style={globalStyles.button_normal_text}>Submit</Text>
+                    </Pressable>
+                </View>
+            </View>
         </View>
     );    
 }
 
-const styles = StyleSheet.create({
-    page: {
-        padding: '5%',
-        alignItems: 'center',
-        justifyContent: 'center',
+const localStyles = StyleSheet.create({
+    label_container: {
+        width: '30%',
+    },
+
+    input_label: {
+        fontSize: 15,
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
         height: '100%',
     },
 
-    title_container: {
-        width: '70%',
-    },
-
-    page_title: {
-        fontSize: 30,
-        textAlign: 'center',
+    input_container: {
+        flexDirection: 'row',
+        gap: '10%',
+        width: '100%',
+        paddingTop: '5%',
         paddingBottom: '5%',
-        fontWeight: 'bold',
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif'
+        alignItems: 'center',
     },
 
-    text: {
-        fontSize: 15,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif'
+    form_container: {
+        width: '85%',
+        height: '30%',
+        backgroundColor: '#afdaff',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '5%',
+        borderColor: '#97b9d6',
+        borderWidth: 2,
     },
 
-    image: {
-        width: '70%',
-        height: 200,
-        resizeMode: 'contain',
-        alignSelf: 'center',
+    text_input: {
+        backgroundColor: '#ffffff',
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        width: '100%',
+        flex: 1,
+        height: '130%',
+        padding: '2%',
     },
-
+    
     button_parent: {
         width: '70%',
-        height: '7%',
+        height: '20%',
         display: 'flex',
         marginTop: '10%',
     },
@@ -59,8 +112,8 @@ const styles = StyleSheet.create({
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#afdaff',
-        borderRadius: 15,
+        backgroundColor: '#ffffff',
+        borderRadius: 10,
     },
 
     pressable_onPress: {
@@ -68,14 +121,7 @@ const styles = StyleSheet.create({
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#97b9d6',
-        borderRadius: 15,
-    },
-
-    button_text: {
-        fontSize: 20,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
-        width: '100%',
-        textAlign: 'center',
+        backgroundColor: '#d4d4d4',
+        borderRadius: 10,
     },
 });

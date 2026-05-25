@@ -28,7 +28,7 @@ export default function Landing() {
                 style={({ pressed }) => [
                     pressed ? globalStyles.pressable_onPress : globalStyles.pressable_default
                 ]}>
-                    <Text style={globalStyles.button_text}>Login</Text>
+                    <Text style={globalStyles.button_big_text}>Login</Text>
                 </Pressable>
             </View>
 
@@ -37,7 +37,7 @@ export default function Landing() {
                 style={({ pressed }) => [
                     pressed ? globalStyles.pressable_onPress : globalStyles.pressable_default
                 ]}>
-                    <Text style={globalStyles.button_text}>Register</Text>
+                    <Text style={globalStyles.button_big_text}>Register</Text>
                 </Pressable>
             </View>
         </View>

@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import React from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { globalStyles } from "./styles";
 
@@ -18,7 +18,7 @@ export default function HomeScreen() {
                 style={({ pressed }) => [
                     pressed ? globalStyles.pressable_onPress : globalStyles.pressable_default
                 ]}>
-                    <Text style={globalStyles.button_text}>Settings</Text>
+                    <Text style={globalStyles.button_big_text}>Settings</Text>
                 </Pressable>
             </View>
 
@@ -27,7 +27,7 @@ export default function HomeScreen() {
                 style={({ pressed }) => [
                     pressed ? globalStyles.pressable_onPress : globalStyles.pressable_default
                 ]}>
-                    <Text style={globalStyles.button_text}>History</Text>
+                    <Text style={globalStyles.button_big_text}>History</Text>
                 </Pressable>
             </View>
 
@@ -37,7 +37,7 @@ export default function HomeScreen() {
                 style={({ pressed }) => [
                     pressed ? globalStyles.pressable_onPress : globalStyles.pressable_default
                 ]}>
-                    <Text style={globalStyles.button_text}>Profile</Text>
+                    <Text style={globalStyles.button_big_text}>Profile</Text>
                 </Pressable>
             </View>
 
@@ -47,9 +47,18 @@ export default function HomeScreen() {
                 style={({ pressed }) => [
                     pressed ? globalStyles.pressable_onPress : globalStyles.pressable_default
                 ]}>
-                    <Text style={globalStyles.button_text}>Inbox</Text>
+                    <Text style={globalStyles.button_big_text}>Inbox</Text>
                 </Pressable>
             </View>
         </View>
     );    
 }
+
+const localStyles = StyleSheet.create({
+    button_parent: {
+        width: '70%',
+        height: '7%',
+        display: 'flex',
+        marginTop: '10%',
+    },
+})

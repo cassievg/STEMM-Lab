@@ -9,11 +9,14 @@ export const globalStyles = StyleSheet.create({
     },
 
     title_container: {
-        width: '70%',
+        width: '100%',
+        textAlign: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 
     page_title: {
-        fontSize: 30,
+        fontSize: 25,
         textAlign: 'center',
         paddingBottom: '5%',
         fontWeight: 'bold',
@@ -57,8 +60,15 @@ export const globalStyles = StyleSheet.create({
         borderRadius: 15,
     },
 
-    button_text: {
+    button_big_text: {
         fontSize: 20,
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        width: '100%',
+        textAlign: 'center',
+    },
+
+    button_normal_text: {
+        fontSize: 15,
         fontFamily: 'Trebuchet MS, Roboto, sans-serif',
         width: '100%',
         textAlign: 'center',

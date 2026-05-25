@@ -1,14 +1,127 @@
-import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { router } from 'expo-router';
+import React, { useState } from 'react';
+import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
-export default function Register() {
+import { globalStyles } from "./styles";
+
+export default function Login() {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
     return (
-        <Text>
-            register
-        </Text>
+        <View style={globalStyles.page}>
+            <View style={globalStyles.title_container}>
+                <Text style={globalStyles.page_title}>
+                    Register
+                </Text>           
+            </View>
+
+            <View style={localStyles.form_container}>
+                <View style={localStyles.input_container}>
+                    <View style={localStyles.label_container}>
+                        <Text style={localStyles.input_label}>Username</Text>
+                    </View>
+
+                    <TextInput 
+                    style={localStyles.text_input}
+                    placeholder='Username'
+                    placeholderTextColor='#969696'
+                    onChangeText={userInput => setUsername(userInput)}
+                    defaultValue=''
+                    />
+                </View>
+
+                <View style={localStyles.input_container}>
+                    <View style={localStyles.label_container}>
+                        <Text style={localStyles.input_label}>Password</Text>
+                    </View>
+                    
+                    <TextInput 
+                    style={localStyles.text_input}
+                    placeholder='Password'
+                    placeholderTextColor='#969696'
+                    onChangeText={passInput => setUsername(passInput)}
+                    defaultValue=''
+                    secureTextEntry
+                    />
+                </View>
+
+                <View style={localStyles.button_parent}>
+                    <Pressable 
+                    onPress={() => {router.push('/homescreen')}}
+                    style={({ pressed }) => [
+                        pressed ? localStyles.pressable_onPress : localStyles.pressable_default
+                    ]}>
+                        <Text style={globalStyles.button_normal_text}>Submit</Text>
+                    </Pressable>
+                </View>
+            </View>
+        </View>
     );    
 }
 
-const styles = StyleSheet.create({
-    
+const localStyles = StyleSheet.create({
+    label_container: {
+        width: '30%',
+    },
+
+    input_label: {
+        fontSize: 15,
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        height: '100%',
+    },
+
+    input_container: {
+        flexDirection: 'row',
+        gap: '10%',
+        width: '100%',
+        paddingTop: '5%',
+        paddingBottom: '5%',
+        alignItems: 'center',
+    },
+
+    form_container: {
+        width: '85%',
+        height: '30%',
+        backgroundColor: '#afdaff',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '5%',
+        borderColor: '#97b9d6',
+        borderWidth: 2,
+    },
+
+    text_input: {
+        backgroundColor: '#ffffff',
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        width: '100%',
+        flex: 1,
+        height: '130%',
+        padding: '2%',
+    },
+
+    button_parent: {
+        width: '70%',
+        height: '20%',
+        display: 'flex',
+        marginTop: '10%',
+    },
+
+    pressable_default: {
+        width: '100%',
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#ffffff',
+        borderRadius: 10,
+    },
+
+    pressable_onPress: {
+        width: '100%',
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#d4d4d4',
+        borderRadius: 10,
+    },
 });
