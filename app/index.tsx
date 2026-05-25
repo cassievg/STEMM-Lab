@@ -13,14 +13,18 @@ export default function HomeScreen() {
 
             <View style={styles.button_parent}>
                 <Pressable onPress={() => {router.push('/settings')}}
-                style={styles.pressable}>
+                style={({ pressed }) => [
+                    pressed ? styles.pressable_onPress : styles.pressable_default
+                ]}>
                     <Text style={styles.button_text}>Settings</Text>
                 </Pressable>
             </View>
 
             <View style={styles.button_parent}>
                 <Pressable onPress={() => {router.push('/history')}}
-                style={styles.pressable}>
+                style={({ pressed }) => [
+                    pressed ? styles.pressable_onPress : styles.pressable_default
+                ]}>
                     <Text style={styles.button_text}>History</Text>
                 </Pressable>
             </View>
@@ -28,7 +32,9 @@ export default function HomeScreen() {
             <View style={styles.button_parent}>
                 <Pressable 
                 onPress={() => {router.push('/profile')}}
-                style={styles.pressable}>
+                style={({ pressed }) => [
+                    pressed ? styles.pressable_onPress : styles.pressable_default
+                ]}>
                     <Text style={styles.button_text}>Profile</Text>
                 </Pressable>
             </View>
@@ -36,7 +42,9 @@ export default function HomeScreen() {
             <View style={styles.button_parent}>
                 <Pressable 
                 onPress={() => {router.push('/inbox')}}
-                style={(styles.pressable)}>
+                style={({ pressed }) => [
+                    pressed ? styles.pressable_onPress : styles.pressable_default
+                ]}>
                     <Text style={styles.button_text}>Inbox</Text>
                 </Pressable>
             </View>
@@ -68,16 +76,25 @@ const styles = StyleSheet.create({
         width: '70%',
         height: '7%',
         display: 'flex',
-        backgroundColor: '#afdaff',
         marginTop: '10%',
-        borderRadius: 15,
     },
 
-    pressable: {
+    pressable_default: {
         width: '100%',
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#afdaff',
+        borderRadius: 15,
+    },
+
+    pressable_onPress: {
+        width: '100%',
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#97b9d6',
+        borderRadius: 15,
     },
 
     button_text: {
