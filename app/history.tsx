@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { Text } from 'react-native';
+
 
 export default function History() {
     return (
@@ -8,7 +9,3 @@ export default function History() {
         </Text>
     );    
 }
-
-const styles = StyleSheet.create({
-    
-});

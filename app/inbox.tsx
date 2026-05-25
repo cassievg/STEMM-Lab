@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { Text } from 'react-native';
+
 
 export default function Inbox() {
     return (
@@ -8,7 +9,3 @@ export default function Inbox() {
         </Text>
     );    
 }
-
-const styles = StyleSheet.create({
-    
-});
