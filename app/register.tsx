@@ -75,6 +75,7 @@ const localStyles = StyleSheet.create({
         flexDirection: 'row',
         gap: '10%',
         width: '100%',
+        height: '25%',
         paddingTop: '5%',
         paddingBottom: '5%',
         alignItems: 'center',

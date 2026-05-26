@@ -40,7 +40,7 @@ export default function Login() {
                     style={localStyles.text_input}
                     placeholder='Password'
                     placeholderTextColor='#969696'
-                    onChangeText={passInput => setUsername(passInput)}
+                    onChangeText={passInput => setPassword(passInput)}
                     defaultValue=''
                     secureTextEntry
                     />
@@ -75,6 +75,7 @@ const localStyles = StyleSheet.create({
         flexDirection: 'row',
         gap: '10%',
         width: '100%',
+        height: '25%',
         paddingTop: '5%',
         paddingBottom: '5%',
         alignItems: 'center',
