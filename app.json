@@ -9,9 +9,13 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.madapp.stemm",
+      "googleServicesFile": "GoogleService-Info.plist"
     },
     "android": {
+      "package": "com.madapp.stemm",
+      "googleServicesFile": "google-services.json",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -38,7 +42,9 @@
             "backgroundColor": "#000000"
           }
         }
-      ]
+      ],
+      "@react-native-firebase/app",
+      "@react-native-firebase/auth"
     ],
     "experiments": {
       "typedRoutes": true,

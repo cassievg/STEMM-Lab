@@ -48,7 +48,7 @@ export default function Login() {
 
                 <View style={localStyles.button_parent}>
                     <Pressable 
-                    onPress={() => {router.push('/homescreen')}}
+                    onPress={() => {router.push('/studenthome')}}
                     style={({ pressed }) => [
                         pressed ? localStyles.pressable_onPress : localStyles.pressable_default
                     ]}>

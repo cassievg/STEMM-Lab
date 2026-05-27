@@ -4,13 +4,22 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { globalStyles } from "./styles";
 
-export default function HomeScreen() {
+export default function TeacherHome() {
     return (
         <View style={globalStyles.page}>
             <View style={globalStyles.title_container}>
                 <Text style={globalStyles.page_title}>
                     Welcome to STEMM Lab!
                 </Text>           
+            </View>
+
+            <View style={globalStyles.button_parent}>
+                <Pressable onPress={() => {router.push('/activityselection')}}
+                style={({ pressed }) => [
+                    pressed ? globalStyles.pressable_onPress : globalStyles.pressable_default
+                ]}>
+                    <Text style={globalStyles.button_big_text}>Play</Text>
+                </Pressable>
             </View>
 
             <View style={globalStyles.button_parent}>
