@@ -5,8 +5,10 @@ import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { globalStyles } from "./styles";
 
 export default function Login() {
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const [error, setError] = useState("");
 
     return (
         <View style={globalStyles.page}>
@@ -19,14 +21,14 @@ export default function Login() {
             <View style={localStyles.form_container}>
                 <View style={localStyles.input_container}>
                     <View style={localStyles.label_container}>
-                        <Text style={localStyles.input_label}>Username</Text>
+                        <Text style={localStyles.input_label}>Email</Text>
                     </View>
 
                     <TextInput 
                     style={localStyles.text_input}
-                    placeholder='Username'
+                    placeholder='Email'
                     placeholderTextColor='#969696'
-                    onChangeText={userInput => setUsername(userInput)}
+                    onChangeText={userInput => setEmail(userInput)}
                     defaultValue=''
                     />
                 </View>
@@ -44,6 +46,10 @@ export default function Login() {
                     defaultValue=''
                     secureTextEntry
                     />
+                </View>
+
+                <View style={localStyles.error_container}>
+                    <Text style={localStyles.error_text}>{error}</Text>
                 </View>
 
                 <View style={localStyles.button_parent}>
@@ -75,15 +81,13 @@ const localStyles = StyleSheet.create({
         flexDirection: 'row',
         gap: '10%',
         width: '100%',
-        height: '25%',
+        height: '32%',
         paddingTop: '5%',
         paddingBottom: '5%',
         alignItems: 'center',
     },
 
     form_container: {
-        width: '85%',
-        height: '30%',
         backgroundColor: '#afdaff',
         justifyContent: 'center',
         alignItems: 'center',
@@ -124,5 +128,17 @@ const localStyles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#d4d4d4',
         borderRadius: 10,
+    },
+
+    error_container: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        bottom: -25,
+    },
+
+    error_text: {
+        textAlign: 'center',
+        color: 'red',
     },
 });

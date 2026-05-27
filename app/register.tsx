@@ -1,12 +1,51 @@
+import { Picker } from "@react-native-picker/picker";
 import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
+import firestore from '@react-native-firebase/firestore';
+import { signUp } from '../src/firebase/auth.js';
+
 import { globalStyles } from "./styles";
 
-export default function Login() {
+export default function Register() {
     const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPass, setConfirmPass] = useState("");
+    const [role, setRole] = useState("");
+
+    const [error, setError] = useState("");
+
+    const handleSingup = async () => {
+        if (confirmPass != password) {
+            setError("Your passwords do not match!");
+            return;
+        }
+        else if (email == "") {
+            setError("Please enter a valid email address.");
+            return;
+        }
+        else if (role == "") {
+            setError("Please select a role.");
+            return;
+        }
+        
+        try {
+            const { user } = await signUp(email, password);
+
+            await firestore().collection('users').doc(user.uid).set(
+                {
+                    role: role,
+                    username: username,
+                }
+            )
+
+            router.push('/login');
+        } catch (e: any) {
+            setError(e.message);
+        }
+    }
 
     return (
         <View style={globalStyles.page}>
@@ -33,6 +72,20 @@ export default function Login() {
 
                 <View style={localStyles.input_container}>
                     <View style={localStyles.label_container}>
+                        <Text style={localStyles.input_label}>Email</Text>
+                    </View>
+
+                    <TextInput 
+                    style={localStyles.text_input}
+                    placeholder='Email'
+                    placeholderTextColor='#969696'
+                    onChangeText={emailInput => setEmail(emailInput)}
+                    defaultValue=''
+                    />
+                </View>
+
+                <View style={localStyles.input_container}>
+                    <View style={localStyles.label_container}>
                         <Text style={localStyles.input_label}>Password</Text>
                     </View>
                     
@@ -40,20 +93,54 @@ export default function Login() {
                     style={localStyles.text_input}
                     placeholder='Password'
                     placeholderTextColor='#969696'
-                    onChangeText={passInput => setUsername(passInput)}
+                    onChangeText={passInput => setPassword(passInput)}
                     defaultValue=''
                     secureTextEntry
                     />
                 </View>
 
+                <View style={localStyles.input_container}>
+                    <View style={localStyles.label_container}>
+                        <Text style={localStyles.input_label}>Confirm Password</Text>
+                    </View>
+                    
+                    <TextInput 
+                    style={localStyles.text_input}
+                    placeholder='Confirm Password'
+                    placeholderTextColor='#969696'
+                    onChangeText={confirmInput => setConfirmPass(confirmInput)}
+                    defaultValue=''
+                    secureTextEntry
+                    />
+                </View>
+
+                <View style={localStyles.input_container}>
+                    <View style={localStyles.label_container}>
+                        <Text style={localStyles.input_label}>Role</Text>
+                    </View>
+                    
+                    <Picker
+                    selectedValue={role}
+                    onValueChange={(value, index) => setRole(value)}
+                    style={localStyles.input_container}
+                    >
+                        <Picker.Item label="Teacher" value="teacher" />
+                        <Picker.Item label="Student" value="student" />
+                    </Picker>
+                </View>
+
                 <View style={localStyles.button_parent}>
                     <Pressable 
-                    onPress={() => {router.push('/studenthome')}}
+                    onPress={handleSingup}
                     style={({ pressed }) => [
                         pressed ? localStyles.pressable_onPress : localStyles.pressable_default
                     ]}>
                         <Text style={globalStyles.button_normal_text}>Submit</Text>
                     </Pressable>
+                </View>
+
+                <View style={localStyles.error_container}>
+                    <Text style={localStyles.error_text}>{error}</Text>
                 </View>
             </View>
         </View>
@@ -75,15 +162,13 @@ const localStyles = StyleSheet.create({
         flexDirection: 'row',
         gap: '10%',
         width: '100%',
-        height: '25%',
+        height: '18%',
         paddingTop: '5%',
         paddingBottom: '5%',
         alignItems: 'center',
     },
 
     form_container: {
-        width: '85%',
-        height: '30%',
         backgroundColor: '#afdaff',
         justifyContent: 'center',
         alignItems: 'center',
@@ -100,10 +185,10 @@ const localStyles = StyleSheet.create({
         height: '130%',
         padding: '2%',
     },
-
+    
     button_parent: {
         width: '70%',
-        height: '20%',
+        height: '13%',
         display: 'flex',
         marginTop: '10%',
     },
@@ -124,5 +209,17 @@ const localStyles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#d4d4d4',
         borderRadius: 10,
+    },
+
+    error_container: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        bottom: -25,
+    },
+
+    error_text: {
+        textAlign: 'center',
+        color: 'red',
     },
 });
