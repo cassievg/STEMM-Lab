@@ -10,7 +10,7 @@ export default function Login() {
 
     return (
         <View style={globalStyles.page}>
-            <View style={globalStyles.title_container}>
+            <View style={globalStyles.header}>
                 <Text style={globalStyles.page_title}>
                     Login
                 </Text>           

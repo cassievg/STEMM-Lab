@@ -18,7 +18,7 @@ export default function Settings() {
 
     return (
         <View style={globalStyles.page}>
-            <View style={globalStyles.title_container}>
+            <View style={globalStyles.header}>
                 <Text style={globalStyles.page_title}>
                     Settings
                 </Text>
@@ -122,7 +122,7 @@ export default function Settings() {
             </View>
                 <View style={localStyles.save_button}>
                     <Pressable
-                    onPress={() => {router.push('/homescreen')}}
+                    onPress={() => {router.push('/studenthome')}}
                     style={({ pressed }) => [
                     pressed ? globalStyles.pressable_onPress : globalStyles.pressable_default
                     ]}>

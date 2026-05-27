@@ -1,6 +1,24 @@
 import { StyleSheet } from "react-native";
 
 export const globalStyles = StyleSheet.create({
+    header: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '100%',
+        paddingVertical: 10,
+        marginBottom: '5%'
+    },
+
+    back_button: {
+        borderWidth: 1,
+        borderColor: '#97b9d6',
+        paddingHorizontal: 6,
+        paddingVertical: 2,
+        marginRight: 16,
+        borderRadius: 4,
+        zIndex: 1,
+    },
+
     page: {
         padding: '5%',
         alignItems: 'center',
@@ -16,9 +34,11 @@ export const globalStyles = StyleSheet.create({
     },
 
     page_title: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
         fontSize: 25,
         textAlign: 'center',
-        paddingBottom: '5%',
         fontWeight: 'bold',
         fontFamily: 'Trebuchet MS, Roboto, sans-serif'
     },
