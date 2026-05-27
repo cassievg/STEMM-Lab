@@ -15,7 +15,7 @@ export default function ActivitySelection() {
                     <Text>{'<'}</Text>
                 </TouchableOpacity>
                 <Text style={globalStyles.page_title}>
-                    History
+                    Activities
                 </Text>
             </View>
         </SafeAreaView>
