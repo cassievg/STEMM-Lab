@@ -121,9 +121,10 @@ export default function Register() {
                     
                     <Picker
                     selectedValue={role}
-                    onValueChange={(value, index) => setRole(value)}
-                    style={localStyles.input_container}
+                    onValueChange={(value) => setRole(value)}
+                    style={localStyles.picker}
                     >
+                        <Picker.Item label="Select a role" value="" />
                         <Picker.Item label="Teacher" value="teacher" />
                         <Picker.Item label="Student" value="student" />
                     </Picker>
@@ -166,6 +167,10 @@ const localStyles = StyleSheet.create({
         paddingTop: '5%',
         paddingBottom: '5%',
         alignItems: 'center',
+    },
+
+    picker: {
+        flex: 1,
     },
 
     form_container: {
