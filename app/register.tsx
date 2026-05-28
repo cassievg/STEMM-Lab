@@ -1,7 +1,7 @@
 import { Picker } from "@react-native-picker/picker";
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import firestore from '@react-native-firebase/firestore';
 import { signUp } from '../src/firebase/auth.js';
@@ -49,10 +49,15 @@ export default function Register() {
 
     return (
         <View style={globalStyles.page}>
-            <View style={globalStyles.header}>
+            <View style={localStyles.header}>
+                <TouchableOpacity 
+                style={globalStyles.back_button}
+                onPress={() => router.push('/')}>
+                    <Text>{'<'}</Text>
+                </TouchableOpacity>
                 <Text style={globalStyles.page_title}>
                     Register
-                </Text>           
+                </Text>       
             </View>
 
             <View style={localStyles.form_container}>
@@ -149,6 +154,14 @@ export default function Register() {
 }
 
 const localStyles = StyleSheet.create({
+    header: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '100%',
+        paddingVertical: 10,
+        marginBottom: '5%'
+    },
+
     label_container: {
         width: '30%',
     },

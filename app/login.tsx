@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import { globalStyles } from "./styles";
 
@@ -13,9 +13,14 @@ export default function Login() {
     return (
         <View style={globalStyles.page}>
             <View style={globalStyles.header}>
+                <TouchableOpacity 
+                style={globalStyles.back_button}
+                onPress={() => router.push('/')}>
+                    <Text>{'<'}</Text>
+                </TouchableOpacity>
                 <Text style={globalStyles.page_title}>
                     Login
-                </Text>           
+                </Text>       
             </View>
 
             <View style={localStyles.form_container}>

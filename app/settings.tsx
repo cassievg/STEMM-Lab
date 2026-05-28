@@ -19,8 +19,13 @@ export default function Settings() {
     return (
         <View style={globalStyles.page}>
             <View style={globalStyles.header}>
+                <TouchableOpacity 
+                style={globalStyles.back_button}
+                onPress={() => router.push('/studenthome')}>
+                    <Text>{'<'}</Text>
+                </TouchableOpacity>
                 <Text style={globalStyles.page_title}>
-                    Settings
+                    Setting
                 </Text>
             </View>
 
@@ -137,7 +142,7 @@ export default function Settings() {
 
 const localStyles = StyleSheet.create({
     container: {
-        width: '85%',
+        width: '90%',
         height: '37%',
         backgroundColor: '#afdaff',
         borderRadius: 8,

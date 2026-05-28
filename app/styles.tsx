@@ -4,7 +4,7 @@ export const globalStyles = StyleSheet.create({
     header: {
         flexDirection: 'row',
         alignItems: 'center',
-        width: '100%',
+        width: '90%',
         paddingVertical: 10,
         marginBottom: '5%'
     },

@@ -30,7 +30,7 @@ export default function Inbox() {
 
     return (
         <SafeAreaView style={globalStyles.page}>
-            <View style={globalStyles.header}>
+            <View style={localStyles.header}>
                 <TouchableOpacity 
                 style={globalStyles.back_button}
                 onPress={() => router.push('/studenthome')}>
@@ -55,6 +55,14 @@ export default function Inbox() {
 }
 
 const localStyles = StyleSheet.create({
+    header: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '100%',
+        paddingVertical: 10,
+        marginBottom: '5%'
+    },
+
     container: {
         width: '100%',
         height: '37%',
