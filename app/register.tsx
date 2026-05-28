@@ -162,7 +162,7 @@ const localStyles = StyleSheet.create({
         flexDirection: 'row',
         gap: '10%',
         width: '100%',
-        height: '18%',
+        height: '13%',
         paddingTop: '5%',
         paddingBottom: '5%',
         alignItems: 'center',
@@ -188,7 +188,7 @@ const localStyles = StyleSheet.create({
     
     button_parent: {
         width: '70%',
-        height: '13%',
+        height: '8%',
         display: 'flex',
         marginTop: '10%',
     },
