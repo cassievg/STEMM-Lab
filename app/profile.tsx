@@ -14,7 +14,7 @@ export default function Profile() {
             <View style={globalStyles.header}>
                 <TouchableOpacity 
                 style={globalStyles.back_button}
-                onPress={() => router.push('/studenthome')}>
+                onPress={() => router.push('/homescreen')}>
                     <Text>{'<'}</Text>
                 </TouchableOpacity>
                 <Text style={globalStyles.page_title}>
@@ -60,7 +60,7 @@ export default function Profile() {
                     <View style={localStyles.button_container}>
                         <TouchableOpacity
                             style={localStyles.button}
-                            onPress={() => router.push('/studenthome')}>
+                            onPress={() => router.push('/homescreen')}>
                                 <Text style={localStyles.button_text}>
                                     Save
                                 </Text>

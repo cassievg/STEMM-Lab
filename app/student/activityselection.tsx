@@ -2,10 +2,10 @@ import { router } from 'expo-router';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { globalStyles } from './styles';
+import { globalStyles } from '../styles';
 
 
-export default function History() {
+export default function ActivitySelection() {
     return (
         <SafeAreaView style={globalStyles.page}>
             <View style={globalStyles.header}>
@@ -15,13 +15,13 @@ export default function History() {
                     <Text>{'<'}</Text>
                 </TouchableOpacity>
                 <Text style={globalStyles.page_title}>
-                    History
+                    Activities
                 </Text>
             </View>
         </SafeAreaView>
     );    
 }
 
-const localStyles = StyleSheet.create({
+const styles = StyleSheet.create({
     
 });

@@ -2,7 +2,7 @@ import { router } from 'expo-router';
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-import { globalStyles } from "./styles";
+import { globalStyles } from "../styles";
 
 export default function TeacherHome() {
     return (
@@ -14,7 +14,7 @@ export default function TeacherHome() {
             </View>
 
             <View style={globalStyles.button_parent}>
-                <Pressable onPress={() => {router.push('/activityselection')}}
+                <Pressable onPress={() => {router.push('/student/activityselection')}}
                 style={({ pressed }) => [
                     pressed ? globalStyles.pressable_onPress : globalStyles.pressable_default
                 ]}>

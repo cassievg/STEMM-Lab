@@ -14,7 +14,7 @@ export default function StudentHome() {
             </View>
 
             <View style={globalStyles.button_parent}>
-                <Pressable onPress={() => {router.push('/activityselection')}}
+                <Pressable onPress={() => {router.push('/student/activityselection')}}
                 style={({ pressed }) => [
                     pressed ? globalStyles.pressable_onPress : globalStyles.pressable_default
                 ]}>

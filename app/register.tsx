@@ -18,15 +18,15 @@ export default function Register() {
     const [error, setError] = useState("");
 
     const handleSingup = async () => {
-        if (confirmPass != password) {
+        if (confirmPass !== password) {
             setError("Your passwords do not match!");
             return;
         }
-        else if (email == "") {
+        else if (email === "") {
             setError("Please enter a valid email address.");
             return;
         }
-        else if (role == "") {
+        else if (role === "") {
             setError("Please select a role.");
             return;
         }
