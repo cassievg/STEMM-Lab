@@ -176,10 +176,11 @@ const localStyles = StyleSheet.create({
         flexDirection: 'row',
         gap: '10%',
         width: '100%',
-        height: '13%',
+        height: '28%',
         paddingTop: '5%',
         paddingBottom: '5%',
         alignItems: 'center',
+        marginBottom: '4%',
     },
 
     picker: {
@@ -193,6 +194,8 @@ const localStyles = StyleSheet.create({
         padding: '5%',
         borderColor: '#97b9d6',
         borderWidth: 2,
+        height: '50%',
+        width: '90%',
     },
 
     text_input: {
