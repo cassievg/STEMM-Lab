@@ -2,6 +2,8 @@ import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
+import firestore from '@react-native-firebase/firestore';
+import { getUserID, signIn } from '../src/firebase/auth.js';
 import { globalStyles } from "./styles";
 
 export default function Login() {
@@ -9,6 +11,22 @@ export default function Login() {
     const [password, setPassword] = useState("");
 
     const [error, setError] = useState("");
+
+    const handleLogin = async () => {
+        try {
+            await signIn(email, password);
+            const userDocument = await firestore().collection('users').doc(getUserID()).get();
+            if (userDocument.get('role') == 'teacher') {
+                router.push('/teacher/teacherhome');
+            } else if (userDocument.get('role') == 'student') {
+                router.push('/homescreen');
+            }
+
+            console.log(userDocument.get('username'));
+        } catch (e) {
+            console.log("Error fetching user: " + e);
+        }
+    }
 
     return (
         <View style={globalStyles.page}>
@@ -59,7 +77,7 @@ export default function Login() {
 
                 <View style={localStyles.button_parent}>
                     <Pressable 
-                    onPress={() => {router.push('/homescreen')}}
+                    onPress={handleLogin}
                     style={({ pressed }) => [
                         pressed ? localStyles.pressable_onPress : localStyles.pressable_default
                     ]}>

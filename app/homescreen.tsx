@@ -1,10 +1,21 @@
 import { router } from 'expo-router';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
+import firestore from '@react-native-firebase/firestore';
+import { getUserID } from '../src/firebase/auth.js';
 import { globalStyles } from "./styles";
 
 export default function StudentHome() {
+    const [username, setUsername] = useState('');
+
+    useEffect(() => {
+            const initUser = async () => {
+                const userDocument = await firestore().collection('users').doc(getUserID()).get();
+                setUsername(userDocument.get('username'));
+            }
+        }, []);
+
     return (
         <View style={globalStyles.page}>
             <View style={globalStyles.title_container}>
