@@ -18,10 +18,17 @@ export default function History() {
                     History
                 </Text>
             </View>
+
+            <View>
+
+            </View>
+
         </SafeAreaView>
     );    
 }
 
 const localStyles = StyleSheet.create({
-    
+    container: {
+
+    },
 });
