@@ -2,8 +2,7 @@ import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-import firestore from '@react-native-firebase/firestore';
-import { getUserID, signIn } from '../src/firebase/auth.js';
+import { signIn } from '../backend/firebase/auth.js';
 import { globalStyles } from "./styles";
 
 export default function Login() {
@@ -15,16 +14,8 @@ export default function Login() {
     const handleLogin = async () => {
         try {
             await signIn(email, password);
-            const userDocument = await firestore().collection('users').doc(getUserID()).get();
-            if (userDocument.get('role') == 'teacher') {
-                router.push('/teacher/teacherhome');
-            } else if (userDocument.get('role') == 'student') {
-                router.push('/homescreen');
-            }
-
-            console.log(userDocument.get('username'));
         } catch (e) {
-            console.log("Error fetching user: " + e);
+            setError("Incorrect email or password.");
         }
     }
 

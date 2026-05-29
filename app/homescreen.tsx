@@ -1,26 +1,19 @@
 import { router } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-import firestore from '@react-native-firebase/firestore';
-import { getUserID } from '../src/firebase/auth.js';
 import { globalStyles } from "./styles";
 
-export default function StudentHome() {
-    const [username, setUsername] = useState('');
+import { useAuth } from '@/src/context/AuthContext.js';
 
-    useEffect(() => {
-            const initUser = async () => {
-                const userDocument = await firestore().collection('users').doc(getUserID()).get();
-                setUsername(userDocument.get('username'));
-            }
-        }, []);
+export default function StudentHome() {
+    const { currentUser, userDoc } = useAuth();
 
     return (
         <View style={globalStyles.page}>
             <View style={globalStyles.title_container}>
                 <Text style={globalStyles.page_title}>
-                    Welcome to STEMM Lab!
+                    Welcome, {userDoc?.username}!
                 </Text>           
             </View>
 

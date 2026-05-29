@@ -1,3 +1,4 @@
+import { useAuth } from '@/src/context/AuthContext';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
@@ -8,6 +9,7 @@ export default function Profile() {
     const [name, setName] = useState('Username');
     const [email] = useState('Email');
 
+    const { logout } = useAuth();
 
     return (
         <SafeAreaView style={globalStyles.page}>
@@ -67,7 +69,7 @@ export default function Profile() {
                             </TouchableOpacity>
                         <TouchableOpacity
                             style={localStyles.button}
-                            onPress={() => router.push('/')}>
+                            onPress={logout}>
                                 <Text style={localStyles.button_text}>
                                     Logout
                                 </Text>
