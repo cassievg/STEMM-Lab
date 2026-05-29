@@ -192,7 +192,7 @@ const localStyles = StyleSheet.create({
         paddingBottom: '5%',
         alignItems: 'center',
         marginTop: '2%',
-        marginBottom: '-10%',
+        marginBottom: '-8%',
     },
 
     picker_container: {
@@ -240,7 +240,7 @@ const localStyles = StyleSheet.create({
         height: '12%',
         display: 'flex',
         marginTop: '8%',
-        marginBottom: '5%',
+        marginBottom: '7%',
     },
 
     pressable_default: {
