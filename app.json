@@ -9,11 +9,11 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.madapp.stemm",
+      "bundleIdentifier": "com.stemmlab",
       "googleServicesFile": "GoogleService-Info.plist"
     },
     "android": {
-      "package": "com.madapp.stemm",
+      "package": "com.stemmlab",
       "googleServicesFile": "google-services.json",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE"
