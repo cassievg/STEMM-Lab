@@ -29,7 +29,7 @@ export default function StudentHome() {
                 style={({ pressed }) => [
                     pressed ? globalStyles.pressable_onPress : globalStyles.pressable_default
                 ]}>
-                    <Text style={globalStyles.button_big_text}>Play</Text>
+                    <Text style={globalStyles.button_big_text}>Learn</Text>
                 </Pressable>
             </View>
 

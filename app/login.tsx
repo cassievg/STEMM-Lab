@@ -16,15 +16,15 @@ export default function Login() {
         try {
             await signIn(email, password);
             const userDocument = await firestore().collection('users').doc(getUserID()).get();
-            if (userDocument.get('role') == 'teacher') {
+            if (userDocument.get('role') === 'teacher') {
                 router.push('/teacher/teacherhome');
-            } else if (userDocument.get('role') == 'student') {
+            } else if (userDocument.get('role') === 'student') {
                 router.push('/homescreen');
             }
 
             console.log(userDocument.get('username'));
-        } catch (e) {
-            console.log("Error fetching user: " + e);
+        } catch (e: any) {
+            setError(e.message);
         }
     }
 
@@ -160,7 +160,7 @@ const localStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',
-        bottom: -25,
+        bottom: -55,
     },
 
     error_text: {

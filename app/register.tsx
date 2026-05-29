@@ -119,7 +119,7 @@ export default function Register() {
                     />
                 </View>
 
-                <View style={localStyles.input_container}>
+                <View style={localStyles.role_container}>
                     <View style={localStyles.label_container}>
                         <Text style={localStyles.input_label}>Role</Text>
                     </View>
@@ -180,6 +180,18 @@ const localStyles = StyleSheet.create({
         paddingTop: '5%',
         paddingBottom: '5%',
         alignItems: 'center',
+        marginBottom: '-10%',
+    },
+
+    role_container: {
+        flexDirection: 'row',
+        gap: '10%',
+        width: '100%',
+        height: '28%',
+        paddingTop: '5%',
+        paddingBottom: '5%',
+        alignItems: 'center',
+        marginTop: '2%',
         marginBottom: '-10%',
     },
 
@@ -253,7 +265,7 @@ const localStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',
-        bottom: -25,
+        bottom: -45,
     },
 
     error_text: {

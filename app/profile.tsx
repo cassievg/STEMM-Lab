@@ -153,7 +153,6 @@ const localStyles = StyleSheet.create({
 
     button_container: {
         width: '75%',
-        height: '8%',
         marginTop: '7%',
         paddingHorizontal: 24,
         gap: 12,

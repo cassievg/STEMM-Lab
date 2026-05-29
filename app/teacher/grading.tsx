@@ -10,7 +10,7 @@ export default function Grading() {
             <View style={globalStyles.header}>
                 <TouchableOpacity 
                 style={globalStyles.back_button}
-                onPress={() => router.push('/homescreen')}>
+                onPress={() => router.push('//teacherhome')}>
                     <Text>{'<'}</Text>
                 </TouchableOpacity>
                 <Text style={globalStyles.page_title}>
