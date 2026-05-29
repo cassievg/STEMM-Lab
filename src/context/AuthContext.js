@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
                     setLoading(false);
                 }
             } catch (e) {
-                console.log("Failed to load token, " + e);
+                console.log("Failed to load token: " + e);
                 setLoading(false);
             }
         }

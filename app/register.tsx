@@ -36,8 +36,8 @@ export default function Register() {
 
             await firestore().collection('users').doc(user.uid).set(
                 {
-                    role: role,
                     username: username,
+                    role: role,
                 }
             )
 
