@@ -2,14 +2,17 @@ import { router } from 'expo-router';
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
+import { useAuth } from '@/src/context/AuthContext';
 import { globalStyles } from "../styles";
 
 export default function TeacherHome() {
+    const { currentUser, userDoc } = useAuth();
+    
     return (
         <View style={globalStyles.page}>
             <View style={globalStyles.title_container}>
                 <Text style={globalStyles.page_title}>
-                    Welcome to STEMM Lab!
+                    Welcome, {userDoc?.username}!
                 </Text>           
             </View>
 

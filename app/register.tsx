@@ -3,8 +3,8 @@ import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-import firestore from '@react-native-firebase/firestore';
-import { signUp } from '../src/firebase/auth.js';
+import { signUp } from '../backend/firebase/auth.js';
+import { firestore } from '../backend/firebase/config.js';
 
 import { globalStyles } from "./styles";
 
