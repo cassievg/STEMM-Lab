@@ -88,7 +88,6 @@ const localStyles = StyleSheet.create({
     input_label: {
         fontSize: 15,
         fontFamily: 'Trebuchet MS, Roboto, sans-serif',
-        height: '100%',
     },
 
     input_container: {
@@ -99,6 +98,7 @@ const localStyles = StyleSheet.create({
         paddingTop: '5%',
         paddingBottom: '5%',
         alignItems: 'center',
+        marginBottom: '4%',
     },
 
     form_container: {
@@ -108,6 +108,8 @@ const localStyles = StyleSheet.create({
         padding: '5%',
         borderColor: '#97b9d6',
         borderWidth: 2,
+        height: '30%',
+        width: '90%',
     },
 
     text_input: {
@@ -115,15 +117,16 @@ const localStyles = StyleSheet.create({
         fontFamily: 'Trebuchet MS, Roboto, sans-serif',
         width: '100%',
         flex: 1,
-        height: '130%',
+        height: '100%',
         padding: '2%',
     },
     
     button_parent: {
-        width: '70%',
+        width: '65%',
         height: '20%',
         display: 'flex',
-        marginTop: '10%',
+        marginTop: '8%',
+        marginBottom: '5%',
     },
 
     pressable_default: {
@@ -148,7 +151,7 @@ const localStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',
-        bottom: -25,
+        bottom: -55,
     },
 
     error_text: {
