@@ -58,13 +58,13 @@ const localStyles = StyleSheet.create({
     header: {
         flexDirection: 'row',
         alignItems: 'center',
-        width: '100%',
+        width: '90%',
         paddingVertical: 10,
         marginBottom: '5%'
     },
 
     container: {
-        width: '100%',
+        width: '90%',
         height: '37%',
         backgroundColor: '#afdaff',
         borderRadius: 8,

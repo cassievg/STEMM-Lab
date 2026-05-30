@@ -119,20 +119,21 @@ export default function Register() {
                     />
                 </View>
 
-                <View style={localStyles.input_container}>
+                <View style={localStyles.role_container}>
                     <View style={localStyles.label_container}>
                         <Text style={localStyles.input_label}>Role</Text>
                     </View>
-                    
-                    <Picker
-                    selectedValue={role}
-                    onValueChange={(value) => setRole(value)}
-                    style={localStyles.picker}
-                    >
-                        <Picker.Item label="Select a role" value="" />
-                        <Picker.Item label="Teacher" value="teacher" />
-                        <Picker.Item label="Student" value="student" />
-                    </Picker>
+                    <View style={localStyles.picker_container}>
+                        <Picker
+                        selectedValue={role}
+                        onValueChange={(value) => setRole(value)}
+                        style={localStyles.picker}
+                        >
+                            <Picker.Item label="Select a role" value="" style={localStyles.picker_text}/>
+                            <Picker.Item label="Teacher" value="teacher" style={localStyles.picker_text}/>
+                            <Picker.Item label="Student" value="student" style={localStyles.picker_text}/>
+                        </Picker>
+                    </View>
                 </View>
 
                 <View style={localStyles.button_parent}>
@@ -169,21 +170,48 @@ const localStyles = StyleSheet.create({
     input_label: {
         fontSize: 15,
         fontFamily: 'Trebuchet MS, Roboto, sans-serif',
-        height: '100%',
     },
 
     input_container: {
         flexDirection: 'row',
         gap: '10%',
         width: '100%',
-        height: '13%',
+        height: '28%',
         paddingTop: '5%',
         paddingBottom: '5%',
         alignItems: 'center',
+        marginBottom: '-10%',
+    },
+
+    role_container: {
+        flexDirection: 'row',
+        gap: '10%',
+        width: '100%',
+        height: '28%',
+        paddingTop: '5%',
+        paddingBottom: '5%',
+        alignItems: 'center',
+        marginTop: '2%',
+        marginBottom: '-8%',
+    },
+
+    picker_container: {
+        flex: 1,
+        zIndex: 999,
+        elevation: 999,
+        height: '90%',
+        justifyContent: 'center',
     },
 
     picker: {
         flex: 1,
+        backgroundColor: '#ffffff',
+        marginVertical: 1,
+    },
+
+    picker_text: {
+        fontSize: 14,
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
     },
 
     form_container: {
@@ -193,6 +221,9 @@ const localStyles = StyleSheet.create({
         padding: '5%',
         borderColor: '#97b9d6',
         borderWidth: 2,
+        height: '40%',
+        width: '100%',
+        overflow: 'visible',
     },
 
     text_input: {
@@ -200,15 +231,16 @@ const localStyles = StyleSheet.create({
         fontFamily: 'Trebuchet MS, Roboto, sans-serif',
         width: '100%',
         flex: 1,
-        height: '130%',
+        height: '60%',
         padding: '2%',
     },
     
     button_parent: {
-        width: '70%',
-        height: '8%',
+        width: '65%',
+        height: '12%',
         display: 'flex',
-        marginTop: '10%',
+        marginTop: '8%',
+        marginBottom: '7%',
     },
 
     pressable_default: {
@@ -233,7 +265,7 @@ const localStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',
-        bottom: -25,
+        bottom: -45,
     },
 
     error_text: {
