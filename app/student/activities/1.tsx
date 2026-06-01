@@ -65,6 +65,10 @@ const FORMULA: {force: string; equation: string}[] = [
     {force: 'Net (total) force', equation: 'Net Force = Weight - Drag Force'},
 ]
 
+const BLUE = '#97b9d6';
+const LIGHT_BLUE = '#afdaff';
+const WHITE = '#ffffff';
+
 export default function Activity1() {
     const [activeSection, setActiveSection] = useState<SectionKey>('overview');
     const [checkedItems, setCheckedItems] = useState<string[]>([]);
@@ -296,7 +300,8 @@ export default function Activity1() {
             <View style={localStyles.footer}>
                 <TouchableOpacity 
                     style={localStyles.start_button}
-                    activeOpacity={0.85}>
+                    activeOpacity={0.85}
+                    onPress={() => router.push('/student/startactivity/start1')}>
 
                     <Text style={localStyles.start_button_text}>
                         Start Activity
@@ -310,7 +315,7 @@ export default function Activity1() {
 
 const localStyles = StyleSheet.create({
     page: {
-        backgroundColor: '#97b9d6',
+        backgroundColor: BLUE,
         flex: 1,
     },
 
@@ -324,8 +329,8 @@ const localStyles = StyleSheet.create({
 
     back_button: {
         borderWidth: 1,
-        borderColor: '#ffffff',
-        backgroundColor: '#ffffff',
+        borderColor: WHITE,
+        backgroundColor: WHITE,
         paddingHorizontal: 6,
         paddingVertical: 2,
         marginRight: 16,
@@ -355,9 +360,9 @@ const localStyles = StyleSheet.create({
     tab_row: {
         flexDirection: 'row',
         width: '100%',
-        backgroundColor: '#ffffff',
+        backgroundColor: WHITE,
         borderBottomWidth: 1,
-        borderBottomColor: '#ffffff',
+        borderBottomColor: WHITE,
     },
 
     tab: {
@@ -369,7 +374,7 @@ const localStyles = StyleSheet.create({
     },
 
     tab_active: {
-        borderBottomColor: '#afdaff',
+        borderBottomColor: LIGHT_BLUE,
     },
 
     tab_icon: {
@@ -384,14 +389,14 @@ const localStyles = StyleSheet.create({
     },
 
     tab_label_active: {
-        color: '#97b9d6',
+        color: BLUE,
         fontWeight: '700',
     },
 
     scroll: {
         flex: 1,
         width: '100%',
-        backgroundColor: '#ffffff',
+        backgroundColor: WHITE,
     },
 
     scroll_content: {
@@ -421,12 +426,12 @@ const localStyles = StyleSheet.create({
     },
 
     chip: {
-        backgroundColor: '#97b9d6',
+        backgroundColor: BLUE,
         borderRadius: 20,
         paddingHorizontal: 12,
         paddingVertical: 5,
         borderWidth: 1,
-        borderColor: '#afdaff',
+        borderColor: LIGHT_BLUE,
     },
 
     chip_text: {
@@ -443,7 +448,7 @@ const localStyles = StyleSheet.create({
     },
 
     curriculum_icon: {
-        backgroundColor: '#97b9d6',
+        backgroundColor: BLUE,
         borderRadius: 6,
         paddingHorizontal: 8,
         paddingVertical: 3,
@@ -472,7 +477,7 @@ const localStyles = StyleSheet.create({
         width: 6,
         height: 6,
         borderRadius: 3,
-        backgroundColor: '#97b9d6',
+        backgroundColor: BLUE,
         marginTop: 6,
         flexShrink: 0,
     },
@@ -487,7 +492,7 @@ const localStyles = StyleSheet.create({
 
     progress_text: {
         fontSize: 14,
-        color: '#97b9d6',
+        color: BLUE,
         fontWeight: '600',
         marginBottom: 12,
         marginTop: 4,
@@ -496,25 +501,25 @@ const localStyles = StyleSheet.create({
     equipment_row: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#ffffff',
+        backgroundColor: WHITE,
         borderRadius: 12,
         borderWidth: 1,
-        borderColor: '#afdaff',
+        borderColor: LIGHT_BLUE,
         padding: 10,
         marginBottom: 10,
         gap: 12,
     },
 
     equipment_row_checked: {
-        backgroundColor: '#afdaff',
-        borderColor: '#97b9d6',
+        backgroundColor: LIGHT_BLUE,
+        borderColor: BLUE,
     },
 
     equipment_image: {
         width: 52,
         height: 52,
         borderRadius: 8,
-        backgroundColor: '#97b9d6'
+        backgroundColor: BLUE
     },
 
     equipment_image_checked: {
@@ -537,17 +542,17 @@ const localStyles = StyleSheet.create({
         height: 24,
         borderRadius: 8,
         borderWidth: 2,
-        borderColor: '#97b9d6',
+        borderColor: BLUE,
         alignItems: 'center',
         justifyContent: 'center',
     },
 
     checkbox_checked: {
-      backgroundColor: '#97b9d6', 
+      backgroundColor: BLUE, 
     },
 
     checkbox_tick: {
-        color: '#ffffff',
+        color: WHITE,
         fontSize: 14,
         fontWeight: '700',
     },
@@ -563,7 +568,7 @@ const localStyles = StyleSheet.create({
         width: 28,
         height: 28,
         borderRadius: 14,
-        backgroundColor: '#97b9d6',
+        backgroundColor: BLUE,
         alignItems: 'center',
         justifyContent: 'center',
         flexShrink: 0,
@@ -572,7 +577,7 @@ const localStyles = StyleSheet.create({
     step_number: {
         fontSize: 16,
         fontFamily: 'Trebuchet MS, Roboto, sans-serif',
-        color: '#ffffff',
+        color: WHITE,
         fontWeight: '700',
     },
 
@@ -586,12 +591,12 @@ const localStyles = StyleSheet.create({
     },
 
     info_box: {
-        backgroundColor: '#ffffff',
+        backgroundColor: WHITE,
         borderRadius: 12,
         padding: 14,
         marginTop: 16,
         borderLeftWidth: 3,
-        borderLeftColor: '#97b9d6',
+        borderLeftColor: BLUE,
     },
 
     info_box_title: {
@@ -604,26 +609,26 @@ const localStyles = StyleSheet.create({
         borderRadius: 10,
         overflow: 'hidden',
         borderWidth: 1,
-        borderColor: '#afdaff'
+        borderColor: LIGHT_BLUE
     },
 
     table_header_row: {
         flexDirection: 'row',
-        backgroundColor: '#97b9d6',
+        backgroundColor: BLUE,
     },
 
     table_row: {
         flexDirection: 'row',
-        backgroundColor: '#ffffff'
+        backgroundColor: WHITE
     },
 
     table_row_alt: {
-        backgroundColor: '#afdaff'
+        backgroundColor: LIGHT_BLUE
     },
 
     table_header: {
         fontFamily: 'Trebuchet MS, Roboto, sans-serif',
-        color: '#ffffff',
+        color: WHITE,
         marginLeft: 3,
         fontWeight: '700',
     },
@@ -642,11 +647,11 @@ const localStyles = StyleSheet.create({
 
     focus_card: {
         flex: 1,
-        backgroundColor: '#ffffff',
+        backgroundColor: WHITE,
         borderRadius: 12,
         padding: 12,
         borderWidth: 1,
-        borderColor: '#afdaff',
+        borderColor: LIGHT_BLUE,
     },
 
     focus_level: {
@@ -658,14 +663,14 @@ const localStyles = StyleSheet.create({
 
     footer: {
         width: '100%',
-        backgroundColor: '#ffffff',
+        backgroundColor: WHITE,
         borderColor: 'transparent',
         paddingBottom: 12,
         paddingHorizontal: 16,
     },
 
     start_button: {
-        backgroundColor: '#97b9d6',
+        backgroundColor: BLUE,
         paddingVertical: 16,
         borderRadius: 14,
         alignItems: 'center',
@@ -678,7 +683,7 @@ const localStyles = StyleSheet.create({
         fontWeight: '800',
         alignSelf: 'center',
         letterSpacing: 0.3,
-        color: '#ffffff',
+        color: WHITE,
     }
 
 });

@@ -5,17 +5,17 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { globalStyles } from '../../styles';
 
 
-export default function Activity2() {
+export default function StartActivity4() {
     return (
         <SafeAreaView style={globalStyles.page}>
             <View style={globalStyles.header}>
                 <TouchableOpacity 
                 style={globalStyles.back_button}
-                onPress={() => router.push('/student/activityselection')}>
+                onPress={() => router.push('/student/activities/4')}>
                     <Text>{'<'}</Text>
                 </TouchableOpacity>
                 <Text style={globalStyles.page_title}>
-                    Activity 2
+                    Start activity 4
                 </Text>
             </View>
 
