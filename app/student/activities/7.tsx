@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { globalStyles } from '../../styles';
 
 
-export default function History() {
+export default function Activity7() {
     return (
         <SafeAreaView style={globalStyles.page}>
             <View style={globalStyles.header}>

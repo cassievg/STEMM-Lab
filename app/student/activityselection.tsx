@@ -15,7 +15,7 @@ type TabKey = 'engineering' | 'health_medical';
 
 const ACTIVITIES = {
     engineering: [
-        {id: '1', name: 'Parachuute Drop Challenge', icon: 'A', status: false},
+        {id: '1', name: 'Parachute Drop Challenge', icon: 'A', status: false},
         {id: '2', name: 'Sound Pollution Hunter', icon: 'B', status: false},
         {id: '3', name: 'Hand Fan Challenge', icon: 'C', status: false},
         {id: '4', name: 'Earthquake-Resistant Structure', icon: 'D', status: false},
