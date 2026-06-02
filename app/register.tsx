@@ -37,6 +37,7 @@ export default function Register() {
             await firestore().collection('users').doc(user.uid).set(
                 {
                     username: username,
+                    email: email,
                     role: role,
                 }
             )
@@ -146,8 +147,8 @@ export default function Register() {
                     </Pressable>
                 </View>
 
-                <View style={localStyles.error_container}>
-                    <Text style={localStyles.error_text}>{error}</Text>
+                <View style={globalStyles.error_container}>
+                    <Text style={globalStyles.error_text}>{error}</Text>
                 </View>
             </View>
         </View>
@@ -259,17 +260,5 @@ const localStyles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#d4d4d4',
         borderRadius: 10,
-    },
-
-    error_container: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        position: 'absolute',
-        bottom: -45,
-    },
-
-    error_text: {
-        textAlign: 'center',
-        color: 'red',
     },
 });

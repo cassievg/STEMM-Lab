@@ -1,15 +1,40 @@
+import { firestore } from '@/backend/firebase/config';
 import { useAuth } from '@/src/context/AuthContext';
 import { router } from 'expo-router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { globalStyles } from './styles';
 
 export default function Profile() {
-    const [name, setName] = useState('Username');
-    const [email] = useState('Email');
+    const [inputName, setInputName] = useState('Username');
+    const { currentUser, userDoc } = useAuth();
+
+    const [error, setError] = useState("");
 
     const { logout } = useAuth();
+
+    useEffect(() => {
+        if (userDoc?.username) {
+            setInputName(userDoc.username);
+        }
+    }, [userDoc])
+
+    const handleProfileUpdate = async () => {
+        if (inputName == "") {
+            setError("Please enter a valid username.");
+            return;
+        }
+
+        try {
+            await firestore().collection("users").doc(currentUser.uid).update({
+                username: inputName
+            })
+        } catch (e) {
+            setError("Update failed.");
+            console.log(e);
+        }
+    }
 
     return (
         <SafeAreaView style={globalStyles.page}>
@@ -45,8 +70,11 @@ export default function Profile() {
                         </Text>
                         <TextInput
                             style={localStyles.input}
-                            value={name}
-                            onChangeText={setName}
+                            value={inputName}
+                            onChangeText={(text) => {
+                                setInputName(text);
+                                setError('');
+                            }}
                         />
                     </View>
 
@@ -55,14 +83,14 @@ export default function Profile() {
                             Email
                         </Text>
                         <Text style={localStyles.email_text}>
-                            {email}
+                            {userDoc?.email}
                         </Text>
                     </View>
 
                     <View style={localStyles.button_container}>
                         <TouchableOpacity
                             style={localStyles.button}
-                            onPress={() => router.push('/homescreen')}>
+                            onPress={handleProfileUpdate}>
                                 <Text style={localStyles.button_text}>
                                     Save
                                 </Text>
@@ -74,6 +102,10 @@ export default function Profile() {
                                     Logout
                                 </Text>
                             </TouchableOpacity>
+                    </View>
+
+                    <View style={globalStyles.error_container}>
+                        <Text style={globalStyles.error_text}>{error}</Text>
                     </View>
                 </View>
             </View>

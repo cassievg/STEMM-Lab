@@ -12,15 +12,26 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const unsubscribe = auth().onAuthStateChanged(async (user) => {
-            if (user) {
-                const userDoc = await firestore().collection('users').doc(user.uid).get()
-                setUserDoc(userDoc.data());
-            } else {
+            setCurrentUser(user ?? null);
+
+            if (!user) {
                 setUserDoc(null);
+                return;
             }
 
-            setCurrentUser(user ?? null);
-        })
+            return firestore().collection("users").doc(user.uid).onSnapshot((doc) => {
+                if (!doc) {
+                    setUserDoc(null);
+                    return;
+                }
+
+                if (doc.exists) {
+                    setUserDoc(doc.data());
+                } else {
+                    setUserDoc(null);
+                }
+            });
+        });
 
         return unsubscribe
     }, []);
