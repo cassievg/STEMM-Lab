@@ -6,7 +6,6 @@
     "orientation": "portrait",
     "scheme": "stemmlab",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.stemmlab",
@@ -18,14 +17,21 @@
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE"
       },
-      "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "RECORD_AUDIO"
+      ]
     },
     "web": {
       "output": "static"
     },
     "plugins": [
       "expo-router",
+      "expo-av",
+      "expo-image-picker",
       "@react-native-firebase/app",
       "@react-native-firebase/auth",
       "expo-font"
