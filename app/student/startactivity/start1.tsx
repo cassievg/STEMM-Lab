@@ -1,3 +1,5 @@
+import { ResizeMode, Video } from 'expo-av';
+import * as ImagePicker from 'expo-image-picker';
 import { router } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import { Alert, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
@@ -12,7 +14,8 @@ type AttemptData = {
     slowMotionTime: string;
     notes: string;
     videoRecorded: boolean;
-}
+    videoUri: string | null;
+};
 
 const BLUE = '#97b9d6';
 const LIGHT_BLUE = '#afdaff';
@@ -32,6 +35,7 @@ const DEFAULT_ATTEMPT: AttemptData = {
     slowMotionTime: '',
     notes: '',
     videoRecorded: false,
+    videoUri: null,
 };
 
 const isAttemptComplete = (attempt: AttemptData) => 
@@ -104,9 +108,25 @@ export default function StartActivity1() {
         };
     }, []);
 
-    const handleRecordVideo = () => {
-        Alert.alert('Record Video', 'Camera integration');
-        updateField('videoRecorded', true);
+    const handleRecordVideo = async () => {
+        const permission = await ImagePicker.requestCameraPermissionsAsync();
+        if (!permission.granted){
+            Alert.alert('Permission Required', 'Camera access is needed to record the drop');
+            return;
+        };
+
+        const result = await ImagePicker.launchCameraAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Videos,
+            videoMaxDuration: 60,
+            allowsEditing: true,
+            quality: 1,
+        });
+
+        if (!result.canceled){
+            updateField('videoUri', result.assets[0].uri);
+            updateField('videoRecorded', true);
+        }
+        
     };
 
     const handleSubmit = () => {
@@ -176,18 +196,43 @@ export default function StartActivity1() {
                     <Text style={localStyles.section_heading}>
                         📹 Video Recording
                     </Text>
-                    <TouchableOpacity
-                        style={[localStyles.video_button, current.videoRecorded && localStyles.video_button_complete]}
-                        onPress={handleRecordVideo}
-                        activeOpacity={0.8}>
-                            
+                    
+                    {current.videoUri ? (
+                        <View style={localStyles.video_preview_container}>
+                            <Video
+                                source={{uri: current.videoUri}}
+                                style={localStyles.video_preview}
+                                resizeMode={ResizeMode.CONTAIN}
+                                useNativeControls/>
+                            <TouchableOpacity
+                                style={localStyles.video_retake_button}
+                                onPress={handleRecordVideo}
+                                activeOpacity={0.8}>
+
+                                <Text style={localStyles.video_retake_text}>
+                                    🔄 Retake Video
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                    ) : (
+                        <TouchableOpacity
+                            style={localStyles.video_button}
+                            onPress={handleRecordVideo}
+                            activeOpacity={0.8}>
+
                             <Text style={localStyles.video_icon}>
-                                {current.videoRecorded ? '✅' : '🎥'}
+                                🎥
                             </Text>
-                            <Text style={localStyles.video_text}>
-                                {current.videoRecorded ? 'Video Record' : 'Record Drop Video'}
-                            </Text>
-                    </TouchableOpacity>
+                            <View>
+                                <Text style={localStyles.video_text}>
+                                    Record Drop Video
+                                </Text>
+                                <Text style={localStyles.video_subtext}>
+                                    Tap to open camera
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
+                    )}
 
                     <Text style={localStyles.section_heading}>
                         ⏱ Drop Timer
@@ -490,6 +535,41 @@ const localStyles = StyleSheet.create({
         letterSpacing: 0.5,
         marginTop: 20,
         marginBottom: 10,
+    },
+
+    video_preview_container: {
+        borderRadius: 12,
+        overflow: 'hidden',
+        backgroundColor: '#000000',
+        gap: 8,
+    },
+
+    video_preview: {
+        width: '100%',
+        height: 200,
+        borderRadius: 12,
+    },
+
+    video_retake_button: {
+        backgroundColor: WHITE,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: BLUE,
+        paddingVertical: 10,
+        alignItems: 'center',
+        marginTop: 8,
+    },
+
+    video_retake_text: {
+        fontSize: 14,
+        fontFamily: FONT_FAMILY,
+        fontWeight: '600',
+        color: BLUE,
+    },
+
+    video_subtext: {
+        fontSize: 12,
+        marginTop: 2,
     },
 
     video_button: {
