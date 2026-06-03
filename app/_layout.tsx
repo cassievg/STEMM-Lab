@@ -4,6 +4,8 @@ import React, { useEffect } from 'react';
 import { ActivityIndicator } from "react-native";
 import { AuthProvider, useAuth } from '../src/context/AuthContext.js';
 
+import { initDatabase } from "../backend/database/database";
+
 export default function Layout() {
     return (
         <AuthProvider>
@@ -27,6 +29,11 @@ function RootLayout() {
             router.replace('/homescreen');
         } 
     }, [currentUser, userDoc])
+
+    useEffect(() => {
+        initDatabase();
+        console.log("database initialized.");
+    }, [])
 
     if (currentUser === undefined) return <ActivityIndicator style={{ flex: 1 }} />
 
