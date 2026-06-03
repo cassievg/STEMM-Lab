@@ -1,6 +1,6 @@
-import { ResizeMode, Video } from 'expo-av';
 import * as ImagePicker from 'expo-image-picker';
 import { router } from 'expo-router';
+import { VideoView, useVideoPlayer } from 'expo-video';
 import React, { useEffect, useRef, useState } from 'react';
 import { Alert, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -137,6 +137,8 @@ export default function StartActivity1() {
 
     const completeCount = Object.values(attempt).filter(isAttemptComplete).length;
 
+    const player = useVideoPlayer(current.videoUri ?? null);
+
     return (
         <SafeAreaView style={localStyles.page}>
             <View style={localStyles.header}>
@@ -199,11 +201,10 @@ export default function StartActivity1() {
                     
                     {current.videoUri ? (
                         <View style={localStyles.video_preview_container}>
-                            <Video
-                                source={{uri: current.videoUri}}
+                            <VideoView
+                                player={player}
                                 style={localStyles.video_preview}
-                                resizeMode={ResizeMode.CONTAIN}
-                                useNativeControls/>
+                                nativeControls/>
                             <TouchableOpacity
                                 style={localStyles.video_retake_button}
                                 onPress={handleRecordVideo}

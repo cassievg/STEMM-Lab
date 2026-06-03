@@ -30,11 +30,11 @@
     },
     "plugins": [
       "expo-router",
-      "expo-av",
-      "expo-image-picker",
+      "expo-video",
       "@react-native-firebase/app",
       "@react-native-firebase/auth",
-      "expo-font"
+      "expo-font",
+      "expo-video"
     ],
     "experiments": {
       "typedRoutes": true,
