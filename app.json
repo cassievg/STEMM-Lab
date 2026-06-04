@@ -36,7 +36,8 @@
       "@react-native-firebase/auth",
       "expo-font",
       "expo-video",
-      "expo-sqlite"
+      "expo-sqlite",
+      "expo-maps"
     ],
     "experiments": {
       "typedRoutes": true,

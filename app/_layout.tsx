@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { ActivityIndicator } from "react-native";
 import { AuthProvider, useAuth } from '../src/context/AuthContext.js';
 
-import { initDatabase } from "../backend/database/database";
+import { initDatabase } from "../src/database/db_schema.js";
 
 export default function Layout() {
     return (
@@ -23,11 +23,13 @@ function RootLayout() {
 
         if (currentUser === null) {
             router.replace('/login');
-        } else if (userDoc?.role === 'teacher') {
-            router.replace('/teacher/teacherhome');
-        } else if (userDoc?.role === 'student') {
-            router.replace('/homescreen');
-        } 
+        } else {
+            if (userDoc?.role === 'teacher') {
+                router.replace('/teacher/teacherhome');
+            } else if (userDoc?.role === 'student') {
+                router.replace('/homescreen');
+            } 
+        }
     }, [currentUser, userDoc])
 
     useEffect(() => {

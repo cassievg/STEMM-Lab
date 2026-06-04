@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
+    "@libsql/client": "^0.17.3",
     "@react-native-async-storage/async-storage": "2.2.0",
     "@react-native-firebase/app": "^24.0.0",
     "@react-native-firebase/auth": "^24.0.0",
@@ -20,6 +21,8 @@
     "@react-navigation/bottom-tabs": "^7.4.0",
     "@react-navigation/elements": "^2.6.3",
     "@react-navigation/native": "^7.1.8",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
     "expo": "~54.0.35",
     "expo-constants": "~18.0.13",
     "expo-dev-client": "~6.0.21",
@@ -28,6 +31,7 @@
     "expo-image": "~3.0.11",
     "expo-image-picker": "~17.0.11",
     "expo-linking": "~8.0.11",
+    "expo-maps": "~0.12.10",
     "expo-router": "~6.0.23",
     "expo-sensors": "~15.0.8",
     "expo-splash-screen": "~31.0.13",
@@ -51,8 +55,10 @@
   },
   "devDependencies": {
     "@types/react": "~19.1.0",
+    "drizzle-kit": "^0.31.10",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~10.0.0",
+    "tsx": "^4.22.4",
     "typescript": "~5.9.2"
   },
   "private": true
