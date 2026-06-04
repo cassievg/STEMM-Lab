@@ -41,7 +41,7 @@ export default function Profile() {
             <View style={globalStyles.header}>
                 <TouchableOpacity 
                 style={globalStyles.back_button}
-                onPress={() => router.push('./pages/student/menu/homescreen')}>
+                onPress={() => router.push('/pages/student/menu/homescreen')}>
                     <Text>{'<'}</Text>
                 </TouchableOpacity>
                 <Text style={globalStyles.page_title}>

@@ -2,7 +2,7 @@ import { router } from 'expo-router';
 import React from 'react';
 import { Image, Pressable, Text, View } from 'react-native';
 
-import { globalStyles } from '../../../styles';
+import { globalStyles } from './styles';
 
 export default function Landing() {
     return (
@@ -14,7 +14,7 @@ export default function Landing() {
             </View>
 
             <Image
-            source={require("../../../../assets/images/Logo.png")}
+            source={require("../assets/images/Logo.png")}
             style={globalStyles.image}/>
 
             <View style={globalStyles.title_container}>

@@ -9,9 +9,9 @@ const initDatabase = async (db: any) => {
     if (existingActivities.length === 0) {
         for (const activity of data) {
             await db.insert(activities).values({
-                id: activity.ID,
-                name: activity.Name,
-                course: activity.Course
+                ID: activity.ID,
+                Name: activity.Name,
+                Course: activity.Course
             })
         }
     };
