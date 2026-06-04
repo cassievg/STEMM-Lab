@@ -24,7 +24,7 @@ export default function Landing() {
             </View>
 
             <View style={globalStyles.button_parent}>
-                <Pressable onPress={() => {router.push('/pages/student/menu/login')}}
+                <Pressable onPress={() => {router.push('./pages/student/menu/login')}}
                 style={({ pressed }) => [
                     pressed ? globalStyles.pressable_onPress : globalStyles.pressable_default
                 ]}>
@@ -33,7 +33,7 @@ export default function Landing() {
             </View>
 
             <View style={globalStyles.button_parent}>
-                <Pressable onPress={() => {router.push('/pages/student/menu/register')}}
+                <Pressable onPress={() => {router.push('./pages/student/menu/register')}}
                 style={({ pressed }) => [
                     pressed ? globalStyles.pressable_onPress : globalStyles.pressable_default
                 ]}>
