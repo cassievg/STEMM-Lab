@@ -27,7 +27,7 @@ export default function StudentHome() {
             </View>
 
             <View style={globalStyles.button_parent}>
-                <Pressable onPress={() => {router.push('/pages/student/menu/settings')}}
+                <Pressable onPress={() => {router.push('./settings')}}
                 style={({ pressed }) => [
                     pressed ? globalStyles.pressable_onPress : globalStyles.pressable_default
                 ]}>
@@ -36,7 +36,7 @@ export default function StudentHome() {
             </View>
 
             <View style={globalStyles.button_parent}>
-                <Pressable onPress={() => {router.push('/pages/student/menu/history')}}
+                <Pressable onPress={() => {router.push('./history')}}
                 style={({ pressed }) => [
                     pressed ? globalStyles.pressable_onPress : globalStyles.pressable_default
                 ]}>
@@ -46,7 +46,7 @@ export default function StudentHome() {
 
             <View style={globalStyles.button_parent}>
                 <Pressable 
-                onPress={() => {router.push('/pages/student/menu/profile')}}
+                onPress={() => {router.push('./profile')}}
                 style={({ pressed }) => [
                     pressed ? globalStyles.pressable_onPress : globalStyles.pressable_default
                 ]}>
@@ -56,7 +56,7 @@ export default function StudentHome() {
 
             <View style={globalStyles.button_parent}>
                 <Pressable 
-                onPress={() => {router.push('/pages/student/menu/inbox')}}
+                onPress={() => {router.push('./inbox')}}
                 style={({ pressed }) => [
                     pressed ? globalStyles.pressable_onPress : globalStyles.pressable_default
                 ]}>

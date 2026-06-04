@@ -5,7 +5,6 @@ import { Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from '
 import { signIn } from '../../../../backend/firebase/auth.js';
 import { globalStyles } from "../../../styles";
 
-import { useUserData } from '../../../../src/context/UserDataContext.js';
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -13,12 +12,9 @@ export default function Login() {
 
     const [error, setError] = useState("");
 
-    const { loadUser } = useUserData();
-
     const handleLogin = async () => {
         try {
             await signIn(email, password);
-            await loadUser();
         } catch (e) {
             setError("Incorrect email or password.");
         }

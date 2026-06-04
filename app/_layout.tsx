@@ -12,7 +12,7 @@ import { initDatabase } from "../src/database/databaseServices";
 export default function Layout() {
     return (
         <AuthProvider>
-            <DatabaseProvider uri="stemm_lab.db">
+            <DatabaseProvider uri="stemm.db">
                 <UserDataProvider>
                     <RootLayout />
                 </UserDataProvider>

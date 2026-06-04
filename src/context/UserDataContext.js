@@ -17,10 +17,6 @@ const UserDataProvider = ({ children }) => {
     const [cache, setCache] = useState([]);    
     const [results, setResults] = useState([]);
 
-    const loadUser = async () => {
-        const data = await renderUserData(db, userId);
-    };
-
     useEffect(() => {
         const loadUser = async () => {
             return await renderUserData(db, userId);
