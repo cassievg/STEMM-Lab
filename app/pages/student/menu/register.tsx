@@ -6,7 +6,7 @@ import { Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from '
 import { signUp } from '../../../../backend/firebase/auth.js';
 import { firestore } from '../../../../backend/firebase/config.js';
 
-import { globalStyles } from "../../../styles.js";
+import { globalStyles } from "../../../styles";
 
 export default function Register() {
     const [username, setUsername] = useState("");
@@ -42,7 +42,7 @@ export default function Register() {
                 }
             )
 
-            router.push('/login');
+            router.push('/pages/student/menu/login');
         } catch (e: any) {
             setError(e.message);
         }
@@ -53,7 +53,7 @@ export default function Register() {
             <View style={localStyles.header}>
                 <TouchableOpacity 
                 style={globalStyles.back_button}
-                onPress={() => router.push('/')}>
+                onPress={() => router.push('..')}>
                     <Text>{'<'}</Text>
                 </TouchableOpacity>
                 <Text style={globalStyles.page_title}>

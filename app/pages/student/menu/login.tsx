@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import { signIn } from '../../../../backend/firebase/auth.js';
-import { globalStyles } from "../../../styles.js";
+import { globalStyles } from "../../../styles";
 
 import { useUserData } from '../../../../src/context/UserDataContext.js';
 
@@ -29,7 +29,7 @@ export default function Login() {
             <View style={globalStyles.header}>
                 <TouchableOpacity 
                 style={globalStyles.back_button}
-                onPress={() => router.push('/')}>
+                onPress={() => router.push('..')}>
                     <Text>{'<'}</Text>
                 </TouchableOpacity>
                 <Text style={globalStyles.page_title}>

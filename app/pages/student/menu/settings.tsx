@@ -21,7 +21,7 @@ export default function Settings() {
             <View style={globalStyles.header}>
                 <TouchableOpacity 
                 style={globalStyles.back_button}
-                onPress={() => router.push('/homescreen')}>
+                onPress={() => router.push('/pages/student/menu/homescreen')}>
                     <Text>{'<'}</Text>
                 </TouchableOpacity>
                 <Text style={globalStyles.page_title}>
@@ -127,7 +127,7 @@ export default function Settings() {
             </View>
                 <View style={localStyles.save_button}>
                     <Pressable
-                    onPress={() => {router.push('/homescreen')}}
+                    onPress={() => {router.push('/pages/student/menu/homescreen')}}
                     style={({ pressed }) => [
                     pressed ? globalStyles.pressable_onPress : globalStyles.pressable_default
                     ]}>

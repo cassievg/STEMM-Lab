@@ -33,7 +33,7 @@ export default function Inbox() {
             <View style={localStyles.header}>
                 <TouchableOpacity 
                 style={globalStyles.back_button}
-                onPress={() => router.push('/homescreen')}>
+                onPress={() => router.push('/pages/student/menu/homescreen')}>
                     <Text>{'<'}</Text>
                 </TouchableOpacity>
                 <Text style={globalStyles.page_title}>

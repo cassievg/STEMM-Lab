@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { ActivityIndicator } from "react-native";
 import { AuthProvider, useAuth } from '../src/context/AuthContext.js';
 
-import { initDatabase } from "@/src/database/databaseServices.js";
+import { initDatabase } from "@/src/database/databaseServices";
 import { useDatabase } from "../src/context/DBContext.js";
 
 export default function Layout() {
