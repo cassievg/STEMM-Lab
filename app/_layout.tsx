@@ -5,6 +5,7 @@ import { ActivityIndicator } from "react-native";
 import { AuthProvider, useAuth } from '../src/context/AuthContext.js';
 
 import { initDatabase } from "@/src/database/databaseServices.js";
+import { useDatabase } from "../src/context/DBContext.js";
 
 export default function Layout() {
     return (
@@ -16,6 +17,7 @@ export default function Layout() {
 
 function RootLayout() {
     const { currentUser, userDoc } = useAuth();
+    const { db } = useDatabase();
     const router = useRouter();
 
     useEffect(() => {
@@ -33,7 +35,7 @@ function RootLayout() {
     }, [currentUser, userDoc])
 
     useEffect(() => {
-        initDatabase();
+        initDatabase(db);
         console.log("database initialized.");
     }, [])
 
