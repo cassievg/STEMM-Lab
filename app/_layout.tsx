@@ -4,8 +4,8 @@ import React, { useEffect } from 'react';
 import { ActivityIndicator } from "react-native";
 import { AuthProvider, useAuth } from '../src/context/AuthContext.js';
 
-import { useDatabase } from "../src/context/DBContext.js";
-import { initDatabase } from "../src/database/databaseServices.js";
+import { useDatabase } from "../src/context/DBContext";
+import { initDatabase } from "../src/database/databaseServices";
 
 export default function Layout() {
     return (
@@ -24,12 +24,12 @@ function RootLayout() {
         if (currentUser === undefined) return;
 
         if (currentUser === null) {
-            router.replace('/login');
+            router.replace('/pages/student/menu/login');
         } else {
             if (userDoc?.role === 'teacher') {
-                router.replace('/teacher/teacherhome');
+                router.replace('/pages/teacher/teacherhome');
             } else if (userDoc?.role === 'student') {
-                router.replace('/homescreen');
+                router.replace('/pages/student/menu/homescreen');
             } 
         }
     }, [currentUser, userDoc])
