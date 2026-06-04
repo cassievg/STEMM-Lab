@@ -23,9 +23,9 @@ const WHITE = '#ffffff';
 const FONT_FAMILY = 'Trebuchet MS, Roboto, sans-serif';
 
 const TABS: {key: AttemptKey; label: string; description: string}[] = [
-    {key: 'action1', label: 'Action 1', description: 'No parachute (baseline)'},
-    {key: 'action2', label: 'Action 2', description: 'Plastic with corners tied'},
-    {key: 'action3', label: 'Action 3', description: 'Your own design'},
+    {key: 'action1', label: 'Design 1', description: 'No parachute (baseline)'},
+    {key: 'action2', label: 'Design 2', description: 'Plastic with corners tied'},
+    {key: 'action3', label: 'Design 3', description: 'Your own design'},
 ];
 
 const DEFAULT_ATTEMPT: AttemptData = {
@@ -131,6 +131,7 @@ export default function StartActivity1() {
 
     const handleSubmit = () => {
         Alert.alert('Submitted', 'Your results have been saved');
+        router.push('/student/quiz/quiz1');
     };
 
     const current = attempt[activeTab];
