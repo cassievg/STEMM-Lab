@@ -1,7 +1,51 @@
 [
     {
-        "id": "",
-        "name": "",
-        "course": ""
+        "ID": "EC1",
+        "Name" : "Parachute Drop Challenge",
+        "Course" : "Engineering Challenges",
+        "Overview" : "Students design, build, and test a parachute for a small toy to reduce its landing speed and impact force. Teams iterate their designs under time and material constraints, aiming to achieve the slowest and safest landing within a target area.",
+        "Equipment" : [
+            "Mobile phone with STEMM Lab app",
+            "Small toy (e.g. army toy soldier)",
+            "Table or elevated surface",
+            "Paper or plastic",
+            "String",
+            "Scissors",
+            "Tape"
+        ],
+        "Instruction" : [
+            "Drop the toy without a parachute and record the fall (baseline test).",
+            "Build a parachute using provided materials.",
+            "Drop the toy from the same height and record the fall.",
+            "Review speed and landing accuracy results in the app.",
+            "Redesign and test up to three prototypes within 20 minutes.",
+            "Upload videos, results, and team reflections."
+        ],
+        "Diagram" : [
+            "Toy attached to parachute",
+            "Drog height marked",
+            "Target landing zone shown on floor"
+        ],
+        "DiagramUri" : "placeholder",
+        "WriteUp" : [
+            "Predict which parachute design was the best.",
+            "Sketch each of the design",
+            "Recode the times of the design",
+            "Were you correct in timings?",
+            "What design was the easiest to make?"
+        ],
+        "TableColumn" : [
+            "How long will it take to hit the ground?",
+            "Time to first hit the ground",
+            "Were you right?",
+            "Time from first hitting the ground and stop moving (need slow motion)"
+        ],
+        "TableRow" : [
+            "Action 1 (No parachute as the baseline)",
+            "Action 2 (Use plastics with the corners tied",
+            "Action 3 (Your own design)"
+        ],
+        "Discussion" : "Parachutes and Forces: Gravity pulls objects downward, causing them to speed up as they fall. A parachute increases air resistance (also called drag). Drag acts upward, opposing the motion and slowing the fall. A slower fall reduces the force when the toy hits the ground, making the landing safer. Engineers improve parachute designs through repeated testing and redesign.",
+        "Extra" : "test"
     }
 ]
