@@ -1,7 +1,6 @@
 import { eq } from "drizzle-orm";
 import { activities, activityCache, activityResults, progress } from './db_schema';
 
-import { getUserID } from '@/backend/firebase/auth';
 import data from '../../assets/constants/activitydetails.json';
 
 const initDatabase = async (db: any) => {
@@ -18,9 +17,7 @@ const initDatabase = async (db: any) => {
     };
 }
 
-const renderUserData = async (db: any) => {
-    const userId = getUserID();
-
+const renderUserData = async (db: any, userId: any) => {
     const [userProgress, userCache, userResults] = await Promise.all([
         db.select().from(progress).where(eq(progress.userId, userId)),
         db.select().from(activityCache).where(eq(activityCache.userId, userId)),
