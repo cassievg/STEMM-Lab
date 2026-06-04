@@ -1,4 +1,4 @@
-import { drizzle } from "drizzle-orm/singlestore/driver";
+import { drizzle } from "drizzle-orm/expo-sqlite";
 import { openDatabaseSync } from "expo-sqlite";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
