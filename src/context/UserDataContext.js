@@ -8,14 +8,15 @@ const UserDataContext = createContext();
 const useUserData = () => useContext(UserDataContext);
 
 const UserDataProvider = ({ children }) => {
-    const { userId } = useAuth();
+    const { currentUser, userId } = useAuth();
+    const { db } = useDatabase();
     
     const [progress, setProgress] = useState([]);    
     const [cache, setCache] = useState([]);    
     const [results, setResults] = useState([]);
 
     const loadUser = async () => {
-        const { db } = useDatabase();
+        if (!currentUser || !userId) return;
 
         const data = await renderUserData(db, userId);
 
