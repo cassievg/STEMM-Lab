@@ -1,8 +1,10 @@
 import * as SQLite from 'expo-sqlite';
 
-const db = await SQLite.openDatabaseAsync('stemm.db');
+let db: SQLite.SQLiteDatabase;
 
 const initDatabase = async () => {
+    db = await SQLite.openDatabaseAsync('stemm.db');
+
     await db.execAsync(`
         CREATE TABLE IF NOT EXISTS activities (
             id TEXT PRIMARY KEY,

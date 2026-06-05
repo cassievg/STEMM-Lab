@@ -4,12 +4,15 @@ import React, { useEffect } from 'react';
 import { ActivityIndicator } from "react-native";
 import { AuthProvider, useAuth } from '../src/context/AuthContext.js';
 
+import { SQLiteProvider } from "expo-sqlite";
 import { initDatabase } from "../src/database/databaseServices";
 
 export default function Layout() {
     return (
         <AuthProvider>
-            <RootLayout />
+            <SQLiteProvider databaseName="stemm.db" onInit={initDatabase}>
+                <RootLayout />
+            </SQLiteProvider>
         </AuthProvider>
     );
 }
