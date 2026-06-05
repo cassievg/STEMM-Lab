@@ -1,33 +1,95 @@
-import { eq } from "drizzle-orm";
-import { activities, activityCache, activityResults, progress } from './db_schema';
+import * as SQLite from 'expo-sqlite';
 
-import data from '../../assets/constants/activitydetails.json';
+const db = await SQLite.openDatabaseAsync('stemm.db');
 
-const initDatabase = async (db: any) => {
-    const existingActivities = await db.select().from(activities);
-
-    if (existingActivities.length === 0) {
-        for (const activity of data) {
-            await db.insert(activities).values({
-                ID: activity.ID,
-                Name: activity.Name,
-                Course: activity.Course
-            })
-        }
-    };
+const initDatabase = async () => {
+    await db.execAsync(`
+        CREATE TABLE IF NOT EXISTS activities (
+            id TEXT PRIMARY KEY,
+            name TEXT NOT NULL,
+            course TEXT NOT NULL
+        )    
+    `)
 }
 
-const renderUserData = async (db: any, userId: any) => {
-    const [userProgress, userCache, userResults] = await Promise.all([
-        db.select().from(progress).where(eq(progress.userId, userId)),
-        db.select().from(activityCache).where(eq(activityCache.userId, userId)),
-        db.select().from(activityResults).where(eq(activityResults.userId, userId))
-    ])
+const renderUserData = async (userId: any) => {
+    try {
+        const userProgress = await db.getAllAsync(`
+            SELECT *
+            FROM progress
+            WHERE userID = ?
+        `, [userId]);
 
-    return { userProgress, userCache, userResults };
+        const userCache = await db.getAllAsync(`
+            SELECT *
+            FROM activityCache
+            WHERE userID = ?
+        `, [userId]);
+
+        const userResults = await db.getAllAsync(`
+            SELECT *
+            FROM activityResults
+            WHERE userID = ?
+        `, [userId]);
+
+        return { userProgress, userCache, userResults };
+    } catch (e) {
+        console.log("Error:", e);
+
+        return { 
+            userProgress: [],
+            userCache: [],
+            userResults: [] 
+        };
+    }
+}
+
+const fetchProgress = async (userId: any) => {
+    try {
+        const res = await db.getAllAsync(`
+            SELECT *
+            FROM progress
+            WHERE userID = ?
+        `, [userId])
+
+        return res;
+    } catch (e) {
+        console.log("Error:", e);
+        return {res: []};
+    }
+}
+
+const fetchCache = async (userId: any) => {
+    try {
+        const res = await db.getAllAsync(`
+            SELECT *
+            FROM activityCache
+            WHERE userID = ?
+        `, [userId])
+
+        return res;
+    } catch (e) {
+        console.log("Error:", e);
+        return {res: []};
+    }
+}
+
+const fetchResults = async (userId: any) => {
+    try {
+        const res = await db.getAllAsync(`
+            SELECT *
+            FROM activityResults
+            WHERE userID = ?
+        `, [userId])
+
+        return res;
+    } catch (e) {
+        console.log("Error:", e);
+        return {res: []};
+    }
 }
 
 export {
-    initDatabase, renderUserData
+    db, fetchCache, fetchProgress, fetchResults, initDatabase, renderUserData
 };
 

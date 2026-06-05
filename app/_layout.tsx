@@ -1,29 +1,21 @@
 import { Stack, useRouter } from "expo-router";
 import React, { useEffect } from 'react';
 
-import { DatabaseProvider } from "@/src/context/DBContext.js";
-import { UserDataProvider } from "@/src/context/UserDataContext.js";
 import { ActivityIndicator } from "react-native";
 import { AuthProvider, useAuth } from '../src/context/AuthContext.js';
 
-import { useDatabase } from "../src/context/DBContext";
 import { initDatabase } from "../src/database/databaseServices";
 
 export default function Layout() {
     return (
         <AuthProvider>
-            <DatabaseProvider uri="stemm.db">
-                <UserDataProvider>
-                    <RootLayout />
-                </UserDataProvider>
-            </DatabaseProvider>
+            <RootLayout />
         </AuthProvider>
     );
 }
 
 function RootLayout() {
     const { currentUser, userDoc } = useAuth();
-    const { db } = useDatabase();
     const router = useRouter();
 
     useEffect(() => {
@@ -41,7 +33,7 @@ function RootLayout() {
     }, [currentUser, userDoc])
 
     useEffect(() => {
-        initDatabase(db);
+        initDatabase();
         console.log("database initialized.");
     }, [])
 
