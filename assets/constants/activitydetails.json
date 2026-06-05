@@ -1,10 +1,10 @@
 [
     {
-        "ID": "EC1",
-        "Name" : "Parachute Drop Challenge",
-        "Course" : "Engineering Challenges",
-        "Overview" : "Students design, build, and test a parachute for a small toy to reduce its landing speed and impact force. Teams iterate their designs under time and material constraints, aiming to achieve the slowest and safest landing within a target area.",
-        "Equipment" : [
+        "id": "EC1",
+        "name" : "Parachute Drop Challenge",
+        "course" : "Engineering Challenges",
+        "overview" : "Students design, build, and test a parachute for a small toy to reduce its landing speed and impact force. Teams iterate their designs under time and material constraints, aiming to achieve the slowest and safest landing within a target area.",
+        "equipment" : [
             "Mobile phone with STEMM Lab app",
             "Small toy (e.g. army toy soldier)",
             "Table or elevated surface",
@@ -13,39 +13,287 @@
             "Scissors",
             "Tape"
         ],
-        "Instruction" : [
-            "Drop the toy without a parachute and record the fall (baseline test).",
-            "Build a parachute using provided materials.",
-            "Drop the toy from the same height and record the fall.",
-            "Review speed and landing accuracy results in the app.",
-            "Redesign and test up to three prototypes within 20 minutes.",
-            "Upload videos, results, and team reflections."
+        "instruction" : [
+            {
+                "step": 1,
+                "text": "Drop the toy without a parachute and record the fall (baseline test)."
+            },
+            {
+                "step": 2,
+                "text": "Build a parachute using provided materials."
+            },
+            {
+                "step": 3,
+                "text": "Drop the toy from the same height and record the fall."
+            },
+            {
+                "step": 4,
+                "text": "Review speed and landing accuracy results in the app."
+            },
+            {
+                "step": 5,
+                "text": "Redesign and test up to three prototypes within 20 minutes."
+            },
+            {
+                "step": 6,
+                "text": "Upload videos, results, and team reflections."
+            }
         ],
-        "Diagram" : [
-            "Toy attached to parachute",
-            "Drog height marked",
-            "Target landing zone shown on floor"
+        "diagram" : {
+            "imageUri" : "placeholder",
+            "label": [
+                "Toy attached to parachute",
+                "Drop height marked",
+                "Target landing zone shown on floor"
+            ]
+        },
+        "writeUp" : {
+            "question": 
+            [
+                "Predict which parachute design was the best.",
+                "Sketch each of the design",
+                "Recode the times of the design",
+                "Were you correct in timings?",
+                "What design was the easiest to make?"
+            ]
+        },
+
+        "experimentTable": {
+            "columns": [
+                "Prediction",
+                "Time To Ground",
+                "Prediction Correct",
+                "Stopping Time"
+            ],
+            "rows": [
+            {
+                "id": 1,
+                "label": "No Parachute (Baseline)"
+            },
+            {
+                "id": 2,
+                "label": "Plastic Parachute"
+            },
+            {
+                "id": 3,
+                "label": "Custom Design"
+            }
+            ]
+        },
+        "discussion" : {
+            "title": "Parachutes and Forces",
+            "description": "Gravity pulls objects downward, causing them to speed up as they fall. A parachute increases air resistance (also called drag). Drag acts upward, opposing the motion and slowing the fall. A slower fall reduces the force when the toy hits the ground, making the landing safer. Engineers improve parachute designs through repeated testing and redesign."
+        },
+        
+        "physics": {
+            "newtonsSecondLaw": {
+            "name": "Newton's Second Law",
+            "formula": "Net Force = Mass × Acceleration"
+            },
+
+            "forceTable": [
+            {
+                "force": "Downward (Weight)",
+                "formula": "Weight = Mass × g"
+            },
+            {
+                "force": "Upward (Drag)",
+                "formula": "Drag force from the parachute"
+            },
+            {
+                "force": "Net Force",
+                "formula": "Weight - Drag Force"
+            }
+            ]
+        },
+        "calculations" : [
+            {
+                "step": 1,
+                "title": "Measure the Drop Height",
+                "description": "Measure the height of the table or drop surface (distance fallen)."
+            },
+            {
+                "step": 2,
+                "title": "Measure the Time",
+                "description": [
+                    "Drop the toy (do not throw it).",
+                    "Record the time taken to first hit the ground using a phone or video."
+                ]
+            },
+            {
+                "step": 3,
+                "title": "Calculate Final Velocity",
+                "description": [
+                    "Since the toy is dropped, the initial velocity is 0 m/s.",
+                    "Final Velocity = distance / time",
+                    "Example: 1.0 m/0.5 s = 2.0 m/s"
+                ]
+            },
+            {
+                "step": 4,
+                "title": "Calculate Acceleration",
+                "description": [
+                    "Acceleration = (Final velocity - Initial velocity) / time",
+                    "Initial velocity = 0: ",
+                    "Acceleration = 2.0 m/s / 0.5 s = 4.0 m/s²"
+                ]
+            },
+            {
+                "step": 5,
+                "title": "Calculate Net Force",
+                "description": [
+                    "Net Force = mass × acceleration",
+                    "Example (mass = 0.20 kg): ",
+                    "Net Force = 0.20 kg x 4 m/s² = 0.8 N"
+                ]
+            },
+            {
+                "step": 6,
+                "title": "Calculate Drag Force",
+                "description": [
+                    "Calculate the weight: ",
+                    "Weight = mass × g = 0.20 kg x 9.8 m/s² = 1.96 N",
+                    "Calculate drag: ",
+                    "Drag Force = Weight - Net force = 1.96 N - 0.8 N = 1.16 N"
+                ]
+            }
         ],
-        "DiagramUri" : "placeholder",
-        "WriteUp" : [
-            "Predict which parachute design was the best.",
-            "Sketch each of the design",
-            "Recode the times of the design",
-            "Were you correct in timings?",
-            "What design was the easiest to make?"
+        "gForce": {
+            "description": "G-force describes how quickly the object slows down when it hits the ground. It is measured in multiples of g = 9.8 m/s².",
+            "slowMotionInstruction": [
+                "Identify the moment the toy first hits the ground",
+                "Measure the time taken for the toy to stop moving (contact time)"
+            ]
+        },
+        "cases" : [
+            {
+                "id": 1,
+                "title": "Object Does Not Bounce",
+                "description": "Object goes from impact speed downward to 0 m/s.",
+                "velocityChange": "vImpact",
+                "formula": "g = (Δv / tContact) / 9.8",
+                "example": [
+                    "Impact speed = 2.0 m/s",
+                    "Contact time = 0.05 s",
+                    "g-force = (2.0/0.05) / 9.8 ≈ 4.1 g"
+                ]
+            },
+            {
+                "id": 2,
+                "title": "Object Bounces",
+                "description": "Object goes from impact speed downward to updward velocity at separation (𝑣Up).",
+                "velocityChange": "Δ𝑣 = 𝑣Impact + 𝑣Up",
+                "formula": "g = (Δ𝑣 / tContact) / 9.8",
+                "additionalCalculation": {
+                    "title": "Finding 𝑣Up if rebound height is unknown",
+                    "description": "Measure time to maximum height after bounce (𝑡up) using slow-motion video.",
+                    "formula": "𝑣Up = g × tUp"
+                },
+                "example": [
+                    "Impact speed downward: 2.0 m/s",
+                    "Time to max height after bounce: 0.15 s → 𝑣Up = 9.8 × 0.15 ≈ 1.47 m/s",
+                    "Contact time: 0.02 s",
+                    "Δ𝑣 = 2.0 + 1.47 = 3.47 m/s",
+                    "g-force = 3.47/0.02 ÷ 9.8 ≈ 17.7 g"
+                ],
+                "observation" : "Bouncing increases g-force because the velocity change during contact is larger."
+            }
         ],
-        "TableColumn" : [
-            "How long will it take to hit the ground?",
-            "Time to first hit the ground",
-            "Were you right?",
-            "Time from first hitting the ground and stop moving (need slow motion)"
+        "tips" : [
+            "Use a ruler in frame for scale",
+            "Identify first contact for contact time",
+            "Identify when object leaves surface for bounce calculation"
         ],
-        "TableRow" : [
-            "Action 1 (No parachute as the baseline)",
-            "Action 2 (Use plastics with the corners tied",
-            "Action 3 (Your own design)"
+        "injuryRisk" : {
+            "title": "Typical G-Force Ranges and Injury Risk",
+            "ranges": [
+                {
+                    "range": "1-5 g",
+                    "example": "Standing up quicly, elevators or amusement rides",
+                    "effect": "No injury"
+                },
+                {
+                    "range": "5-10 g",
+                    "example": "Hard falls while running or minor car braking",
+                    "effect": "Possible bruising or strains"
+                },
+                {
+                    "range": "10-30 g",
+                    "example": "Sports collisions, bicycle crashes or car crashes with seatbelts",
+                    "effect": "Serious injuries possible (broken bones or concussions"
+                },
+                {
+                    "range": "30-50 g",
+                    "example": "Servere car crashes or falls onto hard surface",
+                    "effect": "High risk of servere injury"
+                },
+                {
+                    "range": "50+ g",
+                    "example": "Very sudden stops with no cushioning",
+                    "effect": "Life-threatening injuries likely"
+                }
+            ],
+            "Important": " Duration matters. A brief spike can be survivable, while sustained g-forces are more dangerous."
+        },
+        "studentFocus": [
+            {
+                "level": "Primary School",
+                "tasks": [
+                    "Measure time",
+                    "Calculate final speed"
+                ]
+            },
+            {
+                "level": "High School",
+                "tasks": [
+                    "Calculate final velocity",
+                    "Calculate acceleration",
+                    "Calculate net force",
+                    "Calculate drag force",
+                    "Calculate g-force"
+                ]
+            }
         ],
-        "Discussion" : "Parachutes and Forces: Gravity pulls objects downward, causing them to speed up as they fall. A parachute increases air resistance (also called drag). Drag acts upward, opposing the motion and slowing the fall. A slower fall reduces the force when the toy hits the ground, making the landing safer. Engineers improve parachute designs through repeated testing and redesign.",
-        "Extra" : "test"
+        "curriculumLinks" : [
+            {
+            "subject": "Science",
+            "outcomes": [
+                {
+                "code": "ACSSU076 / ACSSU117",
+                "description": "Forces affect motion"
+                },
+                {
+                "code": "ACSIS124",
+                "description": "Planning and conducting investigations"
+                },
+                {
+                "code": "ACSIS126",
+                "description": "Analysing patterns in data"
+                }
+            ]
+            },
+            {
+                "subject": "Design & Technologies",
+                "outcomes": [
+                    {
+                    "code": "ACTDEP036",
+                    "description": "Generate, test, and improve solutions"
+                    }
+                ]
+            },
+            {
+                "subject": "Mathematics",
+                "outcomes": [
+                    {
+                    "code": "ACMMG108",
+                    "description": "Measuring speed"
+                    },
+                    {
+                    "code": "ACMSP147",
+                    "description": "Comparing data and averages"
+                    }
+                ]
+            }
+        ]
     }
 ]
