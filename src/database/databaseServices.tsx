@@ -3,8 +3,13 @@ import activityList from '../../assets/constants/activitydetails.json';
 
 let db: SQLite.SQLiteDatabase;
 
+type ActivityRow = {
+    id: string;
+    name: string;
+    course: string;
+}
+
 const initDatabase = async () => {
-    console.log("dasdasdasasdasdasdasdasdasdasdasd");
     db = await SQLite.openDatabaseAsync('stemm.db');
 
     await db.execAsync(`
@@ -15,14 +20,49 @@ const initDatabase = async () => {
         )    
     `)
 
-    console.log('getting activities')
+    await db.execAsync(`
+        CREATE TABLE IF NOT EXISTS inbox (
+            id TEXT PRIMARY KEY,
+            author TEXT NOT NULL,
+            recipient TEXT NOT NULL,
+            body TEXT NOT NULL,
+            date TEXT NOT NULL
+        )    
+    `)
+
     for (const activity of activityList) {
-        console.log(activity.Name);
         await db.runAsync(`
-            INSERT INTO activities
+            INSERT OR IGNORE INTO activities
             (id, name, course)
             VALUES (?, ?, ?)
-        `, [activity.ID, activity.Name, activity.Course])
+        `, [activity.id, activity.name, activity.course])
+    }
+}
+
+const fetchInbox = async (userId: any) => {
+    try {
+        const inbox = await db.getAllAsync(`
+            SELECT *
+            FROM activityResults
+            WHERE userID = ?
+        `, [userId]);
+
+        return inbox;
+    } catch (e) {
+        console.log("Error:", e);
+        return;
+    }
+}
+
+const fetchActivities = async (): Promise<ActivityRow[]> => {
+    try {
+        return await db.getAllAsync(`
+            SELECT *
+            FROM activities
+        `)
+    } catch (e) {
+        console.log("Error:", e);
+        return [];
     }
 }
 
@@ -69,7 +109,7 @@ const fetchProgress = async (userId: any) => {
         return res;
     } catch (e) {
         console.log("Error:", e);
-        return {res: []};
+        return [];
     }
 }
 
@@ -84,7 +124,7 @@ const fetchCache = async (userId: any) => {
         return res;
     } catch (e) {
         console.log("Error:", e);
-        return {res: []};
+        return [];
     }
 }
 
@@ -99,11 +139,32 @@ const fetchResults = async (userId: any) => {
         return res;
     } catch (e) {
         console.log("Error:", e);
-        return {res: []};
+        return [];
     }
 }
 
+const fetchCourses = async (): Promise<string[]> => {
+    try {
+        const res = await db.getAllAsync<{ course: string }>(`
+            SELECT DISTINCT course
+            FROM activities
+            ORDER BY course
+        `)
+
+        return res.map(c => c.course);
+    } catch (e) {
+        console.log("Error:", e);
+        return [];
+    }
+} 
+
 export {
-    db, fetchCache, fetchProgress, fetchResults, initDatabase, renderUserData
+    db,
+    fetchActivities,
+    fetchCache, fetchCourses, fetchInbox,
+    fetchProgress,
+    fetchResults,
+    initDatabase,
+    renderUserData
 };
 

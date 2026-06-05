@@ -4,6 +4,8 @@ import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { globalStyles } from '../../../styles';
 
+import { useAuth } from '../../../../src/context/AuthContext';
+
 type Notification = {
     id: string;
     message: string;
@@ -16,6 +18,8 @@ const notifications: Notification[] = [
 ]
 
 export default function Inbox() {
+    const { currentUser, userDoc, userID } = useAuth();
+
     const renderItem = ({item}: {item: Notification}) => (
         <TouchableOpacity 
         style={localStyles.item}

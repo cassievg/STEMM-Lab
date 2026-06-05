@@ -1,11 +1,13 @@
+import { useAuth } from '@/src/context/AuthContext';
 import { router } from 'expo-router';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { globalStyles } from '../../../styles';
 
-
 export default function History() {
+    const { currentUser, userDoc, userID } = useAuth();
+
     return (
         <SafeAreaView style={globalStyles.page}>
             <View style={globalStyles.header}>

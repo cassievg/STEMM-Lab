@@ -1,57 +1,86 @@
+import { fetchActivities, fetchCourses } from '@/src/database/databaseServices';
 import { router } from 'expo-router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dimensions, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { globalStyles } from '../../../styles';
 
-type Activity = {
+// type Activity = {
+//     id: string;
+//     name: string;
+//     icon: string;
+//     status: boolean;
+// };
+
+type ActivityRow = {
     id: string;
     name: string;
-    icon: string;
-    status: boolean;
-};
+    course: string;
+}
 
-type TabKey = 'engineering' | 'health_medical';
+// const ACTIVITIES = {
+//     engineering: [
+//         {id: '1', name: 'Parachute Drop Challenge', icon: 'A', status: false},
+//         {id: '2', name: 'Sound Pollution Hunter', icon: 'B', status: false},
+//         {id: '3', name: 'Hand Fan Challenge', icon: 'C', status: false},
+//         {id: '4', name: 'Earthquake-Resistant Structure', icon: 'D', status: false},
+//     ],
+//     health_medical: [
+//         {id: '5', name: 'Human Performance Lab', icon: 'E', status: false},
+//         {id: '6', name: 'Reaction Board Challenge', icon: 'F', status: false},
+//         {id: '7', name: 'Breathing Pace Trainer', icon: 'G', status: false},
+//     ]
+// };
 
-const ACTIVITIES = {
-    engineering: [
-        {id: '1', name: 'Parachute Drop Challenge', icon: 'A', status: false},
-        {id: '2', name: 'Sound Pollution Hunter', icon: 'B', status: false},
-        {id: '3', name: 'Hand Fan Challenge', icon: 'C', status: false},
-        {id: '4', name: 'Earthquake-Resistant Structure', icon: 'D', status: false},
-    ],
-    health_medical: [
-        {id: '5', name: 'Human Performance Lab', icon: 'E', status: false},
-        {id: '6', name: 'Reaction Board Challenge', icon: 'F', status: false},
-        {id: '7', name: 'Breathing Pace Trainer', icon: 'G', status: false},
-    ]
-};
-
-const TABS: {key: TabKey; label: string}[] = [
-    {key: 'engineering', label: 'Engineering'},
-    {key: 'health_medical', label: 'Health and Medical Science'},
-];
+// const TABS: {key: TabKey; label: string}[] = [
+//     {key: 'engineering', label: 'Engineering'},
+//     {key: 'health_medical', label: 'Health and Medical Science'},
+// ];
 
 const screenWidth = Dimensions.get('window').width;
 const cardSize = (screenWidth - 16 * 2 - 20) / 2;
 
 export default function ActivitySelection() {
-    const [activeTab, setActiveTab] = useState<'engineering' | 'health_medical'>('engineering');
-    const activity = ACTIVITIES[activeTab];
+    const [activeTab, setActiveTab] = useState<string>('');
+
+    const [courses, setCourses] = useState<string[]>([]);
+    const [activities, setActivities] = useState<ActivityRow[]>([]);
+
+    const formatCourseName = (str:string): string => {
+        return str.replace(/(^\w|_\w)/g, (match) => match.replace('_', ' ').toUpperCase());
+    }
+
+    useEffect(() => {
+        const loadData = async () => {
+            const fetchedCourses = await fetchCourses();
+            const fetchedActivities = await fetchActivities();
+
+            setCourses(fetchedCourses);
+            setActivities(fetchedActivities);
+
+            if (fetchedCourses.length > 0) {
+                setActiveTab(fetchedCourses[0]);
+            }
+
+            console.log(fetchedCourses);
+            console.log(fetchedActivities);
+        }
+
+        loadData();  
+    }, [])
     
-    const handleActivityPress = (item: Activity) => {
-        router.push(`/student/activities/${item.id}` as any);
-    };
+    const filteredActivities = activities.filter(
+        activity => activity.course === activeTab
+    );
 
-
-    const renderActivity = ({item}: {item: Activity}) => (
+    const renderActivity = ({item}: {item: ActivityRow}) => (
         <TouchableOpacity
             style={localStyles.card}
-            onPress={() => handleActivityPress(item)}
+            onPress={() => router.push(`/student/activities/${item.id}` as any)}
             activeOpacity={0.7}>
 
             <View style={localStyles.card_icon_box}>
-                <Text style={localStyles.card_icon}>{item.icon}</Text>
+                <Text style={localStyles.card_icon}>A</Text>
             </View>
             <Text style={localStyles.card_label}>{item.name}</Text>
         </TouchableOpacity>
@@ -71,26 +100,25 @@ export default function ActivitySelection() {
             </View>
 
             <View style={localStyles.tab_bar}>
-                {TABS.map((tab) => (
+                {courses.map((course) => (
                     <TouchableOpacity
-                        key={tab.key}
+                        key={course}
                         style={[localStyles.tab, 
-                            activeTab === tab.key && localStyles.tab_active]}
-                        onPress={() => setActiveTab(tab.key)}
+                            activeTab === course && localStyles.tab_active]}
+                        onPress={() => setActiveTab(course)}
                         activeOpacity={0.8}>
                         <Text style={[
                             localStyles.tab_label,
-                            activeTab === tab.key && localStyles.tab_label_active,
+                            activeTab === course && localStyles.tab_label_active,
                         ]}>
-                            {tab.label}
+                            {formatCourseName(course)}
                         </Text>
                     </TouchableOpacity>
                 ))}
             </View>
 
             <FlatList
-                key={activeTab}
-                data={activity}
+                data={filteredActivities}
                 renderItem={renderActivity}
                 keyExtractor={(item) => item.id}
                 numColumns={2}
