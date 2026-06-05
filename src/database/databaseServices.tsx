@@ -1,8 +1,10 @@
 import * as SQLite from 'expo-sqlite';
+import activityList from '../../assets/constants/activitydetails.json';
 
 let db: SQLite.SQLiteDatabase;
 
 const initDatabase = async () => {
+    console.log("dasdasdasasdasdasdasdasdasdasdasd");
     db = await SQLite.openDatabaseAsync('stemm.db');
 
     await db.execAsync(`
@@ -12,6 +14,16 @@ const initDatabase = async () => {
             course TEXT NOT NULL
         )    
     `)
+
+    console.log('getting activities')
+    for (const activity of activityList) {
+        console.log(activity.Name);
+        await db.runAsync(`
+            INSERT INTO activities
+            (id, name, course)
+            VALUES (?, ?, ?)
+        `, [activity.ID, activity.Name, activity.Course])
+    }
 }
 
 const renderUserData = async (userId: any) => {

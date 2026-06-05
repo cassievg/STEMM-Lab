@@ -1,6 +1,6 @@
 import { auth, firestore } from '@/backend/firebase/config';
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { signIn, signOut } from '../../backend/firebase/auth';
+import { getUserID, signIn, signOut } from '../../backend/firebase/auth';
 
 export const AuthContext = createContext();
 

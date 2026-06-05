@@ -10,7 +10,7 @@ import { initDatabase } from "../src/database/databaseServices";
 export default function Layout() {
     return (
         <AuthProvider>
-            <SQLiteProvider databaseName="stemm.db" onInit={initDatabase}>
+            <SQLiteProvider databaseName="stemm.db">
                 <RootLayout />
             </SQLiteProvider>
         </AuthProvider>
