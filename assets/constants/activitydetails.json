@@ -2,7 +2,7 @@
     {
         "id": "EC1",
         "name" : "Parachute Drop Challenge",
-        "course" : "Engineering Challenges",
+        "course" : "Engineering + Physics",
         "overview" : "Students design, build, and test a parachute for a small toy to reduce its landing speed and impact force. Teams iterate their designs under time and material constraints, aiming to achieve the slowest and safest landing within a target area.",
         "equipment" : [
             "Mobile phone with STEMM Lab app",
@@ -291,6 +291,742 @@
                     {
                     "code": "ACMSP147",
                     "description": "Comparing data and averages"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "EC2",
+        "name" : "Sound Pollution Hunter",
+        "course" : "Environmental Science",
+        "overview" : "Students measure and compare sound levels in different classroom activities.",
+        "equipment" : [
+            "Mobile phone with STEMM Lab app"
+        ],
+        "instruction" : [
+            {
+                "step": 1,
+                "text": "Measure noise from different actions (dropping objects (pens, books) talking, walking, stamping your feet)."
+            },
+            {
+                "step": 2,
+                "text": "Record sound levels and locations"
+            },
+            {
+                "step": 3,
+                "text": "Map loud and quiet zones."
+            }
+        ],
+        "diagram" : {
+            "imageUri" : "placeholder",
+            "label": [
+                "Drop object (e.g. book) on table/floor",
+                "Phone, position 30 cm from the noise"
+            ]
+        },
+        "writeUp" : {
+            "question": 
+            [
+                "Predict which action created the loudest sound.",
+                "Record the results",
+                "Were you right?",
+                "Any surprises?",
+                "Should we wear ear muffs in your classroom?"
+            ]
+        },
+
+        "experimentTable": {
+            "columns": [
+                "Prediction (louder or softer than)",
+                "Outcome (dB)",
+                "Were you right?"
+            ],
+            "rows": [
+                {
+                    "id": 1,
+                    "label": "Action 1 (e.g. dropping a book on the table)"
+                },
+                {
+                    "id": 2,
+                    "label": "Action 2 (e.g. talking)"
+                },
+                {
+                    "id": 3,
+                    "label": "Action 3 (e.g. stamping your feet)"
+                }
+            ]
+        },
+        "discussion" : {
+            "title": "Sound and Health",
+            "description": "Sound intensity varies depending on energy and surfaces. Prolonged loud noise can impact health and concentration"
+        },
+        
+        "injuryRisk" : {
+            "title": "Sound Levels and Hearing Damage Risk",
+            "ranges": [
+                {
+                    "range": "0-30 dB",
+                    "example": "Whisper, quiet library ",
+                    "effect": "No risk"
+                },
+                {
+                    "range": "30-60 dB",
+                    "example": "Normal conversation, classroom noise",
+                    "effect": "Safe for long periods"
+                },
+                {
+                    "range": "60-85 dB",
+                    "example": "Busy traffic, vacuum cleaner",
+                    "effect": "Generally safe, but long exposure can cause fatigue"
+                },
+                {
+                    "range": "85-90 dB",
+                    "example": "Lawn mower, loud classroom, heavy traffic",
+                    "effect": "Hearing damage possible after long exposure"
+                },
+                {
+                    "range": "90-100 dB",
+                    "example": "Motorbike, power tools, loud music",
+                    "effect": "Hearing damage likely after short exposure"
+                },
+                {
+                    "range": "100-110 dB",
+                    "example": "Nightclub, rock concert, chainsaw",
+                    "effect": "Serious hearing damage in minutes"
+                },
+                {
+                    "range": "110-120 dB",
+                    "example": "Siren close by, car horn at 1 m",
+                    "effect": "Painful; immediate damage possible"
+                },
+                {
+                    "range": "120-130 dB",
+                    "example": "Jet engine at close range",
+                    "effect": "Immediate and severe hearing damage"
+                },
+                {
+                    "range": "130+ dB",
+                    "example": "Explosion, gunshot",
+                    "effect": "Instant, permanent hearing damage"
+                }
+            ]
+        },
+        "curriculumLinks" : [
+            {
+                "subject": "Science",
+                "outcomes": [
+                    {
+                    "code": "ACSSU073",
+                    "description": " Sound and energy"
+                    }
+                ]
+            },
+            {
+                "subject": "Health",
+                "outcomes": [
+                    {
+                    "code": "ACPPS053",
+                    "description": "Health and wellbeing"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "EC3",
+        "name" : "Hand Fan Challenge",
+        "course" : "Physics - Air Movement",
+        "overview" : "Students test how air movement affects flexible materials.",
+        "equipment" : [
+            "Mobile phone with STEMM Lab app",
+            "Scissors",
+            "Sticky Tape"
+        ],
+        "instruction" : [
+            {
+                "step": 1,
+                "text": "Stand paper upright on a table."
+            },
+            {
+                "step": 2,
+                "text": "Fan air from 30 cm away."
+            },
+            {
+                "step": 3,
+                "text": "Observe and record movement."
+            },
+            {
+                "step": 4,
+                "text": "Repeat with different fan designs and fan distance (15cm, 30, 45cm)."
+            },
+            {
+                "step": 5,
+                "text": "Repeat with a cardboard instead of a paper vertical."
+            }
+        ],
+        "diagram" : {
+            "imageUri" : "placeholder",
+            "label": [
+                "Cut Paper - 1 cm x 10 cm and fold",
+                "Stick paper to table with sticky tape",
+                "Let the paper fan waiver for 20 seconds",
+                "Position phone to capture the wave and the vertical paper movement"
+            ]
+        },
+        "writeUp" : {
+            "question": 
+            [
+                "Predict which fan design makes the paper move the most.",
+                "Record the results",
+                "Were you right?",
+                "Any surprises?",
+                "How does material stiffness affect the bend angle?",
+                "How does fan design influence air velocity and resulting paper movement?",
+                "How does distance from the fan affect bending?"
+            ]
+        },
+
+        "experimentTable": {
+            "columns": [
+                "Bend (in degrees)",
+                "Outcome (in degrees)",
+                "Observation Notes: Were you right?"
+            ],
+            "rows": [
+                {
+                    "id": 1,
+                    "label": "Design 1 (e.g. 1cm back and forward folds)"
+                },
+                {
+                    "id": 2,
+                    "label": "Design 2 (e.g. no folds)"
+                },
+                {
+                    "id": 3,
+                    "label": "Design 3 (your own design)"
+                }
+            ]
+        },
+        "discussion" : {
+            "title": "Object's Flexibility",
+            "description": "Moving air applies force to objects. Paper bends due to flexibility (plasticity), and repeated bending can weaken it.",
+            "Tip": "Approximate force using F ≈ k ⋅ 𝜃. Students can rank forces by stiffness and bend angle without exact units if needed."
+        },
+        
+        "optionalChallenge": {
+            "description": "Estimate a stiffness coefficient 𝑘 for each material by measuring bend angle under a constant fan speed.",
+            "cases" : [
+                {
+                "id": 1,
+                "title": "What 𝒌 is",
+                "description": "For bending a sheet of paper:",
+                "formula": "F ≈ k ⋅ 𝜃",
+                "legend": [
+                    {
+                    "variable": "F",
+                    "definition": "force applied (N)"
+                    },
+                    {
+                    "variable": "k",
+                    "definition": "stiffness coefficient, representing resistance to bending"
+                    },
+                    {
+                    "variable": "𝜃",
+                    "definition": "bend angle (radians)"
+                    }
+                ],
+                "context": "In reality, k is related to flexural rigidity D = (Et³) / (12(1-v²)), but for classroom experiments we can use approximate empirical values."
+                },
+                {
+                    "id": 2,
+                    "title": "Approximate 𝒌 values for different papers",
+                    "materialTable": {
+                        "columns": [
+                            "Material",
+                            "Thickness (mm)",
+                            "Stiffness k (N/rad)",
+                            "Notes"
+                        ],
+                        "rows": [
+                            {
+                                "id": 1,
+                                "material": "Thin printer paper",
+                                "thickness": 0.1,
+                                "stiffness": 0.05,
+                                "note": "Bends very easily"
+                            },
+                            {
+                                "id": 2,
+                                "material": "Standard card stock",
+                                "thickness": 0.25,
+                                "stiffness": 0.2,
+                                "note": "Moderate bend"
+                            },
+                            {
+                                "id": 3,
+                                "material": "Thin cardboard",
+                                "thickness": 0.5,
+                                "stiffness": 0.5,
+                                "note": "Much harder to bend"
+                            },
+                            {
+                                "id": 4,
+                                "material": "Corrugated cardboard",
+                                "thickness": 3.0,
+                                "stiffness": 2.5,
+                                "note": "Very stiff, almost no bend"
+                            }
+                        ]
+                    },
+                    "context": "These are rough classroom values to let students estimate forces. The point is to see relative differences between materials."
+                },
+                {
+                    "id": 3,
+                    "title": "Example calculation",
+                    "example": [
+                        "Thin paper, k = 0.05 N/rad",
+                        "Bend angle observed: 30° → 𝜃 = 30∘ ≈ 0.524 rad",
+                        "F ≈ k ⋅ 𝜃 = 0.05 ⋅ 0.524 ≈ 0.026 N",
+                        "For thicker cardboard, k = 0.5, same bend angle:",
+                        "F ≈ 0.5 ⋅ 0.524 ≈ 0.26 N"
+                    ],
+                    "context": "So, the force required increases strongly with stiffness."
+                }
+            ]
+        },
+
+        "curriculumLinks" : [
+            {
+                "subject": "Science",
+                "outcomes": [
+                    {
+                    "code": "ACSSU076",
+                    "description": "Forces and motion"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "EC4",
+        "name" : "Earthquake-Resistant Structure",
+        "course" : "Engineering + Earth Science",
+        "overview" : "Students design structures that withstand vibration, simulating earthquakes.",
+        "equipment" : [
+            "Mobile phone with STEMM Lab app",
+            "Cardboard",
+            "Paper",
+            "Scissors",
+            "Sticky Tape",
+            "Plastic / paper cups"
+        ],
+        "instruction" : [
+            {
+                "step": 1,
+                "text": "Build an anti-vibration layer, by folding paper/cardboard."
+            },
+            {
+                "step": 2,
+                "text": "Place a flat cardboard platform on top."
+            },
+            {
+                "step": 3,
+                "text": "Place the phone in the centre and activate vibration mode on the STEMM App."
+            },
+            {
+                "step": 4,
+                "text": "Modify the structure to reduce movement (e.g. more pillars, more folds, etc)."
+            }
+        ],
+        "diagram" : {
+            "imageUri" : "placeholder",
+            "label": [
+                "Use plastic / paper cups as pillars",
+                "Cardboard as the foundation with folded paper",
+                "Place the mobile phone above it"
+            ]
+        },
+        "writeUp" : {
+            "question": 
+            [
+                "Predict which fold design makes the phone move the least.",
+                "Record the results",
+                "Were you right?",
+                "Any surprises?"
+            ]
+        },
+
+        "experimentTable": {
+            "columns": [
+                "Phone moves",
+                "Outcome",
+                "Were you right?"
+            ],
+            "rows": [
+                {
+                    "id": 1,
+                    "label": "Design 1 (e.g. 4 folds + 4 pillars)"
+                },
+                {
+                    "id": 2,
+                    "label": "Design 2 (e.g. 10 folds + 4 pillars)"
+                },
+                {
+                    "id": 3,
+                    "label": "Design 3 (e.g. 3 folds + 6 pillars)"
+                }
+            ]
+        },
+        "discussion" : {
+            "title": "Engineers and Earthquake",
+            "description": "Earthquakes cause ground vibrations that can collapse poorly designed structures. Engineers design buildings to absorb and distribute energy safely."
+        },
+        
+        "curriculumLinks" : [
+            {
+                "subject": "Earth Science",
+                "outcomes": [
+                    {
+                    "code": "ACSSU096",
+                    "description": "Earth processes"
+                    },
+                    {
+                    "code": "ACTDEP036",
+                    "description": "Testing and improving designs"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "HMS1",
+        "name" : "Human Performance Lab - Stretch Speed & Gracefulness",
+        "course" : "Medical Science + Biomechanics",
+        "overview" : "Students investigate how the human body moves by measuring speed, smoothness, and coordination during controlled stretching activities.",
+        "equipment" : [
+            "Mobile phone with STEMM Lab app",
+            "Open space to move safely"
+        ],
+        "instruction" : [
+            {
+                "step": 1,
+                "text": "Hold the phone firmly in one hand. Activate the App vibration sensor."
+            },
+            {
+                "step": 2,
+                "text": "Perform guided movement slowly as shown in the app. Record the vibration."
+            },
+            {
+                "step": 3,
+                "text": "Repeat the activity with vibration feedback enabled."
+            },
+            {
+                "step": 4,
+                "text": "Review speed, smoothness, and range-of-motion data."
+            },
+            {
+                "step": 5,
+                "text": "Upload results and reflect as a group."
+            }
+        ],
+        "diagram" : {
+            "imageUri" : "placeholder",
+            "label": [
+                "Student holding phone",
+                "Direction of movement arrows"
+            ]
+        },
+        "writeUp" : {
+            "question": 
+            [
+                "Which movement was the hardest to keep the vibration low?",
+                "Record the results",
+                "Were you right?",
+                "Any surprises?"
+            ]
+        },
+
+        "experimentTable": {
+            "columns": [
+                "Predict Phone Vibration Sensor (absolute)",
+                "Outcome (time + movement)",
+                "Were you right?"
+            ],
+            "rows": [
+                {
+                    "id": 1,
+                    "label": "Attempt 1"
+                },
+                {
+                    "id": 2,
+                    "label": "Attempt 2"
+                },
+                {
+                    "id": 3,
+                    "label": "Attempt 3"
+                }
+            ]
+        },
+        "discussion" : {
+            "title": "Body Movement and Sensors",
+            "description": "Muscles and joints work together to create movement. Faster movements often reduce control, while smoother movements show better coordination. Sensors in the phone measure how quickly and smoothly the body moves, helping students understand biomechanics and fatigue"
+        },
+        
+        "curriculumLinks" : [
+            {
+                "subject": "Health & Physical Education",
+                "outcomes": [
+                    {
+                    "code": "ACPPS051",
+                    "description": "Movement skills"
+                    },
+                    {
+                    "code": "ACPPS054",
+                    "description": "Physical performance"
+                    }
+                ]
+            },
+            {
+                "subject": "Science (Biology)",
+                "outcomes": [
+                    {
+                    "code": "ACSSU176",
+                    "description": "Structure and function of body systems"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "HMS2",
+        "name" : "Reaction Board Challenge",
+        "course" : "Neuroscience + Mathematics",
+        "overview" : "Students measure reaction time, coordination, and improvement through repeated digital and physical challenges.Students measure reaction time, coordination, and improvement through repeated digital and physical challenges.",
+        "equipment" : [
+            "Mobile phone with STEMM Lab app",
+            "Clear working space"
+        ],
+        "instruction" : [
+            {
+                "phase": 1,
+                "title": "Tap Reaction",
+                "steps": [
+                    {
+                        "step": 1,
+                        "text": "Tap the screen as soon as the hidden button appears."
+                    },
+                    {
+                        "step": 2,
+                        "text": "Record reaction time."
+                    },
+                    {
+                        "step": 3,
+                        "text": "Rotate through each team member."
+                    }
+                ]
+            },
+            {
+                "phase": 2,
+                "title": "Swap Hands",
+                "steps": [
+                    {
+                        "step": 1,
+                        "text": "Repeat using the non-dominant hand."
+                    },
+                    {
+                        "step": 2,
+                        "text": "Compare results."
+                    },
+                    {
+                        "step": 3,
+                        "text": "Rotate through each team member."
+                    }
+                ]
+            },
+            {
+                "phase": 3,
+                "title": "Tracing Challenge",
+                "steps": [
+                    {
+                        "step": 1,
+                        "text": "Trace a moving shape on the screen."
+                    },
+                    {
+                        "step": 2,
+                        "text": "Review accuracy and delay."
+                    }
+                ]
+            }
+        ],
+        "diagram" : {
+            "imageUri" : "placeholder",
+            "label": [
+                "Phone screen with reaction button",
+                "Tracing path illustration"
+            ]
+        },
+        "writeUp" : {
+            "question": 
+            [
+                "Predict your reaction time.",
+                "Record the results",
+                "Were you right?",
+                "Any surprises?"
+            ]
+        },
+
+        "experimentTable": {
+            "columns": [
+                "Reaction Time Prediction",
+                "Outcome (time + movement)",
+                "Were you right?"
+            ],
+            "rows": [
+                {
+                    "id": 1,
+                    "label": "Attempt 1"
+                },
+                {
+                    "id": 2,
+                    "label": "Attempt 2"
+                },
+                {
+                    "id": 3,
+                    "label": "Attempt 3"
+                }
+            ]
+        },
+        "discussion" : {
+            "title": "Reaction Time and Coordination",
+            "description": "Reaction time measures how quickly the brain processes information and sends signals to muscles. Practice can improve speed and coordination. Comparing hands shows how dominance affects performance."
+        },
+        
+        "curriculumLinks" : [
+            {
+                "subject": "Science Inquiry",
+                "outcomes": [
+                    {
+                    "code": "ACSIS130",
+                    "description": "Collecting and analysing data"
+                    }
+                ]
+            },
+            {
+                "subject": "Mathematics",
+                "outcomes": [
+                    {
+                    "code": "ACMSP147",
+                    "description": "Averages and variation"
+                    }
+                ]
+            },
+            {
+                "subject": "Health",
+                "outcomes": [
+                    {
+                    "code": "ACPPS057",
+                    "description": "Understanding physical performance"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "HMS3",
+        "name" : "Breathing Pace Trainer",
+        "course" : "Medical Science",
+        "overview" : "Students analyse breathing patterns at rest and after exercise.",
+        "equipment" : [
+            "Mobile phone with STEMM Lab app",
+            "Flat surface or mat"
+        ],
+        "instruction" : [
+            {
+                "step": 1,
+                "title": "Place the phone gently on the chest."
+            },
+            {
+                "step": 2,
+                "title": "Record breathing at rest."
+            },
+            {
+                "step": 3,
+                "title": "Perform light exercise.",
+                "exercise": [
+                    "Jog one minute on the spot",
+                    "100 star jump"
+                ]
+            },
+            {
+                "step": 4,
+                "title": "Record breathing again and compare results."
+            },
+            {
+                "step": 5,
+                "title": "Record breathing again and compare results."
+            }
+        ],
+        "diagram" : {
+            "imageUri" : "placeholder",
+            "label": [
+                "Recording breathing at rest",
+                "Perform light exercise",
+                "Lie down and put the phone on your chest"
+            ]
+        },
+        "writeUp" : {
+            "question": 
+            [
+                "Predict which exercise makes the phone detect most breathing per minute",
+                "Record the results",
+                "Were you right?",
+                "Any surprises?"
+            ]
+        },
+
+        "experimentTable": {
+            "columns": [
+                "Predict Breathe per minute",
+                "Outcome",
+                "Were you right?"
+            ],
+            "rows": [
+                {
+                    "id": 1,
+                    "label": "Breathing at Rest"
+                },
+                {
+                    "id": 2,
+                    "label": "After Exercise 1"
+                },
+                {
+                    "id": 3,
+                    "label": "After Exercise 2"
+                }
+            ]
+        },
+        "discussion" : {
+            "title": "Breathing Rate and Exercise",
+            "description": "Breathing rate increases during exercise to supply more oxygen to muscles. Sensors detect chest movement, helping students visualise breathing patterns.Breathing rate increases during exercise to supply more oxygen to muscles. Sensors detect chest movement, helping students visualise breathing patterns."
+        },
+        
+        "curriculumLinks" : [
+            {
+                "subject": "Science (Biology)",
+                "outcomes": [
+                    {
+                    "code": "ACSSU176",
+                    "description": "Body systems"
+                    }
+                ]
+            },
+            {
+                "subject": "Health & Physical Education",
+                "outcomes": [
+                    {
+                    "code": "ACPPS054",
+                    "description": "Physical activity and health"
                     }
                 ]
             }
