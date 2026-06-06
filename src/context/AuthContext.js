@@ -1,6 +1,6 @@
 import { auth, firestore } from '@/backend/firebase/config';
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { getUserID, signIn, signOut } from '../../backend/firebase/auth';
+import { signIn, signOut } from '../../backend/firebase/auth';
 
 export const AuthContext = createContext();
 
@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
 
                 if (doc.exists) {
                     setUserDoc(doc.data());
-                    setUserId(getUserID());
+                    setUserId(user.uid);
                 } else {
                     setUserDoc(null);
                     setUserId(null);
@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ currentUser, userDoc, login: signIn, logout: signOut, userId }}>
+        <AuthContext.Provider value={{ currentUser, userDoc, login: signIn, logout: signOut, userID: userId }}>
             {children}
         </AuthContext.Provider>
     );
