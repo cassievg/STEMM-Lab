@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 const BLUE = '#97b9d6';
 const LIGHT_BLUE = '#afdaff';
 const WHITE = '#ffffff';
+const FONT_FAMILY = 'Trebuchet MS, Roboto, sans-serif';
 
 export const activityStyles = StyleSheet.create({
     page: {
@@ -35,7 +36,7 @@ export const activityStyles = StyleSheet.create({
 
     header_title: {
         fontSize: 16,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         fontWeight: '600',
         letterSpacing: 0.5,
         marginBottom: 4,
@@ -75,7 +76,7 @@ export const activityStyles = StyleSheet.create({
 
     tab_label: {
         fontSize: 16,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         fontWeight: '500',
     },
 
@@ -96,7 +97,7 @@ export const activityStyles = StyleSheet.create({
 
     section_heading: {
         fontSize: 16,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         fontWeight: '700',
         marginTop: 20,
         marginBottom: 10,
@@ -105,7 +106,7 @@ export const activityStyles = StyleSheet.create({
 
     body: {
         fontSize: 16,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         lineHeight: 22,
         width: '100%',
     },
@@ -127,7 +128,7 @@ export const activityStyles = StyleSheet.create({
 
     chip_text: {
         fontSize: 14,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         fontWeight: '500',
     },
 
@@ -147,13 +148,13 @@ export const activityStyles = StyleSheet.create({
 
     curriculum_code: {
         fontSize: 14,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         flex: 1,
     },
 
     curriculum_description:{
         fontSize: 14,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         flex: 1,
     },
 
@@ -175,7 +176,7 @@ export const activityStyles = StyleSheet.create({
 
     list_text: {
         fontSize: 16,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         marginBottom: 14,
         gap: 12,
         lineHeight: 22,
@@ -220,7 +221,7 @@ export const activityStyles = StyleSheet.create({
     equipment_name: {
         flex: 1,
         fontSize: 14,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
     },
 
     equipment_name_checked: {
@@ -267,14 +268,14 @@ export const activityStyles = StyleSheet.create({
 
     step_number: {
         fontSize: 16,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         color: WHITE,
         fontWeight: '700',
     },
 
     step_text: {
         fontSize: 16,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         lineHeight: 22,
         flex: 1,
         paddingTop: 3,
@@ -318,7 +319,7 @@ export const activityStyles = StyleSheet.create({
     },
 
     table_header: {
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         color: WHITE,
         marginLeft: 3,
         fontWeight: '700',
@@ -326,7 +327,7 @@ export const activityStyles = StyleSheet.create({
 
     table_cell: {
         fontSize: 16,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         paddingVertical: 10,
         paddingHorizontal: 10,
     },
@@ -347,7 +348,7 @@ export const activityStyles = StyleSheet.create({
 
     focus_level: {
         fontSize: 16,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         fontWeight: '700',
         marginBottom: 8,
     },
@@ -378,3 +379,6 @@ export const activityStyles = StyleSheet.create({
     }
 
 });
+
+export { BLUE, FONT_FAMILY, LIGHT_BLUE, WHITE };
+
