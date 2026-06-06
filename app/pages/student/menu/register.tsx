@@ -1,11 +1,12 @@
 import { Picker } from "@react-native-picker/picker";
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-import { signUp } from '../../../../backend/firebase/auth.js';
+import { signOut, signUp } from '../../../../backend/firebase/auth.js';
 import { firestore } from '../../../../backend/firebase/config.js';
 
+import { createTeam } from "@/src/services/firebaseServices";
 import { globalStyles } from "../../../styles";
 
 export default function Register() {
@@ -15,7 +16,16 @@ export default function Register() {
     const [confirmPass, setConfirmPass] = useState("");
     const [role, setRole] = useState("");
 
+    const [teamName, setTeamName] = useState('');
+    const [grade, setGrade] = useState('');
+    const [members, setMembers] = useState<string[]>([]);
+
     const [error, setError] = useState("");
+
+    const generateDisciminator = (): string => {
+        const chars = 'QWERTYUIOPASDFGHJKLZXCVBNM123456789';
+        return Array.from({length: 4}, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+    }
 
     const handleSingup = async () => {
         if (confirmPass !== password) {
@@ -30,6 +40,22 @@ export default function Register() {
             setError("Please select a role.");
             return;
         }
+        else if (role === "student" && teamName === "") {
+            setError("Please enter a team name.");
+            return;
+        }
+        else if (role === "student" && grade === "") {
+            setError("Please enter a grade.");
+            return;
+        }
+        else if (role === "student" && members.some(m => m.trim() === "")) {
+            setError("Please provide all member names.");
+            return;
+        }
+        else if (role === "student" && members.length < 2) {
+            setError("Please add more members to your team.");
+            return;
+        }
         
         try {
             const { user } = await signUp(email, password);
@@ -42,15 +68,42 @@ export default function Register() {
                 }
             )
 
-            router.push('/pages/student/menu/login');
+            if (role === "student") {
+                const discriminator = generateDisciminator();
+                const teamRef = await createTeam(teamName, members, grade, discriminator);
+
+                await firestore()
+                    .collection('users')
+                    .doc(user.uid)
+                    .update({
+                        teamId: teamRef.id
+                    });
+            }
+
+            await signOut();
+            router.replace('/pages/student/menu/login');
         } catch (e: any) {
             setError(e.message);
         }
     }
 
+    const removeMember = (index: number): void => {
+        setMembers(members.filter((_, i) => i !== index));
+    }
+
+    const addMember = (): void => {
+        setMembers([...members, '']);
+    }
+
+    const updateMembers = (text: string, index: number): void => {
+        const updated = [...members];
+        updated[index] = text;
+        setMembers(updated);
+    }
+
     return (
         <View style={globalStyles.page}>
-            <View style={localStyles.header}>
+            <View style={globalStyles.header}>
                 <TouchableOpacity 
                 style={globalStyles.back_button}
                 onPress={() => router.push('..')}>
@@ -61,95 +114,174 @@ export default function Register() {
                 </Text>       
             </View>
 
-            <View style={localStyles.form_container}>
-                <View style={localStyles.input_container}>
-                    <View style={localStyles.label_container}>
-                        <Text style={localStyles.input_label}>Username</Text>
+            <ScrollView
+            style={localStyles.form_container}
+            contentContainerStyle={localStyles.form_content}
+            showsVerticalScrollIndicator={false}>
+                <View style={localStyles.form_container}>
+                    <View style={localStyles.input_container}>
+                        <View style={localStyles.label_container}>
+                            <Text style={localStyles.input_label}>Username</Text>
+                        </View>
+
+                        <TextInput 
+                        style={localStyles.text_input}
+                        placeholder='Username'
+                        placeholderTextColor='#969696'
+                        onChangeText={userInput => setUsername(userInput)}
+                        defaultValue=''
+                        />
                     </View>
 
-                    <TextInput 
-                    style={localStyles.text_input}
-                    placeholder='Username'
-                    placeholderTextColor='#969696'
-                    onChangeText={userInput => setUsername(userInput)}
-                    defaultValue=''
-                    />
-                </View>
+                    <View style={localStyles.input_container}>
+                        <View style={localStyles.label_container}>
+                            <Text style={localStyles.input_label}>Email</Text>
+                        </View>
 
-                <View style={localStyles.input_container}>
-                    <View style={localStyles.label_container}>
-                        <Text style={localStyles.input_label}>Email</Text>
+                        <TextInput 
+                        style={localStyles.text_input}
+                        placeholder='Email'
+                        placeholderTextColor='#969696'
+                        onChangeText={emailInput => setEmail(emailInput)}
+                        defaultValue=''
+                        />
                     </View>
 
-                    <TextInput 
-                    style={localStyles.text_input}
-                    placeholder='Email'
-                    placeholderTextColor='#969696'
-                    onChangeText={emailInput => setEmail(emailInput)}
-                    defaultValue=''
-                    />
-                </View>
-
-                <View style={localStyles.input_container}>
-                    <View style={localStyles.label_container}>
-                        <Text style={localStyles.input_label}>Password</Text>
+                    <View style={localStyles.input_container}>
+                        <View style={localStyles.label_container}>
+                            <Text style={localStyles.input_label}>Password</Text>
+                        </View>
+                        
+                        <TextInput 
+                        style={localStyles.text_input}
+                        placeholder='Password'
+                        placeholderTextColor='#969696'
+                        onChangeText={passInput => setPassword(passInput)}
+                        defaultValue=''
+                        secureTextEntry
+                        />
                     </View>
-                    
-                    <TextInput 
-                    style={localStyles.text_input}
-                    placeholder='Password'
-                    placeholderTextColor='#969696'
-                    onChangeText={passInput => setPassword(passInput)}
-                    defaultValue=''
-                    secureTextEntry
-                    />
-                </View>
 
-                <View style={localStyles.input_container}>
-                    <View style={localStyles.label_container}>
-                        <Text style={localStyles.input_label}>Confirm Password</Text>
+                    <View style={localStyles.input_container}>
+                        <View style={localStyles.label_container}>
+                            <Text style={localStyles.input_label}>Confirm Password</Text>
+                        </View>
+                        
+                        <TextInput 
+                        style={localStyles.text_input}
+                        placeholder='Confirm Password'
+                        placeholderTextColor='#969696'
+                        onChangeText={confirmInput => setConfirmPass(confirmInput)}
+                        defaultValue=''
+                        secureTextEntry
+                        />
                     </View>
-                    
-                    <TextInput 
-                    style={localStyles.text_input}
-                    placeholder='Confirm Password'
-                    placeholderTextColor='#969696'
-                    onChangeText={confirmInput => setConfirmPass(confirmInput)}
-                    defaultValue=''
-                    secureTextEntry
-                    />
-                </View>
 
-                <View style={localStyles.role_container}>
-                    <View style={localStyles.label_container}>
-                        <Text style={localStyles.input_label}>Role</Text>
+                    <View style={localStyles.role_container}>
+                        <View style={localStyles.label_container}>
+                            <Text style={localStyles.input_label}>Role</Text>
+                        </View>
+                        <View style={localStyles.picker_container}>
+                            <Picker
+                            selectedValue={role}
+                            onValueChange={(value) => setRole(value)}
+                            style={localStyles.picker}
+                            >
+                                <Picker.Item label="Select a role" value="" style={localStyles.picker_text}/>
+                                <Picker.Item label="Teacher" value="teacher" style={localStyles.picker_text}/>
+                                <Picker.Item label="Student" value="student" style={localStyles.picker_text}/>
+                            </Picker>
+                        </View>
                     </View>
-                    <View style={localStyles.picker_container}>
-                        <Picker
-                        selectedValue={role}
-                        onValueChange={(value) => setRole(value)}
-                        style={localStyles.picker}
-                        >
-                            <Picker.Item label="Select a role" value="" style={localStyles.picker_text}/>
-                            <Picker.Item label="Teacher" value="teacher" style={localStyles.picker_text}/>
-                            <Picker.Item label="Student" value="student" style={localStyles.picker_text}/>
-                        </Picker>
+
+                    {role === 'student' && (
+                        <View style={localStyles.input_container}>
+                            <View style={localStyles.label_container}>
+                                <Text style={localStyles.input_label}>Grade</Text>
+                            </View>
+
+                            <TextInput 
+                            style={localStyles.text_input}
+                            placeholder='Grade'
+                            placeholderTextColor='#969696'
+                            onChangeText={userInput => setGrade(userInput)}
+                            defaultValue=''
+                            />
+                        </View>
+                    )}
+
+                    {role === 'student' && (
+                        <View style={localStyles.input_container}>
+                            <View style={localStyles.label_container}>
+                                <Text style={localStyles.input_label}>Team Name</Text>
+                            </View>
+
+                            <TextInput 
+                            style={localStyles.text_input}
+                            placeholder='Team Name'
+                            placeholderTextColor='#969696'
+                            onChangeText={userInput => setTeamName(userInput)}
+                            defaultValue=''
+                            />
+                        </View>
+                    )}
+
+                    {role === 'student' && (
+                        <>
+                            {members.map((member, index) => (
+                                <View
+                                key={index}
+                                style={localStyles.member_container}>
+                                    <View style={localStyles.label_container}>
+                                        <Text style={localStyles.input_label}>
+                                            Member {index + 1}
+                                        </Text>
+                                    </View>
+
+                                    <View
+                                    style={localStyles.member_row}>
+                                        <TextInput
+                                        style={localStyles.member_input}
+                                        placeholder="First Name"
+                                        placeholderTextColor='#969696'
+                                        value={member}
+                                        onChangeText={(text:string) => {
+                                            updateMembers(text, index);
+                                        }} />
+
+                                        <Pressable
+                                        onPress={() => removeMember(index)}
+                                        style={localStyles.remove_button}>
+                                            <Text style={globalStyles.button_normal_text}>-</Text>
+                                        </Pressable>
+                                    </View>
+                                </View>
+                            ))}
+                        </>
+                    )}
+
+                    {role === 'student' && (
+                        <Pressable
+                        onPress={addMember}
+                        style={localStyles.add_button}>
+                            <Text style={globalStyles.button_normal_text}>+</Text>
+                        </Pressable>
+                    )}
+
+                    <View style={localStyles.button_parent}>
+                        <Pressable 
+                        onPress={handleSingup}
+                        style={({ pressed }) => [
+                            pressed ? localStyles.pressable_onPress : localStyles.pressable_default
+                        ]}>
+                            <Text style={globalStyles.button_normal_text}>Submit</Text>
+                        </Pressable>
                     </View>
                 </View>
+            </ScrollView>
 
-                <View style={localStyles.button_parent}>
-                    <Pressable 
-                    onPress={handleSingup}
-                    style={({ pressed }) => [
-                        pressed ? localStyles.pressable_onPress : localStyles.pressable_default
-                    ]}>
-                        <Text style={globalStyles.button_normal_text}>Submit</Text>
-                    </Pressable>
-                </View>
-
-                <View style={globalStyles.error_container}>
-                    <Text style={globalStyles.error_text}>{error}</Text>
-                </View>
+            <View style={localStyles.error_container}>
+                <Text style={localStyles.error_text}>{error}</Text>
             </View>
         </View>
     );    
@@ -177,23 +309,18 @@ const localStyles = StyleSheet.create({
         flexDirection: 'row',
         gap: '10%',
         width: '100%',
-        height: '28%',
-        paddingTop: '5%',
-        paddingBottom: '5%',
+        paddingVertical: 8,
         alignItems: 'center',
-        marginBottom: '-10%',
+        marginBottom: 0,
     },
 
     role_container: {
         flexDirection: 'row',
         gap: '10%',
         width: '100%',
-        height: '28%',
-        paddingTop: '5%',
-        paddingBottom: '5%',
+        height: 60,
+        paddingVertical: 8,
         alignItems: 'center',
-        marginTop: '2%',
-        marginBottom: '-8%',
     },
 
     picker_container: {
@@ -217,31 +344,57 @@ const localStyles = StyleSheet.create({
 
     form_container: {
         backgroundColor: '#afdaff',
-        justifyContent: 'center',
-        alignItems: 'center',
         padding: '5%',
-        borderColor: '#97b9d6',
+        borderColor: '#afdaff',
         borderWidth: 2,
-        height: '40%',
         width: '100%',
-        overflow: 'visible',
+        flexGrow: 0,
+        flexShrink: 1,
+        maxHeight: '75%'
+    },
+
+    form_content: {
+        padding: '5%',
+        alignItems: 'center',  
     },
 
     text_input: {
         backgroundColor: '#ffffff',
         fontFamily: 'Trebuchet MS, Roboto, sans-serif',
-        width: '100%',
         flex: 1,
-        height: '60%',
+        height: 36,
+        paddingHorizontal: 8,
+    },
+
+    member_input: {
+        backgroundColor: '#ffffff',
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        flex: 1,
+        height: 36,
         padding: '2%',
+    },
+
+    member_container: {
+        flexDirection: 'row',
+        gap: '10%',
+        width: '100%',
+        paddingTop: '3%',
+        paddingBottom: '3%',
+        alignItems: 'center',
+    },
+
+    member_row: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 6,
     },
     
     button_parent: {
         width: '65%',
-        height: '12%',
-        display: 'flex',
-        marginTop: '8%',
-        marginBottom: '7%',
+        height: 44,
+        marginTop: 16,
+        marginBottom: 12,
     },
 
     pressable_default: {
@@ -260,5 +413,30 @@ const localStyles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#d4d4d4',
         borderRadius: 10,
+    },
+
+    add_button: {
+        marginTop: 20,
+        padding: 5,
+        backgroundColor: '#ffffff',
+        width: '100%'
+    },
+
+    remove_button: {
+        marginLeft: 3,
+        padding: 5,
+        backgroundColor: '#ffffff',
+        borderRadius: 10,
+    },
+
+    error_container: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 10,
+    },
+
+    error_text: {
+        textAlign: 'center',
+        color: 'red',
     },
 });

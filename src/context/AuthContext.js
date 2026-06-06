@@ -8,6 +8,7 @@ export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(undefined);
     const [userDoc, setUserDoc] = useState(null);
     const [userId, setUserId] = useState(null);
+    const [teamId, setTeamId] = useState(null);
 
     useEffect(() => {
         const unsubscribe = auth().onAuthStateChanged(async (user) => {
@@ -16,6 +17,7 @@ export const AuthProvider = ({ children }) => {
             if (!user) {
                 setUserDoc(null);
                 setUserId(null);
+                setTeamId(null);
                 return;
             }
 
@@ -23,15 +25,18 @@ export const AuthProvider = ({ children }) => {
                 if (!doc) {
                     setUserDoc(null);
                     setUserId(null);
+                    setTeamId(null);
                     return;
                 }
 
                 if (doc.exists) {
                     setUserDoc(doc.data());
                     setUserId(user.uid);
+                    setTeamId(doc.data()?.teamId);
                 } else {
                     setUserDoc(null);
                     setUserId(null);
+                    setTeamId(null);
                 }
             });
         });
@@ -40,7 +45,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ currentUser, userDoc, login: signIn, logout: signOut, userID: userId }}>
+        <AuthContext.Provider value={{ currentUser, userDoc, login: signIn, logout: signOut, userID: userId, teamID: teamId }}>
             {children}
         </AuthContext.Provider>
     );

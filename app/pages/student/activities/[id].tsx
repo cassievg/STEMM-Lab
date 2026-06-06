@@ -1,10 +1,19 @@
-import { fetchTeamByActivity, leaveTeam } from '@/backend/firebase/firebaseServices';
 import { useAuth } from '@/src/context/AuthContext';
+import { getTeamDetails } from '@/src/services/firebaseServices';
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
 import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { activityStyles } from './activityStyles';
+
+type TeamRow = {
+    id: string,
+    hostId: string,
+    discriminator: string,
+    grade: string,
+    members: string[],
+    name: string,
+}
 
 type SectionKey = 'overview' | 'equipment' | 'instruction' | 'discussion';
 
@@ -71,11 +80,12 @@ const FORMULA: {force: string; equation: string}[] = [
 export default function Activity1() {
     const [activeSection, setActiveSection] = useState<SectionKey>('overview');
     const [checkedItems, setCheckedItems] = useState<string[]>([]);
-    const [teamModalVisible, setTeamModalVisible] = useState(false);
+    const [team, setTeam] = useState<TeamRow | null>(null);
     const [teamMembers, setTeamMembers] = useState<string[]>([]);
+    const [teamModalVisible, setTeamModalVisible] = useState(false);
 
     const { id } = useLocalSearchParams<{id: string}>();
-    const { userID } = useAuth();
+    const { userDoc, userID, teamID } = useAuth();
 
     const toggleCheck = (id: string) => {
         setCheckedItems((prev) =>
@@ -83,20 +93,21 @@ export default function Activity1() {
     };
 
     const loadTeam = async () => {
-        const members = await fetchTeamByActivity(id, userID);
-        setTeamMembers(members);
+        console.log('userDoc:', userDoc);
+        console.log('teamId:', teamID);
+
+        if (!teamID) {
+            setTeamModalVisible(true);
+            return;
+        }
+
+        const teamData = await getTeamDetails(teamID);
+        if (teamData) {
+            setTeam(teamData);
+            setTeamMembers(teamData.members);
+        }
+
         setTeamModalVisible(true);
-
-        console.log(userID);
-        console.log(members);
-    }
-
-    const handleLeaveTeam = async () => {
-        await leaveTeam(userID, id);
-        setTeamMembers([]);
-        setTeamModalVisible(false);
-        console.log(teamMembers);
-        console.log('left');
     }
 
     return (
@@ -115,11 +126,14 @@ export default function Activity1() {
                         Parachute Drop Challenge
                     </Text>
                 </View>
-                <TouchableOpacity 
-                    style={activityStyles.back_button}
-                    onPress={loadTeam}>
-                    <Text>👥</Text>
-                </TouchableOpacity>
+
+                {userDoc?.role === 'student' && (
+                    <TouchableOpacity 
+                        style={activityStyles.back_button}
+                        onPress={loadTeam}>
+                        <Text>👥</Text>
+                    </TouchableOpacity>
+                )}
             </View>
 
             <Modal
@@ -130,10 +144,12 @@ export default function Activity1() {
             >
                 <View style={teamModalStyles.overlay}>
                     <View style={teamModalStyles.container}>
-                        <Text style={teamModalStyles.title}>Team Members</Text>
+                        <Text style={teamModalStyles.title}>
+                            {team?.name ?? 'No Team'} {team ? `#${team.discriminator}` : ''}
+                        </Text>
 
                         {teamMembers.length === 0 ? (
-                            <Text style={teamModalStyles.empty}>No team yet</Text>
+                            <Text style={teamModalStyles.empty}>No members found</Text>
                         ) : (
                             teamMembers.map((member, i) => (
                                 <View key={i} style={teamModalStyles.memberRow}>
@@ -148,13 +164,6 @@ export default function Activity1() {
                             onPress={() => setTeamModalVisible(false)}
                         >
                             <Text style={teamModalStyles.closeText}>Close</Text>
-                        </Pressable>
-
-                        <Pressable
-                            style={teamModalStyles.leaveButton}
-                            onPress={handleLeaveTeam}
-                        >
-                            <Text style={teamModalStyles.leaveText}>Leave Team</Text>
                         </Pressable>
                     </View>
                 </View>

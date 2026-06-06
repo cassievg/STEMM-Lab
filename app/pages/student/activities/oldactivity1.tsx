@@ -80,7 +80,7 @@ export default function Activity1() {
             <View style={activityStyles.header}>
                 <TouchableOpacity 
                 style={activityStyles.back_button}
-                onPress={() => router.push('/pages/student/menu/activityselection')}>
+                onPress={() => router.push('./pages/student/activities/activityselection')}>
                     <Text>{'<'}</Text>
                 </TouchableOpacity>
                 <View style={activityStyles.header_title_container}>
@@ -298,7 +298,7 @@ export default function Activity1() {
                 <TouchableOpacity 
                     style={activityStyles.start_button}
                     activeOpacity={0.85}
-                    onPress={() => router.push('/pages/student/startactivity/start1')}>
+                    onPress={() => router.push('./pages/student/startactivity/start1')}>
 
                     <Text style={activityStyles.start_button_text}>
                         Start Activity

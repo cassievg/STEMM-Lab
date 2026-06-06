@@ -63,8 +63,8 @@ export default function Login() {
                     />
                 </View>
 
-                <View style={globalStyles.error_container}>
-                    <Text style={globalStyles.error_text}>{error}</Text>
+                <View style={localStyles.error_container}>
+                    <Text style={localStyles.error_text}>{error}</Text>
                 </View>
 
                 <View style={localStyles.button_parent}>
@@ -146,5 +146,16 @@ const localStyles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#d4d4d4',
         borderRadius: 10,
+    },
+
+    error_container: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 10,
+    },
+
+    error_text: {
+        textAlign: 'center',
+        color: 'red',
     },
 });

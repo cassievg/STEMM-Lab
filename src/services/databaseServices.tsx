@@ -9,6 +9,13 @@ type ActivityRow = {
     course: string;
 }
 
+type Progress = {
+    id: string,
+    activityId: string,
+    userId: string,
+    status: string,
+}
+
 const initDatabase = async () => {
     db = await SQLite.openDatabaseAsync('stemm.db');
 
@@ -17,16 +24,6 @@ const initDatabase = async () => {
             id TEXT PRIMARY KEY,
             name TEXT NOT NULL,
             course TEXT NOT NULL
-        )    
-    `)
-
-    await db.execAsync(`
-        CREATE TABLE IF NOT EXISTS inbox (
-            id TEXT PRIMARY KEY,
-            author TEXT NOT NULL,
-            recipient TEXT NOT NULL,
-            body TEXT NOT NULL,
-            date TEXT NOT NULL
         )    
     `)
 
@@ -83,15 +80,26 @@ const renderUserData = async (userId: any) => {
     }
 }
 
-const fetchProgress = async (userId: any) => {
+const fetchProgress = async (userId: any): Promise<Progress[]> => {
     try {
-        const res = await db.getAllAsync(`
+        return await db.getAllAsync(`
             SELECT *
             FROM progress
             WHERE userID = ?
         `, [userId])
+    } catch (e) {
+        console.log("Error:", e);
+        return [];
+    }
+}
 
-        return res;
+const fetchHistory = async (userId: any): Promise<Progress[]> => {
+    try {
+        return await db.getAllAsync(`
+            SELECT *
+            FROM progress
+            WHERE userID = ? AND status = ?
+        `, [userId, 'completed'])
     } catch (e) {
         console.log("Error:", e);
         return [];
@@ -143,13 +151,26 @@ const fetchCourses = async (): Promise<string[]> => {
     }
 } 
 
+const getActivityById = async (id: string) => {
+    try {
+        const res = await db.getFirstAsync<ActivityRow>(`
+            SELECT *
+            FROM activities
+            WHERE id = ?
+        `, [id])
+
+        return res?.name;
+    } catch (e) {
+        console.log("Error:", e);
+        return '';
+    }
+}
+
 export {
     db,
     fetchActivities,
-    fetchCache, fetchCourses,
-    fetchProgress,
-    fetchResults,
-    initDatabase,
+    fetchCache, fetchCourses, fetchHistory, fetchProgress,
+    fetchResults, getActivityById, initDatabase,
     renderUserData
 };
 

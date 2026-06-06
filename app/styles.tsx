@@ -93,16 +93,4 @@ export const globalStyles = StyleSheet.create({
         width: '100%',
         textAlign: 'center',
     },
-
-        error_container: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        position: 'absolute',
-        bottom: -55,
-    },
-
-    error_text: {
-        textAlign: 'center',
-        color: 'red',
-    },
 });

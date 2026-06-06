@@ -4,8 +4,8 @@ import React, { useEffect } from 'react';
 import { ActivityIndicator } from "react-native";
 import { AuthProvider, useAuth } from '../src/context/AuthContext.js';
 
+import { initDatabase } from "@/src/services/databaseServices";
 import { SQLiteProvider } from "expo-sqlite";
-import { initDatabase } from "../src/database/databaseServices";
 
 export default function Layout() {
     return (
@@ -26,13 +26,16 @@ function RootLayout() {
 
         if (currentUser === null) {
             router.replace('/pages/student/menu/login');
-        } else {
-            if (userDoc?.role === 'teacher') {
-                router.replace('/pages/teacher/teacherhome');
-            } else if (userDoc?.role === 'student') {
-                router.replace('/pages/student/menu/homescreen');
-            } 
-        }
+            return;
+        } 
+
+        if (userDoc === null) return;
+
+        if (userDoc?.role === 'teacher') {
+            router.replace('/pages/teacher/teacherhome');
+        } else if (userDoc?.role === 'student') {
+            router.replace('/pages/student/menu/homescreen');
+        } 
     }, [currentUser, userDoc])
 
     useEffect(() => {

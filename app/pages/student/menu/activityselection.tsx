@@ -1,4 +1,4 @@
-import { fetchActivities, fetchCourses } from '@/src/database/databaseServices';
+import { fetchActivities, fetchCourses } from '@/src/services/databaseServices';
 import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Dimensions, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';

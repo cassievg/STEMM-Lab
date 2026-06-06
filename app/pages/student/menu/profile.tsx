@@ -1,39 +1,105 @@
 import { firestore } from '@/backend/firebase/config';
 import { useAuth } from '@/src/context/AuthContext';
+import { getTeamDetails } from '@/src/services/firebaseServices';
 import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { globalStyles } from '../../../styles';
 
+type TeamRow = {
+    id: string,
+    discriminator: string,
+    grade: string,
+    members: string[],
+    name: string,
+}
+
 export default function Profile() {
-    const [inputName, setInputName] = useState('Username');
-    const { currentUser, userDoc } = useAuth();
+    const [usernameEdit, setUsernameEdit] = useState('Username');
+
+    const [team, setTeam] = useState<TeamRow | null>(null);
+    const [teamnameEdit, setTeamnameEdit] = useState('Team Name');
+    const [teammembersEdit, setTeammembersEdit] = useState<string[]>([]);
 
     const [error, setError] = useState("");
 
-    const { logout } = useAuth();
+    const { logout, userID, userDoc, currentUser, teamID } = useAuth();
 
     useEffect(() => {
-        if (userDoc?.username) {
-            setInputName(userDoc.username);
+        const loadTeam = async () => {
+            if (!userID) return;
+
+            const teamData = await getTeamDetails(teamID);
+            if (teamData) {
+                setTeam(teamData);
+                setTeamnameEdit(teamData.name);
+                setTeammembersEdit(teamData.members ?? []);
+            }
         }
-    }, [userDoc])
+
+        if (userDoc?.username) {
+            setUsernameEdit(userDoc.username);
+        }
+        if (userDoc?.role === 'student') {
+            loadTeam();
+        }
+    }, [userDoc, userID])
 
     const handleProfileUpdate = async () => {
-        if (inputName === "") {
+        if (usernameEdit === "") {
             setError("Please enter a valid username.");
             return;
+        }
+        if (userDoc?.role === "student") {
+            if (teamnameEdit.trim() === '') {
+                setError('Please enter a valid team name.');
+                return;
+            }
+            else if (teammembersEdit.some(m => m.trim() === '')) {
+                setError('Please fill in all member names.');
+                return;
+            }
+            else if (teammembersEdit.length < 2) {
+                setError('Please add at least 2 members.');
+                return;
+            }
         }
 
         try {
             await firestore().collection("users").doc(currentUser.uid).update({
-                username: inputName
+                username: usernameEdit
             })
+
+            if (userDoc?.role === 'student') {
+                await firestore()
+                .collection('teams')
+                .doc(team?.id)
+                .update({
+                    name: teamnameEdit.trim(),
+                    members: teammembersEdit.map(m => m.trim())
+                })
+            }
+
+            setError('');
         } catch (e) {
             setError("Update failed.");
             console.log(e);
         }
+    }
+
+    const addMember = () => {
+        setTeammembersEdit([...teammembersEdit, '']);
+    }
+
+    const removeMember = (index: number) => {
+        setTeammembersEdit(teammembersEdit.filter((_, i) => i !== index));
+    }
+    
+    const updateMember = (text: string, index: number) => {
+        const updated = [...teammembersEdit];
+        updated[index] = text;
+        setTeammembersEdit(updated);
     }
 
     return (
@@ -50,29 +116,16 @@ export default function Profile() {
             </View>
 
             <View style={localStyles.container}>
-                <View style={localStyles.avatar_container}>
-                    <View style={localStyles.avatar}>
-                        <Text style={localStyles.avatar_text}>
-                            👤
-                        </Text>
-                    </View>
-                    <TouchableOpacity style={localStyles.edit_button}>
-                        <Text style={localStyles.edit_text}>
-                            ✏️
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-
                 <View style={localStyles.field_container}>
                     <View style={localStyles.row}>
                         <Text style={localStyles.label}>
-                            Name
+                            Username
                         </Text>
                         <TextInput
                             style={localStyles.input}
-                            value={inputName}
+                            value={usernameEdit}
                             onChangeText={(text) => {
-                                setInputName(text);
+                                setUsernameEdit(text);
                                 setError('');
                             }}
                         />
@@ -86,6 +139,48 @@ export default function Profile() {
                             {userDoc?.email}
                         </Text>
                     </View>
+
+                    {userDoc?.role === 'student' && team && (
+                        <>
+                            <View style={localStyles.row}>
+                                <Text style={localStyles.label}>Team Name</Text>
+                                <TextInput
+                                    style={localStyles.input}
+                                    value={teamnameEdit}
+                                    onChangeText={(text) => {
+                                        setTeamnameEdit(text);
+                                        setError('');
+                                    }}
+                                />
+                            </View>
+
+                            <Text style={[localStyles.label, { marginBottom: -8 }]}>Members</Text>
+
+                            {(teammembersEdit ?? []).map((member, index) => (
+                                <View key={index} style={localStyles.row}>
+                                    <Text style={localStyles.label}>Member {index + 1}</Text>
+                                    <View style={{ flex: 1, flexDirection: 'row', gap: 6 }}>
+                                        <TextInput
+                                            style={[localStyles.input, { flex: 1 }]}
+                                            value={member}
+                                            placeholder="First Name"
+                                            placeholderTextColor='#969696'
+                                            onChangeText={(text) => updateMember(text, index)}
+                                        />
+                                        <Pressable
+                                            onPress={() => removeMember(index)}
+                                            style={localStyles.remove_button}>
+                                            <Text>-</Text>
+                                        </Pressable>
+                                    </View>
+                                </View>
+                            ))}
+
+                            <Pressable style={localStyles.add_button} onPress={addMember}>
+                                <Text style={localStyles.button_text}>+ Add Member</Text>
+                            </Pressable>
+                        </>
+                    )}
 
                     <View style={localStyles.button_container}>
                         <TouchableOpacity
@@ -104,8 +199,8 @@ export default function Profile() {
                             </TouchableOpacity>
                     </View>
 
-                    <View style={globalStyles.error_container}>
-                        <Text style={globalStyles.error_text}>{error}</Text>
+                    <View style={localStyles.error_container}>
+                        <Text style={localStyles.error_text}>{error}</Text>
                     </View>
                 </View>
             </View>
@@ -164,7 +259,7 @@ const localStyles = StyleSheet.create({
     },
 
     label: {
-        width: 60,
+        width: 80,
         fontSize: 15,
         fontWeight: '500',
     },
@@ -206,5 +301,30 @@ const localStyles = StyleSheet.create({
         fontSize: 15,
         fontFamily: 'Trebuchet MS, Roboto, sans-serif',
         fontWeight: '500',
+    },
+
+        error_container: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 10,
+    },
+
+    error_text: {
+        textAlign: 'center',
+        color: 'red',
+    },
+
+    add_button: {
+        marginTop: 20,
+        padding: 5,
+        backgroundColor: '#ffffff',
+        width: '100%'
+    },
+
+    remove_button: {
+        marginLeft: 3,
+        padding: 5,
+        backgroundColor: '#ffffff',
+        borderRadius: 10,
     },
 });
