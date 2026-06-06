@@ -5,37 +5,21 @@ import { Dimensions, FlatList, StyleSheet, Text, TouchableOpacity, View } from '
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { globalStyles } from '../../../styles';
 
-// type Activity = {
-//     id: string;
-//     name: string;
-//     icon: string;
-//     status: boolean;
-// };
-
 type ActivityRow = {
     id: string;
     name: string;
     course: string;
 }
 
-// const ACTIVITIES = {
-//     engineering: [
-//         {id: '1', name: 'Parachute Drop Challenge', icon: 'A', status: false},
-//         {id: '2', name: 'Sound Pollution Hunter', icon: 'B', status: false},
-//         {id: '3', name: 'Hand Fan Challenge', icon: 'C', status: false},
-//         {id: '4', name: 'Earthquake-Resistant Structure', icon: 'D', status: false},
-//     ],
-//     health_medical: [
-//         {id: '5', name: 'Human Performance Lab', icon: 'E', status: false},
-//         {id: '6', name: 'Reaction Board Challenge', icon: 'F', status: false},
-//         {id: '7', name: 'Breathing Pace Trainer', icon: 'G', status: false},
-//     ]
-// };
-
-// const TABS: {key: TabKey; label: string}[] = [
-//     {key: 'engineering', label: 'Engineering'},
-//     {key: 'health_medical', label: 'Health and Medical Science'},
-// ];
+const ACTIVITY_ICONS: Record<string, string> = {
+    "EC1": "A",
+    "EC2": "B",
+    "EC3": "C",
+    "EC4": "D",
+    "HMS1": "E",
+    "HMS2": "F",
+    "HMS3": "G",
+}
 
 const screenWidth = Dimensions.get('window').width;
 const cardSize = (screenWidth - 16 * 2 - 20) / 2;
@@ -82,7 +66,7 @@ export default function ActivitySelection() {
             <View style={localStyles.card_icon_box}>
                 <Text style={localStyles.card_icon}>A</Text>
             </View>
-            <Text style={localStyles.card_label}>{item.name}</Text>
+            <Text style={localStyles.card_label}>{ACTIVITY_ICONS[item.id] ?? "📘"}</Text>
         </TouchableOpacity>
     );
 

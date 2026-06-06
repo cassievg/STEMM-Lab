@@ -39,21 +39,6 @@ const initDatabase = async () => {
     }
 }
 
-const fetchInbox = async (userId: any) => {
-    try {
-        const inbox = await db.getAllAsync(`
-            SELECT *
-            FROM activityResults
-            WHERE userID = ?
-        `, [userId]);
-
-        return inbox;
-    } catch (e) {
-        console.log("Error:", e);
-        return;
-    }
-}
-
 const fetchActivities = async (): Promise<ActivityRow[]> => {
     try {
         return await db.getAllAsync(`
@@ -161,7 +146,7 @@ const fetchCourses = async (): Promise<string[]> => {
 export {
     db,
     fetchActivities,
-    fetchCache, fetchCourses, fetchInbox,
+    fetchCache, fetchCourses,
     fetchProgress,
     fetchResults,
     initDatabase,
