@@ -1,6 +1,6 @@
 [
     {
-        "id": "EC1",
+        "id": 1,
         "name" : "Parachute Drop Challenge",
         "course" : "Engineering Challenges",
         "overview" : "Students design, build, and test a parachute for a small toy to reduce its landing speed and impact force. Teams iterate their designs under time and material constraints, aiming to achieve the slowest and safest landing within a target area.",
@@ -297,7 +297,7 @@
         ]
     },
     {
-        "id": "EC2",
+        "id": 2,
         "name" : "Sound Pollution Hunter",
         "course" : "Engineering Challenges",
         "overview" : "Students measure and compare sound levels in different classroom activities.",
@@ -434,7 +434,7 @@
         ]
     },
     {
-        "id": "EC3",
+        "id": 3,
         "name" : "Hand Fan Challenge",
         "course" : "Engineering Challenges",
         "overview" : "Students test how air movement affects flexible materials.",
@@ -609,7 +609,7 @@
         ]
     },
     {
-        "id": "EC4",
+        "id": 4,
         "name" : "Earthquake-Resistant Structure",
         "course" : "Engineering Challenges",
         "overview" : "Students design structures that withstand vibration, simulating earthquakes.",
@@ -700,9 +700,9 @@
         ]
     },
     {
-        "id": "HMS1",
-        "name" : "Human Performance Lab - Stretch Speed & Gracefulness",
-        "course" : "Health and Medical Sciences",
+        "id": 5,
+        "name" : "Stretch Speed & Gracefulness",
+        "course" : "Health & Medical Sciences",
         "overview" : "Students investigate how the human body moves by measuring speed, smoothness, and coordination during controlled stretching activities.",
         "equipment" : [
             "Mobile phone with STEMM Lab app",
@@ -799,9 +799,9 @@
         ]
     },
     {
-        "id": "HMS2",
+        "id": 6,
         "name" : "Reaction Board Challenge",
-        "course" : "Health and Medical Science",
+        "course" : "Health & Medical Sciences",
         "overview" : "Students measure reaction time, coordination, and improvement through repeated digital and physical challenges.Students measure reaction time, coordination, and improvement through repeated digital and physical challenges.",
         "equipment" : [
             "Mobile phone with STEMM Lab app",
@@ -933,9 +933,9 @@
         ]
     },
     {
-        "id": "HMS3",
+        "id": 7,
         "name" : "Breathing Pace Trainer",
-        "course" : "Health and Medical Science",
+        "course" : "Health & Medical Sciences",
         "overview" : "Students analyse breathing patterns at rest and after exercise.",
         "equipment" : [
             "Mobile phone with STEMM Lab app",

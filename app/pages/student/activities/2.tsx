@@ -11,7 +11,7 @@ export default function Activity2() {
             <View style={globalStyles.header}>
                 <TouchableOpacity 
                 style={globalStyles.back_button}
-                onPress={() => router.push('/student/activityselection')}>
+                onPress={() => router.push('/pages/student/menu/activityselection')}>
                     <Text>{'<'}</Text>
                 </TouchableOpacity>
                 <Text style={globalStyles.page_title}>

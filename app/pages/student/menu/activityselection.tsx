@@ -61,7 +61,7 @@ export default function ActivitySelection() {
             if (fetchedCourses.length > 0) {
                 setActiveTab(fetchedCourses[0]);
             }
-
+            
             console.log(fetchedCourses);
             console.log(fetchedActivities);
         }
@@ -76,7 +76,7 @@ export default function ActivitySelection() {
     const renderActivity = ({item}: {item: ActivityRow}) => (
         <TouchableOpacity
             style={localStyles.card}
-            onPress={() => router.push(`/student/activities/${item.id}` as any)}
+            onPress={() => router.push(`/pages/student/activities/${item.id}` as any)}
             activeOpacity={0.7}>
 
             <View style={localStyles.card_icon_box}>
@@ -110,7 +110,9 @@ export default function ActivitySelection() {
                         <Text style={[
                             localStyles.tab_label,
                             activeTab === course && localStyles.tab_label_active,
-                        ]}>
+                            ]}
+                            numberOfLines={1}
+                            adjustsFontSizeToFit>
                             {formatCourseName(course)}
                         </Text>
                     </TouchableOpacity>
@@ -141,7 +143,7 @@ const localStyles = StyleSheet.create({
         flexDirection: 'row',
         borderBottomWidth: 0.5,
         borderBottomColor: '#97b9d6',
-        backgroundColor: '#ffffff'
+        backgroundColor: '#ffffff',
     },
 
     tab: {
@@ -161,6 +163,8 @@ const localStyles = StyleSheet.create({
         fontFamily: 'Trebuchet MS, Roboto, sans-serif',
         color: '#888888',
         fontWeight: '400',
+        textAlign: 'center',
+        width: '100%'
     },
 
     tab_label_active: {

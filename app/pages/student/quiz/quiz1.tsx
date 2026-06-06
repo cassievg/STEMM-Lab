@@ -265,7 +265,7 @@ export default function Quiz1() {
             <View style={activityStyles.header}>
                 <TouchableOpacity 
                 style={activityStyles.back_button}
-                onPress={() => router.push('/student/startactivity/start1')}>
+                onPress={() => router.push('/pages/student/startactivity/start1')}>
                     <Text>{'<'}</Text>
                 </TouchableOpacity>
                 <View style={activityStyles.header_title_container}>
