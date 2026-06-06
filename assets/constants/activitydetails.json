@@ -82,134 +82,144 @@
         },
         "discussion" : {
             "title": "Parachutes and Forces",
-            "description": "Gravity pulls objects downward, causing them to speed up as they fall. A parachute increases air resistance (also called drag). Drag acts upward, opposing the motion and slowing the fall. A slower fall reduces the force when the toy hits the ground, making the landing safer. Engineers improve parachute designs through repeated testing and redesign."
+            "description": [
+                "Gravity pulls objects downward, causing them to speed up as they fall. A parachute increases air resistance (also called drag). Drag acts upward, opposing the motion and slowing the fall. A slower fall reduces the force when the toy hits the ground, making the landing safer. Engineers improve parachute designs through repeated testing and redesign."
+            ]
+        },
+
+        "customSection": {
+            "physics": {
+                "newtonsSecondLaw": {
+                "name": "Newton's Second Law",
+                "formula": "Net Force = Mass × Acceleration"
+                },
+    
+                "forceTable": [
+                {
+                    "force": "Downward (Weight)",
+                    "formula": "Weight = Mass × g"
+                },
+                {
+                    "force": "Upward (Drag)",
+                    "formula": "Drag force from the parachute"
+                },
+                {
+                    "force": "Net Force",
+                    "formula": "Weight - Drag Force"
+                }
+                ]
+            },
+            "calculations" : [
+                {
+                    "step": 1,
+                    "title": "Measure the Drop Height",
+                    "description": "Measure the height of the table or drop surface (distance fallen)."
+                },
+                {
+                    "step": 2,
+                    "title": "Measure the Time",
+                    "description": [
+                        "Drop the toy (do not throw it).",
+                        "Record the time taken to first hit the ground using a phone or video."
+                    ]
+                },
+                {
+                    "step": 3,
+                    "title": "Calculate Final Velocity",
+                    "description": [
+                        "Since the toy is dropped, the initial velocity is 0 m/s.",
+                        "Final Velocity = distance / time",
+                        "Example: 1.0 m/0.5 s = 2.0 m/s"
+                    ]
+                },
+                {
+                    "step": 4,
+                    "title": "Calculate Acceleration",
+                    "description": [
+                        "Acceleration = (Final velocity - Initial velocity) / time",
+                        "Initial velocity = 0: ",
+                        "Acceleration = 2.0 m/s / 0.5 s = 4.0 m/s²"
+                    ]
+                },
+                {
+                    "step": 5,
+                    "title": "Calculate Net Force",
+                    "description": [
+                        "Net Force = mass × acceleration",
+                        "Example (mass = 0.20 kg): ",
+                        "Net Force = 0.20 kg x 4 m/s² = 0.8 N"
+                    ]
+                },
+                {
+                    "step": 6,
+                    "title": "Calculate Drag Force",
+                    "description": [
+                        "Calculate the weight: ",
+                        "Weight = mass × g = 0.20 kg x 9.8 m/s² = 1.96 N",
+                        "Calculate drag: ",
+                        "Drag Force = Weight - Net force = 1.96 N - 0.8 N = 1.16 N"
+                    ]
+                }
+            ],
+            "gForce": {
+                "description": "G-force describes how quickly the object slows down when it hits the ground. It is measured in multiples of g = 9.8 m/s².",
+                "slowMotionInstruction": [
+                    "Identify the moment the toy first hits the ground",
+                    "Measure the time taken for the toy to stop moving (contact time)"
+                ]
+            },
+            "cases" : [
+                {
+                    "id": 1,
+                    "title": "Object Does Not Bounce",
+                    "description": "Object goes from impact speed downward to 0 m/s.",
+                    "velocityChange": "vImpact",
+                    "formula": "g = (Δv / tContact) / 9.8",
+                    "example": [
+                        "Impact speed = 2.0 m/s",
+                        "Contact time = 0.05 s",
+                        "g-force = (2.0/0.05) / 9.8 ≈ 4.1 g"
+                    ]
+                },
+                {
+                    "id": 2,
+                    "title": "Object Bounces",
+                    "description": "Object goes from impact speed downward to updward velocity at separation (𝑣Up).",
+                    "velocityChange": "Δ𝑣 = 𝑣Impact + 𝑣Up",
+                    "formula": "g = (Δ𝑣 / tContact) / 9.8",
+                    "additionalCalculation": {
+                        "title": "Finding 𝑣Up if rebound height is unknown",
+                        "description": "Measure time to maximum height after bounce (𝑡up) using slow-motion video.",
+                        "formula": "𝑣Up = g × tUp"
+                    },
+                    "example": [
+                        "Impact speed downward: 2.0 m/s",
+                        "Time to max height after bounce: 0.15 s → 𝑣Up = 9.8 × 0.15 ≈ 1.47 m/s",
+                        "Contact time: 0.02 s",
+                        "Δ𝑣 = 2.0 + 1.47 = 3.47 m/s",
+                        "g-force = 3.47/0.02 ÷ 9.8 ≈ 17.7 g"
+                    ],
+                    "observation" : "Bouncing increases g-force because the velocity change during contact is larger."
+                }
+            ],
+            "tips" : [
+                "Use a ruler in frame for scale",
+                "Identify first contact for contact time",
+                "Identify when object leaves surface for bounce calculation"
+            ]
         },
         
-        "physics": {
-            "newtonsSecondLaw": {
-            "name": "Newton's Second Law",
-            "formula": "Net Force = Mass × Acceleration"
-            },
-
-            "forceTable": [
-            {
-                "force": "Downward (Weight)",
-                "formula": "Weight = Mass × g"
-            },
-            {
-                "force": "Upward (Drag)",
-                "formula": "Drag force from the parachute"
-            },
-            {
-                "force": "Net Force",
-                "formula": "Weight - Drag Force"
-            }
-            ]
-        },
-        "calculations" : [
-            {
-                "step": 1,
-                "title": "Measure the Drop Height",
-                "description": "Measure the height of the table or drop surface (distance fallen)."
-            },
-            {
-                "step": 2,
-                "title": "Measure the Time",
-                "description": [
-                    "Drop the toy (do not throw it).",
-                    "Record the time taken to first hit the ground using a phone or video."
-                ]
-            },
-            {
-                "step": 3,
-                "title": "Calculate Final Velocity",
-                "description": [
-                    "Since the toy is dropped, the initial velocity is 0 m/s.",
-                    "Final Velocity = distance / time",
-                    "Example: 1.0 m/0.5 s = 2.0 m/s"
-                ]
-            },
-            {
-                "step": 4,
-                "title": "Calculate Acceleration",
-                "description": [
-                    "Acceleration = (Final velocity - Initial velocity) / time",
-                    "Initial velocity = 0: ",
-                    "Acceleration = 2.0 m/s / 0.5 s = 4.0 m/s²"
-                ]
-            },
-            {
-                "step": 5,
-                "title": "Calculate Net Force",
-                "description": [
-                    "Net Force = mass × acceleration",
-                    "Example (mass = 0.20 kg): ",
-                    "Net Force = 0.20 kg x 4 m/s² = 0.8 N"
-                ]
-            },
-            {
-                "step": 6,
-                "title": "Calculate Drag Force",
-                "description": [
-                    "Calculate the weight: ",
-                    "Weight = mass × g = 0.20 kg x 9.8 m/s² = 1.96 N",
-                    "Calculate drag: ",
-                    "Drag Force = Weight - Net force = 1.96 N - 0.8 N = 1.16 N"
-                ]
-            }
-        ],
-        "gForce": {
-            "description": "G-force describes how quickly the object slows down when it hits the ground. It is measured in multiples of g = 9.8 m/s².",
-            "slowMotionInstruction": [
-                "Identify the moment the toy first hits the ground",
-                "Measure the time taken for the toy to stop moving (contact time)"
-            ]
-        },
-        "cases" : [
-            {
-                "id": 1,
-                "title": "Object Does Not Bounce",
-                "description": "Object goes from impact speed downward to 0 m/s.",
-                "velocityChange": "vImpact",
-                "formula": "g = (Δv / tContact) / 9.8",
-                "example": [
-                    "Impact speed = 2.0 m/s",
-                    "Contact time = 0.05 s",
-                    "g-force = (2.0/0.05) / 9.8 ≈ 4.1 g"
-                ]
-            },
-            {
-                "id": 2,
-                "title": "Object Bounces",
-                "description": "Object goes from impact speed downward to updward velocity at separation (𝑣Up).",
-                "velocityChange": "Δ𝑣 = 𝑣Impact + 𝑣Up",
-                "formula": "g = (Δ𝑣 / tContact) / 9.8",
-                "additionalCalculation": {
-                    "title": "Finding 𝑣Up if rebound height is unknown",
-                    "description": "Measure time to maximum height after bounce (𝑡up) using slow-motion video.",
-                    "formula": "𝑣Up = g × tUp"
-                },
-                "example": [
-                    "Impact speed downward: 2.0 m/s",
-                    "Time to max height after bounce: 0.15 s → 𝑣Up = 9.8 × 0.15 ≈ 1.47 m/s",
-                    "Contact time: 0.02 s",
-                    "Δ𝑣 = 2.0 + 1.47 = 3.47 m/s",
-                    "g-force = 3.47/0.02 ÷ 9.8 ≈ 17.7 g"
-                ],
-                "observation" : "Bouncing increases g-force because the velocity change during contact is larger."
-            }
-        ],
-        "tips" : [
-            "Use a ruler in frame for scale",
-            "Identify first contact for contact time",
-            "Identify when object leaves surface for bounce calculation"
-        ],
-        "injuryRisk" : {
+        "riskTable" : {
             "title": "Typical G-Force Ranges and Injury Risk",
-            "ranges": [
+            "columns": [
+                "G-Force Range",
+                "Examples",
+                "Likely Effects"
+            ],
+            "rows": [
                 {
                     "range": "1-5 g",
-                    "example": "Standing up quicly, elevators or amusement rides",
+                    "example": "Standing up quickly, elevators or amusement rides",
                     "effect": "No injury"
                 },
                 {
@@ -220,12 +230,12 @@
                 {
                     "range": "10-30 g",
                     "example": "Sports collisions, bicycle crashes or car crashes with seatbelts",
-                    "effect": "Serious injuries possible (broken bones or concussions"
+                    "effect": "Serious injuries possible (broken bones or concussions)"
                 },
                 {
                     "range": "30-50 g",
-                    "example": "Servere car crashes or falls onto hard surface",
-                    "effect": "High risk of servere injury"
+                    "example": "Severe car crashes or falls onto hard surface",
+                    "effect": "High risk of severe injury"
                 },
                 {
                     "range": "50+ g",
@@ -233,27 +243,21 @@
                     "effect": "Life-threatening injuries likely"
                 }
             ],
-            "Important": " Duration matters. A brief spike can be survivable, while sustained g-forces are more dangerous."
+            "important": " Duration matters. A brief spike can be survivable, while sustained g-forces are more dangerous."
         },
-        "studentFocus": [
-            {
-                "level": "Primary School",
-                "tasks": [
-                    "Measure time",
-                    "Calculate final speed"
-                ]
-            },
-            {
-                "level": "High School",
-                "tasks": [
-                    "Calculate final velocity",
-                    "Calculate acceleration",
-                    "Calculate net force",
-                    "Calculate drag force",
-                    "Calculate g-force"
-                ]
-            }
-        ],
+        "studentFocus": {
+            "primarySchool": [
+                "Measure time",
+                "Calculate final speed"
+            ],
+            "highSchool": [
+                "Calculate final velocity",
+                "Calculate acceleration",
+                "Calculate net force",
+                "Calculate drag force",
+                "Calculate g-force"
+            ]
+        },
         "curriculumLinks" : [
             {
             "subject": "Science",
@@ -359,12 +363,19 @@
         },
         "discussion" : {
             "title": "Sound and Health",
-            "description": "Sound intensity varies depending on energy and surfaces. Prolonged loud noise can impact health and concentration"
+            "description": [
+                "Sound intensity varies depending on energy and surfaces. Prolonged loud noise can impact health and concentration"
+            ]
         },
         
-        "injuryRisk" : {
+        "riskTable" : {
             "title": "Sound Levels and Hearing Damage Risk",
-            "ranges": [
+            "columns": [
+                "Sound Level (dB)",
+                "Example Sounds",
+                "Risk to Hearing"
+            ],
+            "rows": [
                 {
                     "range": "0-30 dB",
                     "example": "Whisper, quiet library ",
@@ -410,6 +421,20 @@
                     "example": "Explosion, gunshot",
                     "effect": "Instant, permanent hearing damage"
                 }
+            ],
+            "important": "Duration matters. For most sounds (0 - 120 dB), longer exposure increase the risk of hearing damage. However, extremely loud sounds (120+ dB) can damage hearing instantly, even if they are very brief."
+        },
+        "studentFocus": {
+            "primarySchool": [
+                "Measure sound levels",
+                "Compare louder and quieter sounds",
+                "Identify loud and quiet zones"
+            ],
+            "highSchool": [
+                "Calculate average sound levels",
+                "Compare differences between activities",
+                "Analyse hearing risk categories",
+                "Evaluate noise-reduction strategies"
             ]
         },
         "curriculumLinks" : [
@@ -510,89 +535,142 @@
         },
         "discussion" : {
             "title": "Object's Flexibility",
-            "description": "Moving air applies force to objects. Paper bends due to flexibility (plasticity), and repeated bending can weaken it.",
-            "Tip": "Approximate force using F ≈ k ⋅ 𝜃. Students can rank forces by stiffness and bend angle without exact units if needed."
+            "description": [
+                "Moving air applies force to objects. Paper bends due to flexibility (plasticity), and repeated bending can weaken it.",
+                "Tip: Approximate force using F ≈ k ⋅ 𝜃. Students can rank forces by stiffness and bend angle without exact units if needed."
+            ]
         },
-        
-        "optionalChallenge": {
-            "description": "Estimate a stiffness coefficient 𝑘 for each material by measuring bend angle under a constant fan speed.",
-            "cases" : [
-                {
-                "id": 1,
-                "title": "What 𝒌 is",
-                "description": "For bending a sheet of paper:",
-                "formula": "F ≈ k ⋅ 𝜃",
-                "legend": [
+
+        "customSection": {
+            "optionalChallenge": {
+                "description": "Estimate a stiffness coefficient 𝑘 for each material by measuring bend angle under a constant fan speed.",
+                "cases" : [
                     {
-                    "variable": "F",
-                    "definition": "force applied (N)"
-                    },
-                    {
-                    "variable": "k",
-                    "definition": "stiffness coefficient, representing resistance to bending"
-                    },
-                    {
-                    "variable": "𝜃",
-                    "definition": "bend angle (radians)"
-                    }
-                ],
-                "context": "In reality, k is related to flexural rigidity D = (Et³) / (12(1-v²)), but for classroom experiments we can use approximate empirical values."
-                },
-                {
-                    "id": 2,
-                    "title": "Approximate 𝒌 values for different papers",
-                    "materialTable": {
-                        "columns": [
-                            "Material",
-                            "Thickness (mm)",
-                            "Stiffness k (N/rad)",
-                            "Notes"
-                        ],
-                        "rows": [
-                            {
-                                "id": 1,
-                                "material": "Thin printer paper",
-                                "thickness": 0.1,
-                                "stiffness": 0.05,
-                                "note": "Bends very easily"
-                            },
-                            {
-                                "id": 2,
-                                "material": "Standard card stock",
-                                "thickness": 0.25,
-                                "stiffness": 0.2,
-                                "note": "Moderate bend"
-                            },
-                            {
-                                "id": 3,
-                                "material": "Thin cardboard",
-                                "thickness": 0.5,
-                                "stiffness": 0.5,
-                                "note": "Much harder to bend"
-                            },
-                            {
-                                "id": 4,
-                                "material": "Corrugated cardboard",
-                                "thickness": 3.0,
-                                "stiffness": 2.5,
-                                "note": "Very stiff, almost no bend"
-                            }
-                        ]
-                    },
-                    "context": "These are rough classroom values to let students estimate forces. The point is to see relative differences between materials."
-                },
-                {
-                    "id": 3,
-                    "title": "Example calculation",
-                    "example": [
-                        "Thin paper, k = 0.05 N/rad",
-                        "Bend angle observed: 30° → 𝜃 = 30∘ ≈ 0.524 rad",
-                        "F ≈ k ⋅ 𝜃 = 0.05 ⋅ 0.524 ≈ 0.026 N",
-                        "For thicker cardboard, k = 0.5, same bend angle:",
-                        "F ≈ 0.5 ⋅ 0.524 ≈ 0.26 N"
+                    "id": 1,
+                    "title": "What 𝒌 is",
+                    "description": "For bending a sheet of paper:",
+                    "formula": "F ≈ k ⋅ 𝜃",
+                    "legend": [
+                        {
+                        "variable": "F",
+                        "definition": "force applied (N)"
+                        },
+                        {
+                        "variable": "k",
+                        "definition": "stiffness coefficient, representing resistance to bending"
+                        },
+                        {
+                        "variable": "𝜃",
+                        "definition": "bend angle (radians)"
+                        }
                     ],
-                    "context": "So, the force required increases strongly with stiffness."
+                    "context": "In reality, k is related to flexural rigidity D = (Et³) / (12(1-v²)), but for classroom experiments we can use approximate empirical values."
+                    },
+                    {
+                        "id": 2,
+                        "title": "Approximate 𝒌 values for different papers",
+                        "materialTable": {
+                            "columns": [
+                                "Material",
+                                "Thickness (mm)",
+                                "Stiffness k (N/rad)",
+                                "Notes"
+                            ],
+                            "rows": [
+                                {
+                                    "id": 1,
+                                    "material": "Thin printer paper",
+                                    "thickness": 0.1,
+                                    "stiffness": 0.05,
+                                    "note": "Bends very easily"
+                                },
+                                {
+                                    "id": 2,
+                                    "material": "Standard card stock",
+                                    "thickness": 0.25,
+                                    "stiffness": 0.2,
+                                    "note": "Moderate bend"
+                                },
+                                {
+                                    "id": 3,
+                                    "material": "Thin cardboard",
+                                    "thickness": 0.5,
+                                    "stiffness": 0.5,
+                                    "note": "Much harder to bend"
+                                },
+                                {
+                                    "id": 4,
+                                    "material": "Corrugated cardboard",
+                                    "thickness": 3.0,
+                                    "stiffness": 2.5,
+                                    "note": "Very stiff, almost no bend"
+                                }
+                            ]
+                        },
+                        "context": "These are rough classroom values to let students estimate forces. The point is to see relative differences between materials."
+                    },
+                    {
+                        "id": 3,
+                        "title": "Example calculation",
+                        "example": [
+                            "Thin paper, k = 0.05 N/rad",
+                            "Bend angle observed: 30° → 𝜃 = 30∘ ≈ 0.524 rad",
+                            "F ≈ k ⋅ 𝜃 = 0.05 ⋅ 0.524 ≈ 0.026 N",
+                            "For thicker cardboard, k = 0.5, same bend angle:",
+                            "F ≈ 0.5 ⋅ 0.524 ≈ 0.26 N"
+                        ],
+                        "context": "So, the force required increases strongly with stiffness."
+                    }
+                ]
+            }
+        },
+
+        "riskTable" : {
+            "title": "Repeated Bending and Material Damage Risk",
+            "columns":[
+                "Bend Angle (°)",
+                "Typical Observation",
+                "Risk of Material Damage"
+            ],
+            "rows": [
+                {
+                    "range": "0-20°",
+                    "example": "Minor movement",
+                    "effect": "No damage expected"
+                },
+                {
+                    "range": "20-45°",
+                    "example": "Visible bending",
+                    "effect": "Very low damage risk"
+                },
+                {
+                    "range": "45-90°",
+                    "example": "Significant bending",
+                    "effect": "Possible creasing after many cycles"
+                },
+                {
+                    "range": "90-120°",
+                    "example": "Severe bending",
+                    "effect": "Creasing likely"
+                },
+                {
+                    "range": "120-150°",
+                    "example": "Folding begins",
+                    "effect": "High chance of permanent deformation"
                 }
+            ],
+            "important": "Repeated bending can weaken the material layers over time, causing permanent deformation or tearing"
+        },
+
+        "studentFocus": {
+            "primarySchool": [
+                "Measure bend angles",
+                "Identify which fan design produces the greatest movement"
+            ],
+            "highSchool": [
+                "Compare the effects of different fan distances",
+                "Estimate stiffness coefficients for different materials",
+                "Calculate approximate force using the stiffness model"
             ]
         },
 
@@ -680,7 +758,57 @@
         },
         "discussion" : {
             "title": "Engineers and Earthquake",
-            "description": "Earthquakes cause ground vibrations that can collapse poorly designed structures. Engineers design buildings to absorb and distribute energy safely."
+            "description": [
+                "Earthquakes cause ground vibrations that can collapse poorly designed structures. Engineers design buildings to absorb and distribute energy safely."
+            ]
+        },
+
+        "riskTable" : {
+            "title": "Structural Movement and Damage Risk",
+            "columns":[
+                "Movement (cm)",
+                "Interpretation",
+                "Risk of Structure Damage"
+            ],
+            "rows": [
+                {
+                    "range": "0-1 cm",
+                    "example": "Stable platform",
+                    "effect": "Minimal structural stress"
+                },
+                {
+                    "range": "1-3 cm",
+                    "example": "Small vibration",
+                    "effect": "Low risk of damage"
+                },
+                {
+                    "range": "3-5 cm",
+                    "example": "Noticeable shaking",
+                    "effect": "Minor structural damage possible"
+                },
+                {
+                    "range": "5-8 cm",
+                    "example": "Strong shaking",
+                    "effect": "High risk of structural failure"
+                },
+                {
+                    "range": "8cm+",
+                    "example": "Severe shaking or tipping",
+                    "effect": "Structural collapse likely"
+                }
+            ],
+            "important": "Real earthquake damage depends on building materials, design, vibration frequency and duration."
+        },
+
+        "studentFocus": {
+            "primarySchool": [
+                "Measure the movement",
+                "Observe how structures move during vibration"
+            ],
+            "highSchool": [
+                "Compare structural performance",
+                "Analyse the effect of folds, pillars, and supports on stability"
+            ]
         },
         
         "curriculumLinks" : [
@@ -770,7 +898,57 @@
         },
         "discussion" : {
             "title": "Body Movement and Sensors",
-            "description": "Muscles and joints work together to create movement. Faster movements often reduce control, while smoother movements show better coordination. Sensors in the phone measure how quickly and smoothly the body moves, helping students understand biomechanics and fatigue"
+            "description": [
+                "Muscles and joints work together to create movement. Faster movements often reduce control, while smoother movements show better coordination. Sensors in the phone measure how quickly and smoothly the body moves, helping students understand biomechanics and fatigue"
+            ]
+        },
+        
+        "riskTable" : {
+            "title": "Movement Stability and Coordination Rating",
+            "columns":[
+                "Movement (mm)",
+                "Example observation",
+                "Interpretation"
+            ],
+            "rows": [
+                {
+                    "range": "0-5 mm",
+                    "example": "steady movement",
+                    "effect": "Excellent coordination and control"
+                },
+                {
+                    "range": "5-10 mm",
+                    "example": "Minor unwanted movement",
+                    "effect": "Good movement control"
+                },
+                {
+                    "range": "10-20 mm",
+                    "example": "Noticeable shaking",
+                    "effect": "Moderate coordination"
+                },
+                {
+                    "range": "20-50 mm",
+                    "example": "Frequent corrections during movement",
+                    "effect": "Reduced movement control"
+                },
+                {
+                    "range": "50+ mm",
+                    "example": "Large unintended movement",
+                    "effect": "Poor coordination or possible fatigue"
+                }
+            ],
+            "important": "Lower movement values generally indicate smoother and more controlled movement."
+        },
+
+        "studentFocus": {
+            "primarySchool": [
+                "Measure the movement",
+                "Perform stretching movements"
+            ],
+            "highSchool": [
+                "Compare movement control between attempts",
+                "Analyse relationships between speed, smoothness, and coordination"
+            ]
         },
         
         "curriculumLinks" : [
@@ -802,61 +980,47 @@
         "id": 6,
         "name" : "Reaction Board Challenge",
         "course" : "Health & Medical Sciences",
-        "overview" : "Students measure reaction time, coordination, and improvement through repeated digital and physical challenges.Students measure reaction time, coordination, and improvement through repeated digital and physical challenges.",
+        "overview" : "Students measure reaction time, coordination, and improvement through repeated digital and physical challenges.",
         "equipment" : [
             "Mobile phone with STEMM Lab app",
             "Clear working space"
         ],
-        "instruction" : [
+        "instruction": [
             {
-                "phase": 1,
-                "title": "Tap Reaction",
-                "steps": [
-                    {
-                        "step": 1,
-                        "text": "Tap the screen as soon as the hidden button appears."
-                    },
-                    {
-                        "step": 2,
-                        "text": "Record reaction time."
-                    },
-                    {
-                        "step": 3,
-                        "text": "Rotate through each team member."
-                    }
-                ]
+                "step": 1,
+                "text": "Tap the screen as soon as the hidden button appears."
             },
             {
-                "phase": 2,
-                "title": "Swap Hands",
-                "steps": [
-                    {
-                        "step": 1,
-                        "text": "Repeat using the non-dominant hand."
-                    },
-                    {
-                        "step": 2,
-                        "text": "Compare results."
-                    },
-                    {
-                        "step": 3,
-                        "text": "Rotate through each team member."
-                    }
-                ]
+                "step": 2,
+                "text": "Record the reaction time."
             },
             {
-                "phase": 3,
-                "title": "Tracing Challenge",
-                "steps": [
-                    {
-                        "step": 1,
-                        "text": "Trace a moving shape on the screen."
-                    },
-                    {
-                        "step": 2,
-                        "text": "Review accuracy and delay."
-                    }
-                ]
+                "step": 3,
+                "text": "Rotate through each team member."
+            },
+            {
+                "step": 4,
+                "text": "Repeat using the non-dominant hand."
+            },
+            {
+                "step": 5,
+                "text": "Compare the results."
+            },
+            {
+                "step": 6,
+                "text": "Rotate through each team member."
+            },
+            {
+                "step": 7,
+                "text": "Trace a moving shape on the screen."
+            },
+            {
+                "step": 8,
+                "text": "Review tracing accuracy and delay."
+            },
+            {
+                "step": 9,
+                "text": "Rotate through each team member."
             }
         ],
         "diagram" : {
@@ -899,7 +1063,58 @@
         },
         "discussion" : {
             "title": "Reaction Time and Coordination",
-            "description": "Reaction time measures how quickly the brain processes information and sends signals to muscles. Practice can improve speed and coordination. Comparing hands shows how dominance affects performance."
+            "description": [
+                "Reaction time measures how quickly the brain processes information and sends signals to muscles. Practice can improve speed and coordination. Comparing hands shows how dominance affects performance."
+            ]
+        },
+
+        "riskTable" : {
+            "title": "Reaction Time and Coordination Performance",
+            "columns":[
+                "Reaction Time (ms)",
+                "Typical Performance",
+                "Interpretation"
+            ],
+            "rows": [
+                {
+                    "range": "< 200 ms",
+                    "example": "Very fast response",
+                    "effect": "Excellent reaction speed"
+                },
+                {
+                    "range": "200-250 ms",
+                    "example": "Fast response",
+                    "effect": "Good reaction speed"
+                },
+                {
+                    "range": "250-300 ms",
+                    "example": "Average response",
+                    "effect": "Typical human reaction time"
+                },
+                {
+                    "range": "300-500 ms",
+                    "example": "Slow response",
+                    "effect": "Reduced reaction speed"
+                },
+                {
+                    "range": "> 500 ms",
+                    "example": "Very slow response",
+                    "effect": "Significant delay in responding"
+                }
+            ],
+            "important": "Reaction time varies between individuals and can be affected by practice, fatigue, and distractions."
+        },
+
+        "studentFocus": {
+            "primarySchool": [
+                "Measure reaction time",
+                "Record tracing accuracy"
+            ],
+            "highSchool": [
+                "Calculate average reaction times across attempts",
+                "Compare dominant and non-dominant hand performance",
+                "Identify improvements through practice"
+            ]
         },
         
         "curriculumLinks" : [
@@ -961,10 +1176,6 @@
             {
                 "step": 4,
                 "title": "Record breathing again and compare results."
-            },
-            {
-                "step": 5,
-                "title": "Record breathing again and compare results."
             }
         ],
         "diagram" : {
@@ -1008,7 +1219,57 @@
         },
         "discussion" : {
             "title": "Breathing Rate and Exercise",
-            "description": "Breathing rate increases during exercise to supply more oxygen to muscles. Sensors detect chest movement, helping students visualise breathing patterns.Breathing rate increases during exercise to supply more oxygen to muscles. Sensors detect chest movement, helping students visualise breathing patterns."
+            "description": [
+                "Breathing rate increases during exercise to supply more oxygen to muscles. Sensors detect chest movement, helping students visualise breathing patterns."
+            ]
+        },
+        
+        "riskTable" : {
+            "title": "Breathing Rate and Activity Level",
+            "columns":[
+                "Breathing rate (breaths/min)",
+                "Typical Performance",
+                "Interpretation"
+            ],
+            "rows": [
+                {
+                    "range": "< 8 breaths/min",
+                    "example": "Very slow breathing",
+                    "effect": "Unusually low breathing rate"
+                },
+                {
+                    "range": "8-12 breaths/min",
+                    "example": "Relaxed resting state",
+                    "effect": "Low activity level"
+                },
+                {
+                    "range": "12-20 breaths/min",
+                    "example": "Typical resting breathing",
+                    "effect": "Normal breathing rate"
+                },
+                {
+                    "range": "20-30 breaths/min",
+                    "example": "Light exercise or recovery",
+                    "effect": "Increased oxygen needed"
+                },
+                {
+                    "range": "30+ breaths/min",
+                    "example": "Moderate or vigorous exercise",
+                    "effect": "High oxyn demand"
+                }
+            ],
+            "important": "Breathing rates vary between individuals. Exercise, fitness level and gender can affect breathing patterns."
+        },
+
+        "studentFocus": {
+            "primarySchool": [
+                "Measure breathing rate",
+                "Identify activities that increase breathing rate"
+            ],
+            "highSchool": [
+                "Compare breathing before and after exercise",
+                "Calculate changes in breathing rate"
+            ]
         },
         
         "curriculumLinks" : [
