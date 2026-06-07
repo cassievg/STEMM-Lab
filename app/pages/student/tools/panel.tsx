@@ -4,13 +4,15 @@ import { BLUE, DARK, FONT_FAMILY, LIGHT_BLUE, SCREEN_HEIGHT, SCREEN_WIDTH, WHITE
 import Calculator from "./calculator";
 import Ruler from "./ruler";
 import Sensors from "./sensors";
+import SoundMeter from "./soundmeter";
 
-type ToolKey = 'calculator' | 'ruler' | 'sensors' | null;
+type ToolKey = 'calculator' | 'ruler' | 'sensors' | 'soundmeter' | null;
 
 const TOOLS = [
     {key: 'calculator' as ToolKey, label: 'Calculator', icon: '🔢'},
     {key: 'ruler' as ToolKey, label: 'Ruler', icon: '📏'},
     {key: 'sensors' as ToolKey, label: 'Sensors', icon: '📡'},
+    {key: 'soundmeter' as ToolKey, label: 'Sound Meter', icon: '🎙'},
 ]
 
 export default function ToolsPanel() {
@@ -47,6 +49,8 @@ export default function ToolsPanel() {
                 return <Ruler />
             case 'sensors':
                 return <Sensors />
+            case 'soundmeter':
+                return <SoundMeter />
             default:
                 return null;
         }
