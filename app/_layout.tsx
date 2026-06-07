@@ -4,7 +4,6 @@ import React, { useEffect } from 'react';
 import { ActivityIndicator } from "react-native";
 import { AuthProvider, useAuth } from '../src/context/AuthContext.js';
 
-import { initDatabase } from "@/src/services/databaseServices";
 import { SQLiteProvider } from "expo-sqlite";
 
 export default function Layout() {
@@ -37,11 +36,6 @@ function RootLayout() {
             router.replace('/pages/student/menu/homescreen');
         } 
     }, [currentUser, userDoc])
-
-    useEffect(() => {
-        initDatabase();
-        console.log("database initialized.");
-    }, [])
 
     if (currentUser === undefined) return <ActivityIndicator style={{ flex: 1 }} />
 

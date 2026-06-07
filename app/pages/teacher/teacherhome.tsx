@@ -52,16 +52,6 @@ export default function TeacherHome() {
                     <Text style={globalStyles.button_big_text}>Profile</Text>
                 </Pressable>
             </View>
-
-            <View style={globalStyles.button_parent}>
-                <Pressable 
-                onPress={() => {router.push('/pages/student/menu/inbox')}}
-                style={({ pressed }) => [
-                    pressed ? globalStyles.pressable_onPress : globalStyles.pressable_default
-                ]}>
-                    <Text style={globalStyles.button_big_text}>Inbox</Text>
-                </Pressable>
-            </View>
         </View>
     );    
 }

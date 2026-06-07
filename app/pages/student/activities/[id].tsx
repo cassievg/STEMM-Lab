@@ -1,8 +1,8 @@
 import { useAuth } from '@/src/context/AuthContext';
-import { getTeamDetails } from '@/src/services/firebaseServices';
+import { createRoom, getRoomByTeamAndActivity, getRoomTeamsNames, getTeamDetails, joinRoom, leaveRoom } from '@/src/services/firebaseServices';
 import { router, useLocalSearchParams } from 'expo-router';
-import React, { useState } from 'react';
-import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { activityStyles } from './activityStyles';
 
@@ -13,6 +13,16 @@ type TeamRow = {
     grade: string,
     members: string[],
     name: string,
+}
+
+type RoomRow = {
+    id: string,
+    code: string,
+    activityId: string,
+    createdAt: string,
+    hostTeamId: string, 
+    status: string,
+    teams: string[]
 }
 
 type SectionKey = 'overview' | 'equipment' | 'instruction' | 'discussion';
@@ -80,17 +90,90 @@ const FORMULA: {force: string; equation: string}[] = [
 export default function Activity1() {
     const [activeSection, setActiveSection] = useState<SectionKey>('overview');
     const [checkedItems, setCheckedItems] = useState<string[]>([]);
+
     const [team, setTeam] = useState<TeamRow | null>(null);
     const [teamMembers, setTeamMembers] = useState<string[]>([]);
     const [teamModalVisible, setTeamModalVisible] = useState(false);
 
+    const [room, setRoom] = useState<RoomRow | null>(null);
+    const [roomCode, setRoomCode] = useState('');
+    const [roomTeam, setRoomTeam] = useState<string[]>([]);
+    const [roomTeamNames, setRoomTeamNames] = useState<string[]>([]);
+
+    const [enterRoomModalVisible, setEnterRoomModalVisible] = useState(false);
+    const [roomDetailsModalVisible, setRoomDetailsModalVisible] = useState(false);
+
     const { id } = useLocalSearchParams<{id: string}>();
-    const { userDoc, userID, teamID } = useAuth();
+    const { userDoc, teamID } = useAuth();
 
     const toggleCheck = (id: string) => {
         setCheckedItems((prev) =>
         prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]);
     };
+
+    useEffect(() => {
+        console.log('id from params:', id);
+        console.log('teamID:', teamID);
+    }, [id, teamID])
+
+    useEffect(() => {
+        console.log(id); 
+
+        const loadRoom = async () => {
+            console.log(teamID);
+
+            if (!teamID || !id) return;
+
+            const roomData = await getRoomByTeamAndActivity(teamID, id);
+            if (roomData) {
+                setRoom(roomData);
+            }
+        }
+
+        loadRoom();
+    }, [teamID, id])
+
+    const handleCreateRoom = async () => {
+        const res = await createRoom(id, teamID);
+        if (res) {
+            const roomData = await getRoomByTeamAndActivity(teamID, id);
+            setRoom(roomData);
+            setEnterRoomModalVisible(false);
+            openRoomDetails(roomData);
+        }
+    }
+
+    const handleLeaveRoom = async () => {
+        if (room?.id) {
+            await leaveRoom(room!.id, teamID);
+            setRoom(null);
+            setRoomDetailsModalVisible(false);
+        } else {
+            console.log("room doesnt exist");
+        }
+    }
+
+    const handleJoinRoom = async () => {
+        const roomId = await joinRoom(roomCode, id, teamID);
+        if (roomId) {
+            const roomData = await getRoomByTeamAndActivity(teamID, id);
+            setRoom(roomData);
+            setEnterRoomModalVisible(false);
+            openRoomDetails(roomData);
+        } else {
+            alert('Room not found. Check the code and try again.');
+        }
+    }
+
+    const openRoomDetails = async (roomData?: RoomRow | null) => {
+        const target = roomData ?? room;
+        if (!room?.id) return null;
+
+        const names = await getRoomTeamsNames(room.id);
+        setRoomTeamNames(names);
+
+        setRoomDetailsModalVisible(true);
+    }
 
     const loadTeam = async () => {
         console.log('userDoc:', userDoc);
@@ -134,6 +217,14 @@ export default function Activity1() {
                         <Text>👥</Text>
                     </TouchableOpacity>
                 )}
+
+                {userDoc?.role === 'student' && (
+                    <TouchableOpacity 
+                        style={activityStyles.back_button}
+                        onPress={() => room ? openRoomDetails(room) : setEnterRoomModalVisible(true)}>
+                        <Text>🏠</Text>
+                    </TouchableOpacity>
+                )}
             </View>
 
             <Modal
@@ -165,6 +256,102 @@ export default function Activity1() {
                         >
                             <Text style={teamModalStyles.closeText}>Close</Text>
                         </Pressable>
+                    </View>
+                </View>
+            </Modal>
+
+            <Modal
+                visible={enterRoomModalVisible}
+                transparent
+                animationType="fade"
+                onRequestClose={() => setEnterRoomModalVisible(false)}
+            >
+                <View style={roomModalStyles.overlay}>
+                    <View style={roomModalStyles.container}>
+                        <Text style={roomModalStyles.title}>Join a Room</Text>
+
+                        <Text style={roomModalStyles.label}>Enter Room Code</Text>
+                        <TextInput
+                            style={roomModalStyles.input}
+                            value={roomCode}
+                            onChangeText={(text) => setRoomCode(text.toUpperCase())}
+                            placeholder="e.g. AB12"
+                            placeholderTextColor='#969696'
+                            maxLength={4}
+                            autoCapitalize="characters"
+                        />
+                        <Pressable
+                            style={roomModalStyles.primaryButton}
+                            onPress={handleJoinRoom}
+                        >
+                            <Text style={roomModalStyles.primaryText}>Join Room</Text>
+                        </Pressable>
+
+                        <View style={roomModalStyles.divider}>
+                            <View style={roomModalStyles.dividerLine}/>
+                            <Text style={roomModalStyles.dividerText}>or</Text>
+                            <View style={roomModalStyles.dividerLine}/>
+                        </View>
+
+                        <Pressable
+                            style={roomModalStyles.secondaryButton}
+                            onPress={handleCreateRoom}
+                        >
+                            <Text style={roomModalStyles.secondaryText}>Create Room</Text>
+                        </Pressable>
+
+                        <Pressable
+                            style={roomModalStyles.cancelButton}
+                            onPress={() => setEnterRoomModalVisible(false)}
+                        >
+                            <Text style={roomModalStyles.cancelText}>Solo (No Room)</Text>
+                        </Pressable>
+                    </View>
+                </View>
+            </Modal>
+
+            <Modal
+                visible={roomDetailsModalVisible}
+                transparent
+                animationType="fade"
+                onRequestClose={() => setRoomDetailsModalVisible(false)}
+            >
+                <View style={roomModalStyles.overlay}>
+                    <View style={roomModalStyles.container}>
+                        <Text style={roomModalStyles.title}>Room Details</Text>
+
+                        <View style={roomModalStyles.codeBox}>
+                            <Text style={roomModalStyles.codeLabel}>Room Code</Text>
+                            <Text style={roomModalStyles.code}>{room?.code ?? '-'}</Text>
+                        </View>
+
+                        <Text style={roomModalStyles.label}>Teams in Room</Text>
+                        {roomTeamNames.length === 0 ? (
+                            <Text style={roomModalStyles.empty}>No teams yet</Text>
+                        ) : (
+                            roomTeamNames.map((name, i) => (
+                                <View key={i} style={roomModalStyles.teamRow}>
+                                    <Text style={roomModalStyles.teamIcon}>🏷️</Text>
+                                    <Text style={roomModalStyles.teamName}>{name}</Text>
+                                </View>
+                            ))
+                        )}
+
+                        <View style={roomModalStyles.buttonRow}>
+                            <Pressable
+                                style={roomModalStyles.leaveButton}
+                                onPress={handleLeaveRoom}
+                            >
+                                <Text style={roomModalStyles.leaveText}>Leave Room</Text>
+                            </Pressable>
+
+                            <Pressable
+                                style={roomModalStyles.closeButton}
+                                onPress={() => setRoomDetailsModalVisible(false)}
+                            >
+                                <Text style={roomModalStyles.closeText}>Close</Text>
+                            </Pressable>
+                        </View>
                     </View>
                 </View>
             </Modal>
@@ -444,4 +631,143 @@ const teamModalStyles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold',
     },
-    });
+
+    
+});
+
+const roomModalStyles = StyleSheet.create({
+    overlay: {
+        flex: 1,
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    container: {
+        width: '85%',
+        backgroundColor: 'white',
+        borderRadius: 10,
+        padding: 20,
+        gap: 10,
+    },
+    title: {
+        fontWeight: 'bold',
+        fontSize: 16,
+        marginBottom: 4,
+    },
+    label: {
+        fontWeight: '500',
+        fontSize: 14,
+        marginTop: 4,
+    },
+    input: {
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 6,
+        padding: 10,
+        fontSize: 16,
+        letterSpacing: 4,
+        textAlign: 'center',
+    },
+    codeBox: {
+        backgroundColor: '#f0f0f0',
+        borderRadius: 8,
+        padding: 12,
+        alignItems: 'center',
+    },
+    codeLabel: {
+        fontSize: 12,
+        color: 'gray',
+        marginBottom: 4,
+    },
+    code: {
+        fontSize: 28,
+        fontWeight: 'bold',
+        letterSpacing: 8,
+    },
+    teamRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingVertical: 6,
+        gap: 8,
+    },
+    teamIcon: {
+        fontSize: 16,
+    },
+    teamName: {
+        fontSize: 14,
+    },
+    empty: {
+        color: 'gray',
+        textAlign: 'center',
+        paddingVertical: 8,
+    },
+    divider: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 8,
+    },
+    dividerLine: {
+        flex: 1,
+        height: 1,
+        backgroundColor: '#ccc',
+    },
+    dividerText: {
+        color: 'gray',
+        fontSize: 13,
+    },
+    primaryButton: {
+        padding: 10,
+        backgroundColor: '#007AFF',
+        borderRadius: 6,
+        alignItems: 'center',
+    },
+    primaryText: {
+        color: 'white',
+        fontWeight: 'bold',
+    },
+    secondaryButton: {
+        padding: 10,
+        backgroundColor: '#f0f0f0',
+        borderRadius: 6,
+        alignItems: 'center',
+    },
+    secondaryText: {
+        color: '#333',
+        fontWeight: '500',
+    },
+    cancelButton: {
+        padding: 10,
+        alignItems: 'center',
+    },
+    cancelText: {
+        color: 'gray',
+        fontSize: 13,
+    },
+    buttonRow: {
+        flexDirection: 'row',
+        gap: 8,
+        marginTop: 8,
+    },
+    leaveButton: {
+        flex: 1,
+        padding: 10,
+        backgroundColor: '#FF3B30',
+        borderRadius: 6,
+        alignItems: 'center',
+    },
+    leaveText: {
+        color: 'white',
+        fontWeight: 'bold',
+    },
+    closeButton: {
+        flex: 1,
+        padding: 10,
+        backgroundColor: '#007AFF',
+        borderRadius: 6,
+        alignItems: 'center',
+    },
+    closeText: {
+        color: 'white',
+        fontWeight: 'bold',
+    },
+});
