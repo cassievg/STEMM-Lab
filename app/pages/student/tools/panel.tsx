@@ -2,17 +2,19 @@ import React, { useRef, useState } from "react";
 import { Animated, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import { BLUE, DARK, FONT_FAMILY, LIGHT_BLUE, SCREEN_HEIGHT, SCREEN_WIDTH, WHITE } from "../activities/activityStyles";
 import Calculator from "./calculator";
+import Camera from "./camera";
 import Ruler from "./ruler";
 import Sensors from "./sensors";
 import SoundMeter from "./soundmeter";
 
-type ToolKey = 'calculator' | 'ruler' | 'sensors' | 'soundmeter' | null;
+type ToolKey = 'calculator' | 'ruler' | 'sensors' | 'camera' | 'soundmeter' | null;
 
 const TOOLS = [
     {key: 'calculator' as ToolKey, label: 'Calculator', icon: '🔢'},
     {key: 'ruler' as ToolKey, label: 'Ruler', icon: '📏'},
     {key: 'sensors' as ToolKey, label: 'Sensors', icon: '📡'},
     {key: 'soundmeter' as ToolKey, label: 'Sound Meter', icon: '🎙'},
+    {key: 'camera' as ToolKey, label: 'Camera', icon: '🎥'},
 ]
 
 export default function ToolsPanel() {
@@ -51,6 +53,8 @@ export default function ToolsPanel() {
                 return <Sensors />
             case 'soundmeter':
                 return <SoundMeter />
+            case 'camera':
+                return <Camera />
             default:
                 return null;
         }
