@@ -154,6 +154,15 @@ export default function Activity1() {
     }
 
     const handleJoinRoom = async () => {
+        if (!teamID) {
+            alert("no team found.");
+            return;
+        }
+        if (!roomCode || roomCode.length < 4) {
+            alert('invalid room code');
+            return;
+        }
+
         const roomId = await joinRoom(roomCode, id, teamID);
         if (roomId) {
             const roomData = await getRoomByTeamAndActivity(teamID, id);
