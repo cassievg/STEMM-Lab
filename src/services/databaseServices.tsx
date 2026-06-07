@@ -1,8 +1,7 @@
 import * as SQLite from 'expo-sqlite';
 import activityList from '../../assets/constants/activitydetails.json';
 
-let db: SQLite.SQLiteDatabase | null = null;
-let dbReady: Promise<void>;
+let db: SQLite.SQLiteDatabase;
 
 type ActivityRow = {
     id: string;
@@ -17,8 +16,8 @@ type Progress = {
     status: string,
 }
 
-const initDatabase = async (database: SQLite.SQLiteDatabase) => {
-    db = database;
+const initDatabase = async () => {
+    db = await SQLite.openDatabaseAsync('stemm.db');
 
     await db.execAsync(`
         CREATE TABLE IF NOT EXISTS activities (
@@ -37,14 +36,9 @@ const initDatabase = async (database: SQLite.SQLiteDatabase) => {
     }
 }
 
-const getDb = (): SQLite.SQLiteDatabase => {
-    if (!db) throw new Error('database not initialized');
-    return db;
-}
-
 const fetchActivities = async (): Promise<ActivityRow[]> => {
     try {
-        return await getDb().getAllAsync(`
+        return await db.getAllAsync(`
             SELECT *
             FROM activities
         `)
@@ -56,19 +50,19 @@ const fetchActivities = async (): Promise<ActivityRow[]> => {
 
 const renderUserData = async (userId: any) => {
     try {
-        const userProgress = await getDb().getAllAsync(`
+        const userProgress = await db.getAllAsync(`
             SELECT *
             FROM progress
             WHERE userID = ?
         `, [userId]);
 
-        const userCache = await getDb().getAllAsync(`
+        const userCache = await db.getAllAsync(`
             SELECT *
             FROM activityCache
             WHERE userID = ?
         `, [userId]);
 
-        const userResults = await getDb().getAllAsync(`
+        const userResults = await db.getAllAsync(`
             SELECT *
             FROM activityResults
             WHERE userID = ?
@@ -88,7 +82,7 @@ const renderUserData = async (userId: any) => {
 
 const fetchProgress = async (userId: any): Promise<Progress[]> => {
     try {
-        return await getDb().getAllAsync(`
+        return await db.getAllAsync(`
             SELECT *
             FROM progress
             WHERE userID = ?
@@ -101,7 +95,7 @@ const fetchProgress = async (userId: any): Promise<Progress[]> => {
 
 const fetchHistory = async (userId: any): Promise<Progress[]> => {
     try {
-        return await getDb().getAllAsync(`
+        return await db.getAllAsync(`
             SELECT *
             FROM progress
             WHERE userID = ? AND status = ?
@@ -114,7 +108,7 @@ const fetchHistory = async (userId: any): Promise<Progress[]> => {
 
 const fetchCache = async (userId: any) => {
     try {
-        const res = await getDb().getAllAsync(`
+        const res = await db.getAllAsync(`
             SELECT *
             FROM activityCache
             WHERE userID = ?
@@ -129,7 +123,7 @@ const fetchCache = async (userId: any) => {
 
 const fetchResults = async (userId: any) => {
     try {
-        const res = await getDb().getAllAsync(`
+        const res = await db.getAllAsync(`
             SELECT *
             FROM activityResults
             WHERE userID = ?
@@ -144,7 +138,7 @@ const fetchResults = async (userId: any) => {
 
 const fetchCourses = async (): Promise<string[]> => {
     try {
-        const res = await getDb().getAllAsync<{ course: string }>(`
+        const res = await db.getAllAsync<{ course: string }>(`
             SELECT DISTINCT course
             FROM activities
             ORDER BY course
@@ -159,7 +153,7 @@ const fetchCourses = async (): Promise<string[]> => {
 
 const getActivityById = async (id: string) => {
     try {
-        const res = await getDb().getFirstAsync<ActivityRow>(`
+        const res = await db.getFirstAsync<ActivityRow>(`
             SELECT *
             FROM activities
             WHERE id = ?
