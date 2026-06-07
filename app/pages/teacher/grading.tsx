@@ -1,19 +1,27 @@
 import { router } from 'expo-router';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { globalStyles } from '../../styles';
 
+import { useTheme } from '@/src/context/ThemeContext';
+
 export default function Grading() {
+    const { getThemedStyle } = useTheme();
+
+    const globalThemedStyles = useMemo(() => {
+        return getThemedStyle(globalStyles);
+    }, [getThemedStyle]);
+
     return (
-        <SafeAreaView style={globalStyles.page}>
-            <View style={globalStyles.header}>
+        <SafeAreaView style={globalThemedStyles.page}>
+            <View style={globalThemedStyles.header}>
                 <TouchableOpacity 
-                style={globalStyles.back_button}
+                style={globalThemedStyles.back_button}
                 onPress={() => router.push('//teacherhome')}>
                     <Text>{'<'}</Text>
                 </TouchableOpacity>
-                <Text style={globalStyles.page_title}>
+                <Text style={globalThemedStyles.page_title}>
                     Grading
                 </Text>
             </View>

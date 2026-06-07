@@ -2,10 +2,12 @@ import { firestore } from '@/backend/firebase/config';
 import { useAuth } from '@/src/context/AuthContext';
 import { getTeamDetails } from '@/src/services/firebaseServices';
 import { router } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { globalStyles } from '../../../styles';
+
+import { useTheme } from '@/src/context/ThemeContext';
 
 type TeamRow = {
     id: string,
@@ -16,6 +18,16 @@ type TeamRow = {
 }
 
 export default function Profile() {
+    const { getThemedStyle } = useTheme();
+
+    const globalThemedStyles = useMemo(() => {
+        return getThemedStyle(globalStyles);
+    }, [getThemedStyle]);
+
+    const localThemedStyles = useMemo(() => {
+        return getThemedStyle(localStyles);
+    }, [getThemedStyle]);
+
     const [usernameEdit, setUsernameEdit] = useState('Username');
 
     const [team, setTeam] = useState<TeamRow | null>(null);
@@ -103,26 +115,26 @@ export default function Profile() {
     }
 
     return (
-        <SafeAreaView style={globalStyles.page}>
-            <View style={globalStyles.header}>
+        <SafeAreaView style={globalThemedStyles.page}>
+            <View style={globalThemedStyles.header}>
                 <TouchableOpacity 
-                style={globalStyles.back_button}
+                style={globalThemedStyles.back_button}
                 onPress={() => router.push('/pages/student/menu/homescreen')}>
-                    <Text>{'<'}</Text>
+                    <Text style={globalThemedStyles.text}>{'<'}</Text>
                 </TouchableOpacity>
-                <Text style={globalStyles.page_title}>
+                <Text style={globalThemedStyles.page_title}>
                     Profile
                 </Text>
             </View>
 
-            <View style={localStyles.container}>
-                <View style={localStyles.field_container}>
-                    <View style={localStyles.row}>
-                        <Text style={localStyles.label}>
+            <View style={localThemedStyles.container}>
+                <View style={localThemedStyles.field_container}>
+                    <View style={localThemedStyles.row}>
+                        <Text style={localThemedStyles.label}>
                             Username
                         </Text>
                         <TextInput
-                            style={localStyles.input}
+                            style={localThemedStyles.input}
                             value={usernameEdit}
                             onChangeText={(text) => {
                                 setUsernameEdit(text);
@@ -131,21 +143,21 @@ export default function Profile() {
                         />
                     </View>
 
-                    <View style={localStyles.row}>
-                        <Text style={localStyles.label}>
+                    <View style={localThemedStyles.row}>
+                        <Text style={localThemedStyles.label}>
                             Email
                         </Text>
-                        <Text style={localStyles.email_text}>
+                        <Text style={localThemedStyles.email_text}>
                             {userDoc?.email}
                         </Text>
                     </View>
 
                     {userDoc?.role === 'student' && team && (
                         <>
-                            <View style={localStyles.row}>
-                                <Text style={localStyles.label}>Team Name</Text>
+                            <View style={localThemedStyles.row}>
+                                <Text style={localThemedStyles.label}>Team Name</Text>
                                 <TextInput
-                                    style={localStyles.input}
+                                    style={localThemedStyles.input}
                                     value={teamnameEdit}
                                     onChangeText={(text) => {
                                         setTeamnameEdit(text);
@@ -154,14 +166,14 @@ export default function Profile() {
                                 />
                             </View>
 
-                            <Text style={[localStyles.label, { marginBottom: -8 }]}>Members</Text>
+                            <Text style={[localThemedStyles.label, { marginBottom: -8 }]}>Members</Text>
 
                             {(teammembersEdit ?? []).map((member, index) => (
-                                <View key={index} style={localStyles.row}>
-                                    <Text style={localStyles.label}>Member {index + 1}</Text>
+                                <View key={index} style={localThemedStyles.row}>
+                                    <Text style={localThemedStyles.label}>Member {index + 1}</Text>
                                     <View style={{ flex: 1, flexDirection: 'row', gap: 6 }}>
                                         <TextInput
-                                            style={[localStyles.input, { flex: 1 }]}
+                                            style={[localThemedStyles.input, { flex: 1 }]}
                                             value={member}
                                             placeholder="First Name"
                                             placeholderTextColor='#969696'
@@ -169,38 +181,38 @@ export default function Profile() {
                                         />
                                         <Pressable
                                             onPress={() => removeMember(index)}
-                                            style={localStyles.remove_button}>
+                                            style={localThemedStyles.remove_button}>
                                             <Text>-</Text>
                                         </Pressable>
                                     </View>
                                 </View>
                             ))}
 
-                            <Pressable style={localStyles.add_button} onPress={addMember}>
-                                <Text style={localStyles.button_text}>+ Add Member</Text>
+                            <Pressable style={localThemedStyles.add_button} onPress={addMember}>
+                                <Text style={localThemedStyles.button_text}>+ Add Member</Text>
                             </Pressable>
                         </>
                     )}
 
-                    <View style={localStyles.button_container}>
+                    <View style={localThemedStyles.button_container}>
                         <TouchableOpacity
-                            style={localStyles.button}
+                            style={localThemedStyles.button}
                             onPress={handleProfileUpdate}>
-                                <Text style={localStyles.button_text}>
+                                <Text style={localThemedStyles.button_text}>
                                     Save
                                 </Text>
                             </TouchableOpacity>
                         <TouchableOpacity
-                            style={localStyles.button}
+                            style={localThemedStyles.button}
                             onPress={logout}>
-                                <Text style={localStyles.button_text}>
+                                <Text style={localThemedStyles.button_text}>
                                     Logout
                                 </Text>
                             </TouchableOpacity>
                     </View>
 
-                    <View style={localStyles.error_container}>
-                        <Text style={localStyles.error_text}>{error}</Text>
+                    <View style={localThemedStyles.error_container}>
+                        <Text style={localThemedStyles.error_text}>{error}</Text>
                     </View>
                 </View>
             </View>
@@ -208,7 +220,8 @@ export default function Profile() {
     );    
 }
 
-const localStyles = StyleSheet.create({
+const localStyles = {
+    light : StyleSheet.create({
     container:{ 
         backgroundColor: '#afdaff',
         borderColor: '#97b9d6',
@@ -303,7 +316,7 @@ const localStyles = StyleSheet.create({
         fontWeight: '500',
     },
 
-        error_container: {
+    error_container: {
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 10,
@@ -327,4 +340,105 @@ const localStyles = StyleSheet.create({
         backgroundColor: '#ffffff',
         borderRadius: 10,
     },
-});
+}), 
+    dark : StyleSheet.create({
+    container:{ 
+        backgroundColor: '#afdaff',
+        borderColor: '#97b9d6',
+        borderWidth: 2,
+        width: '90%',
+        alignSelf: 'center',
+        borderRadius: 8,
+        paddingBottom: '5%',
+    },
+
+    edit_button: {
+        marginTop: 8,
+    },
+
+    edit_text: {
+        fontSize: 16,
+    },
+
+    field_container: {
+        marginTop: 16,
+        paddingHorizontal: 24,
+        gap: 16,
+    },
+
+    row: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 12,
+    },
+
+    label: {
+        width: 80,
+        fontSize: 15,
+        fontWeight: '500',
+    },
+
+    input: {
+        width: '70%',
+        borderWidth: 1,
+        backgroundColor: '#ffffff',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        fontSize: 15,
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+    },
+
+    email_text: {
+        fontSize: 15,
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        color: '#333'
+    },
+
+    button_container: {
+        width: '75%',
+        marginTop: '7%',
+        paddingHorizontal: 24,
+        gap: 12,
+        alignSelf: 'center',
+    },
+
+    button: {
+        borderWidth: 1,
+        borderRadius: 10,
+        paddingVertical: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#ffffff'
+    },
+
+    button_text:{
+        fontSize: 15,
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontWeight: '500',
+    },
+
+    error_container: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 10,
+    },
+
+    error_text: {
+        textAlign: 'center',
+        color: 'red',
+    },
+
+    add_button: {
+        marginTop: 20,
+        padding: 5,
+        backgroundColor: '#ffffff',
+        width: '100%'
+    },
+
+    remove_button: {
+        marginLeft: 3,
+        padding: 5,
+        backgroundColor: '#ffffff',
+        borderRadius: 10,
+    },
+})};

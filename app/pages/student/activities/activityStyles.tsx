@@ -1,13 +1,220 @@
 import { StyleSheet } from "react-native";
 
-const BLUE = '#97b9d6';
-const LIGHT_BLUE = '#afdaff';
-const WHITE = '#ffffff';
-const FONT_FAMILY = 'Trebuchet MS, Roboto, sans-serif';
+export const activityColors = {
+    light : StyleSheet.create({
+        page: {
+            backgroundColor: '#97b9d6',
+        },
+
+        start_button_text: {
+            color: '#ffffff'
+        },
+
+        table_row: {
+            backgroundColor: '#ffffff'
+        },
+
+        scroll: {
+            backgroundColor: '#ffffff'
+        },
+
+        chip: {
+            borderColor:'#afdaff',
+            backgroundColor: '#97b9d6',
+        },
+
+        curriculum_icon: {
+            backgroundColor: '#97b9d6',
+        },
+
+        list_dot: {
+            backgroundColor: '#97b9d6',
+        },
+
+        progress_text: {
+            color: '#97b9d6',
+        },
+
+        equipment_row: {
+            backgroundColor: '#ffffff',
+            borderColor:'#afdaff',
+        },
+
+        equipment_row_checked: {
+            backgroundColor:'#afdaff',
+            borderColor: '#97b9d6',
+        },
+
+        equipment_image: {
+            backgroundColor: '#97b9d6'
+        },
+
+        equipment_name_checked: {
+            color: '#aaaaaa',
+        },
+
+        checkbox: {
+            borderColor: '#97b9d6',
+        },
+
+        checkbox_checked: {
+            backgroundColor: '#97b9d6', 
+        },
+
+        checkbox_tick: {
+            color: '#ffffff',
+        },
+
+        step_number_wrap: {
+            backgroundColor: '#97b9d6',
+        },
+
+        table_header: {
+            color: '#ffffff',
+        },
+
+        step_number: {
+            color: '#ffffff',
+        },
+
+        start_button: {
+            backgroundColor: '#97b9d6',
+        },
+
+        info_box: {
+            backgroundColor: '#ffffff',
+            borderLeftColor: '#97b9d6',
+        },
+
+        table: {
+            borderColor:'#afdaff'
+        },
+
+        table_header_row: {
+            backgroundColor: '#97b9d6',
+        },
+
+        focus_card: {
+            backgroundColor: '#ffffff',
+            borderColor:'#afdaff',
+        },
+
+        table_row_alt: {
+            backgroundColor:'#afdaff'
+        },
+
+        button: {
+            backgroundColor:'#afdaff',
+            borderColor: '#97b9d6',
+        }
+}),
+    dark : StyleSheet.create({
+        page: {
+            backgroundColor: '#435565',
+        },
+
+        table_row: {
+            backgroundColor: '#2b2b2b'
+        },
+
+        table_row_alt: {
+            backgroundColor:'#474747'
+        },
+
+        scroll: {
+            backgroundColor: '#474747',
+        },
+
+        chip: {
+            borderColor: '#474747',
+            backgroundColor: '#435565',
+        },
+
+        start_button: {
+            backgroundColor: '#2b2b2b',
+        },
+
+        curriculum_icon: {
+            backgroundColor: '#435565',
+        },
+
+        list_dot: {
+            backgroundColor: '#435565',
+        },
+
+        progress_text: {
+            color: '#435565',
+        },
+
+        equipment_row: {
+            backgroundColor: '#333333',
+            borderColor:'#2b2b2b',
+        },
+
+        equipment_row_checked: {
+            backgroundColor:'#474747',
+            borderColor: '#435565',
+        },
+
+        equipment_image: {
+            backgroundColor: '#435565'
+        },
+
+        equipment_name_checked: {
+            color: '#d8d8d8', 
+        },
+
+        start_button_text: {
+            color: '#d8d8d8'
+        },
+
+        checkbox: {
+            borderColor: '#435565',
+        },
+        
+        checkbox_checked: {
+            backgroundColor: '#435565', 
+        },
+
+        focus_card: {
+            backgroundColor: '#2b2b2b',
+            borderColor:'#435565',
+        },
+
+        checkbox_tick: {
+            color: '#d8d8d8',
+        },
+
+        step_number_wrap: {
+            backgroundColor: '#435565',
+        },
+
+        step_number: {
+            color: '#d8d8d8',
+        },
+
+        info_box: {
+            backgroundColor: '#333333',
+            borderLeftColor: '#435565',
+        },
+
+        table: {
+            borderColor:'#2b2b2b'
+        },
+
+        table_header_row: {
+            backgroundColor: '#2b2b2b',
+        },
+
+        button: {
+            backgroundColor:'#474747',
+            borderColor: '#2b2b2b',
+        }
+    })
+}
 
 export const activityStyles = StyleSheet.create({
     page: {
-        backgroundColor: BLUE,
         flex: 1,
     },
 
@@ -19,24 +226,13 @@ export const activityStyles = StyleSheet.create({
         paddingVertical: 10,
     },
 
-    back_button: {
-        borderWidth: 1,
-        borderColor: WHITE,
-        backgroundColor: WHITE,
-        paddingHorizontal: 6,
-        paddingVertical: 2,
-        marginRight: 16,
-        borderRadius: 4,
-        zIndex: 1,
-    },
-
     header_title_container: {
         flex: 1,
     },
 
     header_title: {
         fontSize: 16,
-        fontFamily: FONT_FAMILY,
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
         fontWeight: '600',
         letterSpacing: 0.5,
         marginBottom: 4,
@@ -49,46 +245,10 @@ export const activityStyles = StyleSheet.create({
         lineHeight: 28,
     },
 
-    tab_row: {
-        flexDirection: 'row',
-        width: '100%',
-        backgroundColor: WHITE,
-        borderBottomWidth: 1,
-        borderBottomColor: WHITE,
-    },
-
-    tab: {
-        flex: 1,
-        paddingVertical: 10,
-        alignItems: 'center',
-        borderBottomWidth: 2,
-        borderBottomColor: 'transparent',
-    },
-
-    tab_active: {
-        borderBottomColor: LIGHT_BLUE,
-    },
-
-    tab_icon: {
-        fontSize: 16,
-        marginBottom: 2,
-    },
-
-    tab_label: {
-        fontSize: 16,
-        fontFamily: FONT_FAMILY,
-        fontWeight: '500',
-    },
-
-    tab_label_active: {
-        color: BLUE,
-        fontWeight: '700',
-    },
-
     scroll: {
         flex: 1,
         width: '100%',
-        backgroundColor: WHITE,
+        marginBottom: 30,
     },
 
     scroll_content: {
@@ -97,7 +257,7 @@ export const activityStyles = StyleSheet.create({
 
     section_heading: {
         fontSize: 16,
-        fontFamily: FONT_FAMILY,
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
         fontWeight: '700',
         marginTop: 20,
         marginBottom: 10,
@@ -106,7 +266,7 @@ export const activityStyles = StyleSheet.create({
 
     body: {
         fontSize: 16,
-        fontFamily: FONT_FAMILY,
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
         lineHeight: 22,
         width: '100%',
     },
@@ -118,17 +278,15 @@ export const activityStyles = StyleSheet.create({
     },
 
     chip: {
-        backgroundColor: BLUE,
         borderRadius: 20,
         paddingHorizontal: 12,
         paddingVertical: 5,
         borderWidth: 1,
-        borderColor: LIGHT_BLUE,
     },
 
     chip_text: {
         fontSize: 14,
-        fontFamily: FONT_FAMILY,
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
         fontWeight: '500',
     },
 
@@ -140,7 +298,6 @@ export const activityStyles = StyleSheet.create({
     },
 
     curriculum_icon: {
-        backgroundColor: BLUE,
         borderRadius: 6,
         paddingHorizontal: 8,
         paddingVertical: 3,
@@ -148,13 +305,13 @@ export const activityStyles = StyleSheet.create({
 
     curriculum_code: {
         fontSize: 14,
-        fontFamily: FONT_FAMILY,
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
         flex: 1,
     },
 
     curriculum_description:{
         fontSize: 14,
-        fontFamily: FONT_FAMILY,
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
         flex: 1,
     },
 
@@ -169,14 +326,13 @@ export const activityStyles = StyleSheet.create({
         width: 6,
         height: 6,
         borderRadius: 3,
-        backgroundColor: BLUE,
         marginTop: 6,
         flexShrink: 0,
     },
 
     list_text: {
         fontSize: 16,
-        fontFamily: FONT_FAMILY,
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
         marginBottom: 14,
         gap: 12,
         lineHeight: 22,
@@ -184,7 +340,6 @@ export const activityStyles = StyleSheet.create({
 
     progress_text: {
         fontSize: 14,
-        color: BLUE,
         fontWeight: '600',
         marginBottom: 12,
         marginTop: 4,
@@ -193,25 +348,17 @@ export const activityStyles = StyleSheet.create({
     equipment_row: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: WHITE,
         borderRadius: 12,
         borderWidth: 1,
-        borderColor: LIGHT_BLUE,
         padding: 10,
         marginBottom: 10,
         gap: 12,
-    },
-
-    equipment_row_checked: {
-        backgroundColor: LIGHT_BLUE,
-        borderColor: BLUE,
     },
 
     equipment_image: {
         width: 52,
         height: 52,
         borderRadius: 8,
-        backgroundColor: BLUE
     },
 
     equipment_image_checked: {
@@ -221,12 +368,11 @@ export const activityStyles = StyleSheet.create({
     equipment_name: {
         flex: 1,
         fontSize: 14,
-        fontFamily: FONT_FAMILY,
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
     },
 
     equipment_name_checked: {
         textDecorationColor: 'line-through',
-        color: '#aaaaaa',
     },
 
     checkbox: {
@@ -234,17 +380,11 @@ export const activityStyles = StyleSheet.create({
         height: 24,
         borderRadius: 8,
         borderWidth: 2,
-        borderColor: BLUE,
         alignItems: 'center',
         justifyContent: 'center',
     },
 
-    checkbox_checked: {
-      backgroundColor: BLUE, 
-    },
-
     checkbox_tick: {
-        color: WHITE,
         fontSize: 14,
         fontWeight: '700',
     },
@@ -260,7 +400,6 @@ export const activityStyles = StyleSheet.create({
         width: 28,
         height: 28,
         borderRadius: 14,
-        backgroundColor: BLUE,
         alignItems: 'center',
         justifyContent: 'center',
         flexShrink: 0,
@@ -268,14 +407,13 @@ export const activityStyles = StyleSheet.create({
 
     step_number: {
         fontSize: 16,
-        fontFamily: FONT_FAMILY,
-        color: WHITE,
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
         fontWeight: '700',
     },
 
     step_text: {
         fontSize: 16,
-        fontFamily: FONT_FAMILY,
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
         lineHeight: 22,
         flex: 1,
         paddingTop: 3,
@@ -283,12 +421,10 @@ export const activityStyles = StyleSheet.create({
     },
 
     info_box: {
-        backgroundColor: WHITE,
         borderRadius: 12,
         padding: 14,
         marginTop: 16,
         borderLeftWidth: 3,
-        borderLeftColor: BLUE,
     },
 
     info_box_title: {
@@ -301,33 +437,25 @@ export const activityStyles = StyleSheet.create({
         borderRadius: 10,
         overflow: 'hidden',
         borderWidth: 1,
-        borderColor: LIGHT_BLUE
     },
 
     table_header_row: {
         flexDirection: 'row',
-        backgroundColor: BLUE,
     },
 
     table_row: {
         flexDirection: 'row',
-        backgroundColor: WHITE
-    },
-
-    table_row_alt: {
-        backgroundColor: LIGHT_BLUE
     },
 
     table_header: {
-        fontFamily: FONT_FAMILY,
-        color: WHITE,
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
         marginLeft: 3,
         fontWeight: '700',
     },
 
     table_cell: {
         fontSize: 16,
-        fontFamily: FONT_FAMILY,
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
         paddingVertical: 10,
         paddingHorizontal: 10,
     },
@@ -339,30 +467,26 @@ export const activityStyles = StyleSheet.create({
 
     focus_card: {
         flex: 1,
-        backgroundColor: WHITE,
         borderRadius: 12,
         padding: 12,
         borderWidth: 1,
-        borderColor: LIGHT_BLUE,
     },
 
     focus_level: {
         fontSize: 16,
-        fontFamily: FONT_FAMILY,
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
         fontWeight: '700',
         marginBottom: 8,
     },
 
     footer: {
         width: '100%',
-        backgroundColor: WHITE,
         borderColor: 'transparent',
         paddingBottom: 12,
         paddingHorizontal: 16,
     },
 
     start_button: {
-        backgroundColor: BLUE,
         paddingVertical: 16,
         borderRadius: 14,
         alignItems: 'center',
@@ -375,10 +499,196 @@ export const activityStyles = StyleSheet.create({
         fontWeight: '800',
         alignSelf: 'center',
         letterSpacing: 0.3,
-        color: WHITE,
-    }
+    },
 
+    button: {
+        borderWidth: 1,
+        paddingHorizontal: 6,
+        paddingVertical: 2,
+        marginRight: 16,
+        borderRadius: 4,
+        zIndex: 1,
+    },
+
+    tab_bar: {
+        flexDirection: 'row',
+        borderBottomWidth: 0.5,
+    },
 });
 
-export { BLUE, FONT_FAMILY, LIGHT_BLUE, WHITE };
+export const modalStyles = StyleSheet.create({
+    overlay: {
+        flex: 1,
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 
+    container: {
+        width: '80%',
+        backgroundColor: 'white',
+        borderRadius: 10,
+        padding: 20,
+        gap: 8,
+    },
+
+    title: {
+        fontWeight: 'bold',
+        fontSize: 16,
+        marginBottom: 8,
+    },
+
+    empty: {
+        color: 'gray',
+        textAlign: 'center',
+        paddingVertical: 8,
+    },
+
+    memberRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingVertical: 6,
+        gap: 8,
+    },
+
+    memberIcon: {
+        fontSize: 18,
+    },
+
+    memberName: {
+        fontSize: 14,
+    },
+    
+    closeButton: {
+        marginTop: 12,
+        padding: 10,
+        backgroundColor: '#007AFF',
+        borderRadius: 6,
+        alignItems: 'center',
+    },
+
+    closeText: {
+        color: 'white',
+        fontWeight: 'bold',
+    },
+
+        leaveButton: {
+        marginTop: 8,
+        padding: 10,
+        backgroundColor: '#FF3B30',
+        borderRadius: 6,
+        alignItems: 'center',
+    },
+
+    leaveText: {
+        color: 'white',
+        fontWeight: 'bold',
+    },
+
+    label: {
+        fontWeight: '500',
+        fontSize: 14,
+        marginTop: 4,
+    },
+
+    input: {
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 6,
+        padding: 10,
+        fontSize: 16,
+        letterSpacing: 4,
+        textAlign: 'center',
+    },
+
+    codeBox: {
+        backgroundColor: '#f0f0f0',
+        borderRadius: 8,
+        padding: 12,
+        alignItems: 'center',
+    },
+
+    codeLabel: {
+        fontSize: 12,
+        color: 'gray',
+        marginBottom: 4,
+    },
+
+    code: {
+        fontSize: 28,
+        fontWeight: 'bold',
+        letterSpacing: 8,
+    },
+    
+    teamRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingVertical: 6,
+        gap: 8,
+    },
+
+    teamIcon: {
+        fontSize: 16,
+    },
+
+    teamName: {
+        fontSize: 14,
+    },
+
+    divider: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 8,
+    },
+
+    dividerLine: {
+        flex: 1,
+        height: 1,
+        backgroundColor: '#ccc',
+    },
+
+    dividerText: {
+        color: 'gray',
+        fontSize: 13,
+    },
+
+    primaryButton: {
+        padding: 10,
+        backgroundColor: '#007AFF',
+        borderRadius: 6,
+        alignItems: 'center',
+    },
+
+    primaryText: {
+        color: 'white',
+        fontWeight: 'bold',
+    },
+
+    secondaryButton: {
+        padding: 10,
+        backgroundColor: '#f0f0f0',
+        borderRadius: 6,
+        alignItems: 'center',
+    },
+
+    secondaryText: {
+        color: '#333',
+        fontWeight: '500',
+    },
+
+    cancelButton: {
+        padding: 10,
+        alignItems: 'center',
+    },
+
+    cancelText: {
+        color: 'gray',
+        fontSize: 13,
+    },
+
+    buttonRow: {
+        flexDirection: 'row',
+        gap: 8,
+        marginTop: 8,
+    },
+})

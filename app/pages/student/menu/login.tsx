@@ -1,12 +1,20 @@
 import { router } from 'expo-router';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import { signIn } from '../../../../backend/firebase/auth.js';
 import { globalStyles } from "../../../styles";
 
+import { useTheme } from '@/src/context/ThemeContext.js';
+
 
 export default function Login() {
+    const { getThemedStyle } = useTheme();
+
+    const globalThemedStyles = useMemo(() => {
+        return getThemedStyle(globalStyles);
+    }, [getThemedStyle]);
+    
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -21,14 +29,14 @@ export default function Login() {
     }
 
     return (
-        <View style={globalStyles.page}>
-            <View style={globalStyles.header}>
+        <View style={globalThemedStyles.page}>
+            <View style={globalThemedStyles.header}>
                 <TouchableOpacity 
-                style={globalStyles.back_button}
+                style={globalThemedStyles.back_button}
                 onPress={() => router.push("/")}>
-                    <Text>{'<'}</Text>
+                    <Text style={globalThemedStyles.text}>{'<'}</Text>
                 </TouchableOpacity>
-                <Text style={globalStyles.page_title}>
+                <Text style={globalThemedStyles.page_title}>
                     Login
                 </Text>       
             </View>
@@ -73,7 +81,7 @@ export default function Login() {
                     style={({ pressed }) => [
                         pressed ? localStyles.pressable_onPress : localStyles.pressable_default
                     ]}>
-                        <Text style={globalStyles.button_normal_text}>Submit</Text>
+                        <Text style={globalThemedStyles.button_normal_text}>Submit</Text>
                     </Pressable>
                 </View>
             </View>

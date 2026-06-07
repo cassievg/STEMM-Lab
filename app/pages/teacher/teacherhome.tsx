@@ -1,55 +1,63 @@
 import { router } from 'expo-router';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { useAuth } from '@/src/context/AuthContext';
 import { globalStyles } from "../../styles";
 
+import { useTheme } from '@/src/context/ThemeContext';
+
 export default function TeacherHome() {
+    const { getThemedStyle } = useTheme();
+
+    const globalThemedStyles = useMemo(() => {
+        return getThemedStyle(globalStyles);
+    }, [getThemedStyle]);
+
     const { currentUser, userDoc } = useAuth();
     
     return (
-        <View style={globalStyles.page}>
-            <View style={globalStyles.title_container}>
-                <Text style={globalStyles.page_title}>
+        <View style={globalThemedStyles.page}>
+            <View style={globalThemedStyles.title_container}>
+                <Text style={globalThemedStyles.page_title}>
                     Welcome, {userDoc?.username}!
                 </Text>           
             </View>
 
-            <View style={globalStyles.button_parent}>
+            <View style={globalThemedStyles.button_parent}>
                 <Pressable onPress={() => {router.push('/pages/student/menu/activityselection')}}
                 style={({ pressed }) => [
-                    pressed ? globalStyles.pressable_onPress : globalStyles.pressable_default
+                    pressed ? globalThemedStyles.pressable_onPress : globalThemedStyles.pressable_default
                 ]}>
-                    <Text style={globalStyles.button_big_text}>Play</Text>
+                    <Text style={globalThemedStyles.button_big_text}>Play</Text>
                 </Pressable>
             </View>
 
-            <View style={globalStyles.button_parent}>
+            <View style={globalThemedStyles.button_parent}>
                 <Pressable onPress={() => {router.push('/pages/student/menu/settings')}}
                 style={({ pressed }) => [
-                    pressed ? globalStyles.pressable_onPress : globalStyles.pressable_default
+                    pressed ? globalThemedStyles.pressable_onPress : globalThemedStyles.pressable_default
                 ]}>
-                    <Text style={globalStyles.button_big_text}>Settings</Text>
+                    <Text style={globalThemedStyles.button_big_text}>Settings</Text>
                 </Pressable>
             </View>
 
-            <View style={globalStyles.button_parent}>
+            <View style={globalThemedStyles.button_parent}>
                 <Pressable onPress={() => {router.push('/pages/student/menu/history')}}
                 style={({ pressed }) => [
-                    pressed ? globalStyles.pressable_onPress : globalStyles.pressable_default
+                    pressed ? globalThemedStyles.pressable_onPress : globalThemedStyles.pressable_default
                 ]}>
-                    <Text style={globalStyles.button_big_text}>History</Text>
+                    <Text style={globalThemedStyles.button_big_text}>History</Text>
                 </Pressable>
             </View>
 
-            <View style={globalStyles.button_parent}>
+            <View style={globalThemedStyles.button_parent}>
                 <Pressable 
                 onPress={() => {router.push('/pages/student/menu/profile')}}
                 style={({ pressed }) => [
-                    pressed ? globalStyles.pressable_onPress : globalStyles.pressable_default
+                    pressed ? globalThemedStyles.pressable_onPress : globalThemedStyles.pressable_default
                 ]}>
-                    <Text style={globalStyles.button_big_text}>Profile</Text>
+                    <Text style={globalThemedStyles.button_big_text}>Profile</Text>
                 </Pressable>
             </View>
         </View>

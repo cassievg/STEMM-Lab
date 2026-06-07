@@ -17,7 +17,7 @@ type Progress = {
 }
 
 const initDatabase = async () => {
-    db = await SQLite.openDatabaseAsync('stemm.db');
+    db = await SQLite.openDatabaseAsync('stemm.db', {useNewConnection: true});
 
     await db.execAsync(`
         CREATE TABLE IF NOT EXISTS activities (

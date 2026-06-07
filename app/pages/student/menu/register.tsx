@@ -1,6 +1,6 @@
 import { Picker } from "@react-native-picker/picker";
 import { router } from 'expo-router';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import { signOut, signUp } from '../../../../backend/firebase/auth.js';
@@ -9,7 +9,15 @@ import { firestore } from '../../../../backend/firebase/config.js';
 import { createTeam } from "@/src/services/firebaseServices";
 import { globalStyles } from "../../../styles";
 
+import { useTheme } from "@/src/context/ThemeContext.js";
+
 export default function Register() {
+    const { getThemedStyle } = useTheme();
+
+    const globalThemedStyles = useMemo(() => {
+        return getThemedStyle(globalStyles);
+    }, [getThemedStyle]);
+
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -102,14 +110,14 @@ export default function Register() {
     }
 
     return (
-        <View style={globalStyles.page}>
-            <View style={globalStyles.header}>
+        <View style={globalThemedStyles.page}>
+            <View style={globalThemedStyles.header}>
                 <TouchableOpacity 
-                style={globalStyles.back_button}
+                style={globalThemedStyles.back_button}
                 onPress={() => router.push('..')}>
-                    <Text>{'<'}</Text>
+                    <Text style={globalThemedStyles.text}>{'<'}</Text>
                 </TouchableOpacity>
-                <Text style={globalStyles.page_title}>
+                <Text style={globalThemedStyles.page_title}>
                     Register
                 </Text>       
             </View>
@@ -252,7 +260,7 @@ export default function Register() {
                                         <Pressable
                                         onPress={() => removeMember(index)}
                                         style={localStyles.remove_button}>
-                                            <Text style={globalStyles.button_normal_text}>-</Text>
+                                            <Text style={globalThemedStyles.button_normal_text}>-</Text>
                                         </Pressable>
                                     </View>
                                 </View>
@@ -264,7 +272,7 @@ export default function Register() {
                         <Pressable
                         onPress={addMember}
                         style={localStyles.add_button}>
-                            <Text style={globalStyles.button_normal_text}>+</Text>
+                            <Text style={globalThemedStyles.button_normal_text}>+</Text>
                         </Pressable>
                     )}
 
@@ -274,7 +282,7 @@ export default function Register() {
                         style={({ pressed }) => [
                             pressed ? localStyles.pressable_onPress : localStyles.pressable_default
                         ]}>
-                            <Text style={globalStyles.button_normal_text}>Submit</Text>
+                            <Text style={globalThemedStyles.button_normal_text}>Submit</Text>
                         </Pressable>
                     </View>
                 </View>

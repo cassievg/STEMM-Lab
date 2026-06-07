@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 
 import { ActivityIndicator } from "react-native";
 import { AuthProvider, useAuth } from '../src/context/AuthContext.js';
+import { ThemeProvider } from '../src/context/ThemeContext.js';
 
 import { initDatabase } from "@/src/services/databaseServices";
 import { SQLiteProvider } from "expo-sqlite";
@@ -10,9 +11,11 @@ import { SQLiteProvider } from "expo-sqlite";
 export default function Layout() {
     return (
         <AuthProvider>
-            <SQLiteProvider databaseName="stemm.db">
-                <RootLayout />
-            </SQLiteProvider>
+            <ThemeProvider>
+                <SQLiteProvider databaseName="stemm.db">
+                    <RootLayout />
+                </SQLiteProvider>
+            </ThemeProvider>
         </AuthProvider>
     );
 }

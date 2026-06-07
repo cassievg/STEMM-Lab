@@ -1,10 +1,13 @@
 import { useAuth } from '@/src/context/AuthContext';
+import { ThemeKey } from '@/src/context/ThemeContext.d';
 import { fetchGlobalLdb, fetchLocalLdb, getRoomByTeamAndActivity, hasLocal } from '@/src/services/firebaseServices';
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { globalStyles } from '../../../../styles';
+import { globalColors, globalStyles } from '../../../../styles';
+
+import { useTheme } from '@/src/context/ThemeContext';
 
 type HistoryRow = {
     activityId: string,
@@ -21,6 +24,10 @@ type LdbRow = {
 }
 
 export default function History() {
+    const { theme, changeTheme } = useTheme();
+
+    const themed = globalColors[theme as ThemeKey];
+
     const { teamID } = useAuth();
     const [loading, setLoading] = useState(false);
     
@@ -65,51 +72,41 @@ export default function History() {
 
     const renderLocal = ({item, index}: {item: LdbRow, index: number}) => (
         <View style={localStyles.item}>
-            <Text style={localStyles.rank}>#{index + 1}</Text>
-            <Text style={localStyles.team_name}>{item.teamName}</Text>
-            <Text style={localStyles.score}>{item.score}</Text>
+            <Text style={[themed.text, localStyles.rank]}>#{index + 1}</Text>
+            <Text style={[themed.text, localStyles.team_name]}>{item.teamName}</Text>
+            <Text style={[themed.text, localStyles.score]}>{item.score}</Text>
         </View>
     );
 
     const renderGlobal = ({item, index}: {item: LdbRow, index: number}) => (
         <View style={localStyles.item}>
-            <Text style={localStyles.rank}>#{index + 1}</Text>
-            <Text style={localStyles.team_name}>{item.teamName}</Text>
-            <Text style={localStyles.score}>{item.score}</Text>
+            <Text style={[themed.text, localStyles.rank]}>#{index + 1}</Text>
+            <Text style={[themed.text, localStyles.team_name]}>{item.teamName}</Text>
+            <Text style={[themed.text, localStyles.score]}>{item.score}</Text>
         </View>
     );
 
-    const handleLocalActivate = () => {
-        setActiveTab('local');
-        renderLocal;
-    }
-
-    const handleGlobalActivate = () => {
-        setActiveTab('global');
-        renderGlobal;
-    }
-
     return (
-        <SafeAreaView style={globalStyles.page}>
+        <SafeAreaView style={[themed.page, globalStyles.page]}>
             <View style={globalStyles.header}>
                 <TouchableOpacity
-                    style={globalStyles.back_button}
+                    style={[themed.back, globalStyles.back_button]}
                     onPress={() => router.push('/pages/student/menu/activityselection')}>
-                    <Text>{'<'}</Text>
+                    <Text style={[themed.text, globalStyles.text]}>{'<'}</Text>
                 </TouchableOpacity>
-                <Text style={globalStyles.page_title}>Leaderboards</Text>
+                <Text style={[themed.text, globalStyles.page_title]}>Leaderboards</Text>
             </View>
 
-            <View style={localStyles.tab_bar}>
+            <View style={[themed.tab_bar, globalStyles.tab_bar]}>
                 <TouchableOpacity
                     key={'local'}
-                    style={[localStyles.tab, 
-                        activeTab === 'local' && localStyles.tab_active]}
+                    style={[globalStyles.tab, 
+                        activeTab === 'local' && [themed.tab_active]]}
                     onPress={() => setActiveTab('local')}
                     activeOpacity={0.8}>
                     <Text style={[
-                        localStyles.tab_label,
-                        activeTab === 'local' && localStyles.tab_label_active,
+                        [themed.tab_label, globalStyles.tab_label],
+                        activeTab === 'local' && [themed.tab_label_active, globalStyles.tab_label_active],
                         ]}
                         numberOfLines={1}
                         adjustsFontSizeToFit>
@@ -119,13 +116,13 @@ export default function History() {
 
                 <TouchableOpacity
                     key={'global'}
-                    style={[localStyles.tab, 
-                        activeTab === 'global' && localStyles.tab_active]}
+                    style={[globalStyles.tab, 
+                        activeTab === 'global' && [themed.tab_active]]}
                     onPress={() => setActiveTab('global')}
                     activeOpacity={0.8}>
                     <Text style={[
-                        localStyles.tab_label,
-                        activeTab === 'global' && localStyles.tab_label_active,
+                        [themed.tab_label, globalStyles.tab_label],
+                        activeTab === 'global' && [themed.tab_label_active, globalStyles.tab_label_active],
                         ]}
                         numberOfLines={1}
                         adjustsFontSizeToFit>
@@ -134,12 +131,12 @@ export default function History() {
                 </TouchableOpacity>
             </View>
 
-            <View style={localStyles.list}>
+            <View style={[themed.container, localStyles.list]}>
                 {activeTab === 'local' && (
                     loading ? (
-                        <Text style={localStyles.empty}>Loading...</Text>
+                        <Text style={[themed.text, localStyles.empty]}>Loading...</Text>
                     ) : localLDB.length === 0 ? (
-                        <Text style={localStyles.empty}>No local leaderboard yet.</Text>
+                        <Text style={[themed.text, localStyles.empty]}>No local leaderboard yet.</Text>
                     ) : (
                         <FlatList
                             data={localLDB}
@@ -152,15 +149,15 @@ export default function History() {
 
                 {activeTab === 'global' && (
                     loading ? (
-                        <Text style={localStyles.empty}>Loading...</Text>
+                        <Text style={[themed.text, localStyles.empty]}>Loading...</Text>
                     ) : globalLDB.length === 0 ? (
-                        <Text style={localStyles.empty}>No global leaderboard yet.</Text>
+                        <Text style={[themed.text, localStyles.empty]}>No global leaderboard yet.</Text>
                     ) : (
                         <FlatList
                             data={globalLDB}
                             keyExtractor={(_, index) => index.toString()}
                             renderItem={({item, index}) => renderGlobal({item, index})}
-                            ItemSeparatorComponent={() => <View style={localStyles.separator}/>}
+                            ItemSeparatorComponent={() => <View style={[themed.separator, localStyles.separator]}/>}
                         />
                     )
                 )}
@@ -173,12 +170,9 @@ const localStyles = StyleSheet.create({
     list: {
         width: '90%',
         alignSelf: 'center',
-        backgroundColor: '#afdaff',
         borderRadius: 8,
         borderWidth: 2,
-        borderColor: '#97b9d6',
         overflow: 'hidden',
-        marginTop: 20,
     },
 
     item: {
@@ -208,24 +202,20 @@ const localStyles = StyleSheet.create({
     
     score: {
         fontSize: 13,
-        color: '#555',
     },
 
     rank_local: {
         fontSize: 13,
-        color: '#007AFF',
         fontWeight: '500',
     },
 
     rank_global: {
         fontSize: 13,
-        color: '#555',
         fontWeight: '500',
     },
 
     separator: {
         height: 1,
-        backgroundColor: '#97b9d6',
     },
 
     empty: {
@@ -236,45 +226,11 @@ const localStyles = StyleSheet.create({
 
     rank: {
         fontSize: 13,
-        color: '#555',
         fontWeight: '500',
     },
 
     team_name: {
         fontSize: 15,
         fontWeight: '600',
-    },
-
-    tab_bar: {
-        flexDirection: 'row',
-        borderBottomWidth: 0.5,
-        borderBottomColor: '#97b9d6',
-        backgroundColor: '#ffffff',
-    },
-
-    tab: {
-        flex: 1,
-        paddingVertical: 12,
-        alignItems: 'center',
-        borderBottomWidth: 2,
-        borderBottomColor: 'transparent',
-    },
-
-    tab_active: {
-        borderBottomColor: '#97b9d6',
-    },
-
-    tab_label: {
-        fontSize: 16,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
-        color: '#888888',
-        fontWeight: '400',
-        textAlign: 'center',
-        width: '100%'
-    },
-
-    tab_label_active: {
-        color: '#111111',
-        fontWeight: '800',
-    },
+    }
 });

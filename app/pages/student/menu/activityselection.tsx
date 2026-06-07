@@ -1,11 +1,14 @@
 import { useAuth } from '@/src/context/AuthContext';
+import { ThemeKey } from '@/src/context/ThemeContext.d';
 import { fetchActivities, fetchCourses } from '@/src/services/databaseServices';
 import { activityIsComplete } from '@/src/services/firebaseServices';
 import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Dimensions, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { globalStyles } from '../../../styles';
+import { globalColors, globalStyles } from '../../../styles';
+
+import { useTheme } from '@/src/context/ThemeContext';
 
 type ActivityRow = {
     id: string;
@@ -27,6 +30,10 @@ const screenWidth = Dimensions.get('window').width;
 const cardSize = (screenWidth - 16 * 2 - 20) / 2;
 
 export default function ActivitySelection() {
+    const { theme, changeTheme } = useTheme();
+
+    const themed = globalColors[theme as ThemeKey];
+
     const [activeTab, setActiveTab] = useState<string>('');
 
     const [courses, setCourses] = useState<string[]>([]);
@@ -76,37 +83,37 @@ export default function ActivitySelection() {
             onPress={() => handleActivityRouting(item.id)}
             activeOpacity={0.7}>
 
-            <View style={localStyles.card_icon_box}>
-                <Text style={localStyles.card_icon}>A</Text>
+            <View style={[themed.card_box, localStyles.card_icon_box]}>
+                <Text style={[themed.text, localStyles.card_icon]}>A</Text>
             </View>
-            <Text style={localStyles.card_label}>{ACTIVITY_ICONS[item.id] ?? "📘"}</Text>
+            <Text style={[themed.text, localStyles.card_label]}>{ACTIVITY_ICONS[item.id] ?? "📘"}</Text>
         </TouchableOpacity>
     );
 
     return (
-        <SafeAreaView style={localStyles.page}>
+        <SafeAreaView style={[themed.page, globalStyles.page]}>
             <View style={globalStyles.header}>
                 <TouchableOpacity 
-                style={globalStyles.back_button}
+                style={[themed.back, globalStyles.back_button]}
                 onPress={() => router.push('/pages/student/menu/homescreen')}>
-                    <Text>{'<'}</Text>
+                    <Text style={[themed.text, globalStyles.text]}>{'<'}</Text>
                 </TouchableOpacity>
-                <Text style={globalStyles.page_title}>
+                <Text style={[themed.text, globalStyles.page_title]}>
                     Activities
                 </Text>
             </View>
 
-            <View style={localStyles.tab_bar}>
+            <View style={[themed.tab_bar, globalStyles.tab_bar]}>
                 {courses.map((course) => (
                     <TouchableOpacity
                         key={course}
-                        style={[localStyles.tab, 
-                            activeTab === course && localStyles.tab_active]}
+                        style={[globalStyles.tab, 
+                            activeTab === course && [themed.tab_active]]}
                         onPress={() => setActiveTab(course)}
                         activeOpacity={0.8}>
                         <Text style={[
-                            localStyles.tab_label,
-                            activeTab === course && localStyles.tab_label_active,
+                            [themed.tab_label, globalStyles.tab_label],
+                            activeTab === course && [themed.tab_label_active, globalStyles.tab_label_active],
                             ]}
                             numberOfLines={1}
                             adjustsFontSizeToFit>
@@ -130,45 +137,6 @@ export default function ActivitySelection() {
 }
 
 const localStyles = StyleSheet.create({
-    page:{
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100%',
-    },
-
-    tab_bar: {
-        flexDirection: 'row',
-        borderBottomWidth: 0.5,
-        borderBottomColor: '#97b9d6',
-        backgroundColor: '#ffffff',
-    },
-
-    tab: {
-        flex: 1,
-        paddingVertical: 12,
-        alignItems: 'center',
-        borderBottomWidth: 2,
-        borderBottomColor: 'transparent',
-    },
-
-    tab_active: {
-        borderBottomColor: '#97b9d6',
-    },
-
-    tab_label: {
-        fontSize: 16,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
-        color: '#888888',
-        fontWeight: '400',
-        textAlign: 'center',
-        width: '100%'
-    },
-
-    tab_label_active: {
-        color: '#111111',
-        fontWeight: '800',
-    },
-
     grid: {
         padding: 16,
     },
@@ -188,8 +156,6 @@ const localStyles = StyleSheet.create({
         height: cardSize,
         borderRadius: 12,
         borderWidth: 1,
-        borderColor: '#97b9d6',
-        backgroundColor: '#afdaff',
         alignItems: 'center',
         justifyContent: 'center',
         marginBottom: 8,
