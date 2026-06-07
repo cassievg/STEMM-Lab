@@ -22,6 +22,7 @@ export default function History() {
 
     useEffect(() => {
         const loadHistory = async () => {
+            setLoading(true);
             if (!teamID) return;
 
             const data = await fetchTeamHistory(teamID);

@@ -275,5 +275,36 @@ const fetchTeamHistory = async (teamId: string) => {
     return history.sort((a, b) => new Date(b.submitDate).getTime() - new Date(a.submitDate).getTime())
 }
 
-export { createRoom, createTeam, fetchGlobalLdb, fetchLocalLdb, fetchTeamHistory, getRoomByTeamAndActivity, getRoomTeamsNames, getTeamDetails, joinRoom, leaveRoom, submitResult };
+const activityIsComplete = async (teamId: string, activityId: string) => {
+    const snapshot = await firestore()
+        .collection('results')
+        .where('teamId', '==', teamId)
+        .where('activityId', '==', activityId)
+        .get();
+
+    return !snapshot.empty
+}
+
+const hasLocal = async (teamId: string, activityId: string) => {
+    const snapshot = await firestore()
+        .collection('rooms')
+        .where('teams', 'array-contains', teamId)
+        .where('activityId', '==', activityId)
+        .get();
+    
+    return !snapshot.empty;
+}
+
+export {
+    activityIsComplete, createRoom,
+    createTeam,
+    fetchGlobalLdb,
+    fetchLocalLdb,
+    fetchTeamHistory,
+    getRoomByTeamAndActivity,
+    getRoomTeamsNames,
+    getTeamDetails, hasLocal, joinRoom,
+    leaveRoom,
+    submitResult
+};
 

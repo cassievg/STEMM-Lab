@@ -185,9 +185,6 @@ export default function Activity1() {
     }
 
     const loadTeam = async () => {
-        console.log('userDoc:', userDoc);
-        console.log('teamId:', teamID);
-
         if (!teamID) {
             setTeamModalVisible(true);
             return;
@@ -589,6 +586,7 @@ const teamModalStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+
     container: {
         width: '80%',
         backgroundColor: 'white',
@@ -596,28 +594,34 @@ const teamModalStyles = StyleSheet.create({
         padding: 20,
         gap: 8,
     },
+
     title: {
         fontWeight: 'bold',
         fontSize: 16,
         marginBottom: 8,
     },
+
     empty: {
         color: 'gray',
         textAlign: 'center',
         paddingVertical: 8,
     },
+
     memberRow: {
         flexDirection: 'row',
         alignItems: 'center',
         paddingVertical: 6,
         gap: 8,
     },
+
     memberIcon: {
         fontSize: 18,
     },
+
     memberName: {
         fontSize: 14,
     },
+    
     closeButton: {
         marginTop: 12,
         padding: 10,
@@ -625,10 +629,12 @@ const teamModalStyles = StyleSheet.create({
         borderRadius: 6,
         alignItems: 'center',
     },
+
     closeText: {
         color: 'white',
         fontWeight: 'bold',
     },
+
         leaveButton: {
         marginTop: 8,
         padding: 10,
@@ -636,12 +642,11 @@ const teamModalStyles = StyleSheet.create({
         borderRadius: 6,
         alignItems: 'center',
     },
+
     leaveText: {
         color: 'white',
         fontWeight: 'bold',
     },
-
-    
 });
 
 const roomModalStyles = StyleSheet.create({
@@ -651,6 +656,7 @@ const roomModalStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+
     container: {
         width: '85%',
         backgroundColor: 'white',
@@ -658,16 +664,19 @@ const roomModalStyles = StyleSheet.create({
         padding: 20,
         gap: 10,
     },
+
     title: {
         fontWeight: 'bold',
         fontSize: 16,
         marginBottom: 4,
     },
+
     label: {
         fontWeight: '500',
         fontSize: 14,
         marginTop: 4,
     },
+
     input: {
         borderWidth: 1,
         borderColor: '#ccc',
@@ -677,86 +686,104 @@ const roomModalStyles = StyleSheet.create({
         letterSpacing: 4,
         textAlign: 'center',
     },
+
     codeBox: {
         backgroundColor: '#f0f0f0',
         borderRadius: 8,
         padding: 12,
         alignItems: 'center',
     },
+
     codeLabel: {
         fontSize: 12,
         color: 'gray',
         marginBottom: 4,
     },
+
     code: {
         fontSize: 28,
         fontWeight: 'bold',
         letterSpacing: 8,
     },
+    
     teamRow: {
         flexDirection: 'row',
         alignItems: 'center',
         paddingVertical: 6,
         gap: 8,
     },
+
     teamIcon: {
         fontSize: 16,
     },
+
     teamName: {
         fontSize: 14,
     },
+
     empty: {
         color: 'gray',
         textAlign: 'center',
         paddingVertical: 8,
     },
+
     divider: {
         flexDirection: 'row',
         alignItems: 'center',
         gap: 8,
     },
+
     dividerLine: {
         flex: 1,
         height: 1,
         backgroundColor: '#ccc',
     },
+
     dividerText: {
         color: 'gray',
         fontSize: 13,
     },
+
     primaryButton: {
         padding: 10,
         backgroundColor: '#007AFF',
         borderRadius: 6,
         alignItems: 'center',
     },
+
     primaryText: {
         color: 'white',
         fontWeight: 'bold',
     },
+
     secondaryButton: {
         padding: 10,
         backgroundColor: '#f0f0f0',
         borderRadius: 6,
         alignItems: 'center',
     },
+
     secondaryText: {
         color: '#333',
         fontWeight: '500',
     },
+
     cancelButton: {
         padding: 10,
         alignItems: 'center',
     },
+
     cancelText: {
         color: 'gray',
         fontSize: 13,
     },
+
     buttonRow: {
         flexDirection: 'row',
         gap: 8,
         marginTop: 8,
     },
+
     leaveButton: {
         flex: 1,
         padding: 10,
@@ -764,10 +791,12 @@ const roomModalStyles = StyleSheet.create({
         borderRadius: 6,
         alignItems: 'center',
     },
+
     leaveText: {
         color: 'white',
         fontWeight: 'bold',
     },
+
     closeButton: {
         flex: 1,
         padding: 10,
@@ -775,6 +804,7 @@ const roomModalStyles = StyleSheet.create({
         borderRadius: 6,
         alignItems: 'center',
     },
+    
     closeText: {
         color: 'white',
         fontWeight: 'bold',

@@ -1,4 +1,6 @@
+import { useAuth } from '@/src/context/AuthContext';
 import { fetchActivities, fetchCourses } from '@/src/services/databaseServices';
+import { activityIsComplete } from '@/src/services/firebaseServices';
 import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Dimensions, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -30,6 +32,8 @@ export default function ActivitySelection() {
     const [courses, setCourses] = useState<string[]>([]);
     const [activities, setActivities] = useState<ActivityRow[]>([]);
 
+    const { teamID } = useAuth();
+
     const formatCourseName = (str:string): string => {
         return str.replace(/(^\w|_\w)/g, (match) => match.replace('_', ' ').toUpperCase());
     }
@@ -45,9 +49,6 @@ export default function ActivitySelection() {
             if (fetchedCourses.length > 0) {
                 setActiveTab(fetchedCourses[0]);
             }
-            
-            console.log(fetchedCourses);
-            console.log(fetchedActivities);
         }
 
         loadData();  
@@ -57,10 +58,22 @@ export default function ActivitySelection() {
         activity => activity.course === activeTab
     );
 
+    const handleActivityRouting = async (activityId: string) => {
+        console.log('clicked');
+        const activityCompleted = await activityIsComplete(teamID, activityId);
+        if (!activityCompleted) {
+            console.log("activity not done");
+            router.push(`/pages/student/activities/${activityId}` as any);
+        } else {
+            console.log("activity done");
+            router.push(`/pages/student/activities/leaderboards/${activityId}` as any);
+        }
+    }
+
     const renderActivity = ({item}: {item: ActivityRow}) => (
         <TouchableOpacity
             style={localStyles.card}
-            onPress={() => router.push(`/pages/student/activities/${item.id}` as any)}
+            onPress={() => handleActivityRouting(item.id)}
             activeOpacity={0.7}>
 
             <View style={localStyles.card_icon_box}>
