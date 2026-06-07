@@ -1,9 +1,13 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 const BLUE = '#97b9d6';
 const LIGHT_BLUE = '#afdaff';
 const WHITE = '#ffffff';
+const DARK = '#1a2e3d';
 const FONT_FAMILY = 'Trebuchet MS, Roboto, sans-serif';
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT =Dimensions.get('window').height;
 
 export const activityStyles = StyleSheet.create({
     page: {
@@ -380,5 +384,5 @@ export const activityStyles = StyleSheet.create({
 
 });
 
-export { BLUE, FONT_FAMILY, LIGHT_BLUE, WHITE };
+export { BLUE, DARK, FONT_FAMILY, LIGHT_BLUE, SCREEN_HEIGHT, SCREEN_WIDTH, WHITE };
 
