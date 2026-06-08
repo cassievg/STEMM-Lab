@@ -1,13 +1,21 @@
+import { FONT_FAMILY, globalColors } from '@/app/styles';
+import { useTheme } from '@/src/context/ThemeContext';
+import { ThemeKey } from '@/src/context/ThemeContext.d';
 import { Accelerometer, Gyroscope } from 'expo-sensors';
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { BLUE, DARK, FONT_FAMILY, WHITE } from '../activities/activityStyles';
+import { activityColors } from '../activities/activityStyles';
 
 
 export default function Sensors() {
     const [acceleration, setAcceleration] = useState({x: 0, y: 0, z: 0});
     const [gyro, setGyro] = useState({x: 0, y: 0, z:0});
     const [active, setActive] = useState(false);
+
+    const { theme, changeTheme } = useTheme();
+
+    const themed = activityColors[theme as ThemeKey];
+    const globalThemed = globalColors[theme as ThemeKey];
 
     useEffect(() => {
         if (!active) {
@@ -30,7 +38,7 @@ export default function Sensors() {
         const pct = Math.min(Math.abs(value) / 2,1);
         return (
             <View style={localStyles.bar_background}>
-                <View style={[localStyles.bar_fill, {width: `${pct * 100}` as any}]}/>
+                <View style={[[themed.sensor_toggle, localStyles.bar_fill], {width: `${pct * 100}` as any}]}/>
             </View>
         );
     };
@@ -38,48 +46,48 @@ export default function Sensors() {
     return (
         <View style={localStyles.container}>
             <TouchableOpacity
-                style={[localStyles.toggle, active && localStyles.toggle_active]}
+                style={[[themed.sensor_toggle, localStyles.toggle], active && localStyles.toggle_active]}
                 onPress={() => setActive(!active)}>
 
-                <Text style={localStyles.toggle_text}>
+                <Text style={[themed.sensor_toggle_text, localStyles.toggle_text]}>
                     {active ? '⏹ Stop Sensors' : '▶ Start Sensors'}
                 </Text>
             </TouchableOpacity>
 
-            <View style={localStyles.gforce_container}>
-                <Text style={localStyles.gforce_label}>
+            <View style={[themed.sensor_gforce_container, localStyles.gforce_container]}>
+                <Text style={[themed.sensor_toggle_text, localStyles.gforce_label]}>
                     Current G-Force
                 </Text>
-                <Text style={localStyles.gforce_value}>
+                <Text style={[themed.sensor_toggle_text, localStyles.gforce_value]}>
                     {gForce}
                 </Text>
             </View>
 
-            <Text style={localStyles.section}>
+            <Text style={[themed.sensor_text, localStyles.section]}>
                 📱 Accelerometer (g)
             </Text>
             {(['x', 'y', 'z'] as const).map((axis) => (
                 <View key={axis} style={localStyles.axis_row}>
-                    <Text style={localStyles.axis_label}>
+                    <Text style={[themed.sensor_axis_label, localStyles.axis_label]}>
                         {axis.toUpperCase()}
                     </Text>
                     <Bar value={acceleration[axis]}/>
-                    <Text style={localStyles.axis_value}>
+                    <Text style={[themed.sensor_text, localStyles.axis_value]}>
                         {acceleration[axis].toFixed(3)}
                     </Text>
                 </View>
             ))}
 
-            <Text style={localStyles.section}>
+            <Text style={[themed.sensor_text, localStyles.section]}>
                 🔄 Gyroscope (rad/s)
             </Text>
             {(['x', 'y', 'z'] as const).map((axis) => (
                 <View key={axis} style={localStyles.axis_row}>
-                    <Text style={localStyles.axis_label}>
+                    <Text style={[themed.sensor_axis_label, localStyles.axis_label]}>
                         {axis.toUpperCase()}
                     </Text>
                     <Bar value={gyro[axis]}/>
-                    <Text style={localStyles.axis_value}>
+                    <Text style={[themed.sensor_text, localStyles.axis_value]}>
                         {gyro[axis].toFixed(3)}
                     </Text>
                 </View>
@@ -94,7 +102,6 @@ const localStyles = StyleSheet.create({
     },
 
     toggle: {
-        backgroundColor: BLUE,
         borderRadius: 10,
         paddingVertical: 12,
         alignItems: 'center',
@@ -107,12 +114,10 @@ const localStyles = StyleSheet.create({
     toggle_text: {
         fontSize: 16,
         fontFamily: FONT_FAMILY,
-        color: WHITE,
         fontWeight: '700',
     },
 
     gforce_container: {
-        backgroundColor: DARK,
         borderRadius: 12,
         padding: 14,
         alignItems: 'center',
@@ -121,7 +126,6 @@ const localStyles = StyleSheet.create({
     gforce_label: {
         fontSize: 14,
         fontFamily: FONT_FAMILY,
-        color: 'rgba(255,255,255,0.6)',
         marginBottom: 4,
     },
 
@@ -129,14 +133,12 @@ const localStyles = StyleSheet.create({
         fontSize: 36,
         fontFamily: FONT_FAMILY,
         fontWeight: '800',
-        color: WHITE,
     },
 
     section: {
         fontSize: 14,
         fontFamily: FONT_FAMILY,
         fontWeight: '700',
-        color: DARK,
         marginTop: 4,
     },
 
@@ -151,7 +153,6 @@ const localStyles = StyleSheet.create({
         fontSize: 14,
         fontFamily: FONT_FAMILY,
         fontWeight: '700',
-        color: BLUE,
     },
 
     bar_background: {
@@ -164,7 +165,6 @@ const localStyles = StyleSheet.create({
 
     bar_fill: {
         height: '100%',
-        backgroundColor: BLUE,
         borderRadius: 5,
     },
 
@@ -172,7 +172,6 @@ const localStyles = StyleSheet.create({
         width: 52,
         fontSize: 14,
         fontFamily: FONT_FAMILY,
-        color: DARK,
         fontWeight: '600',
         textAlign: 'right',
     },

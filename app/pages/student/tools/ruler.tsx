@@ -1,6 +1,9 @@
+import { FONT_FAMILY, SCREEN_WIDTH } from "@/app/styles";
+import { useTheme } from "@/src/context/ThemeContext";
+import { ThemeKey } from "@/src/context/ThemeContext.d";
 import React from "react";
 import { PixelRatio, StyleSheet, Text, View } from "react-native";
-import { DARK, FONT_FAMILY, LIGHT_BLUE, SCREEN_WIDTH } from "../activities/activityStyles";
+import { activityColors } from "../activities/activityStyles";
 
 export default function Ruler() {
     const PPI = PixelRatio.get() * 160;
@@ -14,11 +17,15 @@ export default function Ruler() {
         const isMajor = i % 10 === 0;
         const isMid = i % 5 === 0;
         tick.push({pos: i * (pxPerCm / 10), isMajor, isMid, val: i / 10});
-    }
+    };
+
+    const { theme, changeTheme } = useTheme();
+
+    const themed = activityColors[theme as ThemeKey];
 
     return (
         <View style={localStyles.container}>
-            <Text style={localStyles.note}>
+            <Text style={[themed.ruler_note, localStyles.note]}>
                 Hold an object along the ruler to measure.
             </Text>
             
@@ -30,7 +37,7 @@ export default function Ruler() {
                         style={[
                             localStyles.tick,
                             {left: val.pos},
-                            val.isMajor && localStyles.tick_major,
+                            val.isMajor && [themed.ruler_tick_major, localStyles.tick_major],
                             val.isMid && !val.isMajor && localStyles.tick_mid,
                         ]}>
                     
@@ -42,18 +49,18 @@ export default function Ruler() {
                     </View>
                 ))}
             </View>
-            <Text style={localStyles.cm_label}>
+            <Text style={[themed.ruler_cm_label ,localStyles.cm_label]}>
                 Centimeter (cm)
             </Text>
             <View style={localStyles.info_row}>
-                <View style={localStyles.info_chip}>
-                    <Text style={localStyles.info_text}>
+                <View style={[themed.ruler_info_chip, localStyles.info_chip]}>
+                    <Text style={[themed.ruler_info_text, localStyles.info_text]}>
                         Screen DPI: {Math.round(PPI)}
                     </Text>
                 </View>
                 
-                <View style={localStyles.info_chip}>
-                    <Text style={localStyles.info_text}>
+                <View style={[themed.ruler_info_chip, localStyles.info_chip]}>
+                    <Text style={[themed.ruler_info_text, localStyles.info_text]}>
                         Range: 0 - {totalCm} cm
                     </Text>
                 </View>
@@ -73,7 +80,6 @@ const localStyles = StyleSheet.create({
     note: {
         fontSize: 14,
         fontFamily: FONT_FAMILY,
-        color: '#555555',
         textAlign: 'center',
     },
 
@@ -112,7 +118,6 @@ const localStyles = StyleSheet.create({
 
     tick_major: {
         height: 24,
-        backgroundColor: DARK,
         width: 2,
     },
 
@@ -123,14 +128,13 @@ const localStyles = StyleSheet.create({
         left: -11,
         width: 24,
         fontFamily: FONT_FAMILY,
-        color: DARK,
         fontWeight: '600',
         textAlign: 'center',
     },
 
     cm_label: {
         fontSize: 12,
-        color: '#888888',
+        fontFamily: FONT_FAMILY,
         textAlign: 'center',
     },
 
@@ -141,7 +145,6 @@ const localStyles = StyleSheet.create({
     },
 
     info_chip: {
-        backgroundColor: LIGHT_BLUE,
         borderRadius: 6,
         paddingHorizontal: 10,
         paddingVertical: 4,
@@ -149,7 +152,7 @@ const localStyles = StyleSheet.create({
 
     info_text: {
         fontSize: 14,
-        color: DARK,
+        fontFamily: FONT_FAMILY,
         fontWeight: '600',
     },
 

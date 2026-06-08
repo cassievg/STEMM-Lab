@@ -176,6 +176,71 @@ export const activityColors = {
         tool_header_label: {
             color: '#0f2a3f',
         },
+
+        calculator_display_wrap: {
+            backgroundColor: '#97b9d6'
+        },
+
+        calculation_button_equal: {
+            backgroundColor: '#97b9d6'
+        },
+
+        calculator_button: {
+            backgroundColor: '#f0f4f8',
+        },
+
+        calculator_button_operator: {
+            backgroundColor: '#afdaff',
+        },
+
+        calculator_display: {
+            color: '#ffffff',
+        },
+
+        calculator_button_text: {
+            color: '#435565',
+        },
+
+        ruler_info_chip: {
+            backgroundColor: '#afdaff',
+        },
+
+        ruler_tick_major:{
+            backgroundColor: '#1a2e3d',
+        },
+        
+        ruler_note: {
+            color: '#555555',
+        },
+
+        ruler_cm_label: {
+            color: '#888888',
+        },
+
+        ruler_info_text: {
+            color: '#1a2e3d',
+        },
+
+        sensor_toggle: {
+            backgroundColor: '#97b9d6',
+        },
+
+        sensor_toggle_text: {
+            color: '#afdaff'
+        },
+
+        sensor_axis_label: {
+            color: '#97b9d6'
+        },
+
+        sensor_gforce_container:{
+            backgroundColor: '#97b9d6',
+        },
+
+        sensor_text: {
+            color: '#1a2e3d',
+        },
+        
 }),
     dark : StyleSheet.create({
         page: {
@@ -334,6 +399,70 @@ export const activityColors = {
         },
 
         tool_header_label: {
+            color: '#d8d8d8',
+        },
+
+        calculator_button: {
+            backgroundColor: '#435565',
+        },
+
+        calculation_button_equal: {
+            backgroundColor: '#435565'
+        },
+
+        calculator_display_wrap: {
+            backgroundColor: '#435565'
+        },
+
+        calculator_button_operator: {
+            backgroundColor: '#d8d8d8',
+        },
+
+        calculator_display: {
+            color: '#d8d8d8',
+        },
+
+        calculator_button_text: {
+            color: '#435565',
+        },
+
+        ruler_info_chip: {
+            backgroundColor: '#435565',
+        },
+
+        ruler_tick_major:{
+            backgroundColor: '#d8d8d8',
+        },
+
+        ruler_note: {
+            color: '#d8d8d8',
+        },
+
+        ruler_cm_label: {
+            color: '#d8d8d8',
+        },
+
+        ruler_info_text: {
+            color: '#d8d8d8',
+        },
+
+        sensor_toggle: {
+            backgroundColor: '#435565',
+        },
+
+        sensor_toggle_text: {
+            color: '#d8d8d8'
+        },
+
+        sensor_axis_label: {
+            color: '#435565'
+        },
+
+        sensor_gforce_container:{
+            backgroundColor: '#435565',
+        },
+
+        sensor_text: {
             color: '#d8d8d8',
         },
     })
