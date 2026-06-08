@@ -9,6 +9,7 @@ import { globalColors, globalStyles } from '../../../styles';
 import { activityColors, activityStyles, modalStyles } from './activityStyles';
 
 import { useTheme } from '@/src/context/ThemeContext';
+import ToolsPanel from '../tools/panel';
 
 type TeamRow = {
     id: string,
@@ -209,381 +210,385 @@ export default function Activity1() {
     }
 
     return (
-        <SafeAreaView style={[themed.page, activityStyles.page]}>
-            <View style={activityStyles.header}>
-                <TouchableOpacity 
-                style={[globalThemed.back, globalStyles.back_button]}
-                onPress={() => router.push('/pages/student/menu/activityselection')}>
-                    <Text style={[globalThemed.text, globalStyles.text]}>{'<'}</Text>
-                </TouchableOpacity>
-                <View style={activityStyles.header_title_container}>
-                    <Text style={[globalThemed.text, activityStyles.header_title]}>
-                        Engineering · Activity 1
-                    </Text>
-                    <Text style={[globalThemed.text, activityStyles.header_subtitle]}>
-                        Parachute Drop Challenge
-                    </Text>
-                </View>
-
-                {userDoc?.role === 'student' && (
+        <>
+            <SafeAreaView style={[themed.page, activityStyles.page]}>
+                <View style={activityStyles.header}>
                     <TouchableOpacity 
-                        style={[themed.button, activityStyles.button]}
-                        onPress={loadTeam}>
-                        <Text>👥</Text>
+                    style={[globalThemed.back, globalStyles.back_button]}
+                    onPress={() => router.push('/pages/student/menu/activityselection')}>
+                        <Text style={[globalThemed.text, globalStyles.text]}>{'<'}</Text>
                     </TouchableOpacity>
-                )}
-
-                {userDoc?.role === 'student' && (
-                    <TouchableOpacity 
-                        style={[themed.button, activityStyles.button]}
-                        onPress={() => room ? openRoomDetails(room) : setEnterRoomModalVisible(true)}>
-                        <Text>🏠</Text>
-                    </TouchableOpacity>
-                )}
-            </View>
-
-            <Modal
-                visible={teamModalVisible}
-                transparent
-                animationType="fade"
-                onRequestClose={() => setTeamModalVisible(false)}
-            >
-                <View style={modalStyles.overlay}>
-                    <View style={[themed.modal, modalStyles.container]}>
-                        <Text style={[globalThemed.text, modalStyles.title]}>
-                            {team?.name ?? 'No Team'} {team ? `#${team.discriminator}` : ''}
+                    <View style={activityStyles.header_title_container}>
+                        <Text style={[globalThemed.text, activityStyles.header_title]}>
+                            Engineering · Activity 1
                         </Text>
-
-                        {teamMembers.length === 0 ? (
-                            <Text style={modalStyles.empty}>No members found</Text>
-                        ) : (
-                            teamMembers.map((member, i) => (
-                                <View key={i} style={modalStyles.memberRow}>
-                                    <Text style={[globalThemed.text, modalStyles.memberIcon]}>👤</Text>
-                                    <Text style={[globalThemed.text, modalStyles.memberName]}>{member}</Text>
-                                </View>
-                            ))
-                        )}
-
-                        <Pressable
-                            style={[themed.modal_button, modalStyles.closeButton]}
-                            onPress={() => setTeamModalVisible(false)}
-                        >
-                            <Text style={[globalThemed.text, modalStyles.closeText]}>Close</Text>
-                        </Pressable>
+                        <Text style={[globalThemed.text, activityStyles.header_subtitle]}>
+                            Parachute Drop Challenge
+                        </Text>
                     </View>
+
+                    {userDoc?.role === 'student' && (
+                        <TouchableOpacity 
+                            style={[themed.button, activityStyles.button]}
+                            onPress={loadTeam}>
+                            <Text>👥</Text>
+                        </TouchableOpacity>
+                    )}
+
+                    {userDoc?.role === 'student' && (
+                        <TouchableOpacity 
+                            style={[themed.button, activityStyles.button]}
+                            onPress={() => room ? openRoomDetails(room) : setEnterRoomModalVisible(true)}>
+                            <Text>🏠</Text>
+                        </TouchableOpacity>
+                    )}
                 </View>
-            </Modal>
 
-            <Modal
-                visible={enterRoomModalVisible}
-                transparent
-                animationType="fade"
-                onRequestClose={() => setEnterRoomModalVisible(false)}
-            >
-                <View style={modalStyles.overlay}>
-                    <View style={[themed.modal, modalStyles.container]}>
-                        <Text style={[globalThemed.text, modalStyles.title]}>Join a Room</Text>
+                <Modal
+                    visible={teamModalVisible}
+                    transparent
+                    animationType="fade"
+                    onRequestClose={() => setTeamModalVisible(false)}
+                >
+                    <View style={modalStyles.overlay}>
+                        <View style={[themed.modal, modalStyles.container]}>
+                            <Text style={[globalThemed.text, modalStyles.title]}>
+                                {team?.name ?? 'No Team'} {team ? `#${team.discriminator}` : ''}
+                            </Text>
 
-                        <Text style={[globalThemed.text, modalStyles.label]}>Enter Room Code</Text>
-                        <TextInput
-                            style={[themed.modal_input, modalStyles.input]}
-                            value={roomCode}
-                            onChangeText={(text) => setRoomCode(text.toUpperCase())}
-                            placeholder="e.g. AB12"
-                            placeholderTextColor='#969696'
-                            maxLength={4}
-                            autoCapitalize="characters"
-                        />
-                        <Pressable
-                            style={[themed.modal_button, modalStyles.primaryButton]}
-                            onPress={handleJoinRoom}
-                        >
-                            <Text style={[globalThemed.text, modalStyles.primaryText]}>Join Room</Text>
-                        </Pressable>
-
-                        <View style={modalStyles.divider}>
-                            <View style={[globalThemed.separator, modalStyles.dividerLine]}/>
-                            <Text style={[globalThemed.text, modalStyles.dividerText]}>or</Text>
-                            <View style={[globalThemed.separator, modalStyles.dividerLine]}/>
-                        </View>
-
-                        <Pressable
-                            style={[themed.modal_button, modalStyles.secondaryButton]}
-                            onPress={handleCreateRoom}
-                        >
-                            <Text style={[globalThemed.text, modalStyles.secondaryText]}>Create Room</Text>
-                        </Pressable>
-
-                        <Pressable
-                            style={[themed.modal_button, modalStyles.closeButton]}
-                            onPress={() => setEnterRoomModalVisible(false)}
-                        >
-                            <Text style={[globalThemed.text, modalStyles.secondaryText]}>Solo (No Room)</Text>
-                        </Pressable>
-                    </View>
-                </View>
-            </Modal>
-
-            <Modal
-                visible={roomDetailsModalVisible}
-                transparent
-                animationType="fade"
-                onRequestClose={() => setRoomDetailsModalVisible(false)}
-            >
-                <View style={modalStyles.overlay}>
-                    <View style={[themed.modal, modalStyles.container]}>
-                        <Text style={[globalThemed.text, modalStyles.title]}>Room Details</Text>
-
-                        <View style={[themed.modal_code_box, modalStyles.codeBox]}>
-                            <Text style={[globalThemed.text, modalStyles.codeLabel]}>Room Code</Text>
-                            <Text style={[globalThemed.text, modalStyles.code]}>{room?.code ?? '-'}</Text>
-                        </View>
-
-                        <Text style={[globalThemed.text, modalStyles.label]}>Teams in Room</Text>
-                        {roomTeamNames.length === 0 ? (
-                            <Text style={modalStyles.empty}>No teams yet</Text>
-                        ) : (
-                            roomTeamNames.map((name, i) => (
-                                <View key={i} style={modalStyles.teamRow}>
-                                    <Text style={[globalThemed.text, modalStyles.teamIcon]}>🏷️</Text>
-                                    <Text style={[globalThemed.text, modalStyles.teamName]}>{name}</Text>
-                                </View>
-                            ))
-                        )}
-
-                        <View style={modalStyles.buttonRow}>
-                            <Pressable
-                                style={[themed.modal_button, modalStyles.leaveButton]}
-                                onPress={handleLeaveRoom}
-                            >
-                                <Text style={[globalThemed.text, modalStyles.leaveText]}>Leave Room</Text>
-                            </Pressable>
+                            {teamMembers.length === 0 ? (
+                                <Text style={modalStyles.empty}>No members found</Text>
+                            ) : (
+                                teamMembers.map((member, i) => (
+                                    <View key={i} style={modalStyles.memberRow}>
+                                        <Text style={[globalThemed.text, modalStyles.memberIcon]}>👤</Text>
+                                        <Text style={[globalThemed.text, modalStyles.memberName]}>{member}</Text>
+                                    </View>
+                                ))
+                            )}
 
                             <Pressable
                                 style={[themed.modal_button, modalStyles.closeButton]}
-                                onPress={() => setRoomDetailsModalVisible(false)}
+                                onPress={() => setTeamModalVisible(false)}
                             >
                                 <Text style={[globalThemed.text, modalStyles.closeText]}>Close</Text>
                             </Pressable>
                         </View>
                     </View>
+                </Modal>
+
+                <Modal
+                    visible={enterRoomModalVisible}
+                    transparent
+                    animationType="fade"
+                    onRequestClose={() => setEnterRoomModalVisible(false)}
+                >
+                    <View style={modalStyles.overlay}>
+                        <View style={[themed.modal, modalStyles.container]}>
+                            <Text style={[globalThemed.text, modalStyles.title]}>Join a Room</Text>
+
+                            <Text style={[globalThemed.text, modalStyles.label]}>Enter Room Code</Text>
+                            <TextInput
+                                style={[themed.modal_input, modalStyles.input]}
+                                value={roomCode}
+                                onChangeText={(text) => setRoomCode(text.toUpperCase())}
+                                placeholder="e.g. AB12"
+                                placeholderTextColor='#969696'
+                                maxLength={4}
+                                autoCapitalize="characters"
+                            />
+                            <Pressable
+                                style={[themed.modal_button, modalStyles.primaryButton]}
+                                onPress={handleJoinRoom}
+                            >
+                                <Text style={[globalThemed.text, modalStyles.primaryText]}>Join Room</Text>
+                            </Pressable>
+
+                            <View style={modalStyles.divider}>
+                                <View style={[globalThemed.separator, modalStyles.dividerLine]}/>
+                                <Text style={[globalThemed.text, modalStyles.dividerText]}>or</Text>
+                                <View style={[globalThemed.separator, modalStyles.dividerLine]}/>
+                            </View>
+
+                            <Pressable
+                                style={[themed.modal_button, modalStyles.secondaryButton]}
+                                onPress={handleCreateRoom}
+                            >
+                                <Text style={[globalThemed.text, modalStyles.secondaryText]}>Create Room</Text>
+                            </Pressable>
+
+                            <Pressable
+                                style={[themed.modal_button, modalStyles.closeButton]}
+                                onPress={() => setEnterRoomModalVisible(false)}
+                            >
+                                <Text style={[globalThemed.text, modalStyles.secondaryText]}>Solo (No Room)</Text>
+                            </Pressable>
+                        </View>
+                    </View>
+                </Modal>
+
+                <Modal
+                    visible={roomDetailsModalVisible}
+                    transparent
+                    animationType="fade"
+                    onRequestClose={() => setRoomDetailsModalVisible(false)}
+                >
+                    <View style={modalStyles.overlay}>
+                        <View style={[themed.modal, modalStyles.container]}>
+                            <Text style={[globalThemed.text, modalStyles.title]}>Room Details</Text>
+
+                            <View style={[themed.modal_code_box, modalStyles.codeBox]}>
+                                <Text style={[globalThemed.text, modalStyles.codeLabel]}>Room Code</Text>
+                                <Text style={[globalThemed.text, modalStyles.code]}>{room?.code ?? '-'}</Text>
+                            </View>
+
+                            <Text style={[globalThemed.text, modalStyles.label]}>Teams in Room</Text>
+                            {roomTeamNames.length === 0 ? (
+                                <Text style={modalStyles.empty}>No teams yet</Text>
+                            ) : (
+                                roomTeamNames.map((name, i) => (
+                                    <View key={i} style={modalStyles.teamRow}>
+                                        <Text style={[globalThemed.text, modalStyles.teamIcon]}>🏷️</Text>
+                                        <Text style={[globalThemed.text, modalStyles.teamName]}>{name}</Text>
+                                    </View>
+                                ))
+                            )}
+
+                            <View style={modalStyles.buttonRow}>
+                                <Pressable
+                                    style={[themed.modal_button, modalStyles.leaveButton]}
+                                    onPress={handleLeaveRoom}
+                                >
+                                    <Text style={[globalThemed.text, modalStyles.leaveText]}>Leave Room</Text>
+                                </Pressable>
+
+                                <Pressable
+                                    style={[themed.modal_button, modalStyles.closeButton]}
+                                    onPress={() => setRoomDetailsModalVisible(false)}
+                                >
+                                    <Text style={[globalThemed.text, modalStyles.closeText]}>Close</Text>
+                                </Pressable>
+                            </View>
+                        </View>
+                    </View>
+                </Modal>
+
+                <View style={[globalThemed.tab_bar, activityStyles.tab_bar]}>
+                    {SECTIONS.map((sect) => (
+                        <TouchableOpacity
+                            key={sect.key}
+                            style={[globalStyles.tab, activeSection === sect.key && [globalThemed.tab_active]]}
+                            onPress={() => setActiveSection(sect.key)}
+                            activeOpacity={0.75}>
+                                <Text style={[globalThemed.tab_label, globalStyles.tab_label]}>
+                                    {sect.icon}
+                                </Text>
+                                <Text style={[[globalThemed.tab_label, globalStyles.tab_label], activeSection === sect.key && [globalThemed.tab_label_active, globalStyles.tab_label_active]]}>
+                                    {sect.label}
+                                </Text>
+                        </TouchableOpacity>
+                    ))}
                 </View>
-            </Modal>
 
-            <View style={[globalThemed.tab_bar, activityStyles.tab_bar]}>
-                {SECTIONS.map((sect) => (
-                    <TouchableOpacity
-                        key={sect.key}
-                        style={[globalStyles.tab, activeSection === sect.key && [globalThemed.tab_active]]}
-                        onPress={() => setActiveSection(sect.key)}
-                        activeOpacity={0.75}>
-                            <Text style={[globalThemed.tab_label, globalStyles.tab_label]}>
-                                {sect.icon}
+                <ScrollView
+                    style={[themed.scroll, activityStyles.scroll]}
+                    contentContainerStyle={activityStyles.scroll_content}
+                    showsVerticalScrollIndicator={false}>
+
+                    {activeSection === 'overview' && (
+                        <View>
+                            <Text style={[globalThemed.text, [globalThemed.text, activityStyles.body]]}>
+                                Students design, build, and test a parachute, for a small toy to reduce its landing 
+                                speed and impact force. Teams iterate their designs under time and material constraints,
+                                aiming to achieve the slowest and safest landing within a target area.
                             </Text>
-                            <Text style={[[globalThemed.tab_label, globalStyles.tab_label], activeSection === sect.key && [globalThemed.tab_label_active, globalStyles.tab_label_active]]}>
-                                {sect.label}
+                            <Text style={[globalThemed.text, activityStyles.section_heading]}>
+                                Learning Goals
                             </Text>
-                    </TouchableOpacity>
-                ))}
-            </View>
+                            <View style={activityStyles.chip_row}>
+                                {['Design Thinking', 'Physics', 'Teamwork', 'Iteration'].map((chip) => (
+                                    <View key={chip} style={[themed.chip, activityStyles.chip]}>
+                                        <Text style={[globalThemed.text, activityStyles.chip_text]}>
+                                            {chip}
+                                        </Text>
+                                    </View>
+                                ))}
+                            </View>
 
-            <ScrollView
-                style={[themed.scroll, activityStyles.scroll]}
-                contentContainerStyle={activityStyles.scroll_content}
-                showsVerticalScrollIndicator={false}>
-
-                {activeSection === 'overview' && (
-                    <View>
-                        <Text style={[globalThemed.text, [globalThemed.text, activityStyles.body]]}>
-                            Students design, build, and test a parachute, for a small toy to reduce its landing 
-                            speed and impact force. Teams iterate their designs under time and material constraints,
-                            aiming to achieve the slowest and safest landing within a target area.
-                        </Text>
-                        <Text style={[globalThemed.text, activityStyles.section_heading]}>
-                            Learning Goals
-                        </Text>
-                        <View style={activityStyles.chip_row}>
-                            {['Design Thinking', 'Physics', 'Teamwork', 'Iteration'].map((chip) => (
-                                <View key={chip} style={[themed.chip, activityStyles.chip]}>
-                                    <Text style={[globalThemed.text, activityStyles.chip_text]}>
-                                        {chip}
+                            <Text style={[globalThemed.text, activityStyles.section_heading]}>
+                                Curriculum Links
+                            </Text>
+                            {CURRICULUM.map((item) => (
+                                <View key={item.code} style={activityStyles.curriculum_row}>
+                                    <View style={[themed.curriculum_icon, activityStyles.curriculum_icon]}>
+                                        <Text style={[globalThemed.text, activityStyles.curriculum_code]}>
+                                            {item.code}
+                                        </Text>
+                                    </View>
+                                    <Text style={[globalThemed.text, activityStyles.curriculum_description]}>
+                                        {item.description}
                                     </Text>
                                 </View>
                             ))}
                         </View>
+                    )}
 
-                        <Text style={[globalThemed.text, activityStyles.section_heading]}>
-                            Curriculum Links
-                        </Text>
-                        {CURRICULUM.map((item) => (
-                            <View key={item.code} style={activityStyles.curriculum_row}>
-                                <View style={[themed.curriculum_icon, activityStyles.curriculum_icon]}>
-                                    <Text style={[globalThemed.text, activityStyles.curriculum_code]}>
-                                        {item.code}
+                    {activeSection === 'equipment' && (
+                        <View>
+                            <Text style={[globalThemed.text, activityStyles.body]}>
+                                Gather the following items before you start:
+                            </Text>
+                            <Text style={[globalThemed.text, activityStyles.progress_text]}>
+                                {checkedItems.length}/{equipment.length} items ready
+                            </Text>
+                            {equipment.map((item) => {
+                                const checked = checkedItems.includes(item.id);
+                                return (
+                                    <TouchableOpacity
+                                        key={item.id}
+                                        style={[[themed.equipment_row, activityStyles.equipment_row], checked && [themed.equipment_row_checked]]}
+                                        onPress={() => toggleCheck(item.id)}
+                                        activeOpacity={0.7}>
+                                            <Image
+                                                source={item.image}
+                                                style={[[themed.equipment_image, activityStyles.equipment_image], checked && activityStyles.equipment_image_checked]}
+                                                resizeMode='contain'/>
+                                            <Text style={[[globalThemed.text, activityStyles.equipment_name], checked && [themed.equipment_name_checked, activityStyles.equipment_name_checked]]}>
+                                                {checked ? (<Text style={{textDecorationLine:'line-through'}}>
+                                                    {item.name}
+                                                </Text>): (item.name)}
+                                            </Text>
+                                            
+                                            <View style={[[themed.checkbox, activityStyles.checkbox], checked && [themed.checkbox_checked]]}>
+                                                {checked && <Text style={[themed.checkbox_tick, activityStyles.checkbox_tick]}>✓</Text>}
+                                            </View>
+                                    </TouchableOpacity>
+                                );
+                            })}
+                        </View>
+                    )}
+
+                    {activeSection === 'instruction' && (
+                        <View>
+                            {instruction.map((step, i) => (
+                                <View key={i} style={activityStyles.step_row}>
+                                    <View style={[themed.step_number_wrap, activityStyles.step_number_wrap]}>
+                                        <Text style={[themed.step_number, activityStyles.step_number]}>
+                                            {i+1}
+                                        </Text>
+                                    </View>
+                                    <Text style={[globalThemed.text, activityStyles.step_text]}>
+                                        {step}
                                     </Text>
                                 </View>
-                                <Text style={[globalThemed.text, activityStyles.curriculum_description]}>
-                                    {item.description}
-                                </Text>
-                            </View>
-                        ))}
-                    </View>
-                )}
+                            ))}
 
-                {activeSection === 'equipment' && (
-                    <View>
-                        <Text style={[globalThemed.text, activityStyles.body]}>
-                            Gather the following items before you start:
-                        </Text>
-                        <Text style={[globalThemed.text, activityStyles.progress_text]}>
-                            {checkedItems.length}/{equipment.length} items ready
-                        </Text>
-                        {equipment.map((item) => {
-                            const checked = checkedItems.includes(item.id);
-                            return (
-                                <TouchableOpacity
-                                    key={item.id}
-                                    style={[[themed.equipment_row, activityStyles.equipment_row], checked && [themed.equipment_row_checked]]}
-                                    onPress={() => toggleCheck(item.id)}
-                                    activeOpacity={0.7}>
-                                        <Image
-                                            source={item.image}
-                                            style={[[themed.equipment_image, activityStyles.equipment_image], checked && activityStyles.equipment_image_checked]}
-                                            resizeMode='contain'/>
-                                        <Text style={[[globalThemed.text, activityStyles.equipment_name], checked && [themed.equipment_name_checked, activityStyles.equipment_name_checked]]}>
-                                            {checked ? (<Text style={{textDecorationLine:'line-through'}}>
-                                                {item.name}
-                                            </Text>): (item.name)}
+                            <View style={[themed.info_box, activityStyles.info_box]}>
+                                <Text style={[globalThemed.text, activityStyles.info_box_title]}>
+                                    📄Write-up (On paper)
+                                </Text>
+                                {writeUp.map((item,i) => (
+                                    <View key={i} style={activityStyles.list_row}>
+                                        <View style={[themed.list_dot, activityStyles.list_dot]}/>
+                                        <Text style={[globalThemed.text, activityStyles.list_text]}>
+                                            {item}
                                         </Text>
-                                        
-                                        <View style={[[themed.checkbox, activityStyles.checkbox], checked && [themed.checkbox_checked]]}>
-                                            {checked && <Text style={[themed.checkbox_tick, activityStyles.checkbox_tick]}>✓</Text>}
+                                    </View>
+                                ))}
+                            </View>
+                        </View>
+                    )}
+
+                    {activeSection === 'discussion' && (
+                        <View>
+                            <Text style={[globalThemed.text, activityStyles.section_heading]}>
+                                Parachute and Forces
+                            </Text>
+                            <Text style={[globalThemed.text, activityStyles.body]}>
+                                Gravity pulls objects downard, causing to speed up as they fall. A parachute increases
+                                air resistance (also called drag). Drag acts upward, opposing the motion and slowing
+                                the fall. A slower fall reduces the force when the toy hits the ground, making the
+                                landing safer. Engineers improve parachute designs through repeated testing and redesign
+                            </Text>
+
+                            <Text style={[globalThemed.text, globalThemed.text, activityStyles.section_heading]}>
+                                Forces Acting on the Toy
+                            </Text>
+                            <View style={[themed.table, activityStyles.table]}>
+                                <View style={[themed.table_header_row, activityStyles.table_header_row]}>
+                                    <Text style={[activityStyles.table_cell, globalThemed.text, activityStyles.table_header, {flex: 1.2}]}>
+                                        Forces
+                                    </Text>
+                                    <Text style={[activityStyles.table_cell, globalThemed.text, activityStyles.table_header, {flex: 2}]}>
+                                        Formula
+                                    </Text>
+                                </View>
+                                {FORMULA.map((item, i) => (
+                                    <View key={i} style={[[themed.table_row, activityStyles.table_row], i%2 === 0 && themed.table_row_alt]}>
+                                        <Text style={[activityStyles.table_cell, globalThemed.text, {flex: 1.2}]}>
+                                            {item.force}
+                                        </Text>
+                                        <Text style={[activityStyles.table_cell, globalThemed.text, {flex: 2}]}>
+                                            {item.equation}
+                                        </Text>
+                                    </View>
+                                ))}
+                            </View>
+
+                            <Text style={[globalThemed.text, activityStyles.section_heading]}>
+                                Student Focus
+                            </Text>
+                            <View style={activityStyles.focus_grid}>
+                                <View style={[themed.focus_card, activityStyles.focus_card]}>
+                                    <Text style={[globalThemed.text, activityStyles.focus_level]}>
+                                        🎒 Primary
+                                    </Text>
+                                    {primaryFocus.map((t, i) => (
+                                        <View key={i} style={activityStyles.list_row}>
+                                            <View style={[themed.list_dot, activityStyles.list_dot]}/>
+                                            <Text style={[globalThemed.text, activityStyles.list_text]}>
+                                                {t}
+                                            </Text>
                                         </View>
-                                </TouchableOpacity>
-                            );
-                        })}
-                    </View>
-                )}
-
-                {activeSection === 'instruction' && (
-                    <View>
-                        {instruction.map((step, i) => (
-                            <View key={i} style={activityStyles.step_row}>
-                                <View style={[themed.step_number_wrap, activityStyles.step_number_wrap]}>
-                                    <Text style={[themed.step_number, activityStyles.step_number]}>
-                                        {i+1}
-                                    </Text>
+                                    ))}
                                 </View>
-                                <Text style={[globalThemed.text, activityStyles.step_text]}>
-                                    {step}
-                                </Text>
-                            </View>
-                        ))}
-
-                        <View style={[themed.info_box, activityStyles.info_box]}>
-                            <Text style={[globalThemed.text, activityStyles.info_box_title]}>
-                                📄Write-up (On paper)
-                            </Text>
-                            {writeUp.map((item,i) => (
-                                <View key={i} style={activityStyles.list_row}>
-                                    <View style={[themed.list_dot, activityStyles.list_dot]}/>
-                                    <Text style={[globalThemed.text, activityStyles.list_text]}>
-                                        {item}
+                                
+                                <View style={[themed.focus_card, activityStyles.focus_card]}>
+                                    <Text style={[globalThemed.text, activityStyles.focus_level]}>
+                                        🎓 High School
                                     </Text>
+                                    {highFocus.map((t,i) => (
+                                        <View key={i} style={activityStyles.list_row}>
+                                            <View style={[themed.list_dot, activityStyles.list_dot]}/>
+                                            <Text style={[globalThemed.text, activityStyles.list_text]}>
+                                                {t}
+                                            </Text>
+                                        </View>
+                                    ))}
                                 </View>
-                            ))}
-                        </View>
-                    </View>
-                )}
-
-                {activeSection === 'discussion' && (
-                    <View>
-                        <Text style={[globalThemed.text, activityStyles.section_heading]}>
-                            Parachute and Forces
-                        </Text>
-                        <Text style={[globalThemed.text, activityStyles.body]}>
-                            Gravity pulls objects downard, causing to speed up as they fall. A parachute increases
-                            air resistance (also called drag). Drag acts upward, opposing the motion and slowing
-                            the fall. A slower fall reduces the force when the toy hits the ground, making the
-                            landing safer. Engineers improve parachute designs through repeated testing and redesign
-                        </Text>
-
-                        <Text style={[globalThemed.text, globalThemed.text, activityStyles.section_heading]}>
-                            Forces Acting on the Toy
-                        </Text>
-                        <View style={[themed.table, activityStyles.table]}>
-                            <View style={[themed.table_header_row, activityStyles.table_header_row]}>
-                                <Text style={[activityStyles.table_cell, globalThemed.text, activityStyles.table_header, {flex: 1.2}]}>
-                                    Forces
-                                </Text>
-                                <Text style={[activityStyles.table_cell, globalThemed.text, activityStyles.table_header, {flex: 2}]}>
-                                    Formula
-                                </Text>
-                            </View>
-                            {FORMULA.map((item, i) => (
-                                <View key={i} style={[[themed.table_row, activityStyles.table_row], i%2 === 0 && themed.table_row_alt]}>
-                                    <Text style={[activityStyles.table_cell, globalThemed.text, {flex: 1.2}]}>
-                                        {item.force}
-                                    </Text>
-                                    <Text style={[activityStyles.table_cell, globalThemed.text, {flex: 2}]}>
-                                        {item.equation}
-                                    </Text>
-                                </View>
-                            ))}
-                        </View>
-
-                        <Text style={[globalThemed.text, activityStyles.section_heading]}>
-                            Student Focus
-                        </Text>
-                        <View style={activityStyles.focus_grid}>
-                            <View style={[themed.focus_card, activityStyles.focus_card]}>
-                                <Text style={[globalThemed.text, activityStyles.focus_level]}>
-                                    🎒 Primary
-                                </Text>
-                                {primaryFocus.map((t, i) => (
-                                    <View key={i} style={activityStyles.list_row}>
-                                        <View style={[themed.list_dot, activityStyles.list_dot]}/>
-                                        <Text style={[globalThemed.text, activityStyles.list_text]}>
-                                            {t}
-                                        </Text>
-                                    </View>
-                                ))}
-                            </View>
-                            
-                            <View style={[themed.focus_card, activityStyles.focus_card]}>
-                                <Text style={[globalThemed.text, activityStyles.focus_level]}>
-                                    🎓 High School
-                                </Text>
-                                {highFocus.map((t,i) => (
-                                    <View key={i} style={activityStyles.list_row}>
-                                        <View style={[themed.list_dot, activityStyles.list_dot]}/>
-                                        <Text style={[globalThemed.text, activityStyles.list_text]}>
-                                            {t}
-                                        </Text>
-                                    </View>
-                                ))}
                             </View>
                         </View>
-                    </View>
-                )}
+                    )}
 
-                <View style={{height: 32}}/>
+                    <View style={{height: 32}}/>
 
-            </ScrollView>
+                </ScrollView>
 
-            <View style={activityStyles.footer}>
-                <TouchableOpacity 
-                    style={[themed.button, activityStyles.start_button]}
-                    activeOpacity={0.85}
-                    onPress={() => router.push('./pages/student/startactivity/start1')}>
+                <View style={activityStyles.footer}>
+                    <TouchableOpacity 
+                        style={[themed.button, activityStyles.start_button]}
+                        activeOpacity={0.85}
+                        onPress={() => router.push('./pages/student/startactivity/start1')}>
 
-                    <Text style={[globalThemed.text, activityStyles.start_button_text]}>
-                        Start Activity
-                    </Text>
-                </TouchableOpacity>
-            </View>
+                        <Text style={[globalThemed.text, activityStyles.start_button_text]}>
+                            Start Activity
+                        </Text>
+                    </TouchableOpacity>
+                </View>
 
-        </SafeAreaView>
+            </SafeAreaView>
+            <ToolsPanel/>
+        </>
+
     );    
 }

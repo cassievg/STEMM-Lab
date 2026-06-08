@@ -1,4 +1,8 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
+
+const SCREEN_WIDTH  = Dimensions.get('window').width;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
+const FONT_FAMILY = 'Trebuchet MS, Roboto, sans-serif';
 
 export const globalColors = {
     light : StyleSheet.create({
@@ -148,7 +152,7 @@ export const globalColors = {
         },
 
         tab_bar: {
-            borderBottomColor: '#d8d8d8',
+            borderBottomColor: 'transparent',
             backgroundColor: '#505050'
         },
 
@@ -216,12 +220,12 @@ export const globalStyles = StyleSheet.create({
         fontSize: 25,
         textAlign: 'center',
         fontWeight: 'bold',
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif'
+        fontFamily: FONT_FAMILY
     },
 
     text: {
         fontSize: 15,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif'
+        fontFamily: FONT_FAMILY
     },
 
     image: {
@@ -256,14 +260,14 @@ export const globalStyles = StyleSheet.create({
 
     button_big_text: {
         fontSize: 20,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         width: '100%',
         textAlign: 'center',
     },
 
     button_normal_text: {
         fontSize: 15,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         width: '100%',
         textAlign: 'center',
     },
@@ -283,7 +287,7 @@ export const globalStyles = StyleSheet.create({
 
     tab_label: {
         fontSize: 16,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         fontWeight: '400',
         textAlign: 'center',
         width: '100%'
@@ -324,6 +328,9 @@ export const globalStyles = StyleSheet.create({
 
     picker_text: {
         fontSize: 14,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
     },
 });
+
+export { FONT_FAMILY, SCREEN_HEIGHT, SCREEN_WIDTH };
+

@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 
 export const activityColors = {
     light : StyleSheet.create({
@@ -139,7 +139,43 @@ export const activityColors = {
 
         modal: {
             backgroundColor: '#ffffff'
-        }
+        },
+
+        fab: {
+            backgroundColor: '#afdaff'
+        },
+
+        panel: {
+            backgroundColor: '#ffffff'
+        },
+
+        panel_title: {
+            color: '#2b2b2b'
+        },
+
+        back_button_text: {
+            color: '#2b2b2b',
+        },
+
+        close_button: {
+            backgroundColor: '#eaf4fd',
+        },
+
+        close_button_text: {
+            color: '#666666',
+        },
+
+        tool_card: {
+            backgroundColor: '#eaf4fd'
+        },
+
+        tool_label: {
+            color: '#0f2a3f'
+        },
+
+        tool_header_label: {
+            color: '#0f2a3f',
+        },
 }),
     dark : StyleSheet.create({
         page: {
@@ -263,12 +299,45 @@ export const activityColors = {
 
         modal: {
             backgroundColor: '#474747'
-        }
+        },
+
+        fab: {
+            backgroundColor: '#435565'
+        },
+
+        panel: {
+            backgroundColor: '#2b2b2b'
+        },
+
+        panel_title: {
+            color: '#d8d8d8',
+        },
+
+        back_button_text: {
+            color: '#d8d8d8',
+        },
+
+        close_button: {
+            backgroundColor: '#435565',
+        },
+
+        close_button_text: {
+            color: '#d8d8d8',
+        },
+
+        tool_card: {
+            backgroundColor: '#435565'
+        },
+
+        tool_label: {
+            color: '#d8d8d8'
+        },
+
+        tool_header_label: {
+            color: '#d8d8d8',
+        },
     })
 }
-
-const SCREEN_WIDTH = Dimensions.get('window').width;
-const SCREEN_HEIGHT =Dimensions.get('window').height;
 
 export const activityStyles = StyleSheet.create({
     page: {

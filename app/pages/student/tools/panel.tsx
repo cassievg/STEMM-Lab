@@ -1,6 +1,10 @@
+import { FONT_FAMILY, SCREEN_HEIGHT, SCREEN_WIDTH } from "@/app/styles";
+import { useTheme } from '@/src/context/ThemeContext';
+import { ThemeKey } from '@/src/context/ThemeContext.d';
 import React, { useRef, useState } from "react";
 import { Animated, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
-import { BLUE, DARK, FONT_FAMILY, LIGHT_BLUE, SCREEN_HEIGHT, SCREEN_WIDTH, WHITE } from "../activities/activityStyles";
+import { globalColors } from '../../../styles';
+import { activityColors } from '../activities/activityStyles';
 import Calculator from "./calculator";
 import Camera from "./camera";
 import Ruler from "./ruler";
@@ -62,10 +66,15 @@ export default function ToolsPanel() {
 
     const activeToolData = TOOLS.find((t) => t.key === activeTool)
 
+    const { theme, changeTheme } = useTheme();
+
+    const themed = activityColors[theme as ThemeKey];
+    const globalThemed = globalColors[theme as ThemeKey];
+
     return (
         <>
             <TouchableOpacity
-                style={localStyles.fab}
+                style={[themed.fab , localStyles.fab]}
                 onPress={openPanel}
                 activeOpacity={0.85}>
 
@@ -86,7 +95,7 @@ export default function ToolsPanel() {
 
                 <Animated.View
                     style={[
-                        localStyles.panel,
+                        themed.panel ,localStyles.panel,
                         {
                             transform: [
                                 {scale: scaleAnimation},
@@ -108,20 +117,20 @@ export default function ToolsPanel() {
                                 style={localStyles.back_button}
                                 onPress={() => setActiveTool(null)}>
 
-                                <Text style={localStyles.back_button_text}>
+                                <Text style={[themed.back_button_text, localStyles.back_button_text]}>
                                     ⬅️ Back
                                 </Text>
                             </TouchableOpacity>
                         ) : (
-                            <Text style={localStyles.panel_title}>
+                            <Text style={[themed.panel_title, localStyles.panel_title]}>
                                 🔧 Tools
                             </Text>
                         )}
                         <TouchableOpacity 
-                            style={localStyles.close_button}
+                            style={[themed.close_button, localStyles.close_button]}
                             onPress={closePanel}>
 
-                            <Text style={localStyles.close_button_text}>
+                            <Text style={[themed.close_button_text, localStyles.close_button_text]}>
                                 ✕
                             </Text>
                         </TouchableOpacity>
@@ -132,14 +141,14 @@ export default function ToolsPanel() {
                             {TOOLS.map((tool) => (
                                 <TouchableOpacity
                                     key={tool.key}
-                                    style={localStyles.tool_card}
+                                    style={[themed.tool_card, localStyles.tool_card]}
                                     onPress={() => setActiveTool(tool.key)}
                                     activeOpacity={0.75}>
 
                                     <Text style={localStyles.tool_icon}>
                                         {tool.icon}
                                     </Text>
-                                    <Text style={localStyles.tool_label}>
+                                    <Text style={[themed.tool_label, localStyles.tool_label]}>
                                         {tool.label}
                                     </Text>
                                 </TouchableOpacity>
@@ -153,7 +162,7 @@ export default function ToolsPanel() {
                                 <Text style={localStyles.tool_header_icon}>
                                     {activeToolData?.icon}
                                 </Text>
-                                <Text style={localStyles.tool_header_label}>
+                                <Text style={[themed.tool_header_label, localStyles.tool_header_label]}>
                                     {activeToolData?.label}
                                 </Text>
                             </View>
@@ -174,12 +183,11 @@ export default function ToolsPanel() {
 const localStyles = StyleSheet.create({
     fab: {
         position: 'absolute',
-        bottom: 100,
+        bottom: 140,
         right: 20,
         width: 52,
         height: 52,
         borderRadius: 26,
-        backgroundColor: DARK,
         alignItems: 'center',
         justifyContent: 'center',
         shadowColor: '#000000',
@@ -209,7 +217,6 @@ const localStyles = StyleSheet.create({
         right: 16,
         width: SCREEN_WIDTH - 32,
         maxHeight: SCREEN_HEIGHT * 0.65,
-        backgroundColor: WHITE,
         borderRadius: 20,
         padding: 16,
         shadowColor: '#000000',
@@ -230,7 +237,6 @@ const localStyles = StyleSheet.create({
         fontSize: 16,
         fontFamily: FONT_FAMILY,
         fontWeight: '800',
-        color: DARK,
     },
 
     back_button: {
@@ -242,14 +248,12 @@ const localStyles = StyleSheet.create({
         fontSize: 16,
         fontFamily: FONT_FAMILY,
         fontWeight: '700',
-        color: BLUE,
     },
 
     close_button: {
         width: 28,
         height: 28,
         borderRadius: 14,
-        backgroundColor: '#f0f4f8',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -258,7 +262,6 @@ const localStyles = StyleSheet.create({
         fontSize: 16,
         fontFamily: FONT_FAMILY,
         fontWeight: '700',
-        color: '#666666',
     },
 
     tool_grid: {
@@ -269,7 +272,6 @@ const localStyles = StyleSheet.create({
 
     tool_card: {
         width: (SCREEN_WIDTH - 32 - 32 - 12) / 2,
-        backgroundColor: LIGHT_BLUE,
         borderRadius: 14,
         paddingVertical: 18,
         alignItems: 'center',
@@ -286,7 +288,6 @@ const localStyles = StyleSheet.create({
         fontSize: 14,
         fontFamily: FONT_FAMILY,
         fontWeight: '700',
-        color: DARK
     },
 
     tool_header: {
@@ -307,6 +308,5 @@ const localStyles = StyleSheet.create({
         fontSize: 16,
         fontFamily: FONT_FAMILY,
         fontWeight: '800',
-        color: DARK,
     },
 })
