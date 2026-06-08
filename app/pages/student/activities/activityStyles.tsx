@@ -6,6 +6,14 @@ export const activityColors = {
             backgroundColor: '#97b9d6',
         },
 
+        modal_input: {
+            borderColor: "#ccc"
+        },
+
+        modal_close_button: {
+            backgroundColor: '#007AFF',
+        },
+
         start_button_text: {
             color: '#ffffff'
         },
@@ -90,6 +98,10 @@ export const activityColors = {
             borderColor:'#afdaff'
         },
 
+        modal_leave_button: {
+            backgroundColor: '#FF3B30',
+        },
+
         table_header_row: {
             backgroundColor: '#97b9d6',
         },
@@ -103,14 +115,34 @@ export const activityColors = {
             backgroundColor:'#afdaff'
         },
 
+        modal_code_box: {
+            backgroundColor: '#f0f0f0',
+        },
+
         button: {
             backgroundColor:'#afdaff',
             borderColor: '#97b9d6',
-        }
+        },
+
+        modal_secondary_text: {
+            color: '#333',
+        },
 }),
     dark : StyleSheet.create({
         page: {
             backgroundColor: '#435565',
+        },
+
+        modal_secondary_text: {
+            color: '#a6a6a6',
+        },
+
+        modal_input: {
+            borderColor: "#435565"
+        },
+
+        modal_code_box: {
+            backgroundColor: '#474747',
         },
 
         table_row: {
@@ -127,6 +159,10 @@ export const activityColors = {
 
         chip: {
             borderColor: '#474747',
+            backgroundColor: '#435565',
+        },
+
+        modal_button: {
             backgroundColor: '#435565',
         },
 
@@ -565,7 +601,6 @@ export const modalStyles = StyleSheet.create({
     closeButton: {
         marginTop: 12,
         padding: 10,
-        backgroundColor: '#007AFF',
         borderRadius: 6,
         alignItems: 'center',
     },
@@ -575,10 +610,9 @@ export const modalStyles = StyleSheet.create({
         fontWeight: 'bold',
     },
 
-        leaveButton: {
+    leaveButton: {
         marginTop: 8,
         padding: 10,
-        backgroundColor: '#FF3B30',
         borderRadius: 6,
         alignItems: 'center',
     },
@@ -596,7 +630,6 @@ export const modalStyles = StyleSheet.create({
 
     input: {
         borderWidth: 1,
-        borderColor: '#ccc',
         borderRadius: 6,
         padding: 10,
         fontSize: 16,
@@ -605,7 +638,6 @@ export const modalStyles = StyleSheet.create({
     },
 
     codeBox: {
-        backgroundColor: '#f0f0f0',
         borderRadius: 8,
         padding: 12,
         alignItems: 'center',
@@ -646,8 +678,7 @@ export const modalStyles = StyleSheet.create({
 
     dividerLine: {
         flex: 1,
-        height: 1,
-        backgroundColor: '#ccc',
+        height: 1
     },
 
     dividerText: {
@@ -657,7 +688,6 @@ export const modalStyles = StyleSheet.create({
 
     primaryButton: {
         padding: 10,
-        backgroundColor: '#007AFF',
         borderRadius: 6,
         alignItems: 'center',
     },
@@ -669,13 +699,11 @@ export const modalStyles = StyleSheet.create({
 
     secondaryButton: {
         padding: 10,
-        backgroundColor: '#f0f0f0',
         borderRadius: 6,
         alignItems: 'center',
     },
 
     secondaryText: {
-        color: '#333',
         fontWeight: '500',
     },
 

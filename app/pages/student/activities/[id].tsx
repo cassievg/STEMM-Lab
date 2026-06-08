@@ -250,7 +250,7 @@ export default function Activity1() {
             >
                 <View style={modalStyles.overlay}>
                     <View style={modalStyles.container}>
-                        <Text style={modalStyles.title}>
+                        <Text style={[globalThemed.text, modalStyles.title]}>
                             {team?.name ?? 'No Team'} {team ? `#${team.discriminator}` : ''}
                         </Text>
 
@@ -259,17 +259,17 @@ export default function Activity1() {
                         ) : (
                             teamMembers.map((member, i) => (
                                 <View key={i} style={modalStyles.memberRow}>
-                                    <Text style={modalStyles.memberIcon}>👤</Text>
-                                    <Text style={modalStyles.memberName}>{member}</Text>
+                                    <Text style={[globalThemed.text, modalStyles.memberIcon]}>👤</Text>
+                                    <Text style={[globalThemed.text, modalStyles.memberName]}>{member}</Text>
                                 </View>
                             ))
                         )}
 
                         <Pressable
-                            style={modalStyles.closeButton}
+                            style={[themed.button, modalStyles.closeButton]}
                             onPress={() => setTeamModalVisible(false)}
                         >
-                            <Text style={modalStyles.closeText}>Close</Text>
+                            <Text style={[globalThemed.text, modalStyles.closeText]}>Close</Text>
                         </Pressable>
                     </View>
                 </View>
@@ -283,11 +283,11 @@ export default function Activity1() {
             >
                 <View style={modalStyles.overlay}>
                     <View style={modalStyles.container}>
-                        <Text style={modalStyles.title}>Join a Room</Text>
+                        <Text style={[globalThemed.text, modalStyles.title]}>Join a Room</Text>
 
-                        <Text style={modalStyles.label}>Enter Room Code</Text>
+                        <Text style={[globalThemed.text, modalStyles.label]}>Enter Room Code</Text>
                         <TextInput
-                            style={modalStyles.input}
+                            style={[themed.modal_input, modalStyles.input]}
                             value={roomCode}
                             onChangeText={(text) => setRoomCode(text.toUpperCase())}
                             placeholder="e.g. AB12"
@@ -296,30 +296,30 @@ export default function Activity1() {
                             autoCapitalize="characters"
                         />
                         <Pressable
-                            style={modalStyles.primaryButton}
+                            style={[themed.button, modalStyles.primaryButton]}
                             onPress={handleJoinRoom}
                         >
-                            <Text style={modalStyles.primaryText}>Join Room</Text>
+                            <Text style={[globalThemed.text, modalStyles.primaryText]}>Join Room</Text>
                         </Pressable>
 
                         <View style={modalStyles.divider}>
-                            <View style={modalStyles.dividerLine}/>
-                            <Text style={modalStyles.dividerText}>or</Text>
-                            <View style={modalStyles.dividerLine}/>
+                            <View style={[globalThemed.separator, modalStyles.dividerLine]}/>
+                            <Text style={[globalThemed.separator, modalStyles.dividerText]}>or</Text>
+                            <View style={[globalThemed.separator, modalStyles.dividerLine]}/>
                         </View>
 
                         <Pressable
-                            style={modalStyles.secondaryButton}
+                            style={[themed.button, modalStyles.secondaryButton]}
                             onPress={handleCreateRoom}
                         >
-                            <Text style={modalStyles.secondaryText}>Create Room</Text>
+                            <Text style={[globalThemed.text, modalStyles.secondaryText]}>Create Room</Text>
                         </Pressable>
 
                         <Pressable
-                            style={modalStyles.cancelButton}
+                            style={[themed.button, modalStyles.closeButton]}
                             onPress={() => setEnterRoomModalVisible(false)}
                         >
-                            <Text style={modalStyles.cancelText}>Solo (No Room)</Text>
+                            <Text style={[globalThemed.text, modalStyles.cancelText]}>Solo (No Room)</Text>
                         </Pressable>
                     </View>
                 </View>
@@ -333,38 +333,38 @@ export default function Activity1() {
             >
                 <View style={modalStyles.overlay}>
                     <View style={modalStyles.container}>
-                        <Text style={modalStyles.title}>Room Details</Text>
+                        <Text style={[globalThemed.text, modalStyles.title]}>Room Details</Text>
 
-                        <View style={modalStyles.codeBox}>
-                            <Text style={modalStyles.codeLabel}>Room Code</Text>
-                            <Text style={modalStyles.code}>{room?.code ?? '-'}</Text>
+                        <View style={[themed.modal_code_box, modalStyles.codeBox]}>
+                            <Text style={[globalThemed.text, modalStyles.codeLabel]}>Room Code</Text>
+                            <Text style={[globalThemed.text, modalStyles.code]}>{room?.code ?? '-'}</Text>
                         </View>
 
-                        <Text style={modalStyles.label}>Teams in Room</Text>
+                        <Text style={[globalThemed.text, modalStyles.label]}>Teams in Room</Text>
                         {roomTeamNames.length === 0 ? (
                             <Text style={modalStyles.empty}>No teams yet</Text>
                         ) : (
                             roomTeamNames.map((name, i) => (
                                 <View key={i} style={modalStyles.teamRow}>
-                                    <Text style={modalStyles.teamIcon}>🏷️</Text>
-                                    <Text style={modalStyles.teamName}>{name}</Text>
+                                    <Text style={[globalThemed.text, modalStyles.teamIcon]}>🏷️</Text>
+                                    <Text style={[globalThemed.text, modalStyles.teamName]}>{name}</Text>
                                 </View>
                             ))
                         )}
 
                         <View style={modalStyles.buttonRow}>
                             <Pressable
-                                style={modalStyles.leaveButton}
+                                style={[themed.button, modalStyles.leaveButton]}
                                 onPress={handleLeaveRoom}
                             >
-                                <Text style={modalStyles.leaveText}>Leave Room</Text>
+                                <Text style={[globalThemed.text, modalStyles.leaveText]}>Leave Room</Text>
                             </Pressable>
 
                             <Pressable
-                                style={modalStyles.closeButton}
+                                style={[themed.button, modalStyles.closeButton]}
                                 onPress={() => setRoomDetailsModalVisible(false)}
                             >
-                                <Text style={modalStyles.closeText}>Close</Text>
+                                <Text style={[globalThemed.text, modalStyles.closeText]}>Close</Text>
                             </Pressable>
                         </View>
                     </View>
