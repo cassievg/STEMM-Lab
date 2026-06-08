@@ -3,14 +3,10 @@ import { ThemeKey } from '@/src/context/ThemeContext.d';
 import { Picker } from '@react-native-picker/picker';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { FlatList, Modal, Pressable, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Modal, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { globalColors, globalStyles } from '../../../styles';
 
 export default function Settings() {
-    const [sound, setSound] = useState(true);
-    const [animations, setAnimations] = useState(true);
-    const [colourblindMode, setColourblindMode] = useState(true);
-
     const languages = ['English', 'Bahasa Indonesia'];
     const [language, setLanguage] = useState('English');
     const [picker, setPicker] = useState<'theme' | 'language' | null>(null);
@@ -35,46 +31,13 @@ export default function Settings() {
             <View style={[themed.container, localStyles.container]}>
                 <View style={localStyles.settings}>
                     <Text style={[themed.text, localStyles.setting_text]}>
-                        Sound
-                    </Text>
-                    <Switch
-                        style={globalStyles.switch}
-                        value={sound}
-                        onValueChange={(value) => setSound(value)}
-                    />
-                </View>
-
-                <View style={localStyles.settings}>
-                    <Text style={[themed.text, localStyles.setting_text]}>
-                        Animation
-                    </Text>
-                    <Switch
-                        style={globalStyles.switch}
-                        value={animations}
-                        onValueChange={(value) => setAnimations(value)}
-                    />
-                </View>
-
-                <View style={localStyles.settings}>
-                    <Text style={[themed.text, localStyles.setting_text]}>
-                        Colourblind mode
-                    </Text>
-                    <Switch
-                        style={globalStyles.switch}
-                        value={colourblindMode}
-                        onValueChange={(value) => setColourblindMode(value)}
-                    />
-                </View>
-
-                <View style={localStyles.settings}>
-                    <Text style={[themed.text, localStyles.setting_text]}>
                         Theme
                     </Text>
                     <View style={globalStyles.picker_container}>
                         <Picker
                             selectedValue={theme}
                             onValueChange={(value) => changeTheme(value)}
-                            style={[themed.picker, globalStyles.picker]}
+                            style={[themed.picker, {color: '#000000'}, globalStyles.picker]}
                         >
                             {themeList.map((t: any) => (
                                 <Picker.Item
@@ -155,9 +118,11 @@ export default function Settings() {
 const localStyles = StyleSheet.create({
     container: {
         width: '90%',
-        height: '37%',
-        borderRadius: 8,
-        borderWidth: 1,
+        flexGrow: 0,
+        flexShrink: 1,
+        maxHeight: '75%',
+        paddingHorizontal: '5%',
+        paddingBottom: '7%'
     },
 
     settings: {

@@ -130,7 +130,7 @@ export default function Register() {
                         </View>
 
                         <TextInput 
-                        style={[themed.text_input, localStyles.text_input]}
+                        style={[themed.text_input, localStyles.text_input, {color: '#000000'}]}
                         placeholder='Username'
                         placeholderTextColor='#808080'
                         onChangeText={userInput => setUsername(userInput)}
@@ -144,7 +144,7 @@ export default function Register() {
                         </View>
 
                         <TextInput 
-                        style={[themed.text_input, localStyles.text_input]}
+                        style={[themed.text_input, localStyles.text_input, {color: '#000000'}]}
                         placeholder='Email'
                         placeholderTextColor='#808080'
                         onChangeText={emailInput => setEmail(emailInput)}
@@ -158,7 +158,7 @@ export default function Register() {
                         </View>
                         
                         <TextInput 
-                        style={[themed.text_input, localStyles.text_input]}
+                        style={[themed.text_input, localStyles.text_input, {color: '#000000'}]}
                         placeholder='Password'
                         placeholderTextColor='#808080'
                         onChangeText={passInput => setPassword(passInput)}
@@ -173,7 +173,7 @@ export default function Register() {
                         </View>
                         
                         <TextInput 
-                        style={[themed.text_input, localStyles.text_input]}
+                        style={[themed.text_input, localStyles.text_input, {color: '#000000'}]}
                         placeholder='Confirm Password'
                         placeholderTextColor='#808080'
                         onChangeText={confirmInput => setConfirmPass(confirmInput)}
@@ -190,11 +190,11 @@ export default function Register() {
                             <Picker
                             selectedValue={role}
                             onValueChange={(value) => setRole(value)}
-                            style={[themed.picker, globalStyles.picker]}
+                            style={[themed.picker, {color: '#000000'}, globalStyles.picker]}
                             >
-                                <Picker.Item label="Select a role" value="" style={[globalStyles.picker_text]}/>
-                                <Picker.Item label="Teacher" value="teacher" style={globalStyles.picker_text}/>
-                                <Picker.Item label="Student" value="student" style={globalStyles.picker_text}/>
+                                <Picker.Item label="Select a role" value="" style={[{color: '#000000'}, globalStyles.picker_text]}/>
+                                <Picker.Item label="Teacher" value="teacher" style={[{color: '#000000'}, globalStyles.picker_text]}/>
+                                <Picker.Item label="Student" value="student" style={[{color: '#000000'}, globalStyles.picker_text]}/>
                             </Picker>
                         </View>
                     </View>
@@ -206,7 +206,7 @@ export default function Register() {
                             </View>
 
                             <TextInput 
-                            style={[themed.text_input, localStyles.text_input]}
+                            style={[themed.text_input, localStyles.text_input, {color: '#000000'}]}
                             placeholder='Grade'
                             placeholderTextColor='#808080'
                             onChangeText={userInput => setGrade(userInput)}
@@ -222,7 +222,7 @@ export default function Register() {
                             </View>
 
                             <TextInput 
-                            style={[themed.text_input, localStyles.text_input]}
+                            style={[themed.text_input, localStyles.text_input, {color: '#000000'}]}
                             placeholder='Team Name'
                             placeholderTextColor='#808080'
                             onChangeText={userInput => setTeamName(userInput)}
@@ -238,7 +238,7 @@ export default function Register() {
                                 key={index}
                                 style={localStyles.member_container}>
                                     <View style={localStyles.label_container}>
-                                        <Text style={[themed.text, localStyles.input_label]}>
+                                        <Text style={[{color: '#000000'}, localStyles.input_label]}>
                                             Member {index + 1}
                                         </Text>
                                     </View>
@@ -246,7 +246,7 @@ export default function Register() {
                                     <View
                                     style={localStyles.member_row}>
                                         <TextInput
-                                        style={localStyles.member_input}
+                                        style={[themed.text_input, {color: '#000000'}, localStyles.text_input]}
                                         placeholder="First Name"
                                         placeholderTextColor='#808080'
                                         value={member}
@@ -256,8 +256,8 @@ export default function Register() {
 
                                         <Pressable
                                         onPress={() => removeMember(index)}
-                                        style={localStyles.remove_button}>
-                                            <Text style={globalStyles.button_normal_text}>-</Text>
+                                        style={[themed.simple_button, localStyles.remove_button]}>
+                                            <Text style={[themed.text, globalStyles.button_normal_text]}>-</Text>
                                         </Pressable>
                                     </View>
                                 </View>

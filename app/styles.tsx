@@ -42,6 +42,10 @@ export const globalColors = {
             borderColor: '#6798c3'
         },
 
+        simple_text: {
+            color: '#000000'
+        },
+
         pressable_onPress: {
             backgroundColor: '#97b9d6',
         },
@@ -52,6 +56,10 @@ export const globalColors = {
 
         error_text: {
             color: 'red'
+        },
+
+        simple_button: {
+            backgroundColor: '#ffffff'
         },
 
         button_extra_light: {
@@ -96,6 +104,10 @@ export const globalColors = {
             backgroundColor: '#323232'
         },
 
+        simple_text: {
+            color: '#ffffff'
+        },
+
         text: {
             color: '#d8d8d8'
         },
@@ -123,6 +135,10 @@ export const globalColors = {
 
         scroll_container: {
             backgroundColor: '#474747',
+        },
+
+        simple_button: {
+            backgroundColor: '#474747'
         },
         
         text_input: {
@@ -318,7 +334,7 @@ export const globalStyles = StyleSheet.create({
     picker: {
         flex: 1,
         marginVertical: 1,
-        width: 120,
+        width: 140,
         marginLeft: 'auto'
     },
 

@@ -45,7 +45,7 @@ export default function Login() {
                     </View>
 
                     <TextInput 
-                    style={[themed.picker, localStyles.text_input]}
+                    style={[themed.picker, localStyles.text_input, {color: '#000000'}]}
                     placeholder='Email'
                     placeholderTextColor='#808080'
                     onChangeText={userInput => setEmail(userInput)}
@@ -59,7 +59,7 @@ export default function Login() {
                     </View>
                     
                     <TextInput 
-                    style={[themed.picker, localStyles.text_input]}
+                    style={[themed.picker, localStyles.text_input, {color: '#000000'}]}
                     placeholder='Password'
                     placeholderTextColor='#808080'
                     onChangeText={passInput => setPassword(passInput)}
@@ -76,7 +76,7 @@ export default function Login() {
                     <Pressable 
                     onPress={handleLogin}
                     style={({ pressed }) => [
-                        pressed ? [themed.pressable_onPress, localStyles.pressable_onPress] : [themed.pressable_default,localStyles.pressable_default]
+                        pressed ? [themed.button_extra_light, localStyles.pressable_onPress] : [themed.button_light,localStyles.pressable_default]
                     ]}>
                         <Text style={[themed.text, globalStyles.button_normal_text]}>Submit</Text>
                     </Pressable>
@@ -111,7 +111,6 @@ const localStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: '5%',
-        borderWidth: 2,
         height: '30%',
         width: '90%',
     },
@@ -128,8 +127,6 @@ const localStyles = StyleSheet.create({
         width: '65%',
         height: '20%',
         display: 'flex',
-        marginTop: '8%',
-        marginBottom: '5%',
     },
 
     pressable_default: {

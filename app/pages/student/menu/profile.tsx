@@ -5,7 +5,7 @@ import { ThemeKey } from '@/src/context/ThemeContext.d';
 import { getTeamDetails } from '@/src/services/firebaseServices';
 import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { globalColors, globalStyles } from '../../../styles';
 
@@ -121,106 +121,110 @@ export default function Profile() {
                 </Text>
             </View>
 
-            <View style={[themed.container, localStyles.container]}>
-                <View style={localStyles.field_container}>
-                    <View style={localStyles.row}>
-                        <Text style={[themed.text, localStyles.label]}>
-                            Username
-                        </Text>
-                        <TextInput
-                            style={[themed.text_input, localStyles.input]}
-                            value={usernameEdit}
-                            onChangeText={(text) => {
-                                setUsernameEdit(text);
-                                setError('');
-                            }}
-                        />
-                    </View>
+            <ScrollView
+                        style={[themed.scroll_container, localStyles.container]}
+                        contentContainerStyle={localStyles.form_content}
+                        showsVerticalScrollIndicator={false}>
+                <View style={[themed.container, localStyles.container]}>
+                    <View style={localStyles.field_container}>
+                        <View style={localStyles.row}>
+                            <Text style={[themed.text, localStyles.label]}>
+                                Username
+                            </Text>
+                            <TextInput
+                                style={[themed.text_input, localStyles.input]}
+                                value={usernameEdit}
+                                onChangeText={(text) => {
+                                    setUsernameEdit(text);
+                                    setError('');
+                                }}
+                            />
+                        </View>
 
-                    <View style={localStyles.row}>
-                        <Text style={[themed.text, localStyles.label]}>
-                            Email
-                        </Text>
-                        <Text style={[themed.text_input, localStyles.input]}>
-                            {userDoc?.email}
-                        </Text>
-                    </View>
+                        <View style={localStyles.row}>
+                            <Text style={[themed.text, localStyles.label]}>
+                                Email
+                            </Text>
+                            <Text style={[themed.text_input, localStyles.input]}>
+                                {userDoc?.email}
+                            </Text>
+                        </View>
 
-                    {userDoc?.role === 'student' && team && (
-                        <>
-                            <View style={localStyles.row}>
-                                <Text style={[themed.text, localStyles.label]}>Team Name</Text>
-                                <TextInput
-                                    style={[themed.text_input, localStyles.input]}
-                                    value={teamnameEdit}
-                                    onChangeText={(text) => {
-                                        setTeamnameEdit(text);
-                                        setError('');
-                                    }}
-                                />
-                            </View>
-
-                            <Text style={[[themed.text, localStyles.label], { marginBottom: -8 }]}>Members</Text>
-
-                            {(teammembersEdit ?? []).map((member, index) => (
-                                <View key={index} style={localStyles.row}>
-                                    <Text style={[themed.text, localStyles.label]}>Member {index + 1}</Text>
-                                    <View style={{ flex: 1, flexDirection: 'row', gap: 6 }}>
-                                        <TextInput
-                                            style={[[themed.text_input, localStyles.input], { flex: 1 }]}
-                                            value={member}
-                                            placeholder="First Name"
-                                            placeholderTextColor='#808080'
-                                            onChangeText={(text) => updateMember(text, index)}
-                                        />
-                                        <Pressable
-                                            onPress={() => removeMember(index)}
-                                            style={localStyles.remove_button}>
-                                            <Text>-</Text>
-                                        </Pressable>
-                                    </View>
+                        {userDoc?.role === 'student' && team && (
+                            <>
+                                <View style={localStyles.row}>
+                                    <Text style={[themed.text, localStyles.label]}>Team Name</Text>
+                                    <TextInput
+                                        style={[themed.text_input, localStyles.input]}
+                                        value={teamnameEdit}
+                                        onChangeText={(text) => {
+                                            setTeamnameEdit(text);
+                                            setError('');
+                                        }}
+                                    />
                                 </View>
-                            ))}
 
-                            <Pressable style={[themed.button_light, localStyles.add_button]} onPress={addMember}>
-                                <Text style={[themed.text, localStyles.button_text]}>+ Add Member</Text>
-                            </Pressable>
-                        </>
-                    )}
+                                <Text style={[[themed.text, localStyles.label], { marginBottom: -8 }]}>Members</Text>
 
-                    <View style={localStyles.button_container}>
-                        <TouchableOpacity
-                            style={[themed.button_light, localStyles.button]}
-                            onPress={handleProfileUpdate}>
-                                <Text style={[themed.text, localStyles.button_text]}>
-                                    Save
-                                </Text>
-                            </TouchableOpacity>
-                        <TouchableOpacity
-                            style={[themed.button_light, localStyles.button]}
-                            onPress={logout}>
-                                <Text style={[themed.text, localStyles.button_text]}>
-                                    Logout
-                                </Text>
-                            </TouchableOpacity>
-                    </View>
+                                {(teammembersEdit ?? []).map((member, index) => (
+                                    <View key={index} style={localStyles.row}>
+                                        <Text style={[themed.text, localStyles.label]}>Member {index + 1}</Text>
+                                        <View style={{ flex: 1, flexDirection: 'row', gap: 6 }}>
+                                            <TextInput
+                                                style={[[themed.text_input, localStyles.input], { flex: 1 }]}
+                                                value={member}
+                                                placeholder="First Name"
+                                                placeholderTextColor='#808080'
+                                                onChangeText={(text) => updateMember(text, index)}
+                                            />
+                                            <Pressable
+                                                onPress={() => removeMember(index)}
+                                                style={[themed.simple_button, localStyles.remove_button]}>
+                                                <Text>-</Text>
+                                            </Pressable>
+                                        </View>
+                                    </View>
+                                ))}
 
-                    <View style={localStyles.error_container}>
-                        <Text style={[themed.error_text, localStyles.error_text]}>{error}</Text>
+                                <Pressable style={[themed.button_light, localStyles.add_button]} onPress={addMember}>
+                                    <Text style={[themed.text, localStyles.button_text]}>+ Add Member</Text>
+                                </Pressable>
+                            </>
+                        )}
+
+                        <View style={localStyles.button_container}>
+                            <TouchableOpacity
+                                style={[themed.button_light, localStyles.button]}
+                                onPress={handleProfileUpdate}>
+                                    <Text style={[themed.text, localStyles.button_text]}>
+                                        Save
+                                    </Text>
+                                </TouchableOpacity>
+                            <TouchableOpacity
+                                style={[themed.button_light, localStyles.button]}
+                                onPress={logout}>
+                                    <Text style={[themed.text, localStyles.button_text]}>
+                                        Logout
+                                    </Text>
+                                </TouchableOpacity>
+                        </View>
+
+                        <View style={localStyles.error_container}>
+                            <Text style={[themed.error_text, localStyles.error_text]}>{error}</Text>
+                        </View>
                     </View>
                 </View>
-            </View>
+            </ScrollView>
         </SafeAreaView>
     );    
 }
 
 const localStyles = StyleSheet.create({
-    container:{ 
+    container: {
         width: '90%',
-        alignSelf: 'center',
-        borderRadius: 8,
-        paddingBottom: '5%',
-        borderWidth: 1,
+        flexGrow: 0,
+        flexShrink: 1,
+        maxHeight: '75%'
     },
 
     avatar_container: {
@@ -318,5 +322,18 @@ const localStyles = StyleSheet.create({
         marginLeft: 3,
         padding: 5,
         borderRadius: 10,
+    },
+    
+    form_container: {
+        padding: '5%',
+        width: '100%',
+        flexGrow: 0,
+        flexShrink: 1,
+        maxHeight: '75%'
+    },
+
+    form_content: {
+        padding: '5%',
+        alignItems: 'center',  
     },
 });
