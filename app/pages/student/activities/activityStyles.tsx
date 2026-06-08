@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 export const activityColors = {
     light : StyleSheet.create({
@@ -212,6 +212,9 @@ export const activityColors = {
         }
     })
 }
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT =Dimensions.get('window').height;
 
 export const activityStyles = StyleSheet.create({
     page: {

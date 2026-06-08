@@ -2,7 +2,7 @@ import React from "react"
 import { StyleSheet, Text, View } from "react-native"
 
 
-export default function TimerScreen() {
+export default function Timer() {
     return (
         <View style={localStyles.container}>
             <Text>
