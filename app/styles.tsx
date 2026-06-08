@@ -11,8 +11,8 @@ export const globalColors = {
         },
 
         container: {
-            color: '#afdaff',
-            borderColor: '#6798c3'
+            backgroundColor: '#afdaff',
+            borderColor: '#6798c3',
         },
 
         back: {
@@ -24,8 +24,38 @@ export const globalColors = {
             backgroundColor: '#afdaff',
         },
 
+        picker: {
+            backgroundColor: '#ffffff',
+            borderColor: '#97b9d6',
+        },
+        
+        empty: {
+            color: 'gray',
+        },
+
+        scroll_container: {
+            backgroundColor: '#afdaff',
+        },
+
+        button_light: {
+            backgroundColor: '#d6ecff',
+            borderColor: '#6798c3'
+        },
+
         pressable_onPress: {
             backgroundColor: '#97b9d6',
+        },
+
+        switch: {
+            backgroundColor: '#97b9d6'
+        },
+
+        error_text: {
+            color: 'red'
+        },
+
+        button_extra_light: {
+            backgroundColor: '#c1e2ff',
         },
 
         tab_bar: {
@@ -53,6 +83,11 @@ export const globalColors = {
 
         separator: {
             backgroundColor: '#97b9d6'
+        },
+        
+        text_input: {
+            backgroundColor: '#ffffff',
+            borderColor: '#97b9d6'
         }
     }),
     
@@ -64,10 +99,35 @@ export const globalColors = {
         text: {
             color: '#d8d8d8'
         },
+        
+        empty: {
+            color: '#656565',
+        },
+
+        button_light: {
+            backgroundColor: '#656565',
+        },
+
+        button_extra_light: {
+            backgroundColor: '#bbbbbb',
+        },
+
+        error_text: {
+            color: '#ffffff'
+        },
 
         container: {
             backgroundColor: '#2b2b2b',
             borderColor: '#656565'
+        },
+
+        scroll_container: {
+            backgroundColor: '#474747',
+        },
+        
+        text_input: {
+            backgroundColor: '#d8d8d8',
+            borderColor: '#2b2b2b'
         },
 
         back: {
@@ -77,6 +137,10 @@ export const globalColors = {
 
         pressable_default: {
             backgroundColor: '#474747',
+        },
+
+        picker: {
+            backgroundColor: '#d8d8d8'
         },
 
         pressable_onPress: {
@@ -142,6 +206,7 @@ export const globalStyles = StyleSheet.create({
         textAlign: 'center',
         justifyContent: 'center',
         alignItems: 'center',
+        marginBottom: 10
     },
 
     page_title: {
@@ -226,5 +291,39 @@ export const globalStyles = StyleSheet.create({
 
     tab_label_active: {
         fontWeight: '800',
+    },
+
+    empty: {
+        textAlign: 'center',
+        marginTop: 40,
+    },
+
+    separator: {
+        height: 1
+    },
+
+    switch: {
+        marginLeft: 'auto'
+    },
+
+    picker_container: {
+        flex: 1,
+        zIndex: 999,
+        elevation: 999,
+        height: 60,
+        justifyContent: 'center',
+        marginVertical: 2,
+    },
+
+    picker: {
+        flex: 1,
+        marginVertical: 1,
+        width: 120,
+        marginLeft: 'auto'
+    },
+
+    picker_text: {
+        fontSize: 14,
+        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
     },
 });

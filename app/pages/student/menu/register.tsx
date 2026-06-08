@@ -1,23 +1,20 @@
 import { Picker } from "@react-native-picker/picker";
 import { router } from 'expo-router';
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import { signOut, signUp } from '../../../../backend/firebase/auth.js';
 import { firestore } from '../../../../backend/firebase/config.js';
 
-import { createTeam } from "@/src/services/firebaseServices";
-import { globalStyles } from "../../../styles";
-
+import { ThemeKey } from "@/src/context/ThemeContext.d.js";
 import { useTheme } from "@/src/context/ThemeContext.js";
+import { createTeam } from "@/src/services/firebaseServices";
+import { globalColors, globalStyles } from "../../../styles";
 
 export default function Register() {
-    const { getThemedStyle } = useTheme();
+    const { theme, changeTheme } = useTheme();
 
-    const globalThemedStyles = useMemo(() => {
-        return getThemedStyle(globalStyles);
-    }, [getThemedStyle]);
-
+    const themed = globalColors[theme as ThemeKey];
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -110,32 +107,32 @@ export default function Register() {
     }
 
     return (
-        <View style={globalThemedStyles.page}>
-            <View style={globalThemedStyles.header}>
+        <View style={[themed.page, globalStyles.page]}>
+            <View style={globalStyles.header}>
                 <TouchableOpacity 
-                style={globalThemedStyles.back_button}
+                style={[themed.back, globalStyles.back_button]}
                 onPress={() => router.push('..')}>
-                    <Text style={globalThemedStyles.text}>{'<'}</Text>
+                    <Text style={[themed.text, globalStyles.text]}>{'<'}</Text>
                 </TouchableOpacity>
-                <Text style={globalThemedStyles.page_title}>
+                <Text style={[themed.text, globalStyles.page_title]}>
                     Register
                 </Text>       
             </View>
 
             <ScrollView
-            style={localStyles.form_container}
+            style={[themed.scroll_container, localStyles.form_container]}
             contentContainerStyle={localStyles.form_content}
             showsVerticalScrollIndicator={false}>
-                <View style={localStyles.form_container}>
+                <View style={[themed.scroll_container, localStyles.form_container]}>
                     <View style={localStyles.input_container}>
                         <View style={localStyles.label_container}>
-                            <Text style={localStyles.input_label}>Username</Text>
+                            <Text style={[themed.text, localStyles.input_label]}>Username</Text>
                         </View>
 
                         <TextInput 
-                        style={localStyles.text_input}
+                        style={[themed.text_input, localStyles.text_input]}
                         placeholder='Username'
-                        placeholderTextColor='#969696'
+                        placeholderTextColor='#808080'
                         onChangeText={userInput => setUsername(userInput)}
                         defaultValue=''
                         />
@@ -143,13 +140,13 @@ export default function Register() {
 
                     <View style={localStyles.input_container}>
                         <View style={localStyles.label_container}>
-                            <Text style={localStyles.input_label}>Email</Text>
+                            <Text style={[themed.text, localStyles.input_label]}>Email</Text>
                         </View>
 
                         <TextInput 
-                        style={localStyles.text_input}
+                        style={[themed.text_input, localStyles.text_input]}
                         placeholder='Email'
-                        placeholderTextColor='#969696'
+                        placeholderTextColor='#808080'
                         onChangeText={emailInput => setEmail(emailInput)}
                         defaultValue=''
                         />
@@ -157,13 +154,13 @@ export default function Register() {
 
                     <View style={localStyles.input_container}>
                         <View style={localStyles.label_container}>
-                            <Text style={localStyles.input_label}>Password</Text>
+                            <Text style={[themed.text, localStyles.input_label]}>Password</Text>
                         </View>
                         
                         <TextInput 
-                        style={localStyles.text_input}
+                        style={[themed.text_input, localStyles.text_input]}
                         placeholder='Password'
-                        placeholderTextColor='#969696'
+                        placeholderTextColor='#808080'
                         onChangeText={passInput => setPassword(passInput)}
                         defaultValue=''
                         secureTextEntry
@@ -172,13 +169,13 @@ export default function Register() {
 
                     <View style={localStyles.input_container}>
                         <View style={localStyles.label_container}>
-                            <Text style={localStyles.input_label}>Confirm Password</Text>
+                            <Text style={[themed.text, localStyles.input_label]}>Confirm Password</Text>
                         </View>
                         
                         <TextInput 
-                        style={localStyles.text_input}
+                        style={[themed.text_input, localStyles.text_input]}
                         placeholder='Confirm Password'
-                        placeholderTextColor='#969696'
+                        placeholderTextColor='#808080'
                         onChangeText={confirmInput => setConfirmPass(confirmInput)}
                         defaultValue=''
                         secureTextEntry
@@ -187,17 +184,17 @@ export default function Register() {
 
                     <View style={localStyles.role_container}>
                         <View style={localStyles.label_container}>
-                            <Text style={localStyles.input_label}>Role</Text>
+                            <Text style={[themed.text, localStyles.input_label]}>Role</Text>
                         </View>
-                        <View style={localStyles.picker_container}>
+                        <View style={globalStyles.picker_container}>
                             <Picker
                             selectedValue={role}
                             onValueChange={(value) => setRole(value)}
-                            style={localStyles.picker}
+                            style={[themed.picker, globalStyles.picker]}
                             >
-                                <Picker.Item label="Select a role" value="" style={localStyles.picker_text}/>
-                                <Picker.Item label="Teacher" value="teacher" style={localStyles.picker_text}/>
-                                <Picker.Item label="Student" value="student" style={localStyles.picker_text}/>
+                                <Picker.Item label="Select a role" value="" style={[globalStyles.picker_text]}/>
+                                <Picker.Item label="Teacher" value="teacher" style={globalStyles.picker_text}/>
+                                <Picker.Item label="Student" value="student" style={globalStyles.picker_text}/>
                             </Picker>
                         </View>
                     </View>
@@ -205,13 +202,13 @@ export default function Register() {
                     {role === 'student' && (
                         <View style={localStyles.input_container}>
                             <View style={localStyles.label_container}>
-                                <Text style={localStyles.input_label}>Grade</Text>
+                                <Text style={[themed.text, localStyles.input_label]}>Grade</Text>
                             </View>
 
                             <TextInput 
-                            style={localStyles.text_input}
+                            style={[themed.text_input, localStyles.text_input]}
                             placeholder='Grade'
-                            placeholderTextColor='#969696'
+                            placeholderTextColor='#808080'
                             onChangeText={userInput => setGrade(userInput)}
                             defaultValue=''
                             />
@@ -221,13 +218,13 @@ export default function Register() {
                     {role === 'student' && (
                         <View style={localStyles.input_container}>
                             <View style={localStyles.label_container}>
-                                <Text style={localStyles.input_label}>Team Name</Text>
+                                <Text style={[themed.text, localStyles.input_label]}>Team Name</Text>
                             </View>
 
                             <TextInput 
-                            style={localStyles.text_input}
+                            style={[themed.text_input, localStyles.text_input]}
                             placeholder='Team Name'
-                            placeholderTextColor='#969696'
+                            placeholderTextColor='#808080'
                             onChangeText={userInput => setTeamName(userInput)}
                             defaultValue=''
                             />
@@ -241,7 +238,7 @@ export default function Register() {
                                 key={index}
                                 style={localStyles.member_container}>
                                     <View style={localStyles.label_container}>
-                                        <Text style={localStyles.input_label}>
+                                        <Text style={[themed.text, localStyles.input_label]}>
                                             Member {index + 1}
                                         </Text>
                                     </View>
@@ -251,7 +248,7 @@ export default function Register() {
                                         <TextInput
                                         style={localStyles.member_input}
                                         placeholder="First Name"
-                                        placeholderTextColor='#969696'
+                                        placeholderTextColor='#808080'
                                         value={member}
                                         onChangeText={(text:string) => {
                                             updateMembers(text, index);
@@ -260,7 +257,7 @@ export default function Register() {
                                         <Pressable
                                         onPress={() => removeMember(index)}
                                         style={localStyles.remove_button}>
-                                            <Text style={globalThemedStyles.button_normal_text}>-</Text>
+                                            <Text style={globalStyles.button_normal_text}>-</Text>
                                         </Pressable>
                                     </View>
                                 </View>
@@ -271,8 +268,8 @@ export default function Register() {
                     {role === 'student' && (
                         <Pressable
                         onPress={addMember}
-                        style={localStyles.add_button}>
-                            <Text style={globalThemedStyles.button_normal_text}>+</Text>
+                        style={[themed.pressable_onPress, localStyles.add_button]}>
+                            <Text style={[themed.text, globalStyles.button_big_text]}>+</Text>
                         </Pressable>
                     )}
 
@@ -280,16 +277,16 @@ export default function Register() {
                         <Pressable 
                         onPress={handleSingup}
                         style={({ pressed }) => [
-                            pressed ? localStyles.pressable_onPress : localStyles.pressable_default
+                            pressed ? [themed.button_extra_light, localStyles.pressable_onPress] : [themed.button_light, localStyles.pressable_default]
                         ]}>
-                            <Text style={globalThemedStyles.button_normal_text}>Submit</Text>
+                            <Text style={[themed.text, globalStyles.button_normal_text]}>Submit</Text>
                         </Pressable>
                     </View>
                 </View>
             </ScrollView>
 
             <View style={localStyles.error_container}>
-                <Text style={localStyles.error_text}>{error}</Text>
+                <Text style={[themed.error_text, localStyles.error_text]}>{error}</Text>
             </View>
         </View>
     );    
@@ -341,7 +338,6 @@ const localStyles = StyleSheet.create({
 
     picker: {
         flex: 1,
-        backgroundColor: '#ffffff',
         marginVertical: 1,
     },
 
@@ -351,10 +347,7 @@ const localStyles = StyleSheet.create({
     },
 
     form_container: {
-        backgroundColor: '#afdaff',
         padding: '5%',
-        borderColor: '#afdaff',
-        borderWidth: 2,
         width: '100%',
         flexGrow: 0,
         flexShrink: 1,
@@ -367,7 +360,6 @@ const localStyles = StyleSheet.create({
     },
 
     text_input: {
-        backgroundColor: '#ffffff',
         fontFamily: 'Trebuchet MS, Roboto, sans-serif',
         flex: 1,
         height: 36,
@@ -375,7 +367,6 @@ const localStyles = StyleSheet.create({
     },
 
     member_input: {
-        backgroundColor: '#ffffff',
         fontFamily: 'Trebuchet MS, Roboto, sans-serif',
         flex: 1,
         height: 36,
@@ -403,6 +394,7 @@ const localStyles = StyleSheet.create({
         height: 44,
         marginTop: 16,
         marginBottom: 12,
+        marginHorizontal: 'auto',
     },
 
     pressable_default: {
@@ -410,7 +402,6 @@ const localStyles = StyleSheet.create({
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#ffffff',
         borderRadius: 10,
     },
 
@@ -419,21 +410,18 @@ const localStyles = StyleSheet.create({
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#d4d4d4',
         borderRadius: 10,
     },
 
     add_button: {
         marginTop: 20,
         padding: 5,
-        backgroundColor: '#ffffff',
         width: '100%'
     },
 
     remove_button: {
         marginLeft: 3,
         padding: 5,
-        backgroundColor: '#ffffff',
         borderRadius: 10,
     },
 
@@ -445,6 +433,5 @@ const localStyles = StyleSheet.create({
 
     error_text: {
         textAlign: 'center',
-        color: 'red',
     },
 });

@@ -249,7 +249,7 @@ export default function Activity1() {
                 onRequestClose={() => setTeamModalVisible(false)}
             >
                 <View style={modalStyles.overlay}>
-                    <View style={modalStyles.container}>
+                    <View style={[themed.modal, modalStyles.container]}>
                         <Text style={[globalThemed.text, modalStyles.title]}>
                             {team?.name ?? 'No Team'} {team ? `#${team.discriminator}` : ''}
                         </Text>
@@ -266,7 +266,7 @@ export default function Activity1() {
                         )}
 
                         <Pressable
-                            style={[themed.button, modalStyles.closeButton]}
+                            style={[themed.modal_button, modalStyles.closeButton]}
                             onPress={() => setTeamModalVisible(false)}
                         >
                             <Text style={[globalThemed.text, modalStyles.closeText]}>Close</Text>
@@ -282,7 +282,7 @@ export default function Activity1() {
                 onRequestClose={() => setEnterRoomModalVisible(false)}
             >
                 <View style={modalStyles.overlay}>
-                    <View style={modalStyles.container}>
+                    <View style={[themed.modal, modalStyles.container]}>
                         <Text style={[globalThemed.text, modalStyles.title]}>Join a Room</Text>
 
                         <Text style={[globalThemed.text, modalStyles.label]}>Enter Room Code</Text>
@@ -296,7 +296,7 @@ export default function Activity1() {
                             autoCapitalize="characters"
                         />
                         <Pressable
-                            style={[themed.button, modalStyles.primaryButton]}
+                            style={[themed.modal_button, modalStyles.primaryButton]}
                             onPress={handleJoinRoom}
                         >
                             <Text style={[globalThemed.text, modalStyles.primaryText]}>Join Room</Text>
@@ -304,22 +304,22 @@ export default function Activity1() {
 
                         <View style={modalStyles.divider}>
                             <View style={[globalThemed.separator, modalStyles.dividerLine]}/>
-                            <Text style={[globalThemed.separator, modalStyles.dividerText]}>or</Text>
+                            <Text style={[globalThemed.text, modalStyles.dividerText]}>or</Text>
                             <View style={[globalThemed.separator, modalStyles.dividerLine]}/>
                         </View>
 
                         <Pressable
-                            style={[themed.button, modalStyles.secondaryButton]}
+                            style={[themed.modal_button, modalStyles.secondaryButton]}
                             onPress={handleCreateRoom}
                         >
                             <Text style={[globalThemed.text, modalStyles.secondaryText]}>Create Room</Text>
                         </Pressable>
 
                         <Pressable
-                            style={[themed.button, modalStyles.closeButton]}
+                            style={[themed.modal_button, modalStyles.closeButton]}
                             onPress={() => setEnterRoomModalVisible(false)}
                         >
-                            <Text style={[globalThemed.text, modalStyles.cancelText]}>Solo (No Room)</Text>
+                            <Text style={[globalThemed.text, modalStyles.secondaryText]}>Solo (No Room)</Text>
                         </Pressable>
                     </View>
                 </View>
@@ -332,7 +332,7 @@ export default function Activity1() {
                 onRequestClose={() => setRoomDetailsModalVisible(false)}
             >
                 <View style={modalStyles.overlay}>
-                    <View style={modalStyles.container}>
+                    <View style={[themed.modal, modalStyles.container]}>
                         <Text style={[globalThemed.text, modalStyles.title]}>Room Details</Text>
 
                         <View style={[themed.modal_code_box, modalStyles.codeBox]}>
@@ -354,14 +354,14 @@ export default function Activity1() {
 
                         <View style={modalStyles.buttonRow}>
                             <Pressable
-                                style={[themed.button, modalStyles.leaveButton]}
+                                style={[themed.modal_button, modalStyles.leaveButton]}
                                 onPress={handleLeaveRoom}
                             >
                                 <Text style={[globalThemed.text, modalStyles.leaveText]}>Leave Room</Text>
                             </Pressable>
 
                             <Pressable
-                                style={[themed.button, modalStyles.closeButton]}
+                                style={[themed.modal_button, modalStyles.closeButton]}
                                 onPress={() => setRoomDetailsModalVisible(false)}
                             >
                                 <Text style={[globalThemed.text, modalStyles.closeText]}>Close</Text>
@@ -574,11 +574,11 @@ export default function Activity1() {
 
             <View style={activityStyles.footer}>
                 <TouchableOpacity 
-                    style={activityStyles.start_button}
+                    style={[themed.button, activityStyles.start_button]}
                     activeOpacity={0.85}
                     onPress={() => router.push('./pages/student/startactivity/start1')}>
 
-                    <Text style={activityStyles.start_button_text}>
+                    <Text style={[globalThemed.text, activityStyles.start_button_text]}>
                         Start Activity
                     </Text>
                 </TouchableOpacity>

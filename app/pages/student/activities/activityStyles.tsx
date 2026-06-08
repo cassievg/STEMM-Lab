@@ -7,8 +7,9 @@ export const activityColors = {
         },
 
         modal_input: {
+            backgroundColor: '#ffffff',
             borderColor: "#ccc"
-        },
+        }, 
 
         modal_close_button: {
             backgroundColor: '#007AFF',
@@ -43,9 +44,17 @@ export const activityColors = {
             color: '#97b9d6',
         },
 
+        modal_code_input: {
+            backgroundColor: '#ffffff'
+        }, 
+
         equipment_row: {
             backgroundColor: '#ffffff',
             borderColor:'#afdaff',
+        },
+        
+        modal_button: {
+            backgroundColor: '#afdaff',
         },
 
         equipment_row_checked: {
@@ -127,6 +136,10 @@ export const activityColors = {
         modal_secondary_text: {
             color: '#333',
         },
+
+        modal: {
+            backgroundColor: '#ffffff'
+        }
 }),
     dark : StyleSheet.create({
         page: {
@@ -135,10 +148,6 @@ export const activityColors = {
 
         modal_secondary_text: {
             color: '#a6a6a6',
-        },
-
-        modal_input: {
-            borderColor: "#435565"
         },
 
         modal_code_box: {
@@ -181,6 +190,11 @@ export const activityColors = {
         progress_text: {
             color: '#435565',
         },
+
+        modal_input: {
+            backgroundColor: '#d8d8d8',
+            borderColor: "#435565"
+        }, 
 
         equipment_row: {
             backgroundColor: '#333333',
@@ -245,6 +259,10 @@ export const activityColors = {
         button: {
             backgroundColor:'#474747',
             borderColor: '#2b2b2b',
+        },
+
+        modal: {
+            backgroundColor: '#474747'
         }
     })
 }
@@ -565,7 +583,6 @@ export const modalStyles = StyleSheet.create({
 
     container: {
         width: '80%',
-        backgroundColor: 'white',
         borderRadius: 10,
         padding: 20,
         gap: 8,
@@ -618,7 +635,6 @@ export const modalStyles = StyleSheet.create({
     },
 
     leaveText: {
-        color: 'white',
         fontWeight: 'bold',
     },
 
@@ -645,7 +661,6 @@ export const modalStyles = StyleSheet.create({
 
     codeLabel: {
         fontSize: 12,
-        color: 'gray',
         marginBottom: 4,
     },
 
@@ -682,7 +697,6 @@ export const modalStyles = StyleSheet.create({
     },
 
     dividerText: {
-        color: 'gray',
         fontSize: 13,
     },
 
@@ -693,7 +707,6 @@ export const modalStyles = StyleSheet.create({
     },
 
     primaryText: {
-        color: 'white',
         fontWeight: 'bold',
     },
 

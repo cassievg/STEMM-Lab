@@ -1,20 +1,17 @@
 import { router } from 'expo-router';
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import { signIn } from '../../../../backend/firebase/auth.js';
-import { globalStyles } from "../../../styles";
+import { globalColors, globalStyles } from "../../../styles";
 
+import { ThemeKey } from '@/src/context/ThemeContext.d.js';
 import { useTheme } from '@/src/context/ThemeContext.js';
 
-
 export default function Login() {
-    const { getThemedStyle } = useTheme();
+    const { theme, changeTheme } = useTheme();
 
-    const globalThemedStyles = useMemo(() => {
-        return getThemedStyle(globalStyles);
-    }, [getThemedStyle]);
-    
+    const themed = globalColors[theme as ThemeKey];
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -29,28 +26,28 @@ export default function Login() {
     }
 
     return (
-        <View style={globalThemedStyles.page}>
-            <View style={globalThemedStyles.header}>
+        <View style={[themed.page, globalStyles.page]}>
+            <View style={globalStyles.header}>
                 <TouchableOpacity 
-                style={globalThemedStyles.back_button}
+                style={[themed.back, globalStyles.back_button]}
                 onPress={() => router.push("/")}>
-                    <Text style={globalThemedStyles.text}>{'<'}</Text>
+                    <Text style={[themed.text, globalStyles.text]}>{'<'}</Text>
                 </TouchableOpacity>
-                <Text style={globalThemedStyles.page_title}>
+                <Text style={[themed.text, globalStyles.page_title]}>
                     Login
                 </Text>       
             </View>
 
-            <View style={localStyles.form_container}>
+            <View style={[themed.container, localStyles.form_container]}>
                 <View style={localStyles.input_container}>
                     <View style={localStyles.label_container}>
-                        <Text style={localStyles.input_label}>Email</Text>
+                        <Text style={[themed.text, localStyles.input_label]}>Email</Text>
                     </View>
 
                     <TextInput 
-                    style={localStyles.text_input}
+                    style={[themed.picker, localStyles.text_input]}
                     placeholder='Email'
-                    placeholderTextColor='#969696'
+                    placeholderTextColor='#808080'
                     onChangeText={userInput => setEmail(userInput)}
                     defaultValue=''
                     />
@@ -58,30 +55,30 @@ export default function Login() {
 
                 <View style={localStyles.input_container}>
                     <View style={localStyles.label_container}>
-                        <Text style={localStyles.input_label}>Password</Text>
+                        <Text style={[themed.text, localStyles.input_label]}>Password</Text>
                     </View>
                     
                     <TextInput 
-                    style={localStyles.text_input}
+                    style={[themed.picker, localStyles.text_input]}
                     placeholder='Password'
-                    placeholderTextColor='#969696'
+                    placeholderTextColor='#808080'
                     onChangeText={passInput => setPassword(passInput)}
                     defaultValue=''
                     secureTextEntry
                     />
                 </View>
 
-                <View style={localStyles.error_container}>
-                    <Text style={localStyles.error_text}>{error}</Text>
+                <View style={[themed.container, localStyles.error_container]}>
+                    <Text style={[themed.error_text, localStyles.error_text]}>{error}</Text>
                 </View>
 
                 <View style={localStyles.button_parent}>
                     <Pressable 
                     onPress={handleLogin}
                     style={({ pressed }) => [
-                        pressed ? localStyles.pressable_onPress : localStyles.pressable_default
+                        pressed ? [themed.pressable_onPress, localStyles.pressable_onPress] : [themed.pressable_default,localStyles.pressable_default]
                     ]}>
-                        <Text style={globalThemedStyles.button_normal_text}>Submit</Text>
+                        <Text style={[themed.text, globalStyles.button_normal_text]}>Submit</Text>
                     </Pressable>
                 </View>
             </View>
@@ -111,18 +108,15 @@ const localStyles = StyleSheet.create({
     },
 
     form_container: {
-        backgroundColor: '#afdaff',
         justifyContent: 'center',
         alignItems: 'center',
         padding: '5%',
-        borderColor: '#97b9d6',
         borderWidth: 2,
         height: '30%',
         width: '90%',
     },
 
     text_input: {
-        backgroundColor: '#ffffff',
         fontFamily: 'Trebuchet MS, Roboto, sans-serif',
         width: '100%',
         flex: 1,
@@ -143,7 +137,6 @@ const localStyles = StyleSheet.create({
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#ffffff',
         borderRadius: 10,
     },
 
@@ -152,7 +145,6 @@ const localStyles = StyleSheet.create({
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#d4d4d4',
         borderRadius: 10,
     },
 

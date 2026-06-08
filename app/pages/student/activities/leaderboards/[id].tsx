@@ -134,30 +134,30 @@ export default function History() {
             <View style={[themed.container, localStyles.list]}>
                 {activeTab === 'local' && (
                     loading ? (
-                        <Text style={[themed.text, localStyles.empty]}>Loading...</Text>
+                        <Text style={[themed.text, globalStyles.empty]}>Loading...</Text>
                     ) : localLDB.length === 0 ? (
-                        <Text style={[themed.text, localStyles.empty]}>No local leaderboard yet.</Text>
+                        <Text style={[themed.text, globalStyles.empty]}>No local leaderboard yet.</Text>
                     ) : (
                         <FlatList
                             data={localLDB}
                             keyExtractor={(_, index) => index.toString()}
                             renderItem={({item, index}) => renderLocal({item, index})}
-                            ItemSeparatorComponent={() => <View style={localStyles.separator}/>}
+                            ItemSeparatorComponent={() => <View style={globalStyles.separator}/>}
                         />
                     )
                 )}
 
                 {activeTab === 'global' && (
                     loading ? (
-                        <Text style={[themed.text, localStyles.empty]}>Loading...</Text>
+                        <Text style={[themed.text, globalStyles.empty]}>Loading...</Text>
                     ) : globalLDB.length === 0 ? (
-                        <Text style={[themed.text, localStyles.empty]}>No global leaderboard yet.</Text>
+                        <Text style={[themed.text, globalStyles.empty]}>No global leaderboard yet.</Text>
                     ) : (
                         <FlatList
                             data={globalLDB}
                             keyExtractor={(_, index) => index.toString()}
                             renderItem={({item, index}) => renderGlobal({item, index})}
-                            ItemSeparatorComponent={() => <View style={[themed.separator, localStyles.separator]}/>}
+                            ItemSeparatorComponent={() => <View style={[themed.separator, globalStyles.separator]}/>}
                         />
                     )
                 )}
@@ -212,16 +212,6 @@ const localStyles = StyleSheet.create({
     rank_global: {
         fontSize: 13,
         fontWeight: '500',
-    },
-
-    separator: {
-        height: 1,
-    },
-
-    empty: {
-        textAlign: 'center',
-        marginTop: 40,
-        color: 'gray',
     },
 
     rank: {
