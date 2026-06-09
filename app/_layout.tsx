@@ -34,9 +34,7 @@ function RootLayout() {
 
         if (userDoc === null) return;
 
-        if (userDoc?.role === 'teacher') {
-            router.replace('/pages/teacher/teacherhome');
-        } else if (userDoc?.role === 'student') {
+        if (userDoc?.role === 'student') {
             router.replace('/pages/student/menu/homescreen');
         } 
     }, [currentUser, userDoc])

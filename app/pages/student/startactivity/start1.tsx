@@ -4,6 +4,7 @@ import { VideoView, useVideoPlayer } from 'expo-video';
 import React, { useEffect, useRef, useState } from 'react';
 import { Alert, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import ToolsPanel from '../tools/panel';
 
 type AttemptKey = 'action1' | 'action2' | 'action3';
 
@@ -413,6 +414,7 @@ export default function StartActivity1() {
                     </TouchableOpacity>
                 )}
             </View>
+            <ToolsPanel />
         </SafeAreaView>
     );    
 }

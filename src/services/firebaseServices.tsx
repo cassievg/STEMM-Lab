@@ -295,8 +295,22 @@ const hasLocal = async (teamId: string, activityId: string) => {
     return !snapshot.empty;
 }
 
+const completeActivity = async (teamId: string, activityId: string, roomId: string | null, score: number) => {
+    const docRef = await firestore()
+        .collection('results')
+        .add({
+            activityId: activityId,
+            roomId: roomId,
+            score: score,
+            submitDate: new Date().toISOString(),
+            teamId: teamId
+        });
+    
+    return docRef;
+}
+
 export {
-    activityIsComplete, createRoom,
+    activityIsComplete, completeActivity, createRoom,
     createTeam,
     fetchGlobalLdb,
     fetchLocalLdb,

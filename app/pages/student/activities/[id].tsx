@@ -578,7 +578,7 @@ export default function Activity1() {
                     <TouchableOpacity 
                         style={[themed.button, activityStyles.start_button]}
                         activeOpacity={0.85}
-                        onPress={() => router.push('./pages/student/startactivity/start1')}>
+                        onPress={() => router.push(`/pages/student/startactivity/start${id}` as any)}>
 
                         <Text style={[globalThemed.text, activityStyles.start_button_text]}>
                             Start Activity

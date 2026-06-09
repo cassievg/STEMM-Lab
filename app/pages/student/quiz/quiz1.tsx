@@ -1,9 +1,10 @@
+import { globalColors, globalStyles } from '@/app/styles';
+import { ThemeKey, useTheme } from '@/src/context/ThemeContext.d';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { activityStyles } from '../activities/activityStyles';
-
 
 type LevelKey = 'primary' | 'highschool';
 type QuestionType = 'mcq' | 'calculation';
@@ -210,6 +211,10 @@ export default function Quiz1() {
     const [submitted, setSubmitted] = useState(false);
     const [showHint, setShowHint] = useState<Record<string,boolean>>({});
 
+    const { theme, changeTheme } = useTheme();
+
+    const themed = globalColors[theme as ThemeKey];
+
     const questions = level === 'primary' ? PRIMARY_QUESTIONS : HIGH_QUESTIONS;
 
     const setAnswer = (id: string, value: string) => {
@@ -261,18 +266,18 @@ export default function Quiz1() {
 
     }
     return (
-        <SafeAreaView style={activityStyles.page}>
+        <SafeAreaView style={[themed.page, activityStyles.page]}>
             <View style={activityStyles.header}>
                 <TouchableOpacity 
-                style={activityStyles.back_button}
+                style={[themed.back, globalStyles.back_button]}
                 onPress={() => router.push('/pages/student/startactivity/start1')}>
-                    <Text style={globalThemedStyles.text}>{'<'}</Text>
+                    <Text style={[themed.text, globalStyles.text]}>{'<'}</Text>
                 </TouchableOpacity>
                 <View style={activityStyles.header_title_container}>
-                    <Text style={activityStyles.header_title}>
+                    <Text style={[themed.text, activityStyles.header_title]}>
                         Activity 1 · Exercises
                     </Text>
-                    <Text style={activityStyles.header_subtitle}>
+                    <Text style={[themed.text, activityStyles.header_subtitle]}>
                         Quiz & Calculations
                     </Text>
                 </View>
