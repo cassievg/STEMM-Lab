@@ -1,7 +1,10 @@
+import { FONT_FAMILY, globalColors } from '@/app/styles';
+import { useTheme } from '@/src/context/ThemeContext';
+import { ThemeKey } from '@/src/context/ThemeContext.d';
 import { Audio } from 'expo-av';
 import React, { useEffect, useRef, useState } from "react";
 import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { BLUE, DARK, FONT_FAMILY, WHITE } from '../activities/activityStyles';
+import { activityColors } from '../activities/activityStyles';
 
 const GRAPH_HEIGHT = 100;
 const MAX_HISTORY = 60;
@@ -45,6 +48,11 @@ export default function SoundMeter() {
     const [history, setHistory] = useState<number[]>([]);
     const recordingRef = useRef<Audio.Recording | null>(null);
     const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+    const { theme, changeTheme } = useTheme();
+
+    const themed = activityColors[theme as ThemeKey];
+    const globalThemed = globalColors[theme as ThemeKey];
 
     const startMeasuring = async () => {
         try {
@@ -128,27 +136,27 @@ export default function SoundMeter() {
         <View style={localStyles.container}>
             <View style={localStyles.control_row}>
                 <TouchableOpacity
-                    style={[localStyles.button, active && localStyles.button_stop]}
+                    style={[themed.sound_button, localStyles.button, active && localStyles.button_stop]}
                     onPress={active ? stopMeasuring : startMeasuring}
                     activeOpacity={0.8}>
 
-                    <Text style={localStyles.button_text}>
+                    <Text style={[themed.sound_button_text, localStyles.button_text]}>
                         {active ? '⏹ Stop' : '▶ Start'}
                     </Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    style={localStyles.button_reset}
+                    style={[themed.sound_button_reset, localStyles.button_reset]}
                     onPress={handleReset}
                     activeOpacity={0.8}>
 
-                    <Text style={localStyles.button_reset_text}>
+                    <Text style={[themed.sound_button_reset_text, localStyles.button_reset_text]}>
                         ↺ Reset
                     </Text>
                 </TouchableOpacity>
             </View>
 
-            <View style={localStyles.meter_box}>
+            <View style={[themed.sound_meter_box, localStyles.meter_box]}>
                 <View style={localStyles.gauge_background}>
                     <View
                         style={[localStyles.gauge_fill,
@@ -206,7 +214,7 @@ export default function SoundMeter() {
 
             <View style={localStyles.graph_wrap}>
                 <View style={localStyles.graph_header}>
-                    <Text style={localStyles.graph_title}>
+                    <Text style={[themed.sound_graph_title, localStyles.graph_title]}>
                         History
                     </Text>
                     <Text style={localStyles.graph_subtitle}>
@@ -263,8 +271,8 @@ export default function SoundMeter() {
                 </View>
             </View>
 
-            <View style={localStyles.info_box}>
-                <Text style={localStyles.info_text}>
+            <View style={[themed.sound_info_box, localStyles.info_box]}>
+                <Text style={[themed.sound_info_text, localStyles.info_text]}>
                     Activity 2
                 </Text>
             </View>
@@ -295,7 +303,6 @@ const localStyles =  StyleSheet.create({
 
     button: {
         flex: 1,
-        backgroundColor: BLUE,
         borderRadius: 10,
         paddingVertical: 12,
         alignItems: 'center',
@@ -309,11 +316,9 @@ const localStyles =  StyleSheet.create({
         fontSize: 16,
         fontFamily: FONT_FAMILY,
         fontWeight: '700',
-        color: WHITE,
     },
 
     button_reset: {
-        backgroundColor: '#f0f4f8',
         borderRadius: 10,
         paddingVertical: 12,
         paddingHorizontal: 16,
@@ -324,11 +329,9 @@ const localStyles =  StyleSheet.create({
         fontSize: 16,
         fontFamily: FONT_FAMILY,
         fontWeight: '700',
-        color: DARK,
     },
 
     meter_box: {
-        backgroundColor: DARK,
         borderRadius: 14,
         padding: 16,
         gap: 10,
@@ -419,7 +422,6 @@ const localStyles =  StyleSheet.create({
     },
 
     graph_wrap: {
-        backgroundColor: WHITE,
         borderRadius: 12,
         borderWidth: 1,
         borderColor: '#dde8f0',
@@ -437,7 +439,6 @@ const localStyles =  StyleSheet.create({
         fontSize: 14,
         fontFamily: FONT_FAMILY,
         fontWeight: '700',
-        color: DARK,
     },
 
     graph_subtitle: {
@@ -517,17 +518,14 @@ const localStyles =  StyleSheet.create({
     },
 
     info_box: {
-        backgroundColor: '#eaf4fd',
         borderRadius: 10,
         padding: 10,
         borderLeftWidth: 3,
-        borderLeftColor: BLUE,
     },
 
     info_text: {
         fontSize: 14,
         fontFamily: FONT_FAMILY,
-        color: DARK,
         lineHeight: 18,
     },
 

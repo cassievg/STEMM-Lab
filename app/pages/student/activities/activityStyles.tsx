@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 
 export const activityColors = {
     light : StyleSheet.create({
@@ -139,7 +139,154 @@ export const activityColors = {
 
         modal: {
             backgroundColor: '#ffffff'
-        }
+        },
+
+        fab: {
+            backgroundColor: '#afdaff'
+        },
+
+        panel: {
+            backgroundColor: '#ffffff'
+        },
+
+        panel_title: {
+            color: '#2b2b2b'
+        },
+
+        back_button_text: {
+            color: '#2b2b2b',
+        },
+
+        close_button: {
+            backgroundColor: '#eaf4fd',
+        },
+
+        close_button_text: {
+            color: '#666666',
+        },
+
+        tool_card: {
+            backgroundColor: '#eaf4fd'
+        },
+
+        tool_label: {
+            color: '#0f2a3f'
+        },
+
+        tool_header_label: {
+            color: '#0f2a3f',
+        },
+
+        calculator_display_wrap: {
+            backgroundColor: '#97b9d6'
+        },
+
+        calculation_button_equal: {
+            backgroundColor: '#97b9d6'
+        },
+
+        calculator_button: {
+            backgroundColor: '#f0f4f8',
+        },
+
+        calculator_button_operator: {
+            backgroundColor: '#afdaff',
+        },
+
+        calculator_display: {
+            color: '#ffffff',
+        },
+
+        calculator_button_text: {
+            color: '#435565',
+        },
+
+        ruler_info_chip: {
+            backgroundColor: '#afdaff',
+        },
+
+        ruler_tick_major:{
+            backgroundColor: '#1a2e3d',
+        },
+        
+        ruler_note: {
+            color: '#555555',
+        },
+
+        ruler_cm_label: {
+            color: '#888888',
+        },
+
+        ruler_info_text: {
+            color: '#1a2e3d',
+        },
+
+        sensor_toggle: {
+            backgroundColor: '#97b9d6',
+        },
+
+        sensor_toggle_text: {
+            color: '#afdaff'
+        },
+
+        sensor_axis_label: {
+            color: '#97b9d6'
+        },
+
+        sensor_gforce_container:{
+            backgroundColor: '#97b9d6',
+        },
+
+        sensor_text: {
+            color: '#1a2e3d',
+        },
+
+        camera_button: {
+            backgroundColor: '#97b9d6',
+            borderColor: '#afdaff'
+        },
+
+        camera_button_text: {
+            color: '#ffffff'
+        },
+
+        sound_button: {
+            backgroundColor: '#97b9d6',
+        },
+
+        sound_button_text: {
+            color: '#ffffff'
+        },
+
+        sound_graph_wrap: {
+            backgroundColor: '#ffffff',
+        },
+
+        sound_button_reset: {
+            backgroundColor: '#f0f4f8',
+        },
+
+        sound_button_reset_text: {
+            color: '#1a2e3d'
+        },
+
+        sound_meter_box: {
+            backgroundColor: '#1a2e3d'
+        },
+
+        sound_graph_title: {
+            color: '#1a2e3d'
+        },
+
+        sound_info_text: {
+            color: '#1a2e3d'
+        },
+        
+        sound_info_box: {
+            borderLeftColor: '#97b9d6',
+            backgroundColor: '#eaf4fd',
+        },
+        
 }),
     dark : StyleSheet.create({
         page: {
@@ -263,12 +410,155 @@ export const activityColors = {
 
         modal: {
             backgroundColor: '#474747'
-        }
+        },
+
+        fab: {
+            backgroundColor: '#435565'
+        },
+
+        panel: {
+            backgroundColor: '#2b2b2b'
+        },
+
+        panel_title: {
+            color: '#d8d8d8',
+        },
+
+        back_button_text: {
+            color: '#d8d8d8',
+        },
+
+        close_button: {
+            backgroundColor: '#435565',
+        },
+
+        close_button_text: {
+            color: '#d8d8d8',
+        },
+
+        tool_card: {
+            backgroundColor: '#435565'
+        },
+
+        tool_label: {
+            color: '#d8d8d8'
+        },
+
+        tool_header_label: {
+            color: '#d8d8d8',
+        },
+
+        calculator_button: {
+            backgroundColor: '#435565',
+        },
+
+        calculation_button_equal: {
+            backgroundColor: '#435565'
+        },
+
+        calculator_display_wrap: {
+            backgroundColor: '#435565'
+        },
+
+        calculator_button_operator: {
+            backgroundColor: '#d8d8d8',
+        },
+
+        calculator_display: {
+            color: '#d8d8d8',
+        },
+
+        calculator_button_text: {
+            color: '#435565',
+        },
+
+        ruler_info_chip: {
+            backgroundColor: '#435565',
+        },
+
+        ruler_tick_major:{
+            backgroundColor: '#d8d8d8',
+        },
+
+        ruler_note: {
+            color: '#d8d8d8',
+        },
+
+        ruler_cm_label: {
+            color: '#d8d8d8',
+        },
+
+        ruler_info_text: {
+            color: '#d8d8d8',
+        },
+
+        sensor_toggle: {
+            backgroundColor: '#435565',
+        },
+
+        sensor_toggle_text: {
+            color: '#d8d8d8'
+        },
+
+        sensor_axis_label: {
+            color: '#435565'
+        },
+
+        sensor_gforce_container:{
+            backgroundColor: '#435565',
+        },
+
+        sensor_text: {
+            color: '#d8d8d8',
+        },
+
+        camera_button: {
+            backgroundColor: '#435565',
+            color: '#d8d8d8',
+        },
+
+        camera_button_text: {
+            color: '#d8d8d8'
+        },
+
+        sound_button: {
+            backgroundColor: '#474747',
+        },
+
+        sound_button_text: {
+            color: '#d8d8d8'
+        },
+
+        sound_graph_wrap: {
+            backgroundColor: '#333333',
+        },
+
+        sound_button_reset_text: {
+            color: '#d8d8d8'
+        },
+
+        sound_button_reset: {
+            backgroundColor: '#474747',
+        },
+
+        sound_meter_box: {
+            backgroundColor: '#435565'
+        },
+                
+        sound_graph_title: {
+            color: '#d8d8d8'
+        },
+
+        sound_info_text: {
+            color: '#d8d8d8'
+        },
+
+        sound_info_box: {
+            borderLeftColor: '#d8d8d8',
+            backgroundColor: '#333333',
+        },
     })
 }
-
-const SCREEN_WIDTH = Dimensions.get('window').width;
-const SCREEN_HEIGHT =Dimensions.get('window').height;
 
 export const activityStyles = StyleSheet.create({
     page: {

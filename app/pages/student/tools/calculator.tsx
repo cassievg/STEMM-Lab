@@ -1,6 +1,9 @@
+import { FONT_FAMILY, globalColors } from "@/app/styles";
+import { useTheme } from '@/src/context/ThemeContext';
+import { ThemeKey } from "@/src/context/ThemeContext.d";
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { BLUE, DARK, FONT_FAMILY, WHITE } from "../activities/activityStyles";
+import { activityColors } from "../activities/activityStyles";
 
 
 export default function Calculator() {
@@ -8,6 +11,11 @@ export default function Calculator() {
     const [prev, setPrev] = useState<number | null>(null);
     const [operator, setOperator] = useState<string | null>(null);
     const [waiting, setWaiting] = useState(false);
+    const [expression, setExpression] = useState("");
+
+    const { theme, changeTheme } = useTheme();
+    const themed = activityColors[theme as ThemeKey];
+    const globalThemed = globalColors[theme as ThemeKey];
 
     const handleNumber = (n: string) => {
         if (waiting){
@@ -48,10 +56,13 @@ export default function Calculator() {
         const current = parseFloat(display);
         if (prev !== null && !waiting){
             const result = calculate(prev, current, operator!);
+
+            setExpression(`${prev} ${operator} ${current} =`);
             setDsisplay(String(parseFloat(result.toFixed(8))));
             setPrev(result);
         } else {
             setPrev(current);
+            setExpression(`${current} ${operator}`);
         }
         setOperator(operator);
         setWaiting(true);
@@ -63,6 +74,8 @@ export default function Calculator() {
         }
         const current = parseFloat(display);
         const result = calculate(prev, current, operator);
+
+        setExpression(`${prev} ${operator} ${current} =`);
         setDsisplay(String(parseFloat(result.toFixed(8))));
         setPrev(null);
         setOperator(null);
@@ -70,6 +83,7 @@ export default function Calculator() {
     };
 
     const handleClear = () => {
+        setExpression("");
         setDsisplay("0");
         setPrev(null);
         setOperator(null);
@@ -106,11 +120,11 @@ export default function Calculator() {
 
     return (
         <View style={localStyles.container}>
-            <View style={localStyles.display_wrap}>
-                {operator && <Text style={localStyles.operator_indicator}>
-                    {prev} {operator}</Text>}
+            <View style={[themed.calculator_display_wrap, localStyles.display_wrap]}>
+                {expression !== "" && <Text style={localStyles.operator_indicator}>
+                    {expression}</Text>}
                 <Text
-                    style={localStyles.display}
+                    style={[themed.calculator_display, localStyles.display]}
                     numberOfLines={1}
                     adjustsFontSizeToFit>
 
@@ -124,10 +138,10 @@ export default function Calculator() {
                         <TouchableOpacity
                             key={button}
                             style={[
-                                localStyles.button,
-                                isOperator(button) && localStyles.button_operator,
-                                isExtra(button) && localStyles.button_extra,
-                                button === '=' && {backgroundColor: BLUE},
+                                themed.calculator_button, localStyles.button, 
+                                isOperator(button) && [themed.calculator_button_operator],
+                                isExtra(button) && [localStyles.button_extra],
+                                button === '=' && {backgroundColor: '#97b9d6'},
                                 button === 'C' && {backgroundColor: '#e05c5c'}
                             ]}
                         onPress={() => {
@@ -160,8 +174,8 @@ export default function Calculator() {
 
                            <Text style={[
                                 localStyles.button_text,
-                                (isOperator(button) || isExtra(button)) && {color: WHITE},
-                                button === 'C' && {color: WHITE},
+                                (isOperator(button) || isExtra(button)) && themed.calculator_button_text,
+                                button === 'C' && {color: '#ffffff'},
                            ]}>
                                 {button}
                            </Text>
@@ -179,7 +193,6 @@ const localStyles = StyleSheet.create({
     },
 
     display_wrap: {
-        backgroundColor: DARK,
         borderRadius: 12,
         padding: 14,
         marginBottom: 4,
@@ -199,7 +212,6 @@ const localStyles = StyleSheet.create({
         fontSize: 36,
         fontFamily: FONT_FAMILY,
         fontWeight: '700',
-        color: WHITE,
     },
 
     row: {
@@ -211,14 +223,10 @@ const localStyles = StyleSheet.create({
         flex: 1,
         paddingVertical: 14,
         borderRadius: 10,
-        backgroundColor: '#f0f4f8',
         alignItems: 'center',
         justifyContent: 'center',
     },
 
-    button_operator: {
-        backgroundColor: BLUE,
-    },
 
     button_extra: {
         backgroundColor: '#97b9d6aa',
@@ -228,6 +236,5 @@ const localStyles = StyleSheet.create({
         fontSize: 18,
         fontFamily: FONT_FAMILY,
         fontWeight: '600',
-        color: DARK,
     },
 })
