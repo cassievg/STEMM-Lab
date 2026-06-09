@@ -1159,23 +1159,19 @@
         "instruction" : [
             {
                 "step": 1,
-                "title": "Place the phone gently on the chest."
+                "text": "Place the phone gently on the chest."
             },
             {
                 "step": 2,
-                "title": "Record breathing at rest."
+                "text": "Record breathing at rest."
             },
             {
                 "step": 3,
-                "title": "Perform light exercise.",
-                "exercise": [
-                    "Jog one minute on the spot",
-                    "100 star jump"
-                ]
+                "text": "Perform light exercise (Jog one minute on the spot or 100 star jump)."
             },
             {
                 "step": 4,
-                "title": "Record breathing again and compare results."
+                "text": "Record breathing again and compare results."
             }
         ],
         "diagram" : {

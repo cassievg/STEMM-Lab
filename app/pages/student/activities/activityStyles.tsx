@@ -1,13 +1,25 @@
 import { StyleSheet } from "react-native";
 
+const FONT_FAMILY = 'Trebuchet MS, Roboto, sans-serif';
+
+const BLUE = '#97b9d6';
+const LIGHT_BLUE = '#afdaff';
+const DARK = '#1a2e3d';
+const WHITE = '#ffffff';
+
+const ALT_BLUE = '#435565';
+const ALT_LIGHT_BLUE = '#474747';
+const ALT_DARK = '#2b2b2b';
+const ALT_WHITE = '#d8d8d8';
+
 export const activityColors = {
     light : StyleSheet.create({
         page: {
-            backgroundColor: '#97b9d6',
+            backgroundColor: BLUE,
         },
 
         modal_input: {
-            backgroundColor: '#ffffff',
+            backgroundColor: WHITE,
             borderColor: "#ccc"
         }, 
 
@@ -16,54 +28,54 @@ export const activityColors = {
         },
 
         start_button_text: {
-            color: '#ffffff'
+            color: WHITE
         },
 
         table_row: {
-            backgroundColor: '#ffffff'
+            backgroundColor: WHITE
         },
 
         scroll: {
-            backgroundColor: '#ffffff'
+            backgroundColor: WHITE
         },
 
         chip: {
-            borderColor:'#afdaff',
-            backgroundColor: '#97b9d6',
+            borderColor:LIGHT_BLUE,
+            backgroundColor: BLUE,
         },
 
         curriculum_icon: {
-            backgroundColor: '#97b9d6',
+            backgroundColor: BLUE,
         },
 
         list_dot: {
-            backgroundColor: '#97b9d6',
+            backgroundColor: BLUE,
         },
 
         progress_text: {
-            color: '#97b9d6',
+            color: BLUE,
         },
 
         modal_code_input: {
-            backgroundColor: '#ffffff'
+            backgroundColor: WHITE
         }, 
 
         equipment_row: {
-            backgroundColor: '#ffffff',
-            borderColor:'#afdaff',
+            backgroundColor: WHITE,
+            borderColor:LIGHT_BLUE,
         },
         
         modal_button: {
-            backgroundColor: '#afdaff',
+            backgroundColor: LIGHT_BLUE,
         },
 
         equipment_row_checked: {
-            backgroundColor:'#afdaff',
-            borderColor: '#97b9d6',
+            backgroundColor:LIGHT_BLUE,
+            borderColor: BLUE,
         },
 
         equipment_image: {
-            backgroundColor: '#97b9d6'
+            backgroundColor: BLUE
         },
 
         equipment_name_checked: {
@@ -71,40 +83,40 @@ export const activityColors = {
         },
 
         checkbox: {
-            borderColor: '#97b9d6',
+            borderColor: BLUE,
         },
 
         checkbox_checked: {
-            backgroundColor: '#97b9d6', 
+            backgroundColor: BLUE, 
         },
 
         checkbox_tick: {
-            color: '#ffffff',
+            color: WHITE,
         },
 
         step_number_wrap: {
-            backgroundColor: '#97b9d6',
+            backgroundColor: BLUE,
         },
 
         table_header: {
-            color: '#ffffff',
+            color: WHITE,
         },
 
         step_number: {
-            color: '#ffffff',
+            color: WHITE,
         },
 
         start_button: {
-            backgroundColor: '#97b9d6',
+            backgroundColor: BLUE,
         },
 
         info_box: {
-            backgroundColor: '#ffffff',
-            borderLeftColor: '#97b9d6',
+            backgroundColor: WHITE,
+            borderLeftColor: BLUE,
         },
 
         table: {
-            borderColor:'#afdaff'
+            borderColor:LIGHT_BLUE
         },
 
         modal_leave_button: {
@@ -112,16 +124,16 @@ export const activityColors = {
         },
 
         table_header_row: {
-            backgroundColor: '#97b9d6',
+            backgroundColor: BLUE,
         },
 
         focus_card: {
-            backgroundColor: '#ffffff',
-            borderColor:'#afdaff',
+            backgroundColor: WHITE,
+            borderColor:LIGHT_BLUE,
         },
 
         table_row_alt: {
-            backgroundColor:'#afdaff'
+            backgroundColor:LIGHT_BLUE
         },
 
         modal_code_box: {
@@ -129,8 +141,8 @@ export const activityColors = {
         },
 
         button: {
-            backgroundColor:'#afdaff',
-            borderColor: '#97b9d6',
+            backgroundColor:LIGHT_BLUE,
+            borderColor: BLUE,
         },
 
         modal_secondary_text: {
@@ -138,23 +150,23 @@ export const activityColors = {
         },
 
         modal: {
-            backgroundColor: '#ffffff'
+            backgroundColor: WHITE
         },
 
         fab: {
-            backgroundColor: '#afdaff'
+            backgroundColor: LIGHT_BLUE
         },
 
         panel: {
-            backgroundColor: '#ffffff'
+            backgroundColor: WHITE
         },
 
         panel_title: {
-            color: '#2b2b2b'
+            color: ALT_DARK
         },
 
         back_button_text: {
-            color: '#2b2b2b',
+            color: ALT_DARK,
         },
 
         close_button: {
@@ -178,11 +190,11 @@ export const activityColors = {
         },
 
         calculator_display_wrap: {
-            backgroundColor: '#97b9d6'
+            backgroundColor: BLUE
         },
 
         calculation_button_equal: {
-            backgroundColor: '#97b9d6'
+            backgroundColor: BLUE
         },
 
         calculator_button: {
@@ -190,23 +202,23 @@ export const activityColors = {
         },
 
         calculator_button_operator: {
-            backgroundColor: '#afdaff',
+            backgroundColor: LIGHT_BLUE,
         },
 
         calculator_display: {
-            color: '#ffffff',
+            color: WHITE,
         },
 
         calculator_button_text: {
-            color: '#435565',
+            color: ALT_BLUE,
         },
 
         ruler_info_chip: {
-            backgroundColor: '#afdaff',
+            backgroundColor: LIGHT_BLUE,
         },
 
         ruler_tick_major:{
-            backgroundColor: '#1a2e3d',
+            backgroundColor: DARK,
         },
         
         ruler_note: {
@@ -218,48 +230,48 @@ export const activityColors = {
         },
 
         ruler_info_text: {
-            color: '#1a2e3d',
+            color: DARK,
         },
 
         sensor_toggle: {
-            backgroundColor: '#97b9d6',
+            backgroundColor: BLUE,
         },
 
         sensor_toggle_text: {
-            color: '#afdaff'
+            color: LIGHT_BLUE
         },
 
         sensor_axis_label: {
-            color: '#97b9d6'
+            color: BLUE
         },
 
         sensor_gforce_container:{
-            backgroundColor: '#97b9d6',
+            backgroundColor: BLUE,
         },
 
         sensor_text: {
-            color: '#1a2e3d',
+            color: DARK,
         },
 
         camera_button: {
-            backgroundColor: '#97b9d6',
-            borderColor: '#afdaff'
+            backgroundColor: BLUE,
+            borderColor: LIGHT_BLUE
         },
 
         camera_button_text: {
-            color: '#ffffff'
+            color: WHITE
         },
 
         sound_button: {
-            backgroundColor: '#97b9d6',
+            backgroundColor: BLUE,
         },
 
         sound_button_text: {
-            color: '#ffffff'
+            color: WHITE
         },
 
         sound_graph_wrap: {
-            backgroundColor: '#ffffff',
+            backgroundColor: WHITE,
         },
 
         sound_button_reset: {
@@ -267,30 +279,30 @@ export const activityColors = {
         },
 
         sound_button_reset_text: {
-            color: '#1a2e3d'
+            color: DARK
         },
 
         sound_meter_box: {
-            backgroundColor: '#1a2e3d'
+            backgroundColor: DARK
         },
 
         sound_graph_title: {
-            color: '#1a2e3d'
+            color: DARK
         },
 
         sound_info_text: {
-            color: '#1a2e3d'
+            color: DARK
         },
         
         sound_info_box: {
-            borderLeftColor: '#97b9d6',
+            borderLeftColor: BLUE,
             backgroundColor: '#eaf4fd',
         },
         
 }),
     dark : StyleSheet.create({
         page: {
-            backgroundColor: '#435565',
+            backgroundColor: ALT_BLUE,
         },
 
         modal_secondary_text: {
@@ -298,235 +310,235 @@ export const activityColors = {
         },
 
         modal_code_box: {
-            backgroundColor: '#474747',
+            backgroundColor: ALT_LIGHT_BLUE,
         },
 
         table_row: {
-            backgroundColor: '#2b2b2b'
+            backgroundColor: ALT_DARK
         },
 
         table_row_alt: {
-            backgroundColor:'#474747'
+            backgroundColor:ALT_LIGHT_BLUE
         },
 
         scroll: {
-            backgroundColor: '#474747',
+            backgroundColor: ALT_LIGHT_BLUE,
         },
 
         chip: {
-            borderColor: '#474747',
-            backgroundColor: '#435565',
+            borderColor: ALT_LIGHT_BLUE,
+            backgroundColor: ALT_BLUE,
         },
 
         modal_button: {
-            backgroundColor: '#435565',
+            backgroundColor: ALT_BLUE,
         },
 
         start_button: {
-            backgroundColor: '#2b2b2b',
+            backgroundColor: ALT_DARK,
         },
 
         curriculum_icon: {
-            backgroundColor: '#435565',
+            backgroundColor: ALT_BLUE,
         },
 
         list_dot: {
-            backgroundColor: '#435565',
+            backgroundColor: ALT_BLUE,
         },
 
         progress_text: {
-            color: '#435565',
+            color: ALT_BLUE,
         },
 
         modal_input: {
-            backgroundColor: '#d8d8d8',
+            backgroundColor: ALT_WHITE,
             borderColor: "#435565"
         }, 
 
         equipment_row: {
             backgroundColor: '#333333',
-            borderColor:'#2b2b2b',
+            borderColor:ALT_DARK,
         },
 
         equipment_row_checked: {
-            backgroundColor:'#474747',
-            borderColor: '#435565',
+            backgroundColor:ALT_LIGHT_BLUE,
+            borderColor: ALT_BLUE,
         },
 
         equipment_image: {
-            backgroundColor: '#435565'
+            backgroundColor: ALT_BLUE
         },
 
         equipment_name_checked: {
-            color: '#d8d8d8', 
+            color: ALT_WHITE, 
         },
 
         start_button_text: {
-            color: '#d8d8d8'
+            color: ALT_WHITE
         },
 
         checkbox: {
-            borderColor: '#435565',
+            borderColor: ALT_BLUE,
         },
         
         checkbox_checked: {
-            backgroundColor: '#435565', 
+            backgroundColor: ALT_BLUE, 
         },
 
         focus_card: {
-            backgroundColor: '#2b2b2b',
-            borderColor:'#435565',
+            backgroundColor: ALT_DARK,
+            borderColor:ALT_BLUE,
         },
 
         checkbox_tick: {
-            color: '#d8d8d8',
+            color: ALT_WHITE,
         },
 
         step_number_wrap: {
-            backgroundColor: '#435565',
+            backgroundColor: ALT_BLUE,
         },
 
         step_number: {
-            color: '#d8d8d8',
+            color: ALT_WHITE,
         },
 
         info_box: {
             backgroundColor: '#333333',
-            borderLeftColor: '#435565',
+            borderLeftColor: ALT_BLUE,
         },
 
         table: {
-            borderColor:'#2b2b2b'
+            borderColor:ALT_DARK
         },
 
         table_header_row: {
-            backgroundColor: '#2b2b2b',
+            backgroundColor: ALT_DARK,
         },
 
         button: {
-            backgroundColor:'#474747',
-            borderColor: '#2b2b2b',
+            backgroundColor:ALT_LIGHT_BLUE,
+            borderColor: ALT_DARK,
         },
 
         modal: {
-            backgroundColor: '#474747'
+            backgroundColor: ALT_LIGHT_BLUE
         },
 
         fab: {
-            backgroundColor: '#435565'
+            backgroundColor: ALT_BLUE
         },
 
         panel: {
-            backgroundColor: '#2b2b2b'
+            backgroundColor: ALT_DARK
         },
 
         panel_title: {
-            color: '#d8d8d8',
+            color: ALT_WHITE,
         },
 
         back_button_text: {
-            color: '#d8d8d8',
+            color: ALT_WHITE,
         },
 
         close_button: {
-            backgroundColor: '#435565',
+            backgroundColor: ALT_BLUE,
         },
 
         close_button_text: {
-            color: '#d8d8d8',
+            color: ALT_WHITE,
         },
 
         tool_card: {
-            backgroundColor: '#435565'
+            backgroundColor: ALT_BLUE
         },
 
         tool_label: {
-            color: '#d8d8d8'
+            color: ALT_WHITE
         },
 
         tool_header_label: {
-            color: '#d8d8d8',
+            color: ALT_WHITE,
         },
 
         calculator_button: {
-            backgroundColor: '#435565',
+            backgroundColor: ALT_BLUE,
         },
 
         calculation_button_equal: {
-            backgroundColor: '#435565'
+            backgroundColor: ALT_BLUE
         },
 
         calculator_display_wrap: {
-            backgroundColor: '#435565'
+            backgroundColor: ALT_BLUE
         },
 
         calculator_button_operator: {
-            backgroundColor: '#d8d8d8',
+            backgroundColor: ALT_WHITE,
         },
 
         calculator_display: {
-            color: '#d8d8d8',
+            color: ALT_WHITE,
         },
 
         calculator_button_text: {
-            color: '#435565',
+            color: ALT_BLUE,
         },
 
         ruler_info_chip: {
-            backgroundColor: '#435565',
+            backgroundColor: ALT_BLUE,
         },
 
         ruler_tick_major:{
-            backgroundColor: '#d8d8d8',
+            backgroundColor: ALT_WHITE,
         },
 
         ruler_note: {
-            color: '#d8d8d8',
+            color: ALT_WHITE,
         },
 
         ruler_cm_label: {
-            color: '#d8d8d8',
+            color: ALT_WHITE,
         },
 
         ruler_info_text: {
-            color: '#d8d8d8',
+            color: ALT_WHITE,
         },
 
         sensor_toggle: {
-            backgroundColor: '#435565',
+            backgroundColor: ALT_BLUE,
         },
 
         sensor_toggle_text: {
-            color: '#d8d8d8'
+            color: ALT_WHITE
         },
 
         sensor_axis_label: {
-            color: '#435565'
+            color: ALT_BLUE
         },
 
         sensor_gforce_container:{
-            backgroundColor: '#435565',
+            backgroundColor: ALT_BLUE,
         },
 
         sensor_text: {
-            color: '#d8d8d8',
+            color: ALT_WHITE,
         },
 
         camera_button: {
-            backgroundColor: '#435565',
-            color: '#d8d8d8',
+            backgroundColor: ALT_BLUE,
+            color: ALT_WHITE,
         },
 
         camera_button_text: {
-            color: '#d8d8d8'
+            color: ALT_WHITE
         },
 
         sound_button: {
-            backgroundColor: '#474747',
+            backgroundColor: ALT_LIGHT_BLUE,
         },
 
         sound_button_text: {
-            color: '#d8d8d8'
+            color: ALT_WHITE
         },
 
         sound_graph_wrap: {
@@ -534,27 +546,27 @@ export const activityColors = {
         },
 
         sound_button_reset_text: {
-            color: '#d8d8d8'
+            color: ALT_WHITE
         },
 
         sound_button_reset: {
-            backgroundColor: '#474747',
+            backgroundColor: ALT_LIGHT_BLUE,
         },
 
         sound_meter_box: {
-            backgroundColor: '#435565'
+            backgroundColor: ALT_BLUE
         },
                 
         sound_graph_title: {
-            color: '#d8d8d8'
+            color: ALT_WHITE
         },
 
         sound_info_text: {
-            color: '#d8d8d8'
+            color: ALT_WHITE
         },
 
         sound_info_box: {
-            borderLeftColor: '#d8d8d8',
+            borderLeftColor: ALT_WHITE,
             backgroundColor: '#333333',
         },
     })
@@ -579,7 +591,7 @@ export const activityStyles = StyleSheet.create({
 
     header_title: {
         fontSize: 16,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         fontWeight: '600',
         letterSpacing: 0.5,
         marginBottom: 4,
@@ -604,7 +616,7 @@ export const activityStyles = StyleSheet.create({
 
     section_heading: {
         fontSize: 16,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         fontWeight: '700',
         marginTop: 20,
         marginBottom: 10,
@@ -613,7 +625,7 @@ export const activityStyles = StyleSheet.create({
 
     body: {
         fontSize: 16,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         lineHeight: 22,
         width: '100%',
     },
@@ -633,7 +645,7 @@ export const activityStyles = StyleSheet.create({
 
     chip_text: {
         fontSize: 14,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         fontWeight: '500',
     },
 
@@ -652,13 +664,13 @@ export const activityStyles = StyleSheet.create({
 
     curriculum_code: {
         fontSize: 14,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         flex: 1,
     },
 
     curriculum_description:{
         fontSize: 14,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         flex: 1,
     },
 
@@ -679,7 +691,7 @@ export const activityStyles = StyleSheet.create({
 
     list_text: {
         fontSize: 16,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         marginBottom: 14,
         gap: 12,
         lineHeight: 22,
@@ -715,7 +727,7 @@ export const activityStyles = StyleSheet.create({
     equipment_name: {
         flex: 1,
         fontSize: 14,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
     },
 
     equipment_name_checked: {
@@ -754,13 +766,13 @@ export const activityStyles = StyleSheet.create({
 
     step_number: {
         fontSize: 16,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         fontWeight: '700',
     },
 
     step_text: {
         fontSize: 16,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         lineHeight: 22,
         flex: 1,
         paddingTop: 3,
@@ -795,14 +807,14 @@ export const activityStyles = StyleSheet.create({
     },
 
     table_header: {
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         marginLeft: 3,
         fontWeight: '700',
     },
 
     table_cell: {
         fontSize: 16,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         paddingVertical: 10,
         paddingHorizontal: 10,
     },
@@ -821,7 +833,7 @@ export const activityStyles = StyleSheet.create({
 
     focus_level: {
         fontSize: 16,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
+        fontFamily: FONT_FAMILY,
         fontWeight: '700',
         marginBottom: 8,
     },
