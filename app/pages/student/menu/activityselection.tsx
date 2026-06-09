@@ -17,13 +17,13 @@ type ActivityRow = {
 }
 
 const ACTIVITY_ICONS: Record<string, string> = {
-    "EC1": "A",
-    "EC2": "B",
-    "EC3": "C",
-    "EC4": "D",
-    "HMS1": "E",
-    "HMS2": "F",
-    "HMS3": "G",
+    "1": "A",
+    "2": "B",
+    "3": "C",
+    "4": "D",
+    "5": "E",
+    "6": "F",
+    "7": "G",
 }
 
 const screenWidth = Dimensions.get('window').width;
@@ -84,9 +84,9 @@ export default function ActivitySelection() {
             activeOpacity={0.7}>
 
             <View style={[themed.card_box, localStyles.card_icon_box]}>
-                <Text style={[themed.text, localStyles.card_icon]}>A</Text>
+                <Text style={[themed.text, localStyles.card_icon]}>{ACTIVITY_ICONS[item.id] ?? 'X'}</Text>
             </View>
-            <Text style={[themed.text, localStyles.card_label]}>{ACTIVITY_ICONS[item.id] ?? "📘"}</Text>
+            <Text style={[themed.text, localStyles.card_label]}>{item.name}</Text>
         </TouchableOpacity>
     );
 

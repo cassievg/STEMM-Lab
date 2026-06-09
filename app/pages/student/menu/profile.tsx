@@ -29,6 +29,7 @@ export default function Profile() {
     const [teammembersEdit, setTeammembersEdit] = useState<string[]>([]);
 
     const [error, setError] = useState("");
+    const [msg, setMsg] = useState("");
 
     const { logout, userID, userDoc, currentUser, teamID } = useAuth();
 
@@ -88,6 +89,7 @@ export default function Profile() {
             }
 
             setError('');
+            alert('Update successful!');
         } catch (e) {
             setError("Update failed.");
             console.log(e);
@@ -125,7 +127,7 @@ export default function Profile() {
                         style={[themed.scroll_container, localStyles.container]}
                         contentContainerStyle={localStyles.form_content}
                         showsVerticalScrollIndicator={false}>
-                <View style={[themed.container, localStyles.container]}>
+                <View style={[localStyles.container]}>
                     <View style={localStyles.field_container}>
                         <View style={localStyles.row}>
                             <Text style={[themed.text, localStyles.label]}>
