@@ -1,11 +1,19 @@
 import * as ImagePicker from 'expo-image-picker';
 import React, { useState } from 'react';
 
+import { FONT_FAMILY, globalColors } from '@/app/styles';
+import { useTheme } from '@/src/context/ThemeContext';
+import { ThemeKey } from '@/src/context/ThemeContext.d';
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BLUE, DARK, FONT_FAMILY, LIGHT_BLUE, WHITE } from '../activities/activityStyles';
+import { activityColors } from '../activities/activityStyles';
 
 export default function Camera(){
     const [lastUri, setLastUri] = useState<string | null>(null);
+
+    const { theme, changeTheme } = useTheme();
+
+    const themed = activityColors[theme as ThemeKey];
+    const globalThemed = globalColors[theme as ThemeKey];
 
     const handlePhoto = async () => {
         const permission = await ImagePicker.requestCameraPermissionsAsync();
@@ -44,26 +52,26 @@ export default function Camera(){
         <View style={localStyles.container}>
             <View style={localStyles.button_row}>
                 <TouchableOpacity
-                    style={localStyles.button}
+                    style={[localStyles.button, themed.camera_button]}
                     onPress={handlePhoto}
                     activeOpacity={0.8}>
 
                     <Text style={localStyles.button_icon}>
                         📸
                     </Text>
-                    <Text style={localStyles.button_text}>
+                    <Text style={[themed.camera_button_text, localStyles.button_text]}>
                         Take Photo
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={[localStyles.button, {backgroundColor: DARK}]}
+                    style={[localStyles.button, themed.camera_button]}
                     onPress={handleVideo}
                     activeOpacity={0.8}>
 
                     <Text style={localStyles.button_icon}>
                         🎥
                     </Text>
-                    <Text style={[localStyles.button_text, {color: WHITE}]}>
+                    <Text style={[localStyles.button_text, themed.camera_button_text]}>
                         Record Video
                     </Text>
                 </TouchableOpacity>
@@ -99,13 +107,11 @@ const localStyles = StyleSheet.create({
 
     button: {
         flex: 1,
-        backgroundColor: LIGHT_BLUE,
         borderRadius: 12,
         paddingVertical: 16,
         alignItems: 'center',
         gap: 6,
         borderWidth: 1,
-        borderColor: BLUE,
     },
 
     button_icon: {
@@ -116,7 +122,6 @@ const localStyles = StyleSheet.create({
         fontSize: 14,
         fontFamily: FONT_FAMILY,
         fontWeight: '700',
-        color: DARK,
     },
 
     captured: {

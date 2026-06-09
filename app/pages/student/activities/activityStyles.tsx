@@ -240,6 +240,52 @@ export const activityColors = {
         sensor_text: {
             color: '#1a2e3d',
         },
+
+        camera_button: {
+            backgroundColor: '#97b9d6',
+            borderColor: '#afdaff'
+        },
+
+        camera_button_text: {
+            color: '#ffffff'
+        },
+
+        sound_button: {
+            backgroundColor: '#97b9d6',
+        },
+
+        sound_button_text: {
+            color: '#ffffff'
+        },
+
+        sound_graph_wrap: {
+            backgroundColor: '#ffffff',
+        },
+
+        sound_button_reset: {
+            backgroundColor: '#f0f4f8',
+        },
+
+        sound_button_reset_text: {
+            color: '#1a2e3d'
+        },
+
+        sound_meter_box: {
+            backgroundColor: '#1a2e3d'
+        },
+
+        sound_graph_title: {
+            color: '#1a2e3d'
+        },
+
+        sound_info_text: {
+            color: '#1a2e3d'
+        },
+        
+        sound_info_box: {
+            borderLeftColor: '#97b9d6',
+            backgroundColor: '#eaf4fd',
+        },
         
 }),
     dark : StyleSheet.create({
@@ -464,6 +510,52 @@ export const activityColors = {
 
         sensor_text: {
             color: '#d8d8d8',
+        },
+
+        camera_button: {
+            backgroundColor: '#435565',
+            color: '#d8d8d8',
+        },
+
+        camera_button_text: {
+            color: '#d8d8d8'
+        },
+
+        sound_button: {
+            backgroundColor: '#474747',
+        },
+
+        sound_button_text: {
+            color: '#d8d8d8'
+        },
+
+        sound_graph_wrap: {
+            backgroundColor: '#333333',
+        },
+
+        sound_button_reset_text: {
+            color: '#d8d8d8'
+        },
+
+        sound_button_reset: {
+            backgroundColor: '#474747',
+        },
+
+        sound_meter_box: {
+            backgroundColor: '#435565'
+        },
+                
+        sound_graph_title: {
+            color: '#d8d8d8'
+        },
+
+        sound_info_text: {
+            color: '#d8d8d8'
+        },
+
+        sound_info_box: {
+            borderLeftColor: '#d8d8d8',
+            backgroundColor: '#333333',
         },
     })
 }
