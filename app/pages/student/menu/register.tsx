@@ -193,7 +193,6 @@ export default function Register() {
                             style={[themed.picker, {color: '#000000'}, globalStyles.picker]}
                             >
                                 <Picker.Item label="Select a role" value="" style={[{color: '#000000'}, globalStyles.picker_text]}/>
-                                <Picker.Item label="Teacher" value="teacher" style={[{color: '#000000'}, globalStyles.picker_text]}/>
                                 <Picker.Item label="Student" value="student" style={[{color: '#000000'}, globalStyles.picker_text]}/>
                             </Picker>
                         </View>

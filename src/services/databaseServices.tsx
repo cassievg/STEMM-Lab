@@ -80,52 +80,11 @@ const renderUserData = async (userId: any) => {
     }
 }
 
-const fetchProgress = async (userId: any): Promise<Progress[]> => {
-    try {
-        return await db.getAllAsync(`
-            SELECT *
-            FROM progress
-            WHERE userID = ?
-        `, [userId])
-    } catch (e) {
-        console.log("Error:", e);
-        return [];
-    }
-}
-
-const fetchHistory = async (userId: any): Promise<Progress[]> => {
-    try {
-        return await db.getAllAsync(`
-            SELECT *
-            FROM progress
-            WHERE userID = ? AND status = ?
-        `, [userId, 'completed'])
-    } catch (e) {
-        console.log("Error:", e);
-        return [];
-    }
-}
-
 const fetchCache = async (userId: any) => {
     try {
         const res = await db.getAllAsync(`
             SELECT *
             FROM activityCache
-            WHERE userID = ?
-        `, [userId])
-
-        return res;
-    } catch (e) {
-        console.log("Error:", e);
-        return [];
-    }
-}
-
-const fetchResults = async (userId: any) => {
-    try {
-        const res = await db.getAllAsync(`
-            SELECT *
-            FROM activityResults
             WHERE userID = ?
         `, [userId])
 
@@ -169,8 +128,8 @@ const getActivityById = async (id: string) => {
 export {
     db,
     fetchActivities,
-    fetchCache, fetchCourses, fetchHistory, fetchProgress,
-    fetchResults, getActivityById, initDatabase,
+    fetchCache, fetchCourses,
+    getActivityById, initDatabase,
     renderUserData
 };
 
