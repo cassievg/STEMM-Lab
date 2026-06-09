@@ -37,7 +37,8 @@
       "expo-font",
       "expo-video",
       "expo-sqlite",
-      "expo-maps"
+      "expo-maps",
+      "expo-asset"
     ],
     "experiments": {
       "typedRoutes": true,

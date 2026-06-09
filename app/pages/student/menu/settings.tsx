@@ -3,13 +3,11 @@ import { ThemeKey } from '@/src/context/ThemeContext.d';
 import { Picker } from '@react-native-picker/picker';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { FlatList, Modal, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { globalColors, globalStyles } from '../../../styles';
 
 export default function Settings() {
-    const languages = ['English', 'Bahasa Indonesia'];
-    const [language, setLanguage] = useState('English');
-    const [picker, setPicker] = useState<'theme' | 'language' | null>(null);
+    const [picker, setPicker] = useState<'theme' | null>(null);
 
     const { theme, changeTheme, themeList } = useTheme();
 
@@ -51,22 +49,6 @@ export default function Settings() {
                     </View>
                 </View>
 
-                <View style={localStyles.settings}>
-                    <Text style={[themed.text, localStyles.setting_text]}>
-                        Language
-                    </Text>
-                    <TouchableOpacity
-                        style={localStyles.setting_drop_down}
-                        onPress={() => setPicker('language')}>
-                        <Text style={[themed.text, localStyles.setting_text]}>
-                            {language}
-                        </Text>
-                        <Text style={[themed.text, localStyles.drop_down_v]}>
-                            v
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-
                 <Modal
                 visible={!!picker}
                 transparent
@@ -78,7 +60,7 @@ export default function Settings() {
                     >
                         <View style={localStyles.modal}>
                             <FlatList
-                                data={picker === 'theme' ? themeList : picker === 'language' ? languages : []}
+                                data={themeList}
                                 keyExtractor={(item) => item}
                                 renderItem={({ item }) => (
                                     <TouchableOpacity
@@ -87,8 +69,6 @@ export default function Settings() {
                                             setPicker(null);
                                             if (picker === 'theme') {
                                                 changeTheme(item);
-                                            } else {
-                                                setLanguage(item);
                                             }
                                         }}
                                     >
@@ -99,17 +79,6 @@ export default function Settings() {
                         </View>
                     </TouchableOpacity>
                 </Modal>
-            </View>
-            <View style={localStyles.save_button}>
-                <Pressable
-                    onPress={() => { router.push('/pages/student/menu/homescreen') }}
-                    style={({ pressed }) => [
-                        pressed ? [themed.pressable_onPress, globalStyles.pressable_onPress] : [themed.pressable_default, globalStyles.pressable_default]
-                    ]}>
-                    <Text style={[themed.text, localStyles.save_text]}>
-                        Save
-                    </Text>
-                </Pressable>
             </View>
         </View>
     );
@@ -182,19 +151,4 @@ const localStyles = StyleSheet.create({
         fontSize: 16,
         color: '#111'
     },
-
-    save_button: {
-        width: '55%',
-        height: '5%',
-        marginTop: '8%',
-        display: 'flex',
-        justifyContent: 'center',
-        borderRadius: 10,
-    },
-
-    save_text: {
-        fontSize: 18,
-        fontFamily: 'Trebuchet MS, Roboto, sans-serif',
-        textAlign: "center",
-    }
 })
