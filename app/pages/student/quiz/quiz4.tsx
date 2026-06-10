@@ -5,7 +5,7 @@ import { router } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { quizColors, quizStyle, } from './quizStyle';
+import { quizColors, quizStyle } from './quizStyle';
 
 type QuestionType = 'mcq' | 'calculation';
 type Question = {
@@ -26,100 +26,129 @@ const RED = '#e05c5c';
 const FONT_FAMILY = 'Trebuchet MS, Roboto, sans-serif';
 
 const PRIMARY_QUESTIONS: Question[] = [
-    {id: 'p1', type: 'mcq', 
-        question: 'What force pulls the toy downard when it falls?',
-        options: [
-            'Drag', 
-            'Gravity', 
-            'Friction', 
-            'Other',
-        ],
-        correctOption: 1,
-    },
-    {id: 'p2', type: 'mcq', 
-        question: 'What does a parachute do to the falling toy?',
-        options: [
-            'Makes it fall faster',
-            'Has no effect', 
-            'Slows it down', 
-            'Pushes it sideways',
-        ],
-        correctOption: 2,
-    },
-    {id: 'p3', type: 'mcq', 
-        question: 'Which parachute design is likely to slow the toy the most?',
-        options: [
-            'A very small parachute', 
-            'No parachute', 
-            'A large wide parachute', 
-            'Pushes it sideways',
-        ],
-        correctOption: 2,
-    },
-    {id: 'p4', type: 'calculation', 
-        question: 'The toy fell 2.0 m in 0.5 s. Calculate the final speed.',
-        formula: 'Speed = distance / time',
-        hint: 'Divide the distance (2.0 m) by the time (0.5 s)',
-        correctAnswer: 4.0,
-        unit: 'm/s',
-    },
     {
-    id: 'p5', type: 'mcq',
-        question: 'Why was the toy dropped from the same height each time?',
+        id: 'p1',
+        type: 'mcq',
+        question: 'What does the phone vibration represent in this activity?',
         options: [
-            'To make the toy heavier',
-            'To make the test fair',
-            'To increase gravity',
-            'To save time'
-            ],
-            correctOption: 1,
-    },
-    {id: 'p6', type: 'calculation', 
-        question: 'A ball fell with a speed of 3.0 m/s and it took 2.0 s to hit the floor, what is the distance travelled by the ball?',
-        formula: 'Distance = speed × time',
-        hint: 'Multiply the speed (3 m/s) by the time (2.0 s) ',
-        correctAnswer: 6.0,
-        unit: 'm',
-    },
-    {id: 'p7', type: 'mcq',
-    question: 'What is drag?',
-    options: [
-        'A force that speeds objects up',
-        'A force that opposes motion through air',
-        'The same as gravity',
-        'A type of parachute'
-        ],
-        correctOption: 1,
-    },
-    {id: 'p8', type: 'mcq',
-    question: 'Why do engineers test more than one parachute design?',
-    options: [
-        'To make the toy heavier',
-        'To use more materials',
-        'To improve the design and compare results',
-        'To make the toy fall faster'
+            'Wind',
+            'Rain',
+            'An earthquake',
+            'Gravity'
         ],
         correctOption: 2,
     },
-    {id: 'p9', type: 'calculation',
-        question: 'A toy falls 6.0 m with speed of 2.0 m/s . What is the time taken to fall the distance?',
-        formula: 'Time = Speed ÷ time',
-        correctAnswer: 3.0,
-        unit: 's',
-    },
-    {id: 'p10', type: 'mcq',
-        question: 'Which force pulls the toy toward Earth?',
-        options: [
-            'Drag',
-            'Gravity',
-            'Lift',
-            'Magnetism'
-            ],
-            correctOption: 1,
-    },
-]
 
-export default function Quiz2() {
+    {
+        id: 'p2',
+        type: 'mcq',
+        question: 'What is the goal of the structure design?',
+        options: [
+            'Make the phone move more',
+            'Reduce movement caused by vibration',
+            'Make the structure heavier',
+            'Increase the phone volume'
+        ],
+        correctOption: 1,
+    },
+
+    {
+        id: 'p3',
+        type: 'mcq',
+        question: 'Why do engineers test multiple designs?',
+        options: [
+            'To compare and improve performance',
+            'To use more materials',
+            'To make construction slower',
+            'To increase vibration'
+        ],
+        correctOption: 0,
+    },
+
+    {
+        id: 'p4',
+        type: 'calculation',
+        question: 'Design 1 moved 4 cm and Design 2 moved 2 cm. How many centimetres less did Design 2 move?',
+        formula: 'Difference = larger value - smaller value',
+        hint: '4 - 2',
+        correctAnswer: 2,
+        unit: 'cm',
+    },
+
+    {
+        id: 'p5',
+        type: 'mcq',
+        question: 'What might help reduce movement during vibration?',
+        options: [
+            'Adding more support pillars',
+            'Removing supports',
+            'Making the platform smaller',
+            'Increasing vibration'
+        ],
+        correctOption: 0,
+    },
+
+    {
+        id: 'p6',
+        type: 'mcq',
+        question: 'Why should the phone be placed in the centre each time?',
+        options: [
+            'To make the test fair',
+            'To increase vibration',
+            'To reduce gravity',
+            'To save materials'
+        ],
+        correctOption: 0,
+    },
+
+    {
+        id: 'p7',
+        type: 'calculation',
+        question: 'A structure moved 5 cm during the first test and 3 cm after improvements. By how much was the movement reduced?',
+        formula: 'Reduction = first result - second result',
+        hint: '5 - 3',
+        correctAnswer: 2,
+        unit: 'cm',
+    },
+
+    {
+        id: 'p8',
+        type: 'mcq',
+        question: 'What causes buildings to shake during an earthquake?',
+        options: [
+            'Ground vibrations',
+            'Sunlight',
+            'Air pressure',
+            'Magnetism'
+        ],
+        correctOption: 0,
+    },
+
+    {
+        id: 'p9',
+        type: 'mcq',
+        question: 'Which structure is likely to be the most stable?',
+        options: [
+            'One with strong supports and folded layers',
+            'One with no supports',
+            'One made from a single sheet of paper',
+            'One with missing pillars'
+        ],
+        correctOption: 0,
+    },
+
+    {
+        id: 'p10',
+        type: 'calculation',
+        question: 'Design A moved 1 cm, Design B moved 3 cm, and Design C moved 2 cm. Which design had the smallest movement?',
+        formula: 'Compare the measurements',
+        hint: 'Look for the smallest value.',
+        correctAnswer: 1,
+        unit: 'cm',
+    },
+];
+
+export default function Quiz4() {
     const [answers, setAnswers] = useState<Record<string, string>>({});
     const [submitted, setSubmitted] = useState(false);
     const [showHint, setShowHint] = useState<Record<string,boolean>>({});
@@ -129,7 +158,7 @@ export default function Quiz2() {
 
     const themed = quizColors[theme as ThemeKey];
     const globalthemed = globalColors[theme as ThemeKey];
-    const activityStyles = quizStyle;
+    const localStyles = quizStyle;
 
     const questions = PRIMARY_QUESTIONS;
 
@@ -207,18 +236,18 @@ export default function Quiz2() {
 
 
     return (
-        <SafeAreaView style={[globalthemed.page, activityStyles.page]}>
-            <View style={activityStyles.header}>
+        <SafeAreaView style={[globalthemed.page, localStyles.page]}>
+            <View style={localStyles.header}>
                 <TouchableOpacity 
                 style={[globalthemed.back, globalStyles.back_button]}
                 onPress={() => router.back()}>
                     <Text style={[globalthemed.text, globalStyles.text]}>{'<'}</Text>
                 </TouchableOpacity>
-                <View style={activityStyles.header_title_container}>
-                    <Text style={[globalthemed.text, activityStyles.header_title]}>
-                        Activity 1 · Exercises
+                <View style={localStyles.header_title_container}>
+                    <Text style={[globalthemed.text, localStyles.header_title]}>
+                        Activity 4 · Exercises
                     </Text>
-                    <Text style={[globalthemed.text, activityStyles.header_subtitle]}>
+                    <Text style={[globalthemed.text, localStyles.header_subtitle]}>
                         Quiz
                     </Text>
                 </View>

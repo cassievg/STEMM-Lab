@@ -111,7 +111,7 @@ export default function StartActivity1() {
 
     const handleSubmit = () => {
         Alert.alert('Submitted', 'Your results have been saved');
-        router.push('/pages/student/quiz/quiz1');
+        router.push('/pages/student/quiz/quiz6');
     };
 
     const current = attempt[activeTab];
@@ -123,7 +123,7 @@ export default function StartActivity1() {
             <View style={[localThemed.header_container, localStyles.header]}>
                 <TouchableOpacity 
                 style={[themed.back, localStyles.back_button]}
-                onPress={() => router.push('/pages/student/activities/1')}>
+                onPress={() => router.back()}>
                     <Text style={themed.text}>{'<'}</Text>
                 </TouchableOpacity>
                 <View style={localStyles.header_title_container}>
@@ -260,10 +260,10 @@ export default function StartActivity1() {
                     <View style={{height: 32}}/>
             </ScrollView>
 
-            <View style={localStyles.footer}>
+            <View style={[themed.white_background, localStyles.footer]}>
                 {completeCount === 3 ? (
                     <TouchableOpacity
-                        style={localStyles.submit_button}
+                        style={[localThemed.start_button, localStyles.submit_button]}
                         onPress={handleSubmit}
                         activeOpacity={0.85}>
 
@@ -273,7 +273,7 @@ export default function StartActivity1() {
                     </TouchableOpacity>
                 ) : (
                     <TouchableOpacity
-                        style={localStyles.next_button}
+                        style={[themed.pressable_default, localStyles.next_button]}
                         onPress={() => {
                             const i = TABS.findIndex((t) => t.key === activeTab);
                             if (i < TABS.length - 1) {

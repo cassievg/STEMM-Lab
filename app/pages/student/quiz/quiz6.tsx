@@ -5,7 +5,7 @@ import { router } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { quizColors, quizStyle, } from './quizStyle';
+import { quizColors, quizStyle } from './quizStyle';
 
 type QuestionType = 'mcq' | 'calculation';
 type Question = {
@@ -26,100 +26,129 @@ const RED = '#e05c5c';
 const FONT_FAMILY = 'Trebuchet MS, Roboto, sans-serif';
 
 const PRIMARY_QUESTIONS: Question[] = [
-    {id: 'p1', type: 'mcq', 
-        question: 'What force pulls the toy downard when it falls?',
-        options: [
-            'Drag', 
-            'Gravity', 
-            'Friction', 
-            'Other',
-        ],
-        correctOption: 1,
-    },
-    {id: 'p2', type: 'mcq', 
-        question: 'What does a parachute do to the falling toy?',
-        options: [
-            'Makes it fall faster',
-            'Has no effect', 
-            'Slows it down', 
-            'Pushes it sideways',
-        ],
-        correctOption: 2,
-    },
-    {id: 'p3', type: 'mcq', 
-        question: 'Which parachute design is likely to slow the toy the most?',
-        options: [
-            'A very small parachute', 
-            'No parachute', 
-            'A large wide parachute', 
-            'Pushes it sideways',
-        ],
-        correctOption: 2,
-    },
-    {id: 'p4', type: 'calculation', 
-        question: 'The toy fell 2.0 m in 0.5 s. Calculate the final speed.',
-        formula: 'Speed = distance / time',
-        hint: 'Divide the distance (2.0 m) by the time (0.5 s)',
-        correctAnswer: 4.0,
-        unit: 'm/s',
-    },
     {
-    id: 'p5', type: 'mcq',
-        question: 'Why was the toy dropped from the same height each time?',
+        id: 'p1',
+        type: 'mcq',
+        question: 'What does reaction time measure?',
         options: [
-            'To make the toy heavier',
-            'To make the test fair',
-            'To increase gravity',
-            'To save time'
-            ],
-            correctOption: 1,
-    },
-    {id: 'p6', type: 'calculation', 
-        question: 'A ball fell with a speed of 3.0 m/s and it took 2.0 s to hit the floor, what is the distance travelled by the ball?',
-        formula: 'Distance = speed × time',
-        hint: 'Multiply the speed (3 m/s) by the time (2.0 s) ',
-        correctAnswer: 6.0,
-        unit: 'm',
-    },
-    {id: 'p7', type: 'mcq',
-    question: 'What is drag?',
-    options: [
-        'A force that speeds objects up',
-        'A force that opposes motion through air',
-        'The same as gravity',
-        'A type of parachute'
+            'How strong your muscles are',
+            'How quickly you respond to a stimulus',
+            'How far you can move',
+            'How much you weigh'
         ],
         correctOption: 1,
     },
-    {id: 'p8', type: 'mcq',
-    question: 'Why do engineers test more than one parachute design?',
-    options: [
-        'To make the toy heavier',
-        'To use more materials',
-        'To improve the design and compare results',
-        'To make the toy fall faster'
+
+    {
+        id: 'p2',
+        type: 'mcq',
+        question: 'Which body system is mainly responsible for reaction time?',
+        options: [
+            'Digestive system',
+            'Respiratory system',
+            'Nervous system',
+            'Circulatory system'
         ],
         correctOption: 2,
     },
-    {id: 'p9', type: 'calculation',
-        question: 'A toy falls 6.0 m with speed of 2.0 m/s . What is the time taken to fall the distance?',
-        formula: 'Time = Speed ÷ time',
-        correctAnswer: 3.0,
+
+    {
+        id: 'p3',
+        type: 'mcq',
+        question: 'Why do students repeat the reaction test several times?',
+        options: [
+            'To collect more reliable data',
+            'To make the phone heavier',
+            'To increase the screen brightness',
+            'To reduce gravity'
+        ],
+        correctOption: 0,
+    },
+
+    {
+        id: 'p4',
+        type: 'calculation',
+        question: 'Attempt 1 reaction time was 6 s and Attempt 2 reaction time was 3 s. How many seconds faster was Attempt 2?',
+        formula: 'Improvement = first time - second time',
+        hint: '6 - 3',
+        correctAnswer: 3,
         unit: 's',
     },
-    {id: 'p10', type: 'mcq',
-        question: 'Which force pulls the toy toward Earth?',
-        options: [
-            'Drag',
-            'Gravity',
-            'Lift',
-            'Magnetism'
-            ],
-            correctOption: 1,
-    },
-]
 
-export default function Quiz2() {
+    {
+        id: 'p5',
+        type: 'mcq',
+        question: 'What is being compared in the Swap Hands challenge?',
+        options: [
+            'Phone models',
+            'Dominant and non-dominant hand performance',
+            'Screen sizes',
+            'Battery life'
+        ],
+        correctOption: 1,
+    },
+
+    {
+        id: 'p6',
+        type: 'mcq',
+        question: 'What may happen to reaction time after practice?',
+        options: [
+            'It may improve',
+            'It always becomes slower',
+            'It stays exactly the same',
+            'It disappears'
+        ],
+        correctOption: 0,
+    },
+
+    {
+        id: 'p7',
+        type: 'calculation',
+        question: 'A student recorded reaction times of 4 s, 3 s, and 2 s. What is the average reaction time?',
+        formula: 'Average = (4 + 3 + 2) ÷ 3',
+        hint: 'Add the times and divide by 3',
+        correctAnswer: 3,
+        unit: 's',
+    },
+
+    {
+        id: 'p8',
+        type: 'mcq',
+        question: 'What does the tracing challenge mainly test?',
+        options: [
+            'Coordination and accuracy',
+            'Body weight',
+            'Hearing ability',
+            'Lung capacity'
+        ],
+        correctOption: 0,
+    },
+
+    {
+        id: 'p9',
+        type: 'calculation',
+        question: 'A student predicted a reaction time of 5 s but achieved 3 s. By how many seconds was the actual result faster than the prediction?',
+        formula: 'Difference = prediction - actual',
+        hint: '5 - 3',
+        correctAnswer: 2,
+        unit: 's',
+    },
+
+    {
+        id: 'p10',
+        type: 'mcq',
+        question: 'Why might a dominant hand perform better than a non-dominant hand?',
+        options: [
+            'It is usually used more often and has better control',
+            'It is larger',
+            'It has more bones',
+            'It weighs less'
+        ],
+        correctOption: 0,
+    },
+];
+
+export default function Quiz6() {
     const [answers, setAnswers] = useState<Record<string, string>>({});
     const [submitted, setSubmitted] = useState(false);
     const [showHint, setShowHint] = useState<Record<string,boolean>>({});
@@ -129,7 +158,7 @@ export default function Quiz2() {
 
     const themed = quizColors[theme as ThemeKey];
     const globalthemed = globalColors[theme as ThemeKey];
-    const activityStyles = quizStyle;
+    const localStyles = quizStyle;
 
     const questions = PRIMARY_QUESTIONS;
 
@@ -207,18 +236,18 @@ export default function Quiz2() {
 
 
     return (
-        <SafeAreaView style={[globalthemed.page, activityStyles.page]}>
-            <View style={activityStyles.header}>
+        <SafeAreaView style={[globalthemed.page, localStyles.page]}>
+            <View style={localStyles.header}>
                 <TouchableOpacity 
                 style={[globalthemed.back, globalStyles.back_button]}
                 onPress={() => router.back()}>
                     <Text style={[globalthemed.text, globalStyles.text]}>{'<'}</Text>
                 </TouchableOpacity>
-                <View style={activityStyles.header_title_container}>
-                    <Text style={[globalthemed.text, activityStyles.header_title]}>
-                        Activity 1 · Exercises
+                <View style={localStyles.header_title_container}>
+                    <Text style={[globalthemed.text, localStyles.header_title]}>
+                        Activity 6 · Exercises
                     </Text>
-                    <Text style={[globalthemed.text, activityStyles.header_subtitle]}>
+                    <Text style={[globalthemed.text, localStyles.header_subtitle]}>
                         Quiz
                     </Text>
                 </View>

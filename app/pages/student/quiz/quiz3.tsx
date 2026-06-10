@@ -5,7 +5,7 @@ import { router } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { quizColors, quizStyle, } from './quizStyle';
+import { quizColors, quizStyle } from './quizStyle';
 
 type QuestionType = 'mcq' | 'calculation';
 type Question = {
@@ -26,100 +26,129 @@ const RED = '#e05c5c';
 const FONT_FAMILY = 'Trebuchet MS, Roboto, sans-serif';
 
 const PRIMARY_QUESTIONS: Question[] = [
-    {id: 'p1', type: 'mcq', 
-        question: 'What force pulls the toy downard when it falls?',
+    {
+        id: 'p1',
+        type: 'mcq',
+        question: 'What causes the paper to move during the experiment?',
         options: [
-            'Drag', 
-            'Gravity', 
-            'Friction', 
-            'Other',
+            'Gravity',
+            'Air moving from the fan',
+            'Magnetism',
+            'Heat'
         ],
         correctOption: 1,
     },
-    {id: 'p2', type: 'mcq', 
-        question: 'What does a parachute do to the falling toy?',
-        options: [
-            'Makes it fall faster',
-            'Has no effect', 
-            'Slows it down', 
-            'Pushes it sideways',
-        ],
-        correctOption: 2,
-    },
-    {id: 'p3', type: 'mcq', 
-        question: 'Which parachute design is likely to slow the toy the most?',
-        options: [
-            'A very small parachute', 
-            'No parachute', 
-            'A large wide parachute', 
-            'Pushes it sideways',
-        ],
-        correctOption: 2,
-    },
-    {id: 'p4', type: 'calculation', 
-        question: 'The toy fell 2.0 m in 0.5 s. Calculate the final speed.',
-        formula: 'Speed = distance / time',
-        hint: 'Divide the distance (2.0 m) by the time (0.5 s)',
-        correctAnswer: 4.0,
-        unit: 'm/s',
-    },
+
     {
-    id: 'p5', type: 'mcq',
-        question: 'Why was the toy dropped from the same height each time?',
+        id: 'p2',
+        type: 'mcq',
+        question: 'Why are different fan designs tested?',
         options: [
-            'To make the toy heavier',
+            'To use more materials',
+            'To compare how design affects air movement',
+            'To make the paper heavier',
+            'To reduce the effect of air'
+        ],
+        correctOption: 1,
+    },
+
+    {
+        id: 'p3',
+        type: 'mcq',
+        question: 'Which material is expected to bend the least?',
+        options: [
+            'Thin printer paper',
+            'Card stock',
+            'Thin cardboard',
+            'Corrugated cardboard'
+        ],
+        correctOption: 3,
+    },
+
+    {
+        id: 'p4',
+        type: 'calculation',
+        question: 'A sheet of paper bends by 30°. Convert the angle to radians.',
+        formula: 'θ = degrees × π / 180',
+        hint: '30 × π ÷ 180',
+        correctAnswer: 0.524,
+        unit: 'rad',
+    },
+
+    {
+        id: 'p5',
+        type: 'mcq',
+        question: 'What happens to the force required to bend a material as stiffness increases?',
+        options: [
+            'It decreases',
+            'It stays the same',
+            'It increases',
+            'It becomes zero'
+        ],
+        correctOption: 2,
+    },
+
+    {
+        id: 'p6',
+        type: 'calculation',
+        question: 'Thin paper has k = 0.05 N/rad and bends by 0.524 rad. Calculate the force.',
+        formula: 'F = k × θ',
+        hint: '0.05 × 0.524',
+        correctAnswer: 0.026,
+        unit: 'N',
+    },
+
+    {
+        id: 'p7',
+        type: 'mcq',
+        question: 'Why should the distance from the fan be controlled during testing?',
+        options: [
             'To make the test fair',
             'To increase gravity',
-            'To save time'
-            ],
-            correctOption: 1,
+            'To reduce stiffness',
+            'To stop air movement'
+        ],
+        correctOption: 0,
     },
-    {id: 'p6', type: 'calculation', 
-        question: 'A ball fell with a speed of 3.0 m/s and it took 2.0 s to hit the floor, what is the distance travelled by the ball?',
-        formula: 'Distance = speed × time',
-        hint: 'Multiply the speed (3 m/s) by the time (2.0 s) ',
-        correctAnswer: 6.0,
-        unit: 'm',
-    },
-    {id: 'p7', type: 'mcq',
-    question: 'What is drag?',
-    options: [
-        'A force that speeds objects up',
-        'A force that opposes motion through air',
-        'The same as gravity',
-        'A type of parachute'
+
+    {
+        id: 'p8',
+        type: 'mcq',
+        question: 'What is the main variable being observed in this activity?',
+        options: [
+            'Paper colour',
+            'Bend angle of the material',
+            'Table height',
+            'Room temperature'
         ],
         correctOption: 1,
     },
-    {id: 'p8', type: 'mcq',
-    question: 'Why do engineers test more than one parachute design?',
-    options: [
-        'To make the toy heavier',
-        'To use more materials',
-        'To improve the design and compare results',
-        'To make the toy fall faster'
-        ],
-        correctOption: 2,
-    },
-    {id: 'p9', type: 'calculation',
-        question: 'A toy falls 6.0 m with speed of 2.0 m/s . What is the time taken to fall the distance?',
-        formula: 'Time = Speed ÷ time',
-        correctAnswer: 3.0,
-        unit: 's',
-    },
-    {id: 'p10', type: 'mcq',
-        question: 'Which force pulls the toy toward Earth?',
-        options: [
-            'Drag',
-            'Gravity',
-            'Lift',
-            'Magnetism'
-            ],
-            correctOption: 1,
-    },
-]
 
-export default function Quiz2() {
+    {
+        id: 'p9',
+        type: 'calculation',
+        question: 'A cardboard sheet has k = 0.5 N/rad and bends by 0.524 rad. Calculate the force.',
+        formula: 'F = k × θ',
+        hint: '0.5 × 0.524',
+        correctAnswer: 0.262,
+        unit: 'N',
+    },
+
+    {
+        id: 'p10',
+        type: 'mcq',
+        question: 'What would most likely happen if the fan is moved farther away from the paper?',
+        options: [
+            'The paper bends more',
+            'The paper bends less',
+            'The stiffness increases',
+            'The mass increases'
+        ],
+        correctOption: 1,
+    },
+];
+
+export default function Quiz3() {
     const [answers, setAnswers] = useState<Record<string, string>>({});
     const [submitted, setSubmitted] = useState(false);
     const [showHint, setShowHint] = useState<Record<string,boolean>>({});
@@ -129,7 +158,7 @@ export default function Quiz2() {
 
     const themed = quizColors[theme as ThemeKey];
     const globalthemed = globalColors[theme as ThemeKey];
-    const activityStyles = quizStyle;
+    const localStyles = quizStyle;
 
     const questions = PRIMARY_QUESTIONS;
 
@@ -207,18 +236,18 @@ export default function Quiz2() {
 
 
     return (
-        <SafeAreaView style={[globalthemed.page, activityStyles.page]}>
-            <View style={activityStyles.header}>
+        <SafeAreaView style={[globalthemed.page, localStyles.page]}>
+            <View style={localStyles.header}>
                 <TouchableOpacity 
                 style={[globalthemed.back, globalStyles.back_button]}
                 onPress={() => router.back()}>
                     <Text style={[globalthemed.text, globalStyles.text]}>{'<'}</Text>
                 </TouchableOpacity>
-                <View style={activityStyles.header_title_container}>
-                    <Text style={[globalthemed.text, activityStyles.header_title]}>
-                        Activity 1 · Exercises
+                <View style={localStyles.header_title_container}>
+                    <Text style={[globalthemed.text, localStyles.header_title]}>
+                        Activity 3 · Exercises
                     </Text>
-                    <Text style={[globalthemed.text, activityStyles.header_subtitle]}>
+                    <Text style={[globalthemed.text, localStyles.header_subtitle]}>
                         Quiz
                     </Text>
                 </View>

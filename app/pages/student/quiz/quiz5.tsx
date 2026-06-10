@@ -5,7 +5,7 @@ import { router } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { quizColors, quizStyle, } from './quizStyle';
+import { quizColors, quizStyle } from './quizStyle';
 
 type QuestionType = 'mcq' | 'calculation';
 type Question = {
@@ -26,100 +26,129 @@ const RED = '#e05c5c';
 const FONT_FAMILY = 'Trebuchet MS, Roboto, sans-serif';
 
 const PRIMARY_QUESTIONS: Question[] = [
-    {id: 'p1', type: 'mcq', 
-        question: 'What force pulls the toy downard when it falls?',
-        options: [
-            'Drag', 
-            'Gravity', 
-            'Friction', 
-            'Other',
-        ],
-        correctOption: 1,
-    },
-    {id: 'p2', type: 'mcq', 
-        question: 'What does a parachute do to the falling toy?',
-        options: [
-            'Makes it fall faster',
-            'Has no effect', 
-            'Slows it down', 
-            'Pushes it sideways',
-        ],
-        correctOption: 2,
-    },
-    {id: 'p3', type: 'mcq', 
-        question: 'Which parachute design is likely to slow the toy the most?',
-        options: [
-            'A very small parachute', 
-            'No parachute', 
-            'A large wide parachute', 
-            'Pushes it sideways',
-        ],
-        correctOption: 2,
-    },
-    {id: 'p4', type: 'calculation', 
-        question: 'The toy fell 2.0 m in 0.5 s. Calculate the final speed.',
-        formula: 'Speed = distance / time',
-        hint: 'Divide the distance (2.0 m) by the time (0.5 s)',
-        correctAnswer: 4.0,
-        unit: 'm/s',
-    },
     {
-    id: 'p5', type: 'mcq',
-        question: 'Why was the toy dropped from the same height each time?',
+        id: 'p1',
+        type: 'mcq',
+        question: 'What body parts work together to create movement?',
         options: [
-            'To make the toy heavier',
-            'To make the test fair',
-            'To increase gravity',
-            'To save time'
-            ],
-            correctOption: 1,
+            'Muscles and joints',
+            'Hair and skin',
+            'Teeth and nails',
+            'Eyes and ears'
+        ],
+        correctOption: 0,
     },
-    {id: 'p6', type: 'calculation', 
-        question: 'A ball fell with a speed of 3.0 m/s and it took 2.0 s to hit the floor, what is the distance travelled by the ball?',
-        formula: 'Distance = speed × time',
-        hint: 'Multiply the speed (3 m/s) by the time (2.0 s) ',
-        correctAnswer: 6.0,
-        unit: 'm',
-    },
-    {id: 'p7', type: 'mcq',
-    question: 'What is drag?',
-    options: [
-        'A force that speeds objects up',
-        'A force that opposes motion through air',
-        'The same as gravity',
-        'A type of parachute'
+
+    {
+        id: 'p2',
+        type: 'mcq',
+        question: 'What does smoother movement usually indicate?',
+        options: [
+            'Less coordination',
+            'Better coordination',
+            'More fatigue',
+            'Greater weight'
         ],
         correctOption: 1,
     },
-    {id: 'p8', type: 'mcq',
-    question: 'Why do engineers test more than one parachute design?',
-    options: [
-        'To make the toy heavier',
-        'To use more materials',
-        'To improve the design and compare results',
-        'To make the toy fall faster'
+
+    {
+        id: 'p3',
+        type: 'mcq',
+        question: 'Why does the phone record vibration during the activity?',
+        options: [
+            'To measure movement quality',
+            'To make noise',
+            'To charge the phone',
+            'To increase speed'
         ],
-        correctOption: 2,
+        correctOption: 0,
     },
-    {id: 'p9', type: 'calculation',
-        question: 'A toy falls 6.0 m with speed of 2.0 m/s . What is the time taken to fall the distance?',
-        formula: 'Time = Speed ÷ time',
-        correctAnswer: 3.0,
+
+    {
+        id: 'p4',
+        type: 'calculation',
+        question: 'Attempt 1 took 20 seconds and Attempt 2 took 5 seconds. How many seconds faster was Attempt 2?',
+        formula: 'Difference = larger time - smaller time',
+        hint: '20 - 5',
+        correctAnswer: 15,
         unit: 's',
     },
-    {id: 'p10', type: 'mcq',
-        question: 'Which force pulls the toy toward Earth?',
-        options: [
-            'Drag',
-            'Gravity',
-            'Lift',
-            'Magnetism'
-            ],
-            correctOption: 1,
-    },
-]
 
-export default function Quiz2() {
+    {
+        id: 'p5',
+        type: 'mcq',
+        question: 'What often happens when movements become faster?',
+        options: [
+            'Control improves',
+            'Control may decrease',
+            'Muscles disappear',
+            'The phone becomes heavier'
+        ],
+        correctOption: 1,
+    },
+
+    {
+        id: 'p6',
+        type: 'mcq',
+        question: 'Why should students repeat the movement several times?',
+        options: [
+            'To compare results and improve performance',
+            'To make the phone vibrate more',
+            'To increase gravity',
+            'To reduce muscle use'
+        ],
+        correctOption: 0,
+    },
+
+    {
+        id: 'p7',
+        type: 'calculation',
+        question: 'A student completed 3 movement attempts. The times were 18 s, 15 s, and 12 s. How many seconds faster was the final attempt than the first?',
+        formula: 'Improvement = first time - final time',
+        hint: '18 - 12',
+        correctAnswer: 6,
+        unit: 's',
+    },
+
+    {
+        id: 'p8',
+        type: 'mcq',
+        question: 'What is range of motion?',
+        options: [
+            'The distance a joint can move',
+            'The speed of a phone',
+            'The size of a muscle',
+            'The weight of a person'
+        ],
+        correctOption: 0,
+    },
+
+    {
+        id: 'p9',
+        type: 'calculation',
+        question: 'Attempt 1 recorded 8 mm of movement and Attempt 2 recorded 5 mm. By how many millimetres was the movement reduced?',
+        formula: 'Reduction = first measurement - second measurement',
+        hint: '8 - 5',
+        correctAnswer: 3,
+        unit: 'mm',
+    },
+
+    {
+        id: 'p10',
+        type: 'mcq',
+        question: 'What can phone sensors help students learn about?',
+        options: [
+            'Biomechanics and movement',
+            'Weather forecasting',
+            'Plant growth',
+            'Electric circuits'
+        ],
+        correctOption: 0,
+    },
+];
+
+export default function Quiz5() {
     const [answers, setAnswers] = useState<Record<string, string>>({});
     const [submitted, setSubmitted] = useState(false);
     const [showHint, setShowHint] = useState<Record<string,boolean>>({});
@@ -129,7 +158,7 @@ export default function Quiz2() {
 
     const themed = quizColors[theme as ThemeKey];
     const globalthemed = globalColors[theme as ThemeKey];
-    const activityStyles = quizStyle;
+    const localStyles = quizStyle;
 
     const questions = PRIMARY_QUESTIONS;
 
@@ -207,18 +236,18 @@ export default function Quiz2() {
 
 
     return (
-        <SafeAreaView style={[globalthemed.page, activityStyles.page]}>
-            <View style={activityStyles.header}>
+        <SafeAreaView style={[globalthemed.page, localStyles.page]}>
+            <View style={localStyles.header}>
                 <TouchableOpacity 
                 style={[globalthemed.back, globalStyles.back_button]}
                 onPress={() => router.back()}>
                     <Text style={[globalthemed.text, globalStyles.text]}>{'<'}</Text>
                 </TouchableOpacity>
-                <View style={activityStyles.header_title_container}>
-                    <Text style={[globalthemed.text, activityStyles.header_title]}>
-                        Activity 1 · Exercises
+                <View style={localStyles.header_title_container}>
+                    <Text style={[globalthemed.text, localStyles.header_title]}>
+                        Activity 5 · Exercises
                     </Text>
-                    <Text style={[globalthemed.text, activityStyles.header_subtitle]}>
+                    <Text style={[globalthemed.text, localStyles.header_subtitle]}>
                         Quiz
                     </Text>
                 </View>

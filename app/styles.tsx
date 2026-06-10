@@ -112,7 +112,9 @@ export const globalColors = {
         text_input: {
             backgroundColor: '#ffffff',
             borderColor: '#97b9d6'
-        }
+        },
+
+
     }),
     
     dark : StyleSheet.create({
@@ -216,7 +218,8 @@ export const globalColors = {
 
         separator: {
             backgroundColor: '#656565',
-        }
+        },
+
     })
 }
 

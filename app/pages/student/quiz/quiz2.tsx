@@ -3,9 +3,9 @@ import { useTheme } from '@/src/context/ThemeContext';
 import { ThemeKey } from '@/src/context/ThemeContext.d';
 import { router } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { quizColors, quizStyle, } from './quizStyle';
+import { quizColors, quizStyle } from './quizStyle';
 
 type QuestionType = 'mcq' | 'calculation';
 type Question = {
@@ -27,93 +27,104 @@ const FONT_FAMILY = 'Trebuchet MS, Roboto, sans-serif';
 
 const PRIMARY_QUESTIONS: Question[] = [
     {id: 'p1', type: 'mcq', 
-        question: 'What force pulls the toy downard when it falls?',
+        question: 'What unit is used to measure sound level?',
         options: [
-            'Drag', 
-            'Gravity', 
-            'Friction', 
-            'Other',
+            'Hertz (Hz)', 
+            'Decibel (dB)', 
+            'Newton (N)', 
+            'Meter (m)',
         ],
         correctOption: 1,
     },
     {id: 'p2', type: 'mcq', 
-        question: 'What does a parachute do to the falling toy?',
+        question: 'What does "sound intensity" depend on?',
         options: [
-            'Makes it fall faster',
-            'Has no effect', 
-            'Slows it down', 
-            'Pushes it sideways',
+            'Only the colour of the object making the sound',
+            'The energy of the sound and the surfaces around it', 
+            'Only the size of the room', 
+            'The temperature of the air',
         ],
-        correctOption: 2,
+        correctOption: 1,
     },
     {id: 'p3', type: 'mcq', 
-        question: 'Which parachute design is likely to slow the toy the most?',
+        question: 'A library has a sound level of around 25 dB. What is the hearing risk?',
         options: [
-            'A very small parachute', 
-            'No parachute', 
-            'A large wide parachute', 
-            'Pushes it sideways',
+            'Hearing damage likely after short exposure', 
+            'Painful; immediate damage possible', 
+            'Safe for long periods', 
+            'No risk',
         ],
-        correctOption: 2,
+        correctOption: 3,
     },
-    {id: 'p4', type: 'calculation', 
-        question: 'The toy fell 2.0 m in 0.5 s. Calculate the final speed.',
-        formula: 'Speed = distance / time',
-        hint: 'Divide the distance (2.0 m) by the time (0.5 s)',
-        correctAnswer: 4.0,
-        unit: 'm/s',
+    {id: 'p4', type: 'mcq', 
+        question: 'A normal classroom conversation sits around 45 dB. What is the risk level?',
+        options: [
+            'Safe for long periods', 
+            'No risk', 
+            'Hearing damage possible after long exposure', 
+            'Serious hearing damage in minutes',
+        ],
+        correctOption: 0,
     },
     {
     id: 'p5', type: 'mcq',
-        question: 'Why was the toy dropped from the same height each time?',
+        question: 'A lawnmower produces roughly 88 dB. What is the likely hearing risk?',
         options: [
-            'To make the toy heavier',
-            'To make the test fair',
-            'To increase gravity',
-            'To save time'
+            'No risk',
+            'Safe for long periods',
+            'Hearing damage possible after long exposure',
+            'Instant, permanent hearing damage'
             ],
-            correctOption: 1,
+            correctOption: 2,
     },
-    {id: 'p6', type: 'calculation', 
-        question: 'A ball fell with a speed of 3.0 m/s and it took 2.0 s to hit the floor, what is the distance travelled by the ball?',
-        formula: 'Distance = speed × time',
-        hint: 'Multiply the speed (3 m/s) by the time (2.0 s) ',
-        correctAnswer: 6.0,
-        unit: 'm',
+    {
+    id: 'p6', type: 'mcq',
+        question: 'You are standing near an active siren at close range. What should you expect?',
+        options: [
+            'No risk — it is only a siren',
+            'Safe for long periods',
+            'Hearing damage likely after short exposure',
+            'Painful; immediate damage possible'
+            ],
+            correctOption: 2,
     },
     {id: 'p7', type: 'mcq',
-    question: 'What is drag?',
+    question: 'A dance club measures 105 dB. How quickly can serious hearing damage occur?',
     options: [
-        'A force that speeds objects up',
-        'A force that opposes motion through air',
-        'The same as gravity',
-        'A type of parachute'
+        'Only after many hours',
+        'In a matter of minutes',
+        'Only if you are standing right next to a speaker',
+        'Never — music is not dangerous'
         ],
         correctOption: 1,
     },
     {id: 'p8', type: 'mcq',
-    question: 'Why do engineers test more than one parachute design?',
+    question: 'Which sound source is most likely to cause INSTANT permanent hearing damage?',
     options: [
-        'To make the toy heavier',
-        'To use more materials',
-        'To improve the design and compare results',
-        'To make the toy fall faster'
+        'Vacuum cleaner',
+        'Power drill',
+        'Rock concert',
+        'Rocket Explosion'
+        ],
+        correctOption: 3,
+    },
+    {id: 'p9', type: 'mcq',
+    question: 'Which sound source is most likely to cause INSTANT permanent hearing damage?',
+    options: [
+        'It only affects elderly people',
+        'It has no effect on concentration',
+        'It can impact health and concentration',
+        'It only matters if you can feel it vibrating'
         ],
         correctOption: 2,
     },
-    {id: 'p9', type: 'calculation',
-        question: 'A toy falls 6.0 m with speed of 2.0 m/s . What is the time taken to fall the distance?',
-        formula: 'Time = Speed ÷ time',
-        correctAnswer: 3.0,
-        unit: 's',
-    },
     {id: 'p10', type: 'mcq',
-        question: 'Which force pulls the toy toward Earth?',
+        question: 'Why does the activity ask students to map "loud and quiet zones" around the classroom?',
         options: [
-            'Drag',
-            'Gravity',
-            'Lift',
-            'Magnetism'
+            'To find the best spots for the teacher to stand',
+            'To identify areas of high sound exposure that could affect health or focus',
+            'Because sound cannot travel between rooms',
+            'To measure the size of the room'
             ],
             correctOption: 1,
     },
@@ -130,6 +141,7 @@ export default function Quiz2() {
     const themed = quizColors[theme as ThemeKey];
     const globalthemed = globalColors[theme as ThemeKey];
     const activityStyles = quizStyle;
+    const localStyles = quizStyle;
 
     const questions = PRIMARY_QUESTIONS;
 
@@ -216,7 +228,7 @@ export default function Quiz2() {
                 </TouchableOpacity>
                 <View style={activityStyles.header_title_container}>
                     <Text style={[globalthemed.text, activityStyles.header_title]}>
-                        Activity 1 · Exercises
+                        Activity 2 · Exercises
                     </Text>
                     <Text style={[globalthemed.text, activityStyles.header_subtitle]}>
                         Quiz
@@ -413,257 +425,3 @@ export default function Quiz2() {
         </SafeAreaView>
     );    
 }
-
-const localStyles = StyleSheet.create({
-    scroll: {
-        flex: 1,
-    },
-
-    scroll_content: {
-        padding: 16,
-    },
-
-    score_card: {
-      borderRadius: 16,
-      borderWidth: 2,
-      padding: 20,
-      alignItems: 'center',
-      marginBottom: 20,
-      gap: 8,  
-    },
-
-    score_number: {
-        fontSize: 48,
-        fontWeight: '800'
-    },
-
-    score_label: {
-        fontSize: 16,
-        fontWeight: '600',
-    },
-
-    button: {
-        flexDirection: 'row',
-        gap: 16,
-    },
-
-    retry_button: {
-        marginTop: 8,
-        borderRadius: 10,
-        paddingHorizontal: 24,
-        paddingVertical: 10,
-    },
-
-    retry_text: {
-        fontSize: 16,
-        fontFamily: FONT_FAMILY,
-        fontWeight: '700',
-    },
-
-    question_card: {
-        borderRadius: 14,
-        borderWidth: 1,
-        padding: 14,
-        marginBottom: 14,
-        gap: 10,
-    },
-
-    question_card_correct: {
-        borderColor: GREEN,
-    },
-
-    question_card_wrong: {
-        borderColor: RED,
-    },
-
-    question_header: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 8,
-    },
-
-    question_number:{
-        width: 28,
-        height: 28,
-        borderRadius: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-
-    question_number_text: {
-        fontSize: 14,
-        fontFamily: FONT_FAMILY,
-        fontWeight: '700',
-    },
-
-    question_type_icon: {
-        borderRadius: 6,
-        paddingHorizontal: 8,
-        paddingVertical: 3,
-    },
-
-    question_type_text: {
-        fontSize: 12,
-        fontFamily: FONT_FAMILY,
-        color: '#969696',
-        fontWeight: '600',
-    },
-
-    question_text: {
-        fontSize: 16,
-        fontFamily: FONT_FAMILY,
-        lineHeight: 22,
-    },
-
-    formula_chip: {
-        borderRadius: 8,
-        paddingHorizontal: 10,
-        paddingVertical: 6,
-        borderLeftWidth: 3,
-    },
-    
-    formula_text: {
-        fontSize: 14,
-        fontFamily: FONT_FAMILY,
-        fontStyle: 'italic',
-    },
-
-    hint_button: {
-        alignSelf: 'flex-start',
-    },
-
-    hint_button_text: {
-        fontSize: 14,
-        fontFamily: FONT_FAMILY,
-        fontWeight: '600',
-    },
-
-    hint_container: {
-        backgroundColor: '#fffbe6',
-        borderRadius: 8,
-        padding: 10,
-        borderLeftWidth: 3,
-        borderLeftColor: '#f0b429',
-    },
-
-    hint_text: {
-        fontSize: 14,
-        fontFamily: FONT_FAMILY,
-        color: '#7a5c00',
-    },
-
-    option_list: {
-        gap: 8,
-    },
-
-    option: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 10,
-        padding: 10,
-        borderRadius: 10,
-        borderWidth: 1.5,
-    },
-
-    option_correct: {
-        borderColor: GREEN,
-        backgroundColor: '#f0faf4',
-    },
-
-    option_wrong: {
-        borderColor: RED,
-        backgroundColor: '#fff5f5'
-    },
-
-    option_dot: {
-        width: 18,
-        height: 18,
-        borderRadius: 9,
-        borderWidth: 2,
-        flexShrink: 0,
-    },
-
-    option_text: {
-        fontSize: 16,
-        fontFamily: FONT_FAMILY,
-        flex: 1,
-        lineHeight: 20,
-    },
-
-    calculation_row: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 8,
-    },
-
-    calculation_input: {
-        flex: 1,
-        backgroundColor: '#f4f8fc',
-        borderRadius: 10,
-        borderWidth: 1.5,
-        paddingHorizontal: 12,
-        paddingVertical: 10,
-        fontSize: 16,
-        fontFamily: FONT_FAMILY,
-        fontWeight: '600',
-    },
-
-    calculation_input_correct: {
-        borderColor: GREEN,
-        backgroundColor: '#f0faf4',
-    },
-
-    calculation_input_wrong: {
-        borderColor: RED,
-        backgroundColor: '#fff5f5',
-    },
-
-    unit_icon: {
-        borderRadius: 8,
-        paddingHorizontal: 10,
-        paddingVertical: 10,
-    },
-
-    unit_text: {
-        fontSize: 14,
-        fontFamily: FONT_FAMILY,
-        fontWeight: '700',
-    },
-
-    correct_answer_text: {
-        fontSize: 14,
-        fontFamily: FONT_FAMILY,
-        color: GREEN,
-        fontWeight: '600',
-    },
-
-    submit_button: {
-        borderRadius: 14,
-        paddingVertical: 16,
-        alignItems: 'center',
-        marginTop: 8,
-    },
-
-    submit_text: {
-        fontSize: 16,
-        fontFamily: FONT_FAMILY,
-        fontWeight: '800',
-        letterSpacing: 0.5,
-    },
-
-    progressContainer: {
-        width: 64,
-        height: 64,
-        borderRadius: 26,
-        padding: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-
-    progressText: {
-        fontSize: 16,
-        fontFamily: FONT_FAMILY,
-        fontWeight: '700',
-        textAlign: 'center'
-    },
-});

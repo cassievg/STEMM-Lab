@@ -5,7 +5,7 @@ import { router } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { quizColors, quizStyle, } from './quizStyle';
+import { quizColors, quizStyle } from './quizStyle';
 
 type QuestionType = 'mcq' | 'calculation';
 type Question = {
@@ -26,100 +26,129 @@ const RED = '#e05c5c';
 const FONT_FAMILY = 'Trebuchet MS, Roboto, sans-serif';
 
 const PRIMARY_QUESTIONS: Question[] = [
-    {id: 'p1', type: 'mcq', 
-        question: 'What force pulls the toy downard when it falls?',
-        options: [
-            'Drag', 
-            'Gravity', 
-            'Friction', 
-            'Other',
-        ],
-        correctOption: 1,
-    },
-    {id: 'p2', type: 'mcq', 
-        question: 'What does a parachute do to the falling toy?',
-        options: [
-            'Makes it fall faster',
-            'Has no effect', 
-            'Slows it down', 
-            'Pushes it sideways',
-        ],
-        correctOption: 2,
-    },
-    {id: 'p3', type: 'mcq', 
-        question: 'Which parachute design is likely to slow the toy the most?',
-        options: [
-            'A very small parachute', 
-            'No parachute', 
-            'A large wide parachute', 
-            'Pushes it sideways',
-        ],
-        correctOption: 2,
-    },
-    {id: 'p4', type: 'calculation', 
-        question: 'The toy fell 2.0 m in 0.5 s. Calculate the final speed.',
-        formula: 'Speed = distance / time',
-        hint: 'Divide the distance (2.0 m) by the time (0.5 s)',
-        correctAnswer: 4.0,
-        unit: 'm/s',
-    },
     {
-    id: 'p5', type: 'mcq',
-        question: 'Why was the toy dropped from the same height each time?',
+        id: 'p1',
+        type: 'mcq',
+        question: 'What does the respiratory system help the body do?',
         options: [
-            'To make the toy heavier',
-            'To make the test fair',
-            'To increase gravity',
-            'To save time'
-            ],
-            correctOption: 1,
-    },
-    {id: 'p6', type: 'calculation', 
-        question: 'A ball fell with a speed of 3.0 m/s and it took 2.0 s to hit the floor, what is the distance travelled by the ball?',
-        formula: 'Distance = speed × time',
-        hint: 'Multiply the speed (3 m/s) by the time (2.0 s) ',
-        correctAnswer: 6.0,
-        unit: 'm',
-    },
-    {id: 'p7', type: 'mcq',
-    question: 'What is drag?',
-    options: [
-        'A force that speeds objects up',
-        'A force that opposes motion through air',
-        'The same as gravity',
-        'A type of parachute'
-        ],
-        correctOption: 1,
-    },
-    {id: 'p8', type: 'mcq',
-    question: 'Why do engineers test more than one parachute design?',
-    options: [
-        'To make the toy heavier',
-        'To use more materials',
-        'To improve the design and compare results',
-        'To make the toy fall faster'
+            'Digest food',
+            'Pump blood',
+            'Take in oxygen and remove carbon dioxide',
+            'Move bones'
         ],
         correctOption: 2,
     },
-    {id: 'p9', type: 'calculation',
-        question: 'A toy falls 6.0 m with speed of 2.0 m/s . What is the time taken to fall the distance?',
-        formula: 'Time = Speed ÷ time',
-        correctAnswer: 3.0,
-        unit: 's',
-    },
-    {id: 'p10', type: 'mcq',
-        question: 'Which force pulls the toy toward Earth?',
-        options: [
-            'Drag',
-            'Gravity',
-            'Lift',
-            'Magnetism'
-            ],
-            correctOption: 1,
-    },
-]
 
-export default function Quiz2() {
+    {
+        id: 'p2',
+        type: 'mcq',
+        question: 'Why does breathing rate increase during exercise?',
+        options: [
+            'The body needs more oxygen',
+            'The lungs become smaller',
+            'Gravity increases',
+            'The heart stops working'
+        ],
+        correctOption: 0,
+    },
+
+    {
+        id: 'p3',
+        type: 'mcq',
+        question: 'What is being measured in this activity?',
+        options: [
+            'Body weight',
+            'Breaths per minute',
+            'Height',
+            'Blood type'
+        ],
+        correctOption: 1,
+    },
+
+    {
+        id: 'p4',
+        type: 'calculation',
+        question: 'A student recorded 8 breaths per minute at rest and 20 breaths per minute after exercise. How many more breaths per minute were recorded after exercise?',
+        formula: 'Change = after exercise - at rest',
+        hint: '20 - 8',
+        correctAnswer: 12,
+        unit: 'breaths/min',
+    },
+
+    {
+        id: 'p5',
+        type: 'mcq',
+        question: 'Why is the phone placed on the chest?',
+        options: [
+            'To detect chest movement during breathing',
+            'To increase breathing rate',
+            'To measure body temperature',
+            'To record heart sounds'
+        ],
+        correctOption: 0,
+    },
+
+    {
+        id: 'p6',
+        type: 'mcq',
+        question: 'Which activity would most likely cause the highest breathing rate?',
+        options: [
+            'Sitting quietly',
+            'Reading a book',
+            '100 star jumps',
+            'Watching a video'
+        ],
+        correctOption: 2,
+    },
+
+    {
+        id: 'p7',
+        type: 'calculation',
+        question: 'A student measured 10 breaths per minute at rest, 18 after jogging, and 22 after star jumps. What is the average breathing rate across the three measurements?',
+        formula: 'Average = (10 + 18 + 22) ÷ 3',
+        hint: 'Add the three values and divide by 3',
+        correctAnswer: 16.7,
+        unit: 'breaths/min',
+    },
+
+    {
+        id: 'p8',
+        type: 'mcq',
+        question: 'What gas do muscles need more of during exercise?',
+        options: [
+            'Nitrogen',
+            'Oxygen',
+            'Hydrogen',
+            'Helium'
+        ],
+        correctOption: 1,
+    },
+
+    {
+        id: 'p9',
+        type: 'calculation',
+        question: 'A student predicted 12 breaths per minute at rest but measured 10 breaths per minute. What was the difference between the prediction and the result?',
+        formula: 'Difference = prediction - actual',
+        hint: '12 - 10',
+        correctAnswer: 2,
+        unit: 'breaths/min',
+    },
+
+    {
+        id: 'p10',
+        type: 'mcq',
+        question: 'Why do scientists compare breathing rates before and after exercise?',
+        options: [
+            'To understand how the body responds to activity',
+            'To increase breathing rate',
+            'To make exercise easier',
+            'To reduce oxygen intake'
+        ],
+        correctOption: 0,
+    },
+];
+
+export default function Quiz7() {
     const [answers, setAnswers] = useState<Record<string, string>>({});
     const [submitted, setSubmitted] = useState(false);
     const [showHint, setShowHint] = useState<Record<string,boolean>>({});
@@ -129,7 +158,7 @@ export default function Quiz2() {
 
     const themed = quizColors[theme as ThemeKey];
     const globalthemed = globalColors[theme as ThemeKey];
-    const activityStyles = quizStyle;
+    const localStyles = quizStyle;
 
     const questions = PRIMARY_QUESTIONS;
 
@@ -207,18 +236,18 @@ export default function Quiz2() {
 
 
     return (
-        <SafeAreaView style={[globalthemed.page, activityStyles.page]}>
-            <View style={activityStyles.header}>
+        <SafeAreaView style={[globalthemed.page, localStyles.page]}>
+            <View style={localStyles.header}>
                 <TouchableOpacity 
                 style={[globalthemed.back, globalStyles.back_button]}
                 onPress={() => router.back()}>
                     <Text style={[globalthemed.text, globalStyles.text]}>{'<'}</Text>
                 </TouchableOpacity>
-                <View style={activityStyles.header_title_container}>
-                    <Text style={[globalthemed.text, activityStyles.header_title]}>
-                        Activity 1 · Exercises
+                <View style={localStyles.header_title_container}>
+                    <Text style={[globalthemed.text, localStyles.header_title]}>
+                        Activity 3 · Exercises
                     </Text>
-                    <Text style={[globalthemed.text, activityStyles.header_subtitle]}>
+                    <Text style={[globalthemed.text, localStyles.header_subtitle]}>
                         Quiz
                     </Text>
                 </View>

@@ -347,7 +347,7 @@ export const activityColors = {
         },
 
         list_dot: {
-            backgroundColor: ALT_BLUE,
+            backgroundColor: ALT_DARK,
         },
 
         progress_text: {
