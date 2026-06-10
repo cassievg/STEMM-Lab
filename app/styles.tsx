@@ -41,6 +41,14 @@ export const globalColors = {
             backgroundColor: '#afdaff',
         },
 
+        white_background: {
+            backgroundColor: '#ffffff'
+        },
+
+        light_text: {
+            color: '#afdaff'
+        },
+
         button_light: {
             backgroundColor: '#d6ecff',
             borderColor: '#6798c3'
@@ -93,6 +101,10 @@ export const globalColors = {
             backgroundColor: '#afdaff',
         },
 
+        black_background: {
+            backgroundColor: '#000000'
+        },
+
         separator: {
             backgroundColor: '#97b9d6'
         },
@@ -128,8 +140,20 @@ export const globalColors = {
             backgroundColor: '#bbbbbb',
         },
 
+        light_text: {
+            color: '#8d8d8d'
+        },
+
         error_text: {
             color: '#ffffff'
+        },
+
+        white_background: {
+            backgroundColor: '#323232'
+        },
+
+        black_background: {
+            backgroundColor: '#656565'
         },
 
         container: {
