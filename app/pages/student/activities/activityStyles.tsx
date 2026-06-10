@@ -298,6 +298,10 @@ export const activityColors = {
             borderLeftColor: BLUE,
             backgroundColor: '#eaf4fd',
         },
+
+        table_important_text: {
+            color: '#888888'
+        },
         
 }),
     dark : StyleSheet.create({
@@ -386,8 +390,8 @@ export const activityColors = {
         },
 
         focus_card: {
-            backgroundColor: ALT_DARK,
-            borderColor:ALT_BLUE,
+            backgroundColor: ALT_BLUE,
+            borderColor:ALT_LIGHT_BLUE,
         },
 
         checkbox_tick: {
@@ -568,6 +572,10 @@ export const activityColors = {
         sound_info_box: {
             borderLeftColor: ALT_WHITE,
             backgroundColor: '#333333',
+        },
+
+        table_important_text: {
+            color: '#aeaeae'
         },
     })
 }
