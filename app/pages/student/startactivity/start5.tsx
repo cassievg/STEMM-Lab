@@ -34,7 +34,7 @@ const isAttemptComplete = (attempt: AttemptData) =>
     attempt.isUserCorrect !== null
 
 export default function StartActivity1() {
-    const { theme, changeTheme } = useTheme();
+    const { theme } = useTheme();
     
     const themed = globalColors[theme as ThemeKey];
     const localThemed = localColors[theme as ThemeKey];

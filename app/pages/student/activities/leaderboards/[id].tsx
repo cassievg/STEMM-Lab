@@ -9,22 +9,13 @@ import { globalColors, globalStyles } from '../../../../styles';
 
 import { useTheme } from '@/src/context/ThemeContext';
 
-type HistoryRow = {
-    activityId: string,
-    activityName: string,
-    score: number,
-    globalRank: number,
-    localRank: number | null,
-    submitDate: string
-}
-
 type LdbRow = {
     teamName: string,
     score: number
 }
 
 export default function History() {
-    const { theme, changeTheme } = useTheme();
+    const { theme } = useTheme();
 
     const themed = globalColors[theme as ThemeKey];
 
