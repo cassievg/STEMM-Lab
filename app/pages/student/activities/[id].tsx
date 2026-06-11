@@ -494,7 +494,7 @@ function ActivityDetail({ data } : {data: ActivityData}){
             return;
         }
 
-        const roomId = await joinRoom(roomCode, id, teamID);
+    const roomId = await joinRoom(roomCode, id, teamID);
         if (roomId) {
             const roomData = await getRoomByTeamAndActivity(teamID, id);
             setRoom(roomData);

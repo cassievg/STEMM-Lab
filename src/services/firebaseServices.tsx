@@ -296,17 +296,16 @@ const hasLocal = async (teamId: string, activityId: string) => {
 }
 
 const completeActivity = async (teamId: string, activityId: string, roomId: string | null, score: number) => {
-    const docRef = await firestore()
+    console.log(teamId, activityId, roomId, score);
+    await firestore()
         .collection('results')
         .add({
             activityId: activityId,
-            roomId: roomId,
+            roomId: roomId ?? null,
             score: score,
             submitDate: new Date().toISOString(),
             teamId: teamId
         });
-    
-    return docRef;
 }
 
 export {

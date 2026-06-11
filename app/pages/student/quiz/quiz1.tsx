@@ -1,6 +1,8 @@
 import { globalColors, globalStyles } from '@/app/styles';
+import { useAuth } from '@/src/context/AuthContext';
 import { useTheme } from '@/src/context/ThemeContext';
 import { ThemeKey } from '@/src/context/ThemeContext.d';
+import { completeActivity, getRoomByTeamAndActivity } from '@/src/services/firebaseServices';
 import { router } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
@@ -20,6 +22,17 @@ type Question = {
     unit?: string;
     formula?: string;
 };
+
+
+type RoomRow = {
+    id: string,
+    code: string,
+    activityId: string,
+    createdAt: string,
+    hostTeamId: string, 
+    status: string,
+    teams: string[]
+}
 
 const GREEN = '#4caf7d';
 const RED = '#e05c5c';
@@ -119,11 +132,16 @@ const PRIMARY_QUESTIONS: Question[] = [
     },
 ]
 
-export default function Quiz2() {
+export default function Quiz1() {
     const [answers, setAnswers] = useState<Record<string, string>>({});
     const [submitted, setSubmitted] = useState(false);
     const [showHint, setShowHint] = useState<Record<string,boolean>>({});
     const scrollViewRef = useRef<ScrollView>(null);
+    const [room, setRoom] = useState<RoomRow | null>(null);
+    const [roomId, setRoomId] = useState<string | null>(null);
+    const [realScore, setRealScore] = useState(0);
+
+    const {teamID} = useAuth();
 
     const { theme, changeTheme } = useTheme();
 
@@ -172,8 +190,16 @@ export default function Quiz2() {
 
     const answeredCount = questions.filter((q) => answers[q.id] !== undefined && answers[q.id] !== '').length;
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         setSubmitted(true);
+        const score =  questions.filter((q) => checkAnswer(q)).length * 10;
+
+        const roomData = await getRoomByTeamAndActivity(teamID, '1');
+        if (roomData) {
+            await completeActivity(teamID, '1', roomData?.id, score);
+        } else {
+            await completeActivity(teamID, '1', null, score);
+        }
     };
     const handleRetry = () => {
         setAnswers({});
@@ -183,7 +209,7 @@ export default function Quiz2() {
     };
 
     const handleComplete = () => {
-        router.push('/pages/student/menu/activityselection')
+        router.push('/pages/student/activities/leaderboards/1');
         console.log(`Score: ${score}`)
     };
 

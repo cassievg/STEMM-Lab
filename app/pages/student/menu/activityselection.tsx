@@ -66,7 +66,6 @@ export default function ActivitySelection() {
     );
 
     const handleActivityRouting = async (activityId: string) => {
-        console.log('clicked');
         const activityCompleted = await activityIsComplete(teamID, activityId);
         if (!activityCompleted) {
             console.log("activity not done");

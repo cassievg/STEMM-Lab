@@ -185,7 +185,7 @@ export default function StartActivity1() {
             </ScrollView>
 
             <View style={[themed.white_background, localStyles.footer]}>
-                {completeCount === 3 ? (
+                {completeCount === 0 ? (
                     <TouchableOpacity
                         style={[localThemed.start_button, localStyles.submit_button]}
                         onPress={handleSubmit}
