@@ -5,7 +5,7 @@ import { ThemeKey } from '@/src/context/ThemeContext.d';
 import { completeActivity, getRoomByTeamAndActivity } from '@/src/services/firebaseServices';
 import { router } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { quizColors, quizStyle, } from './quizStyle';
 
@@ -23,20 +23,8 @@ type Question = {
     formula?: string;
 };
 
-
-type RoomRow = {
-    id: string,
-    code: string,
-    activityId: string,
-    createdAt: string,
-    hostTeamId: string, 
-    status: string,
-    teams: string[]
-}
-
 const GREEN = '#4caf7d';
 const RED = '#e05c5c';
-const FONT_FAMILY = 'Trebuchet MS, Roboto, sans-serif';
 
 const PRIMARY_QUESTIONS: Question[] = [
     {id: 'p1', type: 'mcq', 
@@ -140,11 +128,12 @@ export default function Quiz1() {
 
     const {teamID} = useAuth();
 
-    const { theme, changeTheme } = useTheme();
+    const { theme } = useTheme();
 
     const themed = quizColors[theme as ThemeKey];
     const globalthemed = globalColors[theme as ThemeKey];
     const activityStyles = quizStyle;
+    const localStyles = quizStyle;
 
     const questions = PRIMARY_QUESTIONS;
 
@@ -247,7 +236,7 @@ export default function Quiz1() {
                     </Text>
                 </View>
 
-                <View style={[globalthemed.simple_button, localStyles.progressContainer]}>
+                <View style={[themed.header_progress, localStyles.progressContainer]}>
                     <Text style={[globalthemed.text, localStyles.progressText]}>
                         {answeredCount}/{questions.length}
                     </Text>
@@ -437,257 +426,3 @@ export default function Quiz1() {
         </SafeAreaView>
     );    
 }
-
-const localStyles = StyleSheet.create({
-    scroll: {
-        flex: 1,
-    },
-
-    scroll_content: {
-        padding: 16,
-    },
-
-    score_card: {
-      borderRadius: 16,
-      borderWidth: 2,
-      padding: 20,
-      alignItems: 'center',
-      marginBottom: 20,
-      gap: 8,  
-    },
-
-    score_number: {
-        fontSize: 48,
-        fontWeight: '800'
-    },
-
-    score_label: {
-        fontSize: 16,
-        fontWeight: '600',
-    },
-
-    button: {
-        flexDirection: 'row',
-        gap: 16,
-    },
-
-    retry_button: {
-        marginTop: 8,
-        borderRadius: 10,
-        paddingHorizontal: 24,
-        paddingVertical: 10,
-    },
-
-    retry_text: {
-        fontSize: 16,
-        fontFamily: FONT_FAMILY,
-        fontWeight: '700',
-    },
-
-    question_card: {
-        borderRadius: 14,
-        borderWidth: 1,
-        padding: 14,
-        marginBottom: 14,
-        gap: 10,
-    },
-
-    question_card_correct: {
-        borderColor: GREEN,
-    },
-
-    question_card_wrong: {
-        borderColor: RED,
-    },
-
-    question_header: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 8,
-    },
-
-    question_number:{
-        width: 28,
-        height: 28,
-        borderRadius: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-
-    question_number_text: {
-        fontSize: 14,
-        fontFamily: FONT_FAMILY,
-        fontWeight: '700',
-    },
-
-    question_type_icon: {
-        borderRadius: 6,
-        paddingHorizontal: 8,
-        paddingVertical: 3,
-    },
-
-    question_type_text: {
-        fontSize: 12,
-        fontFamily: FONT_FAMILY,
-        color: '#969696',
-        fontWeight: '600',
-    },
-
-    question_text: {
-        fontSize: 16,
-        fontFamily: FONT_FAMILY,
-        lineHeight: 22,
-    },
-
-    formula_chip: {
-        borderRadius: 8,
-        paddingHorizontal: 10,
-        paddingVertical: 6,
-        borderLeftWidth: 3,
-    },
-    
-    formula_text: {
-        fontSize: 14,
-        fontFamily: FONT_FAMILY,
-        fontStyle: 'italic',
-    },
-
-    hint_button: {
-        alignSelf: 'flex-start',
-    },
-
-    hint_button_text: {
-        fontSize: 14,
-        fontFamily: FONT_FAMILY,
-        fontWeight: '600',
-    },
-
-    hint_container: {
-        backgroundColor: '#fffbe6',
-        borderRadius: 8,
-        padding: 10,
-        borderLeftWidth: 3,
-        borderLeftColor: '#f0b429',
-    },
-
-    hint_text: {
-        fontSize: 14,
-        fontFamily: FONT_FAMILY,
-        color: '#7a5c00',
-    },
-
-    option_list: {
-        gap: 8,
-    },
-
-    option: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 10,
-        padding: 10,
-        borderRadius: 10,
-        borderWidth: 1.5,
-    },
-
-    option_correct: {
-        borderColor: GREEN,
-        backgroundColor: '#f0faf4',
-    },
-
-    option_wrong: {
-        borderColor: RED,
-        backgroundColor: '#fff5f5'
-    },
-
-    option_dot: {
-        width: 18,
-        height: 18,
-        borderRadius: 9,
-        borderWidth: 2,
-        flexShrink: 0,
-    },
-
-    option_text: {
-        fontSize: 16,
-        fontFamily: FONT_FAMILY,
-        flex: 1,
-        lineHeight: 20,
-    },
-
-    calculation_row: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 8,
-    },
-
-    calculation_input: {
-        flex: 1,
-        backgroundColor: '#f4f8fc',
-        borderRadius: 10,
-        borderWidth: 1.5,
-        paddingHorizontal: 12,
-        paddingVertical: 10,
-        fontSize: 16,
-        fontFamily: FONT_FAMILY,
-        fontWeight: '600',
-    },
-
-    calculation_input_correct: {
-        borderColor: GREEN,
-        backgroundColor: '#f0faf4',
-    },
-
-    calculation_input_wrong: {
-        borderColor: RED,
-        backgroundColor: '#fff5f5',
-    },
-
-    unit_icon: {
-        borderRadius: 8,
-        paddingHorizontal: 10,
-        paddingVertical: 10,
-    },
-
-    unit_text: {
-        fontSize: 14,
-        fontFamily: FONT_FAMILY,
-        fontWeight: '700',
-    },
-
-    correct_answer_text: {
-        fontSize: 14,
-        fontFamily: FONT_FAMILY,
-        color: GREEN,
-        fontWeight: '600',
-    },
-
-    submit_button: {
-        borderRadius: 14,
-        paddingVertical: 16,
-        alignItems: 'center',
-        marginTop: 8,
-    },
-
-    submit_text: {
-        fontSize: 16,
-        fontFamily: FONT_FAMILY,
-        fontWeight: '800',
-        letterSpacing: 0.5,
-    },
-
-    progressContainer: {
-        width: 64,
-        height: 64,
-        borderRadius: 26,
-        padding: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-
-    progressText: {
-        fontSize: 16,
-        fontFamily: FONT_FAMILY,
-        fontWeight: '700',
-        textAlign: 'center'
-    },
-});

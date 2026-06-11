@@ -6,6 +6,10 @@ const FONT_FAMILY = 'Trebuchet MS, Roboto, sans-serif';
 
 export const quizColors = {
     light: StyleSheet.create({
+        header_progress: {
+            backgroundColor: '#97b9d6',
+        },
+
         question_card: {
             backgroundColor: '#ffffff',
             borderColor: '#afdaff',
@@ -42,7 +46,7 @@ export const quizColors = {
         },
 
         option_dot_selected: {
-            backgroundColor: '#97b9d6',
+            backgroundColor: '#afdaff',
             borderColor: '#97b9d6',
         },
 
@@ -63,6 +67,10 @@ export const quizColors = {
         },
     }),
     dark: StyleSheet.create({
+        header_progress: {
+            backgroundColor: '#474747',
+        },
+
         question_card: {
             backgroundColor: '#434343',
             borderColor: '#656565',

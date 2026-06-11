@@ -137,7 +137,7 @@ export default function Quiz2() {
     const [showHint, setShowHint] = useState<Record<string,boolean>>({});
     const scrollViewRef = useRef<ScrollView>(null);
 
-    const { theme, changeTheme } = useTheme();
+    const { theme } = useTheme();
 
     const {teamID} = useAuth();
     
@@ -247,7 +247,7 @@ export default function Quiz2() {
                     </Text>
                 </View>
 
-                <View style={[globalthemed.simple_button, localStyles.progressContainer]}>
+                <View style={[themed.header_progress, localStyles.progressContainer]}>
                     <Text style={[globalthemed.text, localStyles.progressText]}>
                         {answeredCount}/{questions.length}
                     </Text>
