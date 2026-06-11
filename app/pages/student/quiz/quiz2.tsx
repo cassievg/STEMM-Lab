@@ -1,6 +1,8 @@
 import { globalColors, globalStyles } from '@/app/styles';
+import { useAuth } from '@/src/context/AuthContext';
 import { useTheme } from '@/src/context/ThemeContext';
 import { ThemeKey } from '@/src/context/ThemeContext.d';
+import { completeActivity, getRoomByTeamAndActivity } from '@/src/services/firebaseServices';
 import { router } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
@@ -23,7 +25,6 @@ type Question = {
 
 const GREEN = '#4caf7d';
 const RED = '#e05c5c';
-const FONT_FAMILY = 'Trebuchet MS, Roboto, sans-serif';
 
 const PRIMARY_QUESTIONS: Question[] = [
     {id: 'p1', type: 'mcq', 
@@ -138,6 +139,8 @@ export default function Quiz2() {
 
     const { theme, changeTheme } = useTheme();
 
+    const {teamID} = useAuth();
+    
     const themed = quizColors[theme as ThemeKey];
     const globalthemed = globalColors[theme as ThemeKey];
     const activityStyles = quizStyle;
@@ -184,9 +187,18 @@ export default function Quiz2() {
 
     const answeredCount = questions.filter((q) => answers[q.id] !== undefined && answers[q.id] !== '').length;
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         setSubmitted(true);
+        const score =  questions.filter((q) => checkAnswer(q)).length * 10;
+
+        const roomData = await getRoomByTeamAndActivity(teamID, '2');
+        if (roomData) {
+            await completeActivity(teamID, '2', roomData?.id, score);
+        } else {
+            await completeActivity(teamID, '2', null, score);
+        }
     };
+
     const handleRetry = () => {
         setAnswers({});
         setSubmitted(false);
@@ -195,7 +207,7 @@ export default function Quiz2() {
     };
 
     const handleComplete = () => {
-        router.push('/pages/student/menu/activityselection')
+        router.push('/pages/student/activities/leaderboards/2')
         console.log(`Score: ${score}`)
     };
 

@@ -135,7 +135,6 @@ export default function StartActivity1() {
     };
 
     const handleSubmit = () => {
-        Alert.alert('Submitted', 'Your results have been saved');
         router.push('/pages/student/quiz/quiz1');
     };
 
@@ -391,14 +390,14 @@ export default function StartActivity1() {
             </ScrollView>
 
             <View style={[themed.white_background, localStyles.footer]}>
-                {completeCount === 0? (
+                {completeCount === 3 ? (
                     <TouchableOpacity
                         style={[localThemed.start_button, localStyles.submit_button]}
                         onPress={handleSubmit}
                         activeOpacity={0.85}>
 
                         <Text style={localStyles.submit_button_text}>
-                            Submit Results
+                            Proceed to Quiz
                         </Text>
                     </TouchableOpacity>
                 ) : (

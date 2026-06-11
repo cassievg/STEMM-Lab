@@ -131,7 +131,9 @@ export default function History() {
                 </TouchableOpacity>
             </View>
 
-            <View style={[themed.container, localStyles.list]}>
+            <View style={[(loading || (activeTab === 'local' ? localLDB.length === 0 : globalLDB.length === 0))
+                ? themed.white_background : [themed.container, {borderRadius: 8, borderWidth: 2}], localStyles.list
+            ]}>
                 {activeTab === 'local' && (
                     loading ? (
                         <Text style={[themed.text, globalStyles.empty]}>Loading...</Text>
@@ -170,8 +172,6 @@ const localStyles = StyleSheet.create({
     list: {
         width: '90%',
         alignSelf: 'center',
-        borderRadius: 8,
-        borderWidth: 2,
         overflow: 'hidden',
     },
 

@@ -137,9 +137,6 @@ export default function Quiz1() {
     const [submitted, setSubmitted] = useState(false);
     const [showHint, setShowHint] = useState<Record<string,boolean>>({});
     const scrollViewRef = useRef<ScrollView>(null);
-    const [room, setRoom] = useState<RoomRow | null>(null);
-    const [roomId, setRoomId] = useState<string | null>(null);
-    const [realScore, setRealScore] = useState(0);
 
     const {teamID} = useAuth();
 
@@ -201,6 +198,7 @@ export default function Quiz1() {
             await completeActivity(teamID, '1', null, score);
         }
     };
+    
     const handleRetry = () => {
         setAnswers({});
         setSubmitted(false);

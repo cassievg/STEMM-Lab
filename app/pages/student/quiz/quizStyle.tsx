@@ -73,7 +73,7 @@ export const quizColors = {
         },
 
         calculation_input: {
-            color: '#d8d8d8'
+            color: '#656565'
         },
 
         retry_button: {
@@ -81,7 +81,7 @@ export const quizColors = {
         },
 
         complete_button: {
-            backgroundColor: '#afdaff'
+            backgroundColor: '#97b9d6'
         },
 
         question_number: {

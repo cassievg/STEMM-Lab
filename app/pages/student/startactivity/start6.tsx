@@ -3,7 +3,7 @@ import { useTheme } from '@/src/context/ThemeContext';
 import { ThemeKey } from '@/src/context/ThemeContext.d';
 import { router } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
-import { Alert, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ToolsPanel from '../tools/panel';
 import { localColors, localStyles } from './startStyles';
@@ -110,7 +110,6 @@ export default function StartActivity1() {
     };
 
     const handleSubmit = () => {
-        Alert.alert('Submitted', 'Your results have been saved');
         router.push('/pages/student/quiz/quiz6');
     };
 
@@ -268,7 +267,7 @@ export default function StartActivity1() {
                         activeOpacity={0.85}>
 
                         <Text style={localStyles.submit_button_text}>
-                            Submit Results
+                            Proceed to Quiz
                         </Text>
                     </TouchableOpacity>
                 ) : (
