@@ -1,4 +1,4 @@
-import { FONT_FAMILY, globalColors } from "@/app/styles";
+import { FONT_FAMILY } from "@/app/styles";
 import { useTheme } from '@/src/context/ThemeContext';
 import { ThemeKey } from "@/src/context/ThemeContext.d";
 import React, { useState } from "react";
@@ -13,9 +13,8 @@ export default function Calculator() {
     const [waiting, setWaiting] = useState(false);
     const [expression, setExpression] = useState("");
 
-    const { theme, changeTheme } = useTheme();
+    const { theme } = useTheme();
     const themed = activityColors[theme as ThemeKey];
-    const globalThemed = globalColors[theme as ThemeKey];
 
     const handleNumber = (n: string) => {
         if (waiting){
