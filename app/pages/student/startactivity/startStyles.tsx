@@ -4,6 +4,113 @@ const WHITE = '#ffffff';
 const FONT_FAMILY = 'Trebuchet MS, Roboto, sans-serif';
 
 export const localStyles = StyleSheet.create({
+    tracing_container: {
+        alignItems: 'center',
+        paddingTop: 8,
+    },
+
+    tracing_header_text: {
+        fontSize: 14,
+        fontFamily: FONT_FAMILY,
+        marginBottom: 12,
+        textAlign: 'center',
+    },
+
+    tracing_canvas: {
+        borderRadius: 12,
+        borderWidth: 2,
+        overflow: 'hidden',
+        marginBottom: 16,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    
+    countdown_text: {
+        fontSize: 52,
+        fontFamily: FONT_FAMILY,
+        fontWeight: '700',
+    },
+
+    trace_ball: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        borderWidth: 2,
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 0.8,
+        shadowRadius: 12,
+        elevation: 8,
+    },
+
+    trace_complete_canvas: {
+        alignItems: 'center',
+        padding: 16,
+    },
+
+    trace_complete_canvas_text: {
+        fontSize: 16,
+        fontFamily: FONT_FAMILY,
+        fontWeight: '600',
+        marginTop: 4,
+    },
+
+    start_tracing_button: {
+        marginTop: 16,
+        paddingHorizontal: 28,
+    },
+
+    trace_ball_text: {
+        fontSize: 14,
+        fontFamily: FONT_FAMILY,
+        marginBottom: 12,
+    },
+
+    trace_result: {
+        borderRadius: 10,
+        borderWidth: 1,
+        padding: 14,
+        marginBottom: 12,
+    },
+
+    trace_result_rating: {
+        fontSize: 16,
+        fontFamily: FONT_FAMILY,
+        fontWeight: '600',
+        marginBottom: 8,
+        textAlign: 'center',
+    },
+
+    trace_result_wrap: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+    },
+
+    trace_results: {
+        fontSize: 24,
+        fontFamily: FONT_FAMILY,
+        fontWeight: '700',
+    },
+    
+    trace_results_unit: {
+        fontSize: 14,
+        fontFamily: FONT_FAMILY,
+    },
+
+    trace_retry_button: {
+        marginTop: 12
+    },
+
+    trace_show_result_wrap: {
+        marginTop: 8,
+        paddingHorizontal: 4
+    },
+
+    trace_show_resuls: {
+        fontSize: 16,
+        fontFamily: FONT_FAMILY,
+        fontWeight: '600',
+    },
+
     page: {
         flex: 1,
     },
@@ -355,7 +462,35 @@ export const localColors = {
 
         header_container: {
             backgroundColor: '#97b9d6'
-        }
+        },
+
+        start_tracing_button: {
+            backgroundColor: '#97b9d6',
+        },
+
+        countdown_text: {
+            color: '#97b9d6'
+        },
+
+        trace_ball: {
+            backgroundColor: '#97b9d6',
+            borderColor: '#97b9d6',
+            shadowColor: '#97b9d6',
+        },
+
+        tracing_canvas: {
+            backgroundColor: '#EAF3DE',
+            borderColor: '#afdaff',
+        },
+
+        trace_result: {
+            backgroundColor: '#f4f8fc',
+            borderColor: '#97b9d6',
+        },
+
+        trace_retry_button: {
+            backgroundColor: '#e8f0fe',
+        },
     }),
     dark: StyleSheet.create({
         start_button: {
@@ -376,6 +511,34 @@ export const localColors = {
 
         header_container: {
             backgroundColor: '#435565'
-        }
+        },
+
+        start_tracing_button: {
+            backgroundColor: '#374f61',
+        },
+
+        countdown_text: {
+            color: '#374f61'
+        },
+
+        trace_ball: {
+            backgroundColor: '#374f61',
+            borderColor: '#374f61',
+            shadowColor: '#374f61',
+        },
+
+        tracing_canvas: {
+            backgroundColor: '#3b3b3b',
+            borderColor: '#435565',
+        },
+
+        trace_result: {
+            backgroundColor: '#3b3b3b',
+            borderColor: '#435565',
+        },
+
+        trace_retry_button: {
+            backgroundColor: '#374f61',
+        },
     }),
 };
