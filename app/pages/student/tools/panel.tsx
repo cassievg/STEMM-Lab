@@ -3,15 +3,19 @@ import { useTheme } from '@/src/context/ThemeContext';
 import { ThemeKey } from '@/src/context/ThemeContext.d';
 import React, { useRef, useState } from "react";
 import { Animated, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
-import { globalColors } from '../../../styles';
 import { activityColors } from '../activities/activityStyles';
+import BatteryTool from "./battery";
 import Calculator from "./calculator";
 import Camera from "./camera";
+import MapTool from "./map";
 import Ruler from "./ruler";
 import Sensors from "./sensors";
 import SoundMeter from "./soundmeter";
+import Stopwatch from "./stopwatch";
 
-type ToolKey = 'calculator' | 'ruler' | 'sensors' | 'camera' | 'soundmeter' | null;
+type ToolKey = 'calculator' | 'ruler' | 'sensors' | 
+                'stopwatch' | 'camera' | 'soundmeter' | 
+                'battery'  | 'map'  |    null;
 
 const TOOLS = [
     {key: 'calculator' as ToolKey, label: 'Calculator', icon: '🔢'},
@@ -19,6 +23,9 @@ const TOOLS = [
     {key: 'sensors' as ToolKey, label: 'Sensors', icon: '📡'},
     {key: 'soundmeter' as ToolKey, label: 'Sound Meter', icon: '🎙'},
     {key: 'camera' as ToolKey, label: 'Camera', icon: '🎥'},
+    {key: 'stopwatch' as ToolKey, label: 'Stopwatch', icon: '⏱'},
+    { key: 'battery' as ToolKey, icon: '🔋', label: 'Battery' },
+    { key: 'map' as ToolKey, icon: '🗺️', label: 'Map' },
 ]
 
 export default function ToolsPanel() {
@@ -59,6 +66,12 @@ export default function ToolsPanel() {
                 return <SoundMeter />
             case 'camera':
                 return <Camera />
+            case 'stopwatch':
+                return <Stopwatch />
+            case 'battery':
+                return <BatteryTool />
+            case 'map':
+                return <MapTool />
             default:
                 return null;
         }
@@ -66,10 +79,9 @@ export default function ToolsPanel() {
 
     const activeToolData = TOOLS.find((t) => t.key === activeTool)
 
-    const { theme, changeTheme } = useTheme();
+    const { theme } = useTheme();
 
     const themed = activityColors[theme as ThemeKey];
-    const globalThemed = globalColors[theme as ThemeKey];
 
     return (
         <>
@@ -118,7 +130,7 @@ export default function ToolsPanel() {
                                 onPress={() => setActiveTool(null)}>
 
                                 <Text style={[themed.back_button_text, localStyles.back_button_text]}>
-                                    ⬅️ Back
+                                    {"< Back"}
                                 </Text>
                             </TouchableOpacity>
                         ) : (

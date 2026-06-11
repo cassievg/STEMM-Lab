@@ -1,7 +1,7 @@
 import * as ImagePicker from 'expo-image-picker';
 import React, { useState } from 'react';
 
-import { FONT_FAMILY, globalColors } from '@/app/styles';
+import { FONT_FAMILY } from '@/app/styles';
 import { useTheme } from '@/src/context/ThemeContext';
 import { ThemeKey } from '@/src/context/ThemeContext.d';
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -10,10 +10,8 @@ import { activityColors } from '../activities/activityStyles';
 export default function Camera(){
     const [lastUri, setLastUri] = useState<string | null>(null);
 
-    const { theme, changeTheme } = useTheme();
-
+    const { theme } = useTheme();
     const themed = activityColors[theme as ThemeKey];
-    const globalThemed = globalColors[theme as ThemeKey];
 
     const handlePhoto = async () => {
         const permission = await ImagePicker.requestCameraPermissionsAsync();

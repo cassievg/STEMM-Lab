@@ -1,4 +1,4 @@
-import { FONT_FAMILY, globalColors } from '@/app/styles';
+import { FONT_FAMILY } from '@/app/styles';
 import { useTheme } from '@/src/context/ThemeContext';
 import { ThemeKey } from '@/src/context/ThemeContext.d';
 import { Audio } from 'expo-av';
@@ -49,10 +49,9 @@ export default function SoundMeter() {
     const recordingRef = useRef<Audio.Recording | null>(null);
     const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-    const { theme, changeTheme } = useTheme();
+    const { theme } = useTheme();
 
     const themed = activityColors[theme as ThemeKey];
-    const globalThemed = globalColors[theme as ThemeKey];
 
     const startMeasuring = async () => {
         try {
@@ -269,12 +268,6 @@ export default function SoundMeter() {
                         </View>
                     ))}
                 </View>
-            </View>
-
-            <View style={[themed.sound_info_box, localStyles.info_box]}>
-                <Text style={[themed.sound_info_text, localStyles.info_text]}>
-                    Activity 2
-                </Text>
             </View>
         </View>
     )

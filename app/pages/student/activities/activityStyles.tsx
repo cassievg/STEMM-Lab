@@ -302,6 +302,23 @@ export const activityColors = {
         table_important_text: {
             color: '#888888'
         },
+
+        stat_chip: {
+            backgroundColor: WHITE,
+        },
+
+        laps_wrap: {
+            backgroundColor: WHITE,
+        },
+
+        lap_row:{
+            borderBottomColor: '#f0f4f8',
+        },
+
+        info_chip: {
+            backgroundColor: WHITE,
+            borderColor: '#dde8f0',
+        },
         
 }),
     dark : StyleSheet.create({
@@ -576,6 +593,23 @@ export const activityColors = {
 
         table_important_text: {
             color: '#aeaeae'
+        },
+
+        stat_chip: {
+            backgroundColor: ALT_WHITE,
+        },
+
+        laps_wrap: {
+            backgroundColor: ALT_WHITE,
+        },
+
+        lap_row:{
+            borderBottomColor: ALT_BLUE,
+        },
+
+        info_chip: {
+            backgroundColor: ALT_WHITE,
+            borderColor: ALT_BLUE,
         },
     })
 }
