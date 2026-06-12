@@ -92,7 +92,6 @@ export default function Profile() {
             alert('Update successful!');
         } catch (e) {
             setError("Update failed.");
-            console.log(e);
         }
     }
 

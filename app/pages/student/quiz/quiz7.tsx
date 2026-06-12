@@ -225,7 +225,6 @@ export default function Quiz7() {
 
     const handleComplete = () => {
         router.push('/pages/student/activities/leaderboards/7')
-        console.log(`Score: ${score}`)
     };
 
     useEffect(() => {

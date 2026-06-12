@@ -423,15 +423,11 @@ function ActivityDetail({ data } : {data: ActivityData}){
     const { themed, globalThemed } = useThemedStyles();
 
     useEffect(() => {
-        console.log('id from params:', id);
-        console.log('teamID:', teamID);
     }, [id, teamID])
         
     useEffect(() => {
-        console.log(id); 
 
         const loadRoom = async () => {
-            console.log(teamID);
 
             if (!teamID || !id) return;
 
@@ -479,9 +475,7 @@ function ActivityDetail({ data } : {data: ActivityData}){
             await leaveRoom(room!.id, teamID);
             setRoom(null);
             setRoomDetailsModalVisible(false);
-        } else {
-            console.log("room doesnt exist");
-        }
+        } 
     }
 
     const handleJoinRoom = async () => {

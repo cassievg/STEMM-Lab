@@ -8,6 +8,7 @@ import { Dimensions, FlatList, StyleSheet, Text, TouchableOpacity, View } from '
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { globalColors, globalStyles } from '../../../styles';
 
+import AppBannerAd from '@/src/components/bannerAd';
 import { useTheme } from '@/src/context/ThemeContext';
 
 type ActivityRow = {
@@ -68,10 +69,8 @@ export default function ActivitySelection() {
     const handleActivityRouting = async (activityId: string) => {
         const activityCompleted = await activityIsComplete(teamID, activityId);
         if (!activityCompleted) {
-            console.log("activity not done");
             router.push(`/pages/student/activities/${activityId}` as any);
         } else {
-            console.log("activity done");
             router.push(`/pages/student/activities/leaderboards/${activityId}` as any);
         }
     }
@@ -131,6 +130,7 @@ export default function ActivitySelection() {
                 columnWrapperStyle={localStyles.row}
                 showsVerticalScrollIndicator={false}>
             </FlatList>
+            <AppBannerAd />
         </SafeAreaView>
     );    
 }

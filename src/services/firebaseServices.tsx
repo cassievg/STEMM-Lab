@@ -103,7 +103,6 @@ const joinRoom = async (code: string, activityId: string, teamId: string): Promi
         .get();
 
     if (snapshot.empty) {
-        console.log("room not found.");
         return null;
     }
 
@@ -296,7 +295,6 @@ const hasLocal = async (teamId: string, activityId: string) => {
 }
 
 const completeActivity = async (teamId: string, activityId: string, roomId: string | null, score: number) => {
-    console.log(teamId, activityId, roomId, score);
     await firestore()
         .collection('results')
         .add({

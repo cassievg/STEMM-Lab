@@ -208,7 +208,6 @@ export default function Quiz2() {
 
     const handleComplete = () => {
         router.push('/pages/student/activities/leaderboards/2')
-        console.log(`Score: ${score}`)
     };
 
     useEffect(() => {

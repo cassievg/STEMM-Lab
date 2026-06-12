@@ -42,7 +42,6 @@ function RootLayout() {
     useEffect(() => {
         const setup = async () => {
             await initDatabase();
-            console.log("database initialized.");
         }
         
         setup();
