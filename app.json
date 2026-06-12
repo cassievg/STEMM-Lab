@@ -39,7 +39,11 @@
       "expo-sqlite",
       "expo-maps",
       "expo-asset",
-      "react-native-google-mobile-ads"
+  [    "react-native-google-mobile-ads",
+      {
+        "android_app_id": "ca-app-pub-9263495687323879~5794919594",
+        "ios_app_id": "ca-app-pub-xxxxxxxx~xxxxxxxx"
+      }]
     ],
     "experiments": {
       "typedRoutes": true,
@@ -51,9 +55,5 @@
         "projectId": "25ce6a33-2666-4030-a5fb-390253f61d99"
       }
     }
-  },
-    "react-native-google-mobile-ads": {
-    "android_app_id": "ca-app-pub-9263495687323879~5794919594",
-    "ios_app_id": "ca-app-pub-xxxxxxxx~xxxxxxxx"
   }
 }
