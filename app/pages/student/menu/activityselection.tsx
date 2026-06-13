@@ -4,7 +4,7 @@ import { fetchActivities, fetchCourses } from '@/src/services/databaseServices';
 import { activityIsComplete } from '@/src/services/firebaseServices';
 import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Dimensions, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, FlatList, Image, ImageSourcePropType, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { globalColors, globalStyles } from '../../../styles';
 
@@ -17,14 +17,14 @@ type ActivityRow = {
     course: string;
 }
 
-const ACTIVITY_ICONS: Record<string, string> = {
-    "1": "A",
-    "2": "B",
-    "3": "C",
-    "4": "D",
-    "5": "E",
-    "6": "F",
-    "7": "G",
+const ACTIVITY_ICONS: Record<string, ImageSourcePropType> = {
+    "1": require('@/assets/images/1.png'),
+    "2": require('@/assets/images/2.png'),
+    "3": require('@/assets/images/3.png'),
+    "4": require('@/assets/images/4.png'),
+    "5": require('@/assets/images/5.png'),
+    "6": require('@/assets/images/6.png'),
+    "7": require('@/assets/images/7.png'),
 }
 
 const screenWidth = Dimensions.get('window').width;
@@ -82,7 +82,10 @@ export default function ActivitySelection() {
             activeOpacity={0.7}>
 
             <View style={[themed.card_box, localStyles.card_icon_box]}>
-                <Text style={[themed.text, localStyles.card_icon]}>{ACTIVITY_ICONS[item.id] ?? 'X'}</Text>
+                <Image
+                    source={ACTIVITY_ICONS[item.id]}
+                    style={localStyles.card_icon}
+                    resizeMode='contain' />
             </View>
             <Text style={[themed.text, localStyles.card_label]}>{item.name}</Text>
         </TouchableOpacity>
@@ -161,7 +164,7 @@ const localStyles = StyleSheet.create({
     },
 
     card_icon: {
-        fontSize: 28,
+        width: 80,
     },
 
     card_label: {
