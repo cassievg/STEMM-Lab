@@ -183,7 +183,7 @@ const submitResult = async (activityId: string, teamId: string, score: number, r
             teamId: teamId,
             score: score,
             roomId: roomId ?? null,
-            submitDate: new Date().toISOString
+            submitDate: new Date().toISOString()
         })
 }
 

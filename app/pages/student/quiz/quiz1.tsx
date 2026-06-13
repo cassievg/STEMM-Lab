@@ -3,6 +3,7 @@ import { useAuth } from '@/src/context/AuthContext';
 import { useTheme } from '@/src/context/ThemeContext';
 import { ThemeKey } from '@/src/context/ThemeContext.d';
 import { completeActivity, getRoomByTeamAndActivity } from '@/src/services/firebaseServices';
+import { notifyCompletion } from '@/src/services/notificationsServices';
 import { router } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
@@ -186,6 +187,8 @@ export default function Quiz1() {
         } else {
             await completeActivity(teamID, '1', null, score);
         }
+
+        await notifyCompletion('Parachute Drop Challenge', score);
     };
     
     const handleRetry = () => {

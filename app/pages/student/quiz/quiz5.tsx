@@ -3,6 +3,7 @@ import { useAuth } from '@/src/context/AuthContext';
 import { useTheme } from '@/src/context/ThemeContext';
 import { ThemeKey } from '@/src/context/ThemeContext.d';
 import { completeActivity, getRoomByTeamAndActivity } from '@/src/services/firebaseServices';
+import { notifyCompletion } from '@/src/services/notificationsServices';
 import { router } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
@@ -214,6 +215,8 @@ export default function Quiz5() {
         } else {
             await completeActivity(teamID, '5', null, score);
         }
+
+        await notifyCompletion("Stretch Speed & Gracefulness", score);
     };
 
     const handleRetry = () => {

@@ -6,6 +6,7 @@ import { AuthProvider, useAuth } from '../src/context/AuthContext.js';
 import { ThemeProvider } from '../src/context/ThemeContext.js';
 
 import { initDatabase } from "@/src/services/databaseServices";
+import { requestPemissions } from "@/src/services/notificationsServices";
 import { SQLiteProvider } from "expo-sqlite";
 
 export default function Layout() {
@@ -45,6 +46,7 @@ function RootLayout() {
         }
         
         setup();
+        requestPemissions();
     }, [])
 
     if (currentUser === undefined) return <ActivityIndicator style={{ flex: 1 }} />
