@@ -319,6 +319,23 @@ export const activityColors = {
             backgroundColor: WHITE,
             borderColor: '#dde8f0',
         },
+
+        history_wrap: {
+            backgroundColor: WHITE,
+            borderColor: '#dde8f0',
+        },
+
+        loading_box: {
+            backgroundColor: '#f4f8fc', 
+        },
+
+        address_box: {
+            backgroundColor: '#eaf4fd', 
+        },
+
+        address_text: {
+            color: BLUE,
+        },
         
 }),
     dark : StyleSheet.create({
@@ -610,6 +627,23 @@ export const activityColors = {
         info_chip: {
             backgroundColor: ALT_WHITE,
             borderColor: ALT_BLUE,
+        },
+
+        history_wrap: {
+            backgroundColor: ALT_WHITE,
+            borderColor: ALT_BLUE,
+        },
+
+        loading_box: {
+            backgroundColor: ALT_BLUE, 
+        },
+
+        address_box: {
+            backgroundColor: ALT_BLUE, 
+        },
+
+        address_text: {
+            color: ALT_WHITE,
         },
     })
 }

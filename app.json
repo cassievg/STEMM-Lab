@@ -22,7 +22,12 @@
         "CAMERA",
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE",
-        "RECORD_AUDIO"
+        "RECORD_AUDIO",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION",
+        "FOREGROUND_SERVICE",
+        "FOREGROUND_SERVICE_LOCATION"
       ]
     },
     "web": {
@@ -42,7 +47,11 @@
       ["react-native-google-mobile-ads",
       {
         "androidAppId": "ca-app-pub-9263495687323879~5794919594",
-        "ios_app_id": "ca-app-pub-9263495687323879~1298442246"
+        "iosAppId": "ca-app-pub-9263495687323879~1298442246"
+      }],
+      ["expo-location",
+      {
+        "locationAlwaysAndWhenInUsePermission": "STEMM Lab needs location to track sound zones during activities."
       }]
     ],
     "experiments": {
