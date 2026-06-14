@@ -5,6 +5,7 @@ import { ActivityIndicator } from "react-native";
 import { AuthProvider, useAuth } from '../src/context/AuthContext.js';
 import { ThemeProvider } from '../src/context/ThemeContext.js';
 
+import { loadInterstitial } from "@/src/services/adServices.js";
 import { initDatabase } from "@/src/services/databaseServices";
 import { requestPemissions } from "@/src/services/notificationsServices";
 import { SQLiteProvider } from "expo-sqlite";
@@ -38,13 +39,14 @@ function RootLayout() {
         if (userDoc?.role === 'student') {
             router.replace('/pages/student/menu/homescreen');
         } 
-    }, [currentUser, userDoc])
+    }, [currentUser, router, userDoc])
 
     useEffect(() => {
         const setup = async () => {
             await initDatabase();
         }
-        
+
+        loadInterstitial();
         setup();
         requestPemissions();
     }, [])

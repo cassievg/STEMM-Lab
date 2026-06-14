@@ -8,8 +8,8 @@ import { Dimensions, FlatList, Image, ImageSourcePropType, StyleSheet, Text, Tou
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { globalColors, globalStyles } from '../../../styles';
 
-import AppBannerAd from '@/src/components/bannerAd';
 import { useTheme } from '@/src/context/ThemeContext';
+import AppBannerAd from '@/src/services/adServices';
 
 type ActivityRow = {
     id: string;

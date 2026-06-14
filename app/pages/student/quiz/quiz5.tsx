@@ -2,6 +2,7 @@ import { globalColors, globalStyles } from '@/app/styles';
 import { useAuth } from '@/src/context/AuthContext';
 import { useTheme } from '@/src/context/ThemeContext';
 import { ThemeKey } from '@/src/context/ThemeContext.d';
+import { showInterstitial } from '@/src/services/adServices';
 import { completeActivity, getRoomByTeamAndActivity } from '@/src/services/firebaseServices';
 import { notifyCompletion } from '@/src/services/notificationsServices';
 import { router } from 'expo-router';
@@ -219,14 +220,16 @@ export default function Quiz5() {
         await notifyCompletion("Stretch Speed & Gracefulness", score);
     };
 
-    const handleRetry = () => {
+    const handleRetry = async () => {
+        await showInterstitial();
         setAnswers({});
         setSubmitted(false);
         setShowHint({});
         handleScrollToTop();
     };
 
-    const handleComplete = () => {
+    const handleComplete = async () => {
+        await showInterstitial();
         router.push('/pages/student/activities/leaderboards/5')
     };
 
