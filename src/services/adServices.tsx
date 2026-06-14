@@ -13,10 +13,61 @@ const adUnitIdBanner = __DEV__
 
 const adUnitIdInterstitial = __DEV__
   ? TestIds.INTERSTITIAL
-  : 'ca-app-pub-9263495687323879/7279994294';
+  : "ca-app-pub-9263495687323879/7279994294";
 
 let interstitial = InterstitialAd.createForAdRequest(adUnitIdInterstitial);
 
+let isLoaded = false;
+
+interstitial.addAdEventListener(
+  AdEventType.LOADED,
+  () => {
+    console.log("Interstitial loaded");
+    isLoaded = true;
+  }
+);
+
+interstitial.addAdEventListener(
+  AdEventType.ERROR,
+  (error) => {
+    console.log("Interstitial error:", error);
+    isLoaded = false;
+  }
+);
+
+interstitial.addAdEventListener(
+  AdEventType.CLOSED,
+  () => {
+    console.log("Interstitial closed");
+
+    isLoaded = false;
+
+    interstitial = InterstitialAd.createForAdRequest(
+      adUnitIdInterstitial
+    );
+
+    attachListeners();
+    interstitial.load();
+  }
+);
+
+function attachListeners() {
+  interstitial.addAdEventListener(
+    AdEventType.LOADED,
+    () => {
+      console.log("Interstitial loaded");
+      isLoaded = true;
+    }
+  );
+
+  interstitial.addAdEventListener(
+    AdEventType.ERROR,
+    (error) => {
+      console.log("Interstitial error:", error);
+      isLoaded = false;
+    }
+  );
+}
 
 export default function AppBannerAd() {
   return (
@@ -28,31 +79,26 @@ export default function AppBannerAd() {
 }
 
 export const loadInterstitial = () => {
+  console.log("Loading interstitial...");
   interstitial.load();
 };
 
 export const showInterstitial = () => {
   return new Promise<void>((resolve) => {
-    const unsubscribeLoaded = interstitial.addAdEventListener(
-      AdEventType.LOADED,
-      () => {
-        interstitial.show();
-      }
-    );
+    if (!isLoaded) {
+      console.log("Interstitial not ready");
+      resolve();
+      return;
+    }
 
-    const unsubscribeClosed = interstitial.addAdEventListener(
+    const unsubscribe = interstitial.addAdEventListener(
       AdEventType.CLOSED,
       () => {
-        unsubscribeLoaded();
-        unsubscribeClosed();
-
-        interstitial = InterstitialAd.createForAdRequest(adUnitIdInterstitial);
-        interstitial.load();
-
+        unsubscribe();
         resolve();
       }
     );
 
-    interstitial.load();
+    interstitial.show();
   });
 };
