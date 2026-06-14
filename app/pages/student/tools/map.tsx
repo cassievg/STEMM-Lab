@@ -22,10 +22,6 @@ TaskManager.defineTask(LOCATION_TASK, async ({ data, error }: any) => {
         console.error('Background location error:', error);
         return;
     }
-    if (data) {
-        const { locations } = data;
-        console.log('Background location:', locations);
-    }
 });
 
 type LocationPoint = {

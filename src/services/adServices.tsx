@@ -22,7 +22,6 @@ let isLoaded = false;
 interstitial.addAdEventListener(
   AdEventType.LOADED,
   () => {
-    console.log("Interstitial loaded");
     isLoaded = true;
   }
 );
@@ -30,7 +29,6 @@ interstitial.addAdEventListener(
 interstitial.addAdEventListener(
   AdEventType.ERROR,
   (error) => {
-    console.log("Interstitial error:", error);
     isLoaded = false;
   }
 );
@@ -38,7 +36,6 @@ interstitial.addAdEventListener(
 interstitial.addAdEventListener(
   AdEventType.CLOSED,
   () => {
-    console.log("Interstitial closed");
 
     isLoaded = false;
 
@@ -55,7 +52,6 @@ function attachListeners() {
   interstitial.addAdEventListener(
     AdEventType.LOADED,
     () => {
-      console.log("Interstitial loaded");
       isLoaded = true;
     }
   );
@@ -63,7 +59,6 @@ function attachListeners() {
   interstitial.addAdEventListener(
     AdEventType.ERROR,
     (error) => {
-      console.log("Interstitial error:", error);
       isLoaded = false;
     }
   );
@@ -79,14 +74,12 @@ export default function AppBannerAd() {
 }
 
 export const loadInterstitial = () => {
-  console.log("Loading interstitial...");
   interstitial.load();
 };
 
 export const showInterstitial = () => {
   return new Promise<void>((resolve) => {
     if (!isLoaded) {
-      console.log("Interstitial not ready");
       resolve();
       return;
     }

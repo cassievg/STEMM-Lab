@@ -9,13 +9,6 @@ type ActivityRow = {
     course: string;
 }
 
-type Progress = {
-    id: string,
-    activityId: string,
-    userId: string,
-    status: string,
-}
-
 const initDatabase = async () => {
     db = await SQLite.openDatabaseAsync('stemm.db', {useNewConnection: true});
 
