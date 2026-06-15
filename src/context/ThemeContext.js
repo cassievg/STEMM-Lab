@@ -20,7 +20,6 @@ const ThemeProvider = ({ children }) => {
             style = styleDict[theme];
         }
         else {
-            // Get the first element of the style dict as default
             for (let key in styleDict) {
                 style = styleDict[key]
                 break;
