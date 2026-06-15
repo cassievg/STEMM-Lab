@@ -48,7 +48,6 @@
     "expo-web-browser": "~15.0.10",
     "express": "^5.2.1",
     "firebase-admin": "^13.10.0",
-    "jest-expo": "~54.0.17",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-native": "0.81.5",
@@ -61,36 +60,10 @@
     "react-native-worklets": "0.5.1"
   },
   "devDependencies": {
-    "@testing-library/jest-native": "^5.4.3",
-    "@testing-library/react-native": "^14.0.0",
-    "@types/jest": "^30.0.0",
     "@types/react": "~19.1.0",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~10.0.0",
-    "jest": "^29.7.0",
-    "react-test-renderer": "^19.1.0",
     "typescript": "~5.9.2"
-  },
-  "jest": {
-    "preset": "jest-expo",
-    "moduleNameMapper": {
-      "^@/src/context/ThemeContext$": "<rootDir>/__mocks__/ThemeContext.ts",
-      "^@/src/context/ThemeContext.d$": "<rootDir>/__mocks__/ThemeContext.ts",
-      "^@/app/styles$": "<rootDir>/__mocks__/styles.ts",
-      "^@/(.*)$": "<rootDir>/$1",
-      "@react-native-async-storage/async-storage": "<rootDir>/__mocks__/@react-native-async-storage/async-storage.ts",
-      "expo-task-manager": "<rootDir>/__mocks__/expo-task-manager.ts"
-    },
-    "testMatch": [
-      "**/__tests__/**/*.[jt]s?(x)",
-      "**/?(*.)+(spec|test).[tj]s?(x)"
-    ],
-    "setupFilesAfterEnv": [
-      "@testing-library/jest-native/extend-expect"
-    ],
-    "transformIgnorePatterns": [
-      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
-    ]
   },
   "private": true
 }
